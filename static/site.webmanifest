@@ -1,0 +1,6 @@
+{
+    "name": "NottyHub",
+    "short_name": "NottyHub",
+    "display": "standalone",
+    "orientation": "portrait"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "p77-nuxt-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "babel-plugin-import": "^1.13.3",
+    "core-js": "^3.25.3",
+    "jsencrypt": "^3.3.2",
+    "nuxt": "^2.15.8",
+    "nuxt-i18n": "^6.28.1",
+    "postcss-px-to-viewport-8-plugin": "^1.2.3",
+    "uuid": "^9.0.1",
+    "vant": "^2.12.2",
+    "vue": "^2.7.10",
+    "vue-server-renderer": "^2.7.10",
+    "vue-template-compiler": "^2.7.10"
+  },
+  "devDependencies": {
+    "@nuxtjs/proxy": "^2.1.0",
+    "less": "^4.2.0",
+    "less-loader": "^6.2.0",
+    "postcss-px-to-viewport": "^1.1.1",
+    "webpack": "^4.46.0"
+  }
+}

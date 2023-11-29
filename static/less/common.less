@@ -1,0 +1,268 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  // text-transform: capitalize;
+  // word-break: break-word; 
+}
+
+html,body{
+width: 100%;
+background: var(--bg-color1);
+color: var(--text-color1);
+user-select:none; /*用户是否能够选中文本*/
+touch-action: manipulation;
+}
+#app{
+margin: 0 auto;
+position: relative;
+overflow: hidden;
+}
+input:focus{ border: none; outline: none; }
+img{
+border: 0 none;
+outline: none;
+-webkit-touch-callout: none; /* 禁止长按链接与图片弹出菜单 */
+user-select: none;
+object-fit: contain;
+}
+input{
+text-transform: none;
+}
+
+.van-popup__close-icon{
+color: var(--bg-primary);
+font-size: 1.5rem;
+font-weight: bold;
+}
+.van-popup{
+background-color: var(--bg-color1) !important;
+}
+
+.van-switch--on{
+background-color: var(--bg-color1);
+}
+.van-switch{
+border: none;
+}
+// .svg-icon{
+//   transform: translateY(0px);
+//   filter: drop-shadow(var(--text-color1) 0px 0px 0px);
+// }
+.van-nav-bar{
+line-height: 44px;
+background-color: var(--bg-color1) !important;
+}
+.van-nav-bar__content{
+height: 44px;
+}
+.van-nav-bar__title{
+color: var(--text-color1) !important;
+font-size: 18px;
+font-weight: 500;
+}
+.van-nav-bar__text{
+font-size: 14px;
+color: var(--text-color2) !important;
+}
+[class*=van-hairline]:after{
+border-bottom: 1px solid var(--bg-color2) !important;;
+// transform: scale(1)
+}
+.van-checkbox__icon .van-icon{
+width: 16px;
+height: 16px;
+line-height: 16px;
+display: flex;
+justify-content: center;
+}
+.van-checkbox__icon--checked .van-icon{
+background-color: var(--bg-primary);
+border-color: var(--bg-primary);
+}
+.van-dialog{
+background-color: var(--dialog-bg-color);
+}
+.van-dialog__cancel{
+width: 143px;
+height: 40px;
+background-color: var(--bg-color3);
+border-radius: 20px;
+color: var(--text-color2);
+margin-left: 24px;
+}
+.van-dialog__confirm{
+width: 143px;
+height: 40px;
+background-color: var(--bg-primary);
+border-radius: 20px;
+color: var(--dialog-text-color);
+margin-bottom: 16px;
+margin-right: 24px;
+margin-left: 9px;
+}
+.van-overlay{
+background-color: var(--bg-color4);
+// z-index: 2100 !important;
+}
+.van-dialog__message--has-title{
+color: var(--text-color1);
+}
+.add-main{
+z-index: 2100 !important;
+}
+.main-view{
+width: 16px;
+height: 16px;
+background-image: url('~~/static/images/com_bofangliang_big_1.svg');
+background-repeat: no-repeat;
+background-size: contain;
+margin-right: 4px;
+}
+.main-view-white{
+width: 16px;
+height: 16px;
+background-image: url('~~/static/images/com_bofangliang_big.svg');
+background-repeat: no-repeat;
+background-size: contain;
+margin-right: 4px;
+}
+.main-video-num{
+width: 16px;
+height: 16px;
+background-image: url('~~/static/images/com_shipinshu_1.svg');
+background-repeat: no-repeat;
+background-size: contain;
+margin-right: 4px;
+}
+.main-video-num-white{
+width: 16px;
+height: 16px;
+background-image: url('~~/static/images/com_shipinshu.svg');
+background-repeat: no-repeat;
+background-size: contain;
+margin-right: 4px;
+}
+
+img{
+border:0 none;
+vertical-align: middle;
+image-rendering: pixelated;
+}
+.van-image__error, .van-image__loading{
+background-color: var(--bg-color1);
+}
+// .type{
+//   transform: translateY(0px);
+//   filter: drop-shadow(red 0px 0px 0px);
+// }
+.iconfont{
+font-size: 24px !important;
+}
+/*全局loading*/
+.loading-box {
+position: fixed;
+left: 0;
+right: 0;
+top: 44px;
+bottom: 0;
+/*使得loading层浮动到其他层上面，并且尺寸和整个屏幕大小一样*/
+z-index: 1000;
+/*给个 z-index 覆盖到主题内容上面*/
+background: var(--bg-color1);
+/*遮挡后面的内容*/
+display: flex;
+/*采用flex布局*/
+justify-content: center;
+/*loading-box中的内容 水平居中*/
+align-items: center;
+/*loading-box中的内容 垂直居中*/
+}
+
+.loading-skep-box {
+position: fixed;
+left: 0;
+right: 0;
+top: 44px;
+bottom: 0;
+/*使得loading层浮动到其他层上面，并且尺寸和整个屏幕大小一样*/
+z-index: 1000;
+/*给个 z-index 覆盖到主题内容上面*/
+background: var(--bg-color1);
+/*遮挡后面的内容*/
+// display: flex;
+/*采用flex布局*/
+// justify-content: center;
+/*loading-box中的内容 水平居中*/
+// align-items: center;
+/*loading-box中的内容 垂直居中*/
+}
+
+.loading {
+text-align: center;
+/*文本水平居中*/
+}
+
+.loading img {
+display: block;
+width: 90%;
+margin: auto;
+}
+
+.words-ellipsis{
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+[class*=van-hairline]:after{
+border: none;
+}
+.van-checkbox__icon .van-icon{
+border-width: 1px;
+}
+.van-switch__node{
+background-image: url("~~/static/images/cbl_zt_day.svg");
+background-repeat: no-repeat;
+background-size: cover;
+// width: 12px;
+// height: 12px;
+}
+input[type="search"]{appearance:none;// 也可以去除加上border: 0;之类的 根据设计图来
+}
+
+input::-webkit-search-cancel-button {display: none;} 
+.van-pull-refresh__head{
+z-index: -1;
+}
+.van-skeleton__content{
+margin-bottom: 16px;
+}
+.van-skeleton__row, .van-skeleton__title{
+height: 26px;
+}
+
+.paddingTop88{
+padding-top: 88px;
+}
+.paddingBottom50{
+padding-bottom: 50px;
+}
+.paddingBottom10{
+padding-bottom: 10px;
+}
+.paddingTop78{
+padding-top: 78px;
+}
+.paddingTop52{
+  padding-top: 52px;
+}
+.van-toast__text{
+word-break: break-word;
+}
+.text-capitalize{
+text-transform: capitalize;
+}
+.vant-pop-320{
+  width: 320px;
+  height: 100%;
+}
