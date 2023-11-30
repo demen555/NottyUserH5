@@ -9,6 +9,10 @@ export default function ({ app, $axios, store }, inject) {
     // config.headers["Request-Token"] = token;
     // config.headers["Request-Country"] = location;
     config.headers["App-Type"] = 3;
+    config.headers["Request-Country"] = "";
+    config.headers["Request-Lang"] = "en_US";
+
+
   });
 
   $axios.onResponse((response) => {
