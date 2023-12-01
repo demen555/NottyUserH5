@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-      <!-- class="paddingTop52" -->
-      <van-pull-refresh v-model="refreshing" @refresh="onRefresh" >
+      <HeaderTop @refresh="onRefresh"  id="home-top"></HeaderTop>
+      <van-pull-refresh v-model="refreshing" class="paddingTop52" @refresh="onRefresh" >
         <van-list
           v-model="loading"
           :finished="finished"
@@ -16,8 +16,12 @@
 </template>
 
 <script>
+import HeaderTop from '~/components/header/top.vue'
 export default {
   name: 'IndexPage',
+  components:{
+    HeaderTop
+  },
   data(){
     return{
       spainnerLoading: true,// 全局loading层
@@ -29,7 +33,7 @@ export default {
   },
   async asyncData ({ $homeApi }) {
     const pageInfo = {
-      current: 1,
+      page: 1,
       size: 20
     }
     const res = await $homeApi.requestvodpageHome(pageInfo);
@@ -43,18 +47,22 @@ export default {
 
   methods:{
     onLoad(){
-      this.pageInfo.current += 1
-      console.log(222)
+      this.pageInfo.page += 1
       this.getList();
     },
-    async getList(){
+    async getList(isRefresh){
       try {
         this.spainnerLoading = true;
         const res = await this.$homeApi.requestvodpageHome(this.pageInfo) 
         const { code, data } = res
         if(code === 200 && data.data){
-          this.dataList = [ ...this.dataList, ...data.data];
-          console.log( this.dataList, data.data )
+         if(isRefresh){
+            this.dataList = data.data
+            this.refreshing = false
+          } else {
+            this.dataList = [ ...this.dataList, ...data.dat]
+            this.loading = false
+          }
           this.loading = false
           if(data.data.length === 0){
             this.finished = true
@@ -69,8 +77,7 @@ export default {
       }
     },
     onRefresh() {
-      console.log('onRefresh')
-      this.pageInfo.current = 1
+      this.pageInfo.page = 1
       this.getList(true);
     },
   }

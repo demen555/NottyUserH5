@@ -1,0 +1,772 @@
+<template>
+  <div class="layouts">
+      <div class="header">
+        <Overlay v-model="overlayShow" v-if="overlayShow"></Overlay>
+
+        <header class="home-header" id="home-header">
+          <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common" alt="more">
+          <div @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+          <div class="header-right">
+            <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search" alt="com_sousuo">
+            <img @click="handleExpand('right')" class="header-common1" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
+          </div>
+        </header>
+
+        <!-- 左边抽屉 -->
+        <van-popup
+          v-model="showPop"
+          position="left"
+          class="vant-pop-320"
+        >
+          <div id="drawer" class="nav-menu menu-right">
+            <div class="menu-header">
+            <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
+            <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
+            </div>
+
+            <div v-if="!showTypeExpand" class="type-div"></div>
+            <div class="nav-list-tags">
+              <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
+                <div class="nav-menu-left">
+                  <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_biaoqian_1.svg'): require('~/static/images/my_gn_biaoqian.svg')" alt=""></div>
+                  <div>{{ $t('str_menu_tag') }}</div>
+                </div>
+                <div :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+              </div>
+              <template v-if="!showExpand">
+                <div class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" @click.stop="handleClickTag(tag)">
+                  <div class="nav-menu-left">
+                    <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                    <div>{{ tag.name }}</div>
+                  </div>
+                  <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type'">
+                    <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                  </div>
+                </div>
+                <!-- 所有标签 -->
+                <div class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" @click.stop="handleGoPage('tag')"> {{ $t('str_menu_tag_all') }}</div>
+                <div class="nav-menu-list-tag-empty"></div>
+              </template>
+            </div>
+            <div class="nav-menu-list" @click="handleGoPage('history')" >
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt=""></div>
+                <div>{{ $t('str_his') }}</div>
+              </div>
+            </div>
+            <div class="nav-menu-list" @click="handleGoPage('collect')">
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt=""></div>
+                <div>{{ $t('str_collect') }}</div>
+              </div>
+            </div>
+            <div class="nav-menu-list" @click="handleGoPage('up')" >
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
+                <div>{{ $t('str_like') }}</div>
+              </div>
+            </div>
+            <div class="nav-menu-dl" >
+              <div class="nav-menu-btn nav-ios" @click="handleAddMain" v-show="mobileDevice() == 'iOS'">
+                <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
+                <div class="nav-text">{{ $t('str_tianjia_zhupin') }}</div>
+              </div>
+              <div class="nav-menu-btn nav-and" @click="downloadApp" v-show="mobileDevice() == 'Android'">
+                <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_android_1.svg'): require('~/static/images/my_gn_xz_android.svg')"></div>
+                <div class="nav-text">{{ $t('str_down_load') }} </div>
+              </div>
+            </div>
+          </div>
+        </van-popup>
+
+        <!-- 右边抽屉 -->
+        <van-popup
+          v-model="showRightPop"
+          position="right"
+          class="vant-pop-320"
+          
+        >
+          <div id="drawer" class="nav-menu menu-left">
+            <div class="menu-header">
+            <img class="close-pop" @click="showRightPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
+            <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
+            </div>
+            <div class="nav-menu-btns" v-if="!userinfo.accessId">
+              <div class="nav-menu-btns-left">
+                <div class="nav-menu-login" @click="handleLoginorRegister('login')">
+                  <img :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="">
+                </div>
+                <div>{{ $t('str_login') }}</div>
+            </div>
+            <div class="nav-menu-btns-left">
+              <div class="nav-menu-res" @click="handleLoginorRegister('register')">
+                <img :src="themeChecked? require('~/static/images/home_top_zhuce_1.svg'): require('~/static/images/home_top_zhuce.svg')" alt="">
+              </div>
+              <div>{{ $t('str_register') }}</div>
+            </div>
+            </div>
+            <div class="nav-list-tags" @click="handleGoPage('user')" v-show="isLogin">
+              <div class="nav-menu-list-tag nav-menu-list-spec">
+                <div class="nav-menu-left">
+                  <div class="nav-menu-tag"><img src="~/static/images/home_top_gaoliang.svg" alt=""></div>
+                  <!-- {{ $t('str_user_account') }}  -->
+                  <div>{{  userinfo.userNickName || userinfo.userName }}</div>
+                </div>
+                <div @click="handleGoPage('user')">
+                  <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="nav-list-tags">
+              <div class="nav-menu-list-tag" @click="handleShowExpand('language')">
+                <div class="nav-menu-left">
+                  <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_yuyan_1.svg'): require('~/static/images/my_gn_yuyan.svg')" alt=""></div>
+                  <div>{{ $t('str_change_lang') }}</div>
+                </div>
+                <div class="nav-menu-right">
+                  <div class="nav-menu-lang">{{ languageText }}</div>
+                  <div  :class="showLanguageExpand? (themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+                </div>
+              </div>
+              <template v-if="!showLanguageExpand">
+                <div class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.language" @click="handleChangLanguage(item)">
+                  <div class="nav-menu-left">
+                    <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                    <div>{{ item.title }}</div>
+                  </div>
+                  <div class="nav-menu-right" v-if="item.language === language">
+                    <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                  </div>
+                </div>
+              </template>
+            </div>
+            <div v-if="!showLanguageExpand" class="type-div"></div>
+            <div class="nav-list-tags" ref="main">
+              <div class="nav-menu-list-tag" @click="handleShowExpand('location')">
+                <div class="nav-menu-left">
+                  <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_guojia_1.svg'): require('~/static/images/my_gn_guojia.svg')" alt=""></div>
+                  <div> {{ $t('str_change_cuy') }} </div>
+                </div>
+                <div class="nav-menu-right">
+                  <div class="nav-menu-lang">{{ locationText }}</div>
+                  <div :class="showLocationExpand? themeChecked ? 'user-menu-list-right-type' : 'user-menu-list-right-type-white': themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white'"></div>
+                </div>
+              </div>
+              <template v-if="!showLocationExpand">
+                <div class="location-menu" ref="content">
+                  <div class="nav-menu-list-tag-sub" v-for="(item) in locationList" :key="item.id" @click="handleChangLocation(item)">
+                    <div class="nav-menu-left">
+                      <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                      <div>{{ $t(item.country) }}</div>
+                    </div>
+                    <div class="nav-menu-right" v-if="item.code === location">
+                      <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <div v-if="!showLocationExpand" class="type-div"></div>
+            <div class="nav-menu-list">
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_zhuti_1.svg'): require('~/static/images/my_gn_zhuti.svg')" alt=""></div>
+                <div>{{ $t('str_change_bg') }} </div>
+              </div>
+              <div class="nav-menu-right">
+                <van-switch @change="handleChangeTheme" v-model="themeChecked" size="16px"/>
+              </div>
+            </div>
+            <!-- <div class="nav-menu-list" @click="handleGoPage('pwdset')" >
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_sz_1.svg'): require('~/static/images/my_gn_sz.svg')" alt=""></div>
+                <div>{{ $t('str_setting') }}</div>
+              </div>
+            </div> -->
+            <div class="nav-menu-list" @click="handleLoginOut" v-show="isLogin">
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_tuideng_1.svg'): require('~/static/images/my_gn_tuideng.svg')"></div>
+                <div> {{ $t('str_logout') }}</div>
+              </div>
+            </div>
+          </div>
+        </van-popup>
+
+      </div>
+      <Nuxt />
+  </div>
+</template>
+<script>
+import { mapGetters, mapActions } from 'vuex'
+import Overlay from '~/components/overlay'
+import dialogGuild from '~/components/dialog/dialog-guild.vue'
+import { langMap, areaList } from "~/locales/lang.js"
+import {  mobileDevice } from '~/utils/format.js';
+
+export default {
+  data() {
+    return {
+      showPop: false, // 左边抽屉
+      showRightPop: false, // 右边抽屉
+      showTypeExpand: true, //分类
+      showLanguageExpand: true, //语言
+      showLocationExpand: true, //国家
+      showExpand: true, // 标签
+      // language: localStorage.getItem('language'), //语言
+      languageList: langMap, // 语言数据
+      // location: localStorage.getItem('location') || 'US1', //国家
+
+      location: "US1",
+      language: "en_US",
+
+      locationList: areaList, // 国家数据
+      themeChecked: true, // 主题切换
+      typeList: [],  // 分类数据
+      overlayShow: false,  // 指引遮罩层
+      tagList: [], //标签数据
+      pageInfo: {
+        page: 1,
+        size: 10
+      },
+
+    }
+  },
+  components: {
+    dialogLogin: () => import('~/components/dialog/dialog-login.vue'),
+    dialogRegister: () => import('~/components/dialog/dialog-register.vue'),
+    dialogLine: () => import('~/components/dialog/dialog-line.vue'),
+    // dialogGuild: () => import('~/components/dialog/dialog-guild.vue'),
+    dialogGuild,
+    Overlay
+  },
+  created(){
+    // const theme=  localStorage.getItem('data-theme')
+    // this.themeChecked = this.theme === 'dark'
+    this.initTypeList()
+    this.initTagList()
+    // this.$nextTick(() => {
+    //   !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
+    // })
+  },
+  activated(){
+    console.log( 'this.$route.name', this.$route.name )
+    this.showPop = false
+    this.showRightPop = false
+    if(this.$route.name === 'home'){
+      console.log('mounted')
+      this.set_tagid('')
+      this.set_typeid('')
+    }
+  },
+  computed: {
+    ...mapGetters({
+      'userinfo': 'user/userinfo', 
+      'theme': 'user/userinfo', 
+      'isLogin': 'user/isLogin', 
+      'tagId': 'type/tagId', 
+      'typeId': 'type/typeId', 
+    }),
+    languageText({ language,  languageList}) {
+      const obj = languageList[language];
+      return obj.title
+    },
+    locationText() {
+      const obj = this.locationList.find(item => this.location === item.code) || {}
+      return this.$t(obj.country)
+    },
+    // 当前得路由
+    routeName(){
+      return this.$route.name
+    }
+  },
+  methods: {
+    mobileDevice,
+    ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid']),
+    handleClickNotty(){
+      if(this.$route.name === 'home'){
+        this.$emit('refresh')
+        this.handleScroll()
+      } else {
+        this.$router.push({name: 'home'})
+        this.$emit('refresh')
+      }
+    },
+    handleClickLogo(){
+      console.log(this.$route.name === 'search', 'handleClickLogo')
+      if(this.$route.name === 'search') {
+        this.handleScroll()
+      }else{
+        this.$router.push({name: 'home'})
+      }
+    },
+    handleScroll() {
+      console.log(document.querySelector('#home-top'))
+      const navHeight = document.querySelector('.home-header').offsetHeight
+      
+      // scrollIntoView() js原生方法，实现锚点滚动过渡
+      const target = document.querySelector('#home-top')
+      target.scrollIntoView({ behavior: 'smooth',  block: "start" })
+      
+      // scrollTo() 把内容滚动到指定的坐标。减去导航高度的目的：导航用定位固定在顶部，如果不减去，导航栏会遮挡一部分内容
+      // console.log(target.offsetTop, navHeight, target.offsetTop - navHeight, 'height')
+      // window.scrollTo(0, target.offsetTop - navHeight - 10)
+    },
+    handleAddMain(){
+      this.overlayShow = true
+    },
+    handleGoTag(){
+      this.$router.push({
+        name: 'tag'
+      })
+    },
+    handleClickTag(item){
+      gtag('event', 'gt4_click_tags', {
+        id: item.id,
+        name: item.name,
+      });
+      console.log(item)
+      this.set_tagid(item.id)
+      this.$router.push({
+        name: 'type',
+        params:{
+          id: item.id,
+          name: item.name,
+          refresh: true,
+        },
+      });
+    },
+    handleClickType(item){
+      gtag('event', 'gt4_click_type', {
+        typeId: item.typeId,
+        typeName: item.typeName,
+      });
+      this.set_typeid(item.typeId)
+      this.$router.push({
+        name: 'categories',
+        params:{
+          id: item.typeId,
+          name: item.typeName,
+          refresh: true,
+        },
+      })
+    },
+    async initTagList(){
+      try {
+        const res = await this.$homeApi.postTagListPage(this.pageInfo);
+        if(res.code === 100){
+          this.tagList = res.body.records || []
+        }
+        console.log(this.tagList, res, 'tag')
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async initTypeList(){
+      // try {
+      //   const res = await this.$homeApi.postTypeList()
+      //   if(res.code === 100){
+      //     this.typeList = res.body.splice(0,5) || []
+      //     console.log(this.typeList.length ,res, 'type')
+      //   }
+      // } catch (error) {
+      //   console.error(error)
+      // }
+    },
+    async handleLoginOut(){
+      try {
+        const res = await this.$homeApi.postLoginOut()
+        console.log(res)
+        if(res.code === 100){
+          this.$toast(this.$t('toast7'))
+          this.set_userinfo({})
+          this.$refs.dialogLoginRef.onShow()
+          this.$router.push({name: 'home'})
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    goRegister(){
+      this.$refs.dialogRegisterRef.onShow()
+    },
+    goLogin(){
+      this.$refs.dialogLoginRef.onShow()
+    },
+    handleShowExpand(val){
+      if(val==='type'){
+        this.showTypeExpand = !this.showTypeExpand
+      } else if(val === 'tag') {
+        this.showExpand = !this.showExpand
+      } else if(val === 'language') {
+        this.showLanguageExpand = !this.showLanguageExpand
+      } else if(val === 'location') {
+        this.showLocationExpand = !this.showLocationExpand
+      }
+    },
+    handleExpand(val) {
+      if(val==='left'){
+        this.showPop = !this.showPop
+      }else{
+        this.showRightPop = !this.showRightPop
+      }
+    },
+    onClickLeft() {
+      Toast('返回');
+    },
+    onClickRight() {
+      Toast('按钮');
+    },
+    handleChangLanguage(item){
+      localStorage.setItem("language", item.language)
+      location.reload(); // 重启载入
+    },
+    handleChangLocation(item){
+      console.log(item.code)
+      this.location = item.code
+      localStorage.setItem("location", item.code)
+      location.reload(); // 重启载入
+    },
+    handleChangeTheme(val){
+      if(val){
+        document.documentElement.setAttribute('data-theme', 'dark')
+        this.update_theme('dark')
+        // localStorage.setItem('data-theme', JSON.stringify('dark'))
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light')
+        this.update_theme('light')
+        // localStorage.setItem('data-theme', JSON.stringify('light'))
+      }
+    },
+    handleLoginorRegister(val){
+      console.log(val)
+      if(val === 'login'){
+        this.$refs.dialogLoginRef.onShow()
+      } else if (val === 'register') {
+        this.$refs.dialogRegisterRef && this.$refs.dialogRegisterRef.handleShow()
+      }
+      this.showRightPop = false
+    },
+    handleGoPage(val){
+      if( val == "collect" && !this.isLogin ){
+        return this.$refs.dialogLoginRef.onShow()
+      }
+      if( val == "pwdset" && !this.isLogin ){
+        return this.$refs.dialogLoginRef.onShow()
+      }
+      if(val === 'line') {
+        this.$refs.dialogLineRef.onLineShow()
+      } else if (val === 'search') {
+        if(this.$route.name === 'search') {
+          this.set_show(true)
+          // this.handleScroll()
+        }else{
+          this.$router.push({name: val,  params:{
+            refresh: true,
+          }})
+        }
+      } else {
+        this.$router.push({
+          name: val
+        })
+      }
+    },
+    downloadApp() {
+      let url = "https://nottyhub.com/nottyhub-1-0-0.apk"
+      let fileName = "Nottyhub"
+      const aLink = document.createElement('a');
+      aLink.style.display = 'none';
+      aLink.href = url;
+      aLink.download = fileName;
+      aLink.target = '_parent';
+      document.body.appendChild(aLink);
+      aLink.click();
+      document.body.removeChild(aLink); // 下载完成移除元素
+    },
+  }
+}
+</script>
+<style lang="less" scoped>
+header{
+  height: 45px;
+  line-height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  background-color: var(--bg-color1);
+  border-bottom: 1px solid var(--bg-color2);
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  .header-right{
+    display: flex;
+    align-items: center;
+  }
+  .header-search{
+    margin-right: 16px;
+  }
+}
+.header-common{
+  width: 24px;
+  height: 24px;
+}
+.header-common1{
+  width: 24px;
+  height: 24px;
+}
+.header-logo{
+  width: 86px;
+  height: 28px;
+}
+.header-logo img{
+  width: 100%;
+  height: 100%;
+}
+.color{
+  color: var(--text-color3);
+  font-size: 15px;
+}
+.logo-black{
+  width: 86px;
+  height: 28px;
+  background-image: url('~~/static/images/logo-black.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.logo-white{
+  width: 86px;
+  height: 28px;
+  background-image: url('~~/static/images/logo-white.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  // margin-top: 8px;
+  // margin-bottom: 16px;
+}
+.nav-menu-btns{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+.nav-menu-btns-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-menu-btns-left:first-child{
+  margin-right: 80px;
+}
+.nav-menu-login,.nav-menu-res{
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--bg-color2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.nav-menu{
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+  overflow: auto;
+}
+.nav-list-tags{
+  background-color: var(--bg-color2);
+  border-radius: 7.992px;
+}
+.type-div{
+  height: 4px;
+  background-color: var(--bg-color1);
+}
+// .nav-list-tags:first-child{
+//   margin-top: 16px;
+// }
+.nav-menu-list-tag{
+  /* background-color: var(--bg-color2); */
+  line-height: 40px;
+  color: var(--text-color1);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  padding: 0 12px;
+  margin-bottom: 4px;
+}
+
+.nav-menu-list-tag-sub{
+  height: 32px;
+  line-height: 32px;
+  color: var(--text-color1);
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-menu-list{
+  height: 40px;
+  background-color: var(--bg-color2);
+  line-height: 40px;
+  color: var(--text-color1);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  padding: 0 12px;
+  margin-bottom: 4px;
+}
+.nav-menu-lang{
+  margin-right: 8px;
+  color: var(--text-color2);
+}
+.nav-menu-theme{
+  color: var(--text-color2);
+}
+.nav-menu-switch{
+  margin: 0 8px;
+}
+.nav-menu-list-tag-all{
+  width: 232px;
+  height: 28px;
+  border-radius: 8px;
+  background-color: var(--bg-color2);
+  margin: 0 auto;
+  text-align: center;
+  // margin-bottom: 4px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-menu-list-tag-empty{
+  height: 6px;
+  margin-bottom: 4px;
+}
+.tag-white {
+  background-color: #ffffff;
+}
+.nav-menu-list:first-child{
+  margin-top: 4px;
+}
+.nav-menu-dl{
+  height: 68px;
+  padding-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.nav-text{
+  color: var(--text-color1);
+  line-height: 19.6px;
+  margin-top: 9px;
+}
+.nav-menu-btn{
+  width: 146px;
+  height: 68px;
+  border-radius: 8px;
+  background-color: var(--bg-color2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 14px;
+  padding-top: 9px;
+}
+.nav-menu-left,.nav-menu-right{
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+  /deep/ .van-switch--on{
+    // width: 40px;
+    // height: 24px;
+    .van-switch__node{
+      background-image: url("~~/static/images/cbl_zt_night_hui.svg");
+      
+      // margin-top: 4px;
+      // top: 50%;
+      // transform: translateY(-50%);
+    }
+  }
+}
+.nav-menu-tag{
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  display: flex;
+}
+.nav-ios{
+  margin-right: 4px;
+}
+.hide-opacity{
+  opacity: 0;
+}
+.typeName{
+  font-size: 14px;
+}
+.user-menu-list-right-type{
+  width: 12px;
+  height: 12px;
+  background-image: url(~~/static/images/com_jt_sx_xia.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.user-menu-list-right-type-white{
+  width: 12px;
+  height: 12px;
+  background-image: url(~~/static/images/com_jt_sx_xia_rj.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.user-menu-list-right-type-actived{
+  width: 12px;
+  height: 12px;
+  background-image: url(~~/static/images/com_jt_sx_shang.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.user-menu-list-right-type-actived-white{
+  width: 12px;
+  height: 12px;
+  background-image: url(~~/static/images/com_jt_sx_shang_rj.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.nav-menu-list-spec{
+  margin-bottom: 8px;
+}
+.home-header{
+  .logo-black, .logo-white{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-43px, -14px);
+  }
+}
+
+.menu-header{
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  .logo-pop{
+    width: 86px;
+    height: 28px;
+  }
+  .close-pop{
+    width: 24px;
+    height: 24px;
+  }
+}
+.menu-left .menu-header{
+  margin-bottom: 0;
+}
+
+</style>

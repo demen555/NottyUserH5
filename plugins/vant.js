@@ -1,7 +1,7 @@
 import Vue from "vue";
-import { Button, Image as VanImage, Lazyload, PullRefresh, List  } from "vant";
+import { Button, Image as VanImage, Lazyload, PullRefresh, List, Popup, Switch  } from "vant";
 
-Vue.use(Button).use(VanImage).use(Lazyload).use(PullRefresh).use(List);
+Vue.use(Button).use(VanImage).use(Lazyload).use(PullRefresh).use(List).use(Popup).use(Switch)
 
 
 

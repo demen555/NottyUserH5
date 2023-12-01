@@ -26,7 +26,7 @@ let Api = {
     home: {
       vodpagehome: "/api/v1/vod/lists", // 首页视频列表
       emailLogin: '/api/v1/access/login', // 邮箱登录
-
+      tagListPage: '/api/v1/vod_tag/lists',  //获取所有标签
 
 
 
@@ -41,7 +41,7 @@ let Api = {
       type: '/api/obtain/type/list/v1_0_0',
       typeDetail: '/api/obtain/type/detail/v1_0_0',
       tagList: '/api/obtain/vod_tag/list/v1_0_0',
-      tagListPage: '/api/obtain/vod_tag/page/v1_0_0',
+     
       domain: '/api/obtain/domain/list/v1_0_0',
       domainReport: '/api/obtain/domain/report/v1_0_0'
     },

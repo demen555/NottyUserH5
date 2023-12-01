@@ -22,7 +22,9 @@
     "postcss-px-to-viewport-8-plugin": "^1.2.3",
     "uuid": "^9.0.1",
     "vant": "^2.12.2",
+    "video.js": "^8.6.0",
     "vue": "^2.7.10",
+    "vue-content-loader": "^0.2.3",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
     "webpack": "^4.46.0"

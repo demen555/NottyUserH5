@@ -11,4 +11,18 @@ export default ($axios) => ({
             data: data
         })
     },
+
+
+    /***
+     * @标签页列表分页
+     * 
+     */ 
+    postTagListPage(data){
+        return $axios({
+            url: Api.home.tagListPage,
+            method: "POST",
+            data: data
+        })
+    }
+
 });
