@@ -1,4 +1,4 @@
-export const state = () => ({
+const state = {
   encryption: "", //  Aes 加密密钥
   register: {}, //注册/登录弹窗用的信息
   userinfo: {}, //用户登录信息
@@ -11,9 +11,9 @@ export const state = () => ({
   noLoginUpVod: [], // 未登录点赞列表
 
   noLoginDownVod: [], // 未登录点踩列表
-})
+}
 
-export const actions = {
+const actions = {
   set_register(context, data){
     context.commit('SET_REGISTER', data)
   },
@@ -37,7 +37,7 @@ export const actions = {
   },
 }
 
-export const getters = {
+const getters = {
   encryption: (state) => state.encryption,
   register: (state) => state.register,
   userinfo: (state) => state.userinfo,
@@ -49,7 +49,7 @@ export const getters = {
   noLoginDownVod: (state) => state.noLoginDownVod,   
 }
 
-export const mutations = {
+const mutations = {
   SET_ENCRYPTION(state, data){
       state.encryption = data
   },
@@ -136,3 +136,10 @@ export const mutations = {
     state.noLoginDownVod = state.noLoginDownVod.filter( ele => ele.vodId != data );
   },
 }
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+};

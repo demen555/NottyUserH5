@@ -1,62 +1,137 @@
 <template>
   <div class="cover">
-    <div class="main-list-group">
-      <van-image
-        lazy-load
-        :src="item.vodPic"
-      >
-        <template slot="loading">
-          <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="">
-        </template>
-        <template slot="error">
-          <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="">
-        </template>
-      </van-image>
-      <div class="main-title">{{ item.vodName }}</div>
-      <div class="main-btn">
-        <div class="main-btn-view">
-          <div :class="themeChecked ? 'main-view':'main-view-white'"></div>
-          <div class="main-text">{{ $formatNumber(item.vodHits) }}</div>
+    <main class="main-list"
+      @click="handleGoDetail(item)"
+      @touchmove="longpressVideo(item)">
+      <div class="main-list-group">
+        <div class="main-video">
+          <div class="main-like-radio" v-if="showCheck" @click.stop>
+            <van-checkbox :name="item.vodId"></van-checkbox>
+          </div>
+          <div 
+            :class="['main-img', { 'main-img-opacity' : vodId == item.vodId}]" 
+           
+            @mouseenter="mouseenterVideo(item)"
+           >
+           <van-image
+              lazy-load
+              :src="item.vodPic"
+            >
+            <template slot="loading">
+              <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="">
+            </template>
+            <template slot="error">
+              <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="">
+            </template>
+          </van-image>
+            <!-- <img v-if="item.vodPic" :src="item.vodPic" alt="part1"> -->
+            <!-- <img v-else src="~/static/images/cover1.svg" alt="part1"> -->
+          </div>
+          
+          <!-- 只加载当前视频id -->
+          <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId">
+            <videoM3u8 :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8>
+          </div>
+          <div class="main-time">{{ item.vodDuration }}</div>
         </div>
-        <div class="mian-btn-like">
-          <div :class="themeChecked ? 'main-like':'main-like-white'"></div>
-          <div class="main-text">{{ $formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div>
+        <div class="main-title">{{ item.vodName }}</div>
+        <div class="main-btn">
+          <div class="main-btn-view">
+            <div :class="themeChecked? 'main-view':'main-view-white'"></div>
+            <div class="main-text">{{ formatNumber(item.vodHits) }}</div>
+          </div>
+          <div class="mian-btn-like">
+            <div :class="themeChecked? 'main-like':'main-like-white'"></div>
+            <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </template>
 <script>
-export default {
-  props:{ 
+import Cover from '@/components/cover'
+import { formatNumber, formatPer } from '@/utils/format.js'
+import { mapGetters } from 'vuex';
+import videoM3u8 from "@/components/videoM3u8"
+import { isPc } from '@/utils/format.js'
+export default{
+  props: {
     item: {
       type: Object,
       required: true,
     },
+    showCheck: {
+      type: Boolean,
+      default: () => false
+    }
   },
-  data(){
-    return{
-      themeChecked: false,
+  data() {
+    return {
+      activeIcon: require('~/static/images/com_select_on.svg'),
+      inactiveIcon: require('~/static/images/com_select_1.svg'),
+    }
+  },
+  computed: {
+    ...mapGetters(['theme', 'vodId']),
+    themeChecked(){
+      return this.theme === 'dark'
+    }
+  },
+  components: {
+    Cover,
+    videoM3u8
+  },
+  methods: {
+    formatNumber,
+    formatPer,
+    handleGoDetail(item){
+      this.$router.push({
+        path: `/video/${item.vodId}`
+      })
+      // this.$router.push({
+      //   name: 'video',
+      //   params: {
+      //     id: item.vodId
+      //   }
+      // })
+    },
+    longpressVideo(item){
+      this.$store.commit("SET_VODID", item.vodId)
+    },
+    mouseenterVideo(item){
+      if( isPc() ){
+        this.$store.commit("SET_VODID", item.vodId)
+      }else{
+        return;
+      }
     }
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" scoped>/*main*/
 .main-list{
   width: 100%;
   margin: 0 auto;
+  
 }
 .main-list-group{
   margin-top: 16px;
+  /* margin-bottom: .444rem; */
 }
 .main-video{
   position: relative;
+  /* width: 9.528rem; */
+  /* height: 5.389rem; */
 }
 .main-like-radio{
   position:absolute;
   right: 12.5px;
   top: 12.5px;
+  /* background-color: rgba(43, 46, 52, 0.7); */
+  // width: 15px;
   height: 15px;
+  // border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,6 +161,7 @@ export default {
   border-radius: 4px;
   background: var(--bg-color4);
   font-size: 14px;
+
   text-align: center;
   line-height: 24px;
   z-index: 6;
@@ -96,6 +172,7 @@ export default {
   font-weight: 400;
   color: var(--text-color2);
   margin-top: 8px;
+  // word-break: break-all;
   word-break: break-word;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -117,6 +194,7 @@ export default {
   align-items: center;
   margin-right: 24px;
   height: 17px;
+  // line-height: 17px;
 }
 .main-like{
   width: 16px;

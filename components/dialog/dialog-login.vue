@@ -32,8 +32,8 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-
 import commonMinxin from '~/plugins/mixins/common'
+import CODES from "~/plugins/enums/codes"
 export default {
   mixins: [commonMinxin],
   data() {
@@ -70,7 +70,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['set_userinfo']),
+    ...mapActions(['set_userinfo','setAccessToken']),
     validatorEmail(){
       const myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/; 
       if(!myreg.test(this.form.email)){
@@ -103,58 +103,38 @@ export default {
     async handleSubmit() {
       try {
         const params = {
-          email: this.form.email,
-          password: this.$md5(this.form.password),
+          account: this.form.email,
+          password: this.form.password,
         }
         this.showLoading = true
-        console.log(this.form, 'handleSubmit')
         // if (!this.form.email) return this.$toast( this.$t('toast1') )
         // if (!this.form.password) return this.$toast(this.$t('toast2'))
         if(this.email.showError || this.password.showError) {
           this.email.showError && this.validatorEmail()
           this.password.showError && this.validatorPassword()
         } else {
-        // const params = `{ username: ${this.form.username}, password: ${this.$md5(this.form.password)}, code: ${this.form.code}}`
-          console.log(params, ' 888')
-          const res = await this.$homeApi.postEmailLogin(JSON.stringify(params))
-          if (res.code === 100) {
-            // this.code = res.body
-            const userinfo = {
-              ...res.body,
-              ...this.form
-            }
-            console.log(userinfo)
-            
-            this.set_userinfo(userinfo)
-            this.getUserInfo(userinfo)
+          const res = await postEmailLogin(params)
+          if (res.code === CODES.SUCCESS) {
+            this.setAccessToken(res.data.accessToken)
+            this.getUserInfo(res.data)
           } else {
             // this.$toast(res.message)
           }
           console.log(res, '666')
         }
       } catch (error) {
+        // this.$toast(error.message)
         console.error(error)
       } finally {
         this.showLoading = false
       }
     },
-     // 获取用户信息
-     getUserInfo1(userinfo){
-        this.$userApi.requestUserinfo(JSON.stringify({userId: userinfo.accessId})).then( res => {
-            console.log( res ) 
-            // if( res.code == 100 ){
-            //     this.info = res.body;
-            // } 
-        })
-    },
-    async getUserInfo(userinfo){
+    async getUserInfo(info){
       try {
-        const params = { userId: userinfo.accessId }
-        console.log(params, 'params')
-        const res = await this.$userApi.requestUserinfo(JSON.stringify(params))
-        if(res.code === 100){
-          const user = res.body
-          this.set_userinfo({...user, ...userinfo})
+        const res = await requestUserinfo()
+        if(res.code === CODES.SUCCESS){
+          const user = res.data
+          this.set_userinfo({...user, ...info})
           this.$toast(this.$t('toast4'))
           this.show = false
           this.$router.push({ name: 'home' })
@@ -174,6 +154,7 @@ export default {
           // }
         }
       } catch (error) {
+        this.$toast(error.message)
         console.error(error)
       }
     },

@@ -1,23 +1,25 @@
 <template>
-  <van-popup class="scroll-pop" v-model="show" :close-on-click-overlay="false">
-    <div class="dialog">
-      <div class="dialog-top">
-        <div :class="themeChecked? 'logo-black': 'logo-white'"></div>
-      </div>
-      <div class="dialog-text">{{ $t('str_guild_age') }}</div>
-      <div class="dialog-subtitle">{{ $t('str_guild_text') }}</div>
-      <div class="dialog-btns" @click="handleSubmit">
-        {{ $t('str_enter_text') }}
-      </div>
-      <a class="dialog-btns dialog-exit" href="https://www.google.com">
-       {{ $t('str_exit_text') }}
-      </a>
-      <div class="dialog-subtitle dialog-control land_footer">
-          <p v-html="$t('str_page_text1')"> </p>
-          <p> {{ $t('str_page_text2') }} </p>
-          <p> {{ $t('str_page_text3') }} </p>
-          <p class="com">  © {{ hostname }}, 2023 </p>
-          <img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta">
+  <van-popup class="scroll-pop dialog-guild" v-model="show" :close-on-click-overlay="false">
+    <div class="guild-main">
+      <div class="dialog">
+        <div class="dialog-top">
+          <div :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        </div>
+        <div class="dialog-text">{{ $t('str_guild_age') }}</div>
+        <div class="dialog-subtitle">{{ $t('str_guild_text') }}</div>
+        <div class="dialog-btns" @click="handleSubmit">
+          {{ $t('str_enter_text') }}
+        </div>
+        <a class="dialog-btns dialog-exit" href="https://www.google.com">
+        {{ $t('str_exit_text') }}
+        </a>
+        <div class="dialog-subtitle dialog-control land_footer">
+            <p v-html="$t('str_page_text1')"> </p>
+            <p> {{ $t('str_page_text2') }} </p>
+            <p> {{ $t('str_page_text3') }} </p>
+            <p class="com">  © {{ hostname }}, 2023 </p>
+            <img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta">
+        </div>
       </div>
     </div>
   </van-popup>
@@ -29,7 +31,12 @@ export default {
   data() {
     return {
       show: false,
-      hostname: window.location.hostname
+      hostname: "",
+    }
+  },
+  created(){
+    if(process.client){
+      this.hostname = window.location.hostname
     }
   },
   methods: {
@@ -44,21 +51,40 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-
-.van-popup {
-  background-color: var(--dialog-bg-color);
+.dialog-guild{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("~~/static/images/01.png") center/cover fixed no-repeat;
+    filter: blur(4px);
+    z-index: -1;
+  }
+}
+.guild-main {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(24, 24, 28, 0.60);
   width: 343px;
   height: auto;
   padding: 16px;
   border-radius: 16px;
   overflow: hidden;
-  border: 1PX solid #FFFFFF0F
+}
+.scroll-pop{
+  overflow: auto;
 }
 .str-page-text{
   color: var(--bg-primary);
-}  
-.scroll-pop{
-  overflow: auto;
 }
 .logo-black{
   width: 86px;

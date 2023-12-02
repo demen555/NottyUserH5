@@ -1,206 +1,231 @@
 <template>
-  <div class="layouts">
-      <div class="header">
-        <Overlay v-model="overlayShow" v-if="overlayShow"></Overlay>
-
-        <header class="home-header" id="home-header">
-          <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common" alt="more">
-          <div @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
-          <div class="header-right">
-            <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search" alt="com_sousuo">
-            <img @click="handleExpand('right')" class="header-common1" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
+  <div class="header">
+    <Overlay v-model="overlayShow" v-if="overlayShow"></Overlay>
+      <header class="home-header" id="home-header">
+        <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common" alt="more">
+        <div @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        <div class="header-right">
+          <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search" alt="com_sousuo">
+          <img @click="handleExpand('right')" class="header-common1" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
+        </div>
+      </header>
+    <!-- 左边抽屉 -->
+    <van-popup
+      v-model="showPop"
+      position="left"
+      class="vant-pop-320"
+     
+    >
+      <div id="drawer" class="nav-menu menu-right">
+        <div class="menu-header">
+         <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
+         <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
+        </div>
+        <!-- 版本影藏需要v1.1.0 -->
+        <!-- <div class="nav-list-tags type">
+          <div class="nav-menu-list-tag" @click="handleShowExpand('type')">
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_leixing_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
+              <div>{{ $t('str_tags') }}</div>
+            </div>
+            <div :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
-        </header>
-
-        <!-- 左边抽屉 -->
-        <van-popup
-          v-model="showPop"
-          position="left"
-          class="vant-pop-320"
-        >
-          <div id="drawer" class="nav-menu menu-right">
-            <div class="menu-header">
-            <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
-            <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
-            </div>
-
-            <div v-if="!showTypeExpand" class="type-div"></div>
-            <div class="nav-list-tags">
-              <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
-                <div class="nav-menu-left">
-                  <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_biaoqian_1.svg'): require('~/static/images/my_gn_biaoqian.svg')" alt=""></div>
-                  <div>{{ $t('str_menu_tag') }}</div>
-                </div>
-                <div :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
-              </div>
-              <template v-if="!showExpand">
-                <div class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" @click.stop="handleClickTag(tag)">
-                  <div class="nav-menu-left">
-                    <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
-                    <div>{{ tag.name }}</div>
-                  </div>
-                  <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type'">
-                    <img src="~/static/images/com_select_on.svg" alt="com_select_on">
-                  </div>
-                </div>
-                <!-- 所有标签 -->
-                <div class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" @click.stop="handleGoPage('tag')"> {{ $t('str_menu_tag_all') }}</div>
-                <div class="nav-menu-list-tag-empty"></div>
-              </template>
-            </div>
-            <div class="nav-menu-list" @click="handleGoPage('history')" >
+          <template v-if="!showTypeExpand">
+            <div class="nav-menu-list-tag-sub" v-for="(item) in typeList" :key="item.typeId" @click="handleClickType(item)">
               <div class="nav-menu-left">
-                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt=""></div>
-                <div>{{ $t('str_his') }}</div>
+                <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                <div class="typeName">{{ item.typeName }}</div>
+              </div>
+              <div class="nav-menu-right" v-if="item.typeId === typeId && routeName == 'categories' ">
+                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
               </div>
             </div>
-            <div class="nav-menu-list" @click="handleGoPage('collect')">
-              <div class="nav-menu-left">
-                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt=""></div>
-                <div>{{ $t('str_collect') }}</div>
-              </div>
+            
+            <div class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" @click.stop="handleGoPage('allcategories')"> {{ $t('str_menu_type_all') }}</div>
+            <div class="nav-menu-list-tag-empty"></div>
+          </template>
+        </div>-->
+        <div v-if="!showTypeExpand" class="type-div"></div> 
+        <div class="nav-list-tags">
+          <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_biaoqian_1.svg'): require('~/static/images/my_gn_biaoqian.svg')" alt=""></div>
+              <div>{{ $t('str_menu_tag') }}</div>
             </div>
-            <div class="nav-menu-list" @click="handleGoPage('up')" >
-              <div class="nav-menu-left">
-                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
-                <div>{{ $t('str_like') }}</div>
-              </div>
-            </div>
-            <div class="nav-menu-dl" >
-              <div class="nav-menu-btn nav-ios" @click="handleAddMain" v-show="mobileDevice() == 'iOS'">
-                <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
-                <div class="nav-text">{{ $t('str_tianjia_zhupin') }}</div>
-              </div>
-              <div class="nav-menu-btn nav-and" @click="downloadApp" v-show="mobileDevice() == 'Android'">
-                <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_android_1.svg'): require('~/static/images/my_gn_xz_android.svg')"></div>
-                <div class="nav-text">{{ $t('str_down_load') }} </div>
-              </div>
-            </div>
+            <div :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
-        </van-popup>
-
-        <!-- 右边抽屉 -->
-        <van-popup
-          v-model="showRightPop"
-          position="right"
-          class="vant-pop-320"
-          
-        >
-          <div id="drawer" class="nav-menu menu-left">
-            <div class="menu-header">
-            <img class="close-pop" @click="showRightPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
-            <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
-            </div>
-            <div class="nav-menu-btns" v-if="!userinfo.accessId">
-              <div class="nav-menu-btns-left">
-                <div class="nav-menu-login" @click="handleLoginorRegister('login')">
-                  <img :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="">
-                </div>
-                <div>{{ $t('str_login') }}</div>
-            </div>
-            <div class="nav-menu-btns-left">
-              <div class="nav-menu-res" @click="handleLoginorRegister('register')">
-                <img :src="themeChecked? require('~/static/images/home_top_zhuce_1.svg'): require('~/static/images/home_top_zhuce.svg')" alt="">
-              </div>
-              <div>{{ $t('str_register') }}</div>
-            </div>
-            </div>
-            <div class="nav-list-tags" @click="handleGoPage('user')" v-show="isLogin">
-              <div class="nav-menu-list-tag nav-menu-list-spec">
-                <div class="nav-menu-left">
-                  <div class="nav-menu-tag"><img src="~/static/images/home_top_gaoliang.svg" alt=""></div>
-                  <!-- {{ $t('str_user_account') }}  -->
-                  <div>{{  userinfo.userNickName || userinfo.userName }}</div>
-                </div>
-                <div @click="handleGoPage('user')">
-                  <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
-                </div>
-              </div>
-            </div>
-            <div class="nav-list-tags">
-              <div class="nav-menu-list-tag" @click="handleShowExpand('language')">
-                <div class="nav-menu-left">
-                  <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_yuyan_1.svg'): require('~/static/images/my_gn_yuyan.svg')" alt=""></div>
-                  <div>{{ $t('str_change_lang') }}</div>
-                </div>
-                <div class="nav-menu-right">
-                  <div class="nav-menu-lang">{{ languageText }}</div>
-                  <div  :class="showLanguageExpand? (themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
-                </div>
-              </div>
-              <template v-if="!showLanguageExpand">
-                <div class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.language" @click="handleChangLanguage(item)">
-                  <div class="nav-menu-left">
-                    <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
-                    <div>{{ item.title }}</div>
-                  </div>
-                  <div class="nav-menu-right" v-if="item.language === language">
-                    <img src="~/static/images/com_select_on.svg" alt="com_select_on">
-                  </div>
-                </div>
-              </template>
-            </div>
-            <div v-if="!showLanguageExpand" class="type-div"></div>
-            <div class="nav-list-tags" ref="main">
-              <div class="nav-menu-list-tag" @click="handleShowExpand('location')">
-                <div class="nav-menu-left">
-                  <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_guojia_1.svg'): require('~/static/images/my_gn_guojia.svg')" alt=""></div>
-                  <div> {{ $t('str_change_cuy') }} </div>
-                </div>
-                <div class="nav-menu-right">
-                  <div class="nav-menu-lang">{{ locationText }}</div>
-                  <div :class="showLocationExpand? themeChecked ? 'user-menu-list-right-type' : 'user-menu-list-right-type-white': themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white'"></div>
-                </div>
-              </div>
-              <template v-if="!showLocationExpand">
-                <div class="location-menu" ref="content">
-                  <div class="nav-menu-list-tag-sub" v-for="(item) in locationList" :key="item.id" @click="handleChangLocation(item)">
-                    <div class="nav-menu-left">
-                      <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
-                      <div>{{ $t(item.country) }}</div>
-                    </div>
-                    <div class="nav-menu-right" v-if="item.code === location">
-                      <img src="~/static/images/com_select_on.svg" alt="com_select_on">
-                    </div>
-                  </div>
-                </div>
-              </template>
-            </div>
-            <div v-if="!showLocationExpand" class="type-div"></div>
-            <div class="nav-menu-list">
+          <template v-if="!showExpand">
+            <div class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" @click.stop="handleClickTag(tag)">
               <div class="nav-menu-left">
-                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_zhuti_1.svg'): require('~/static/images/my_gn_zhuti.svg')" alt=""></div>
-                <div>{{ $t('str_change_bg') }} </div>
+                <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                <div>{{ tag.name }}</div>
               </div>
-              <div class="nav-menu-right">
-                <van-switch @change="handleChangeTheme" v-model="themeChecked" size="16px"/>
-              </div>
-            </div>
-            <!-- <div class="nav-menu-list" @click="handleGoPage('pwdset')" >
-              <div class="nav-menu-left">
-                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_sz_1.svg'): require('~/static/images/my_gn_sz.svg')" alt=""></div>
-                <div>{{ $t('str_setting') }}</div>
-              </div>
-            </div> -->
-            <div class="nav-menu-list" @click="handleLoginOut" v-show="isLogin">
-              <div class="nav-menu-left">
-                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_tuideng_1.svg'): require('~/static/images/my_gn_tuideng.svg')"></div>
-                <div> {{ $t('str_logout') }}</div>
+              <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type'">
+                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
               </div>
             </div>
+            <!-- 所有标签 -->
+            <div class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" @click.stop="handleGoPage('tag')"> {{ $t('str_menu_tag_all') }}</div>
+            <div class="nav-menu-list-tag-empty"></div>
+          </template>
+        </div>
+        <div class="nav-menu-list" @click="handleGoPage('history')" >
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt=""></div>
+            <div>{{ $t('str_his') }}</div>
           </div>
-        </van-popup>
-
+        </div>
+        <div class="nav-menu-list" @click="handleGoPage('collect')">
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt=""></div>
+            <div>{{ $t('str_collect') }}</div>
+          </div>
+        </div>
+        <div class="nav-menu-list" @click="handleGoPage('up')" >
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
+            <div>{{ $t('str_like') }}</div>
+          </div>
+        </div>
+        <div class="nav-menu-dl">
+          <div class="nav-menu-btn nav-ios" @click="handleAddMain">
+            <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
+            <div class="nav-text">{{ $t('str_tianjia_zhupin') }}</div>
+          </div>
+          <div class="nav-menu-btn nav-and" @click="downloadApp">
+            <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_android_1.svg'): require('~/static/images/my_gn_xz_android.svg')"></div>
+            <div class="nav-text">{{ $t('str_down_load') }} </div>
+          </div>
+        </div>
       </div>
-      <Nuxt />
+    </van-popup>
+    <!-- 右边抽屉 -->
+    <van-popup
+      v-model="showRightPop"
+      position="right"
+      class="vant-pop-320"
+      
+    >
+      <div id="drawer" class="nav-menu menu-left">
+        <div class="menu-header">
+         <img class="close-pop" @click="showRightPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
+         <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        </div>
+        <div class="nav-menu-btns" v-if="!userinfo.userId">
+          <div class="nav-menu-btns-left">
+            <div class="nav-menu-login" @click="handleLoginorRegister('login')">
+              <img :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="">
+            </div>
+            <div>{{ $t('str_login') }}</div>
+        </div>
+        <div class="nav-menu-btns-left">
+          <div class="nav-menu-res" @click="handleLoginorRegister('register')">
+            <img :src="themeChecked? require('~/static/images/home_top_zhuce_1.svg'): require('~/static/images/home_top_zhuce.svg')" alt="">
+          </div>
+          <div>{{ $t('str_register') }}</div>
+        </div>
+        </div>
+        <div class="nav-list-tags" @click="handleGoPage('user')" v-show="isLogin">
+          <div class="nav-menu-list-tag nav-menu-list-spec">
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img src="~/static/images/home_top_gaoliang.svg" alt=""></div>
+              <!-- {{ $t('str_user_account') }}  -->
+              <div>{{  userinfo.userNickName || userinfo.userName }}</div>
+            </div>
+            <div @click="handleGoPage('user')">
+              <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="nav-list-tags">
+          <div class="nav-menu-list-tag" @click="handleShowExpand('language')">
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_yuyan_1.svg'): require('~/static/images/my_gn_yuyan.svg')" alt=""></div>
+              <div>{{ $t('str_change_lang') }}</div>
+            </div>
+            <div class="nav-menu-right">
+              <div class="nav-menu-lang">{{ languageText }}</div>
+              <div  :class="showLanguageExpand? (themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+            </div>
+          </div>
+          <template v-if="!showLanguageExpand">
+            <div class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.language" @click="handleChangLanguage(item)">
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                <div>{{ item.title }}</div>
+              </div>
+              <div class="nav-menu-right" v-if="item.language === language">
+                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+              </div>
+            </div>
+          </template>
+        </div>
+        <div v-if="!showLanguageExpand" class="type-div"></div>
+        <div class="nav-list-tags" ref="main">
+          <div class="nav-menu-list-tag" @click="handleShowExpand('location')">
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_guojia_1.svg'): require('~/static/images/my_gn_guojia.svg')" alt=""></div>
+              <div> {{ $t('str_change_cuy') }} </div>
+            </div>
+            <div class="nav-menu-right">
+              <div class="nav-menu-lang">{{ locationText }}</div>
+              <div :class="showLocationExpand? themeChecked ? 'user-menu-list-right-type' : 'user-menu-list-right-type-white': themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white'"></div>
+            </div>
+          </div>
+          <template v-if="!showLocationExpand">
+            <div class="location-menu" ref="content">
+              <div class="nav-menu-list-tag-sub" v-for="(item, index) in locationList" :key="item.id" @click="handleChangLocation(item)">
+                <div class="nav-menu-left">
+                  <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                  <div>{{ $t(item.country) }}</div>
+                </div>
+                <div class="nav-menu-right" v-if="item.code === location">
+                  <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+        <div v-if="!showLocationExpand" class="type-div"></div>
+        <div class="nav-menu-list">
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_zhuti_1.svg'): require('~/static/images/my_gn_zhuti.svg')" alt=""></div>
+            <div>{{ $t('str_change_bg') }} </div>
+          </div>
+          <div class="nav-menu-right">
+            <van-switch @change="handleChangeTheme" v-model="themeChecked" size="16px"/>
+          </div>
+        </div>
+        <!-- <div class="nav-menu-list" @click="handleGoPage('pwdset')" >
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_sz_1.svg'): require('~/static/images/my_gn_sz.svg')" alt=""></div>
+            <div>{{ $t('str_setting') }}</div>
+          </div>
+        </div> -->
+        <div class="nav-menu-list" @click="handleLoginOut" v-show="isLogin">
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_tuideng_1.svg'): require('~/static/images/my_gn_tuideng.svg')"></div>
+            <div> {{ $t('str_logout') }}</div>
+          </div>
+        </div>
+      </div>
+    </van-popup>
+    <dialogLogin ref="dialogLoginRef" @goRegister="goRegister"></dialogLogin>
+    <dialogRegister ref="dialogRegisterRef" @goLogin="goLogin"></dialogRegister>
+    <dialogLine ref="dialogLineRef" @goLogin="goLogin"></dialogLine>
+    <dialogGuild ref="dialogGuildRef"></dialogGuild>
   </div>
+  
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Overlay from '~/components/overlay'
-import dialogGuild from '~/components/dialog/dialog-guild.vue'
-import { langMap, areaList } from "~/locales/lang.js"
-import {  mobileDevice } from '~/utils/format.js';
+import Overlay from '@/components/overlay'
+import dialogGuild from '@/components/dialog/dialog-guild.vue'
+import { langMap } from "~/locales/langMap.js"
+import { areaList } from '~/plugins/enums/country.js'
+import CODES from "~/plugins/enums/codes"
+
+
 
 export default {
   data() {
@@ -211,13 +236,12 @@ export default {
       showLanguageExpand: true, //语言
       showLocationExpand: true, //国家
       showExpand: true, // 标签
-      // language: localStorage.getItem('language'), //语言
+      
       languageList: langMap, // 语言数据
+      // language: localStorage.getItem('language'), //语言
       // location: localStorage.getItem('location') || 'US1', //国家
-
-      location: "US1",
-      language: "en_US",
-
+      language: "pt_PT",
+      location: "US",
       locationList: areaList, // 国家数据
       themeChecked: true, // 主题切换
       typeList: [],  // 分类数据
@@ -226,26 +250,26 @@ export default {
       pageInfo: {
         page: 1,
         size: 10
-      },
-
+      }
     }
   },
   components: {
-    dialogLogin: () => import('~/components/dialog/dialog-login.vue'),
-    dialogRegister: () => import('~/components/dialog/dialog-register.vue'),
-    dialogLine: () => import('~/components/dialog/dialog-line.vue'),
-    // dialogGuild: () => import('~/components/dialog/dialog-guild.vue'),
+    dialogLogin: () => import('@/components/dialog/dialog-login.vue'),
+    dialogRegister: () => import('@/components/dialog/dialog-register.vue'),
+    dialogLine: () => import('@/components/dialog/dialog-line.vue'),
+    // dialogGuild: () => import('@/components/dialog/dialog-guild.vue'),
     dialogGuild,
     Overlay
   },
   created(){
     // const theme=  localStorage.getItem('data-theme')
-    // this.themeChecked = this.theme === 'dark'
-    this.initTypeList()
+    this.themeChecked = this.theme === 'dark'
     this.initTagList()
-    // this.$nextTick(() => {
-    //   !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
-    // })
+    if(process.client){
+      this.$nextTick(() => {
+        !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
+      })
+    }
   },
   activated(){
     console.log( 'this.$route.name', this.$route.name )
@@ -258,13 +282,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      'userinfo': 'user/userinfo', 
-      'theme': 'user/userinfo', 
-      'isLogin': 'user/isLogin', 
-      'tagId': 'type/tagId', 
-      'typeId': 'type/typeId', 
-    }),
+    ...mapGetters(['userinfo', 'theme', 'isLogin', 'tagId', 'typeId','accessToken']),
     languageText({ language,  languageList}) {
       const obj = languageList[language];
       return obj.title
@@ -279,8 +297,7 @@ export default {
     }
   },
   methods: {
-    mobileDevice,
-    ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid']),
+    ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken']),
     handleClickNotty(){
       if(this.$route.name === 'home'){
         this.$emit('refresh')
@@ -295,7 +312,7 @@ export default {
       if(this.$route.name === 'search') {
         this.handleScroll()
       }else{
-        this.$router.push({name: 'home'})
+        this.$router.push('/')
       }
     },
     handleScroll() {
@@ -314,9 +331,7 @@ export default {
       this.overlayShow = true
     },
     handleGoTag(){
-      this.$router.push({
-        name: 'tag'
-      })
+      this.$router.push("/tag")
     },
     handleClickTag(item){
       gtag('event', 'gt4_click_tags', {
@@ -351,33 +366,24 @@ export default {
     },
     async initTagList(){
       try {
-        const res = await this.$homeApi.postTagListPage(this.pageInfo);
-        if(res.code === 100){
-          this.tagList = res.body.records || []
+        const res = await this.$homeApi.postTagListPage(this.pageInfo)
+        if(res.code === CODES.SUCCESS){
+          console.log(res.data, 'initTagList')
+          this.tagList = res.data.data || []
         }
         console.log(this.tagList, res, 'tag')
       } catch (error) {
         console.error(error)
       }
     },
-    async initTypeList(){
-      // try {
-      //   const res = await this.$homeApi.postTypeList()
-      //   if(res.code === 100){
-      //     this.typeList = res.body.splice(0,5) || []
-      //     console.log(this.typeList.length ,res, 'type')
-      //   }
-      // } catch (error) {
-      //   console.error(error)
-      // }
-    },
+
     async handleLoginOut(){
       try {
-        const res = await this.$homeApi.postLoginOut()
-        console.log(res)
-        if(res.code === 100){
+        const res = await postLoginOut()
+        if(res.code === CODES.SUCCESS){
           this.$toast(this.$t('toast7'))
           this.set_userinfo({})
+          this.clearAccessToken()
           this.$refs.dialogLoginRef.onShow()
           this.$router.push({name: 'home'})
         }
@@ -420,7 +426,6 @@ export default {
       location.reload(); // 重启载入
     },
     handleChangLocation(item){
-      console.log(item.code)
       this.location = item.code
       localStorage.setItem("location", item.code)
       location.reload(); // 重启载入
@@ -429,15 +434,12 @@ export default {
       if(val){
         document.documentElement.setAttribute('data-theme', 'dark')
         this.update_theme('dark')
-        // localStorage.setItem('data-theme', JSON.stringify('dark'))
       } else {
         document.documentElement.setAttribute('data-theme', 'light')
         this.update_theme('light')
-        // localStorage.setItem('data-theme', JSON.stringify('light'))
       }
     },
     handleLoginorRegister(val){
-      console.log(val)
       if(val === 'login'){
         this.$refs.dialogLoginRef.onShow()
       } else if (val === 'register') {
@@ -481,6 +483,8 @@ export default {
       aLink.click();
       document.body.removeChild(aLink); // 下载完成移除元素
     },
+
+
   }
 }
 </script>

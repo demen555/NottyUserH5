@@ -32,7 +32,9 @@
           <input  v-model="form.code" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_code')" type="text">
           <div class="user-center-input-code">
             <!-- <img src="~/static/images/code.png" alt=""> -->
-            <div class="input-code" @click="initCode">{{ code }}</div>
+            <div class="input-code" @click="initCode">
+              <img class="code-img" :src="code" alt="code">
+            </div>
           </div>
         </div>
       </div>
@@ -61,7 +63,8 @@
           email: '',
           username: '',
           password: '',
-          code: ''
+          code: '',
+          key: ''
         },
         showLoading: false,
         email: {
@@ -125,7 +128,8 @@
         try {
           const res  = await this.$homeApi.postCode()
           if(res.code === 100){
-            this.code = res.body
+            this.code = res.data.img
+            this.form.key = res.data.key
           }
           console.log(res, '666')
         } catch (error) {
@@ -141,8 +145,9 @@
           const params = {
             email: this.form.email,
             username: this.form.username,
-            password: this.$md5(this.form.password),
+            password: this.form.password,
             code: this.form.code,
+            key: this.form.key
           }
           this.showLoading = true
           if(!this.form.username) return this.$toast( this.$t('toast1') )
@@ -154,18 +159,17 @@
             this.user.showError && this.validatorUser() 
             this.pwd.showError && this.validatorEmail()
           } else {
-            // const params = `{ username: ${this.form.username}, password: ${this.$md5(this.form.password)}, code: ${this.form.code}}`
-            console.log(params, ' 888')
-            const res  = await this.$homeApi.postEmailRegister(JSON.stringify(params))
+            const res  = await this.$postEmailRegister(JSON.stringify(params))
             if(res.code === 100){
-              this.set_register(this.form)
-              this.handleLoginSubmit()
+              this.set_userinfo(res.data)
+              this.getUserInfo(res.data)
               this.show = false
               this.form = {
                 email: '',
                 username: '',
                 password: '',
-                code: ''
+                code: '',
+                key: ''
               }
             } else {
               // this.$toast(res.message)
@@ -179,41 +183,12 @@
           this.showLoading = false
         }
       },
-      async handleLoginSubmit() {
-        try {
-          const params = {
-            email: this.form.email,
-            password: this.$md5(this.form.password),
-          }
-          this.showLoading = true
-          console.log(this.form, 'handleLoginSubmit')
-          console.log(params, ' 888')
-          const res = await this.$homeApi.postEmailLogin(JSON.stringify(params))
-          if (res.code === 100) {
-            const userinfo = {
-              ...res.body,
-              ...this.form
-            }
-            this.$toast(this.$t('toast4'))
-            this.set_userinfo(userinfo)
-            this.getUserInfo(userinfo)
-          } else {
-            // this.$toast(res.message)
-          }
-        } catch (error) {
-          // this.$toast(error.message)
-          console.error(error)
-        } finally {
-          this.showLoading = false
-        }
-      },
       async getUserInfo(userinfo){
         try {
-          const params = { userId: userinfo.accessId }
-          console.log(params, 'params')
-          const res = await this.$userApi.requestUserinfo(JSON.stringify(params))
+          const res = await userApi.requestUserinfo()
           if(res.code === 100){
-            const user = res.body
+            this.$toast(this.$t('toast4'))
+            const user = res.data
             this.set_userinfo({...user, ...userinfo})
             // this.show = false
             this.$router.push({ name: 'home' })
@@ -228,7 +203,8 @@
           username: '',
           password: '',
           password1: '',
-          code: ''
+          code: '',
+          key: ''
         }
       }
     }
@@ -358,6 +334,10 @@
 }
 .input-code{
   position: relative;
+}
+.input-code .code-img {
+  width: 68px;
+  height: 32px;
 }
 .user-center-input-code{
   position: absolute;

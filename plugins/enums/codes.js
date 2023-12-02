@@ -1,0 +1,14 @@
+/**
+ * 响应状态码
+ */
+export default {
+    SUCCESS: 200,
+    CREATED: 201,
+    ACCEPTED: 202,
+    NO_CONTENT: 204,
+    ERROR_UNAUTHORIZED: 401,
+    ERROR_FORBIDDEN: 403,
+    ERROR_NOTFOUND: 404,
+    ERROR_METHOD_NOT_ALLOWED: 405,
+    FAIL: 500,
+}

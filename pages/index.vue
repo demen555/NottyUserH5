@@ -1,7 +1,12 @@
 <template>
-  <div class="home">
+    <div class="home">
       <HeaderTop @refresh="onRefresh"  id="home-top"></HeaderTop>
-      <van-pull-refresh v-model="refreshing" class="paddingTop52" @refresh="onRefresh" >
+      
+      <div class="loading-box" v-if="spainnerLoading">
+        <cardLoad></cardLoad>
+      </div>
+      <van-pull-refresh v-model="refreshing" @refresh="onRefresh" class="paddingTop52">
+         <!-- <p>刷新次数: {{ count }}</p> -->
         <van-list
           v-model="loading"
           :finished="finished"
@@ -12,58 +17,56 @@
           <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         </van-list>
       </van-pull-refresh>
-  </div>
+    </div>
 </template>
-
 <script>
-import HeaderTop from '~/components/header/top.vue'
-export default {
-  name: 'IndexPage',
-  components:{
-    HeaderTop
-  },
-  data(){
-    return{
+import HeaderTop from '@/components/header/top.vue'
+import Cover from '@/components/cover'
+import cardLoad from "@/components/skeleton/cardLoad.vue"
+import CODES from "~/plugins/enums/codes"
+export default{
+  data() {
+    return {
       spainnerLoading: true,// 全局loading层
       loading: false, // 是否处于加载状态
       finished: false, // 是否加载完成
       refreshing: false, // 当前是否刷新重置信息
       dataList: [],
-    }
-  },
-  async asyncData ({ $homeApi }) {
-    const pageInfo = {
-      page: 1,
-      size: 20
-    }
-    const res = await $homeApi.requestvodpageHome(pageInfo);
-    if( res.code == 200 ){
-      return {
-        dataList: res.data.data,
-        pageInfo: pageInfo
+      pageInfo: {
+        page: 1,
+        size: 20
       }
     }
   },
-
-  methods:{
+  created(){
+    this.getList('first')
+  },
+  components: {
+    HeaderTop,
+    Cover,
+    cardLoad
+  },
+  methods: {
     onLoad(){
       this.pageInfo.page += 1
       this.getList();
     },
-    async getList(isRefresh){
+    async getList(isRefresh ){
       try {
-        this.spainnerLoading = true;
-        const res = await this.$homeApi.requestvodpageHome(this.pageInfo) 
+        isRefresh  === 'first' && (this.spainnerLoading = true)
+        // this.loading = true
+        const res = await this.$homeApi.requestvodpageHome({ page: this.pageInfo.page, size: this.pageInfo.size})
         const { code, data } = res
-        if(code === 200 && data.data){
-         if(isRefresh){
+        
+        if(code == CODES.SUCCESS && data){
+          if(isRefresh){
             this.dataList = data.data
             this.refreshing = false
           } else {
-            this.dataList = [ ...this.dataList, ...data.dat]
+            this.dataList = [ ...this.dataList, ...data.data]
             this.loading = false
           }
-          this.loading = false
+         console.log( code, data, this.dataList, 'data' )
           if(data.data.length === 0){
             this.finished = true
           }
@@ -88,8 +91,7 @@ export default {
   overflow: visible;
 }
 .color{
-  color: var(--text-color3);
-  font-size: 15px;
+    color: var(--text-color3);
+    font-size: 15px;
 }
 </style>
-

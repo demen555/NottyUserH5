@@ -6,6 +6,22 @@ export default {
     htmlAttrs: {
       lang: 'pt_PT'
     },
+    script: [
+      {
+        src: "https://cdn.jsdelivr.net/npm/hls.js@0.14.6/dist/hls.min.js",
+        async: false,
+      },
+      {
+        src: "https://cdn.jsdelivr.net/npm/dplayer@1.26.0/dist/DPlayer.min.js",
+        async: false,
+      },
+      {
+        src: "https://www.googletagmanager.com/gtag/js",
+        async: true,
+      },
+      
+      { src: "~/plugins/analitics.js", mode: 'client' },
+    ],
 
 
     meta: [
@@ -51,7 +67,7 @@ export default {
   ],
 
   
-  components: true,
+  components: false,
 
 
   buildModules: [
@@ -89,9 +105,9 @@ export default {
         name: 'Português',
       },
     ],
-    defaultLocale: 'en_US',
+    defaultLocale: 'pt_PT',
     vueI18n: {
-      fallbackLocale: 'en_US',
+      fallbackLocale: 'pt_PT',
       lazy: true,
       messages: {
         en_US: require('./locales/en_US.json'),

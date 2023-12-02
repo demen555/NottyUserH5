@@ -1,11 +1,11 @@
-export const state = () => ({
+const state =  {
   detail: {}, // 分类列表中的某一类数据
   searchShow: true, //搜索页面导航是否显示
   tagId: 655, // 导航栏选中标签
   typeId: '' // 分类选中
-})
+}
 
-export const actions = {
+const actions = {
   set_detail(context, data){
     context.commit('SET_DETAIL', data)
   },
@@ -20,14 +20,14 @@ export const actions = {
   },
 }
 
-export const getters = {
+const getters = {
   detail: (state) => state.detail,
   searchShow: (state) => state.searchShow,
   tagId: (state) => state.tagId,
   typeId: (state) => state.typeId,
 }
 
-export const mutations = {
+const mutations = {
   SET_DETAIL(state, data){
     state.detail = data
   },
@@ -41,3 +41,10 @@ export const mutations = {
     state.typeId = data
   }
 }
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+};

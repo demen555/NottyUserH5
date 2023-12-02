@@ -41,10 +41,8 @@
     },
     methods: {
       onClickLeft() {
-        if(this.$route.name !== 'tag'){
-          this.$router.go('-1')
-          // this.$toast('返回');
-        }
+        this.$router.go('-1')
+        // this.$toast('返回');
       },
       onClickRight() {
         if(!this.text) return

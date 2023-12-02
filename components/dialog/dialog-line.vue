@@ -6,14 +6,13 @@
         <div class="dialog-title">{{ $t('str_change_line') }}</div>
         <div class="dialog-close" @click="show = false"><img :src="themeChecked ? require('~/static/images/home_top_guanbi_1.svg'): require('~/static/images/home_top_guanbi.svg')"></div>
       </div>
-      <div class="dialog-btns line-btn" v-for="(item) in domainList" :key="item.id" :class="item.id === domain? 'dialog-btns' : 'dialog-btns-no'" @click="handleRepost(item)">{{ item.link }}</div>
-      <!-- <div class="dialog-btns-no" @click="handleSubmit">登录</div> -->
     </div>
   </van-popup>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import commonMinxin from '~/plugins/mixins/common'
+import CODES from "~/plugins/enums/codes"
 export default {
   mixins: [commonMinxin],
   data() {
@@ -23,15 +22,13 @@ export default {
         username: '',
         password: ''
       },
-      domainList: [],
-      domain: 1
     }
   },
   computed: {
     ...mapGetters(['register'])
   },
   mounted() {
-    this.initDomain()
+    // this.initDomain()
     this.form.username = this.register.username
     this.form.password = this.register.password
   },
@@ -40,45 +37,19 @@ export default {
     handleRegister(){
         this.$emit('goRegister')
         this.show  = false
-      },
-    async initDomain(){
-      try {
-        const res = await this.$homeApi.postDomainList()
-        console.log(res, ' domain')
-        if(res.code === 100){
-          this.domainList = res.body
-        }
-      } catch (error) {
-        console.eror(error)
-      }
-    },
-    async handleRepost(item){
-      try {
-        const params = [item]
-        const res = await this.$homeApi.postDomainReport(JSON.stringify(params))
-        if(res.code === 100){
-
-        }else{
-          // this.$toast(res.message)
-        }
-        console.log(res, 'repost')
-      } catch (error) {
-        console.error(error)
-      }
     },
     async handleSubmit() {
       try {
         const params = {
-          username: this.form.username,
+          account: this.form.username,
           password: this.$md5(this.form.password),
         }
         console.log(this.form, 'handleSubmit')
         if (!this.form.username) return this.$toast( this.$t('toast1') )
         if (!this.form.password) return this.$toast(this.$t('toast2'))
         // const params = `{ username: ${this.form.username}, password: ${this.$md5(this.form.password)}, code: ${this.form.code}}`
-        console.log(params, ' 888')
-        const res = await this.$homeApi.postLogin(JSON.stringify(params))
-        if (res.code === 100) {
+        const res = await postLogin(params)
+        if (res.code === CODES.SUCCESS) {
           // this.code = res.body
           const userinfo = {
             ...res.body,
