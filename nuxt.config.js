@@ -2,15 +2,24 @@ export default {
   ssr: true,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'p77-nuxt-app',
+    title: 'Nottyhub',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'pt_PT'
     },
+
+
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
+
+      { property: 'og:site_name', content: "Nottyhub" },
+      { property: 'og:type', content: "video.movie" },
+      { property: 'og:url', content: "https://www.Nottyhub.com/" },
+      { property: 'og:image', content: "https://busa.dasao88.com/brazil-bikini-girl-440x440.png" },
+      { property: 'og:locale', content: "pt_PT" },
+      { property: 'og:description', content: "Assista gratuitamente. Sem compromissos." },
+      { name: 'description', content: "Assista gratuitamente. Sem compromissos." },
     ],
     // link: [
     //   { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
