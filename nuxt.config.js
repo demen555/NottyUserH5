@@ -67,7 +67,7 @@ export default {
   ],
 
   
-  components: false,
+  components: true,
 
 
   buildModules: [

@@ -321,7 +321,7 @@ export default {
             excludes: this.videoInfo.vodId,
             ...this.vodChangePage
           });
-            this.$videoApi.requestvodpage({
+            this.$homeApi.requestvodpage({
               typeId: this.videoInfo.typeId,
               excludes: this.videoInfo.vodId,
               ...this.vodChangePage

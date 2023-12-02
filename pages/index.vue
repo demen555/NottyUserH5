@@ -20,9 +20,9 @@
     </div>
 </template>
 <script>
-import HeaderTop from '@/components/header/top.vue'
-import Cover from '@/components/cover'
-import cardLoad from "@/components/skeleton/cardLoad.vue"
+import HeaderTop from '~/components/header/top.vue'
+import Cover from '~/components/cover'
+import cardLoad from "~/components/skeleton/cardLoad.vue"
 import CODES from "~/plugins/enums/codes"
 export default{
   data() {
