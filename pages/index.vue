@@ -46,6 +46,11 @@ export default{
     Cover,
     cardLoad
   },
+  async asyncData({ $homeApi }) {
+    const res = await $homeApi.requestvodpageHome({ page: 1, size: 20})
+    const { data } = res
+    return { dataList: data.data }
+  },
   methods: {
     onLoad(){
       this.pageInfo.page += 1

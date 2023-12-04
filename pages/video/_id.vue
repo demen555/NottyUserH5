@@ -234,9 +234,9 @@ export default {
 
     created(){
         this.initVideo();
-        // gtag('event', 'start_video', {
-        //     share_name: this.videoInfo.vodName,
-        // });
+        gtag('event', 'start_video', {
+            share_name: this.videoInfo.vodName,
+        });
     },
     beforeCreate(){
         if( process.client ){
@@ -261,9 +261,9 @@ export default {
 
         // 显示分享链接
         onShowdialogLink(){
-            // gtag('event', 'gt4_page_share', {
-            //     share_name: this.videoInfo.vodName,
-            // });
+            gtag('event', 'gt4_page_share', {
+                share_name: this.videoInfo.vodName,
+            });
             const linkStr = window.location.href + '?back=home';
             this.$copyText(linkStr).then(() => {
                 this.$toast.success(this.$t('toast3'));
@@ -380,9 +380,9 @@ export default {
             }
             this.onClick = true;
             if( isUpVod ){
-                // gtag('event', 'gt4_click_down', {
-                //     down_name: this.videoInfo.vodName,
-                // });
+                gtag('event', 'gt4_click_down', {
+                    down_name: this.videoInfo.vodName,
+                });
                 if( this.isLogin ){
                     this.$set(this.videoStatus, "up", false)
                     this.$videoApi.requestVodupcancel({
@@ -404,9 +404,9 @@ export default {
                     this.onClick = false
                 }
             }else{
-                // gtag('event', 'gt4_click_up', {
-                //     up_name: this.videoInfo.vodName,
-                // });
+                gtag('event', 'gt4_click_up', {
+                    up_name: this.videoInfo.vodName,
+                });
                 if( this.isLogin ){
                     this.$set(this.videoStatus, "down", false);
                     this.$set(this.videoStatus, "up", true);
@@ -456,9 +456,9 @@ export default {
                     this.onClick = false
                 })
             }else{
-                // gtag('event', 'gt4_click_collect', {
-                //     collect_name: this.videoInfo.vodName,
-                // });
+                gtag('event', 'gt4_click_collect', {
+                    collect_name: this.videoInfo.vodName,
+                });
                 const num = Number(this.videoStatus.collectNumber) + 1;
                 this.$set(this.videoStatus, "collectNumber", num)
                 this.$set(this.videoStatus, "collect", true)
@@ -549,9 +549,9 @@ export default {
 
         // 评论
         sendVodReview(){
-            // gtag('event', 'gt4_video_review', {
-            //     review_name: this.videoInfo.vodName,
-            // });
+            gtag('event', 'gt4_video_review', {
+                review_name: this.videoInfo.vodName,
+            });
             if( this.onClick || !this.content){
                 return 
             }
@@ -650,7 +650,7 @@ export default {
         // 标签调转
         handleClickType(item){
             this.$router.push({
-                name: 'type',
+                name: 'tag-id',
                 params:{
                     id: item.id,
                     name: item.name,
@@ -671,9 +671,9 @@ export default {
 
     },
     destroyed(){
-        // gtag('event', 'exit_video', {
-        //     share_name: this.videoInfo.vodName,
-        // });
+        gtag('event', 'exit_video', {
+            share_name: this.videoInfo.vodName,
+        });
     }
 }
 </script>

@@ -139,7 +139,7 @@ methods: {
             this.dataList = this.noLoginUpVod || []
           } else {
             try {
-              const res = await postUpDelete(params)
+              const res = await this.$upApi.postUpDelete(params)
               if(res.code === CODES.SUCCESS){
                 this.$toast(this.$t('toast9'))
                 this.onRefresh()
@@ -189,7 +189,7 @@ methods: {
       this.loading = true
       const params = { page: this.pageInfo.page, size: this.pageInfo.size}
 
-      const res = await postUpList(params)
+      const res = await this.$upApi.postUpList(params)
       const { code, data = {} } = res
       if(code === CODES.SUCCESS){
         data.data = data.data.map(item => {

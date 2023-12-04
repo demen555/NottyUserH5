@@ -43,12 +43,12 @@ export default {
         },
         async handleLoginOut(){
             try {
-                const res = await postLoginOut()
+                const res = await this.$homeApi.postLoginOut()
                 if(res.code === CODES.SUCCESS){
                     this.$toast(this.$t('toast7'))
                     this.set_userinfo({})
                     this.clearAccessToken()
-                    this.$router.push({name: 'home'})
+                    this.$router.push("/")
                 }
             } catch (error) {
                 console.error(error)

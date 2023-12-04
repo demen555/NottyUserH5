@@ -120,12 +120,12 @@ export default {
                 videoWatchTimeInSeconds += Math.floor(currentTime / 1000); // 转换为秒
 
                 console.log("video_watch_end", videoWatchTimeInSeconds)
-                // // 发送 Google Analytics 事件
-                // gtag('event', 'video_watch', {
-                //     'event_category': 'Video',
-                //     'event_label': videoInfo.vodName,
-                //     'value': videoWatchTimeInSeconds
-                // });
+                // 发送 Google Analytics 事件
+                gtag('event', 'video_watch', {
+                    'event_category': 'Video',
+                    'event_label': videoInfo.vodName,
+                    'value': videoWatchTimeInSeconds
+                });
             });
             
         },
@@ -147,12 +147,12 @@ export default {
             videoWatchTimeInSeconds += Math.floor(currentTime / 1000); // 转换为秒
 
             console.log("video_watch_destroy", videoWatchTimeInSeconds)
-            // // 发送 Google Analytics 事件
-            // gtag('event', 'video_watch', {
-            //     'event_category': 'Video',
-            //     'event_label': this.videoInfo.vodName,
-            //     'value': videoWatchTimeInSeconds
-            // });
+            // 发送 Google Analytics 事件
+            gtag('event', 'video_watch', {
+                'event_category': 'Video',
+                'event_label': this.videoInfo.vodName,
+                'value': videoWatchTimeInSeconds
+            });
 
             this.dp.destroy();
         }

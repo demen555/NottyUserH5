@@ -117,7 +117,7 @@ export default {
             }).then( res => {
                 if(res.code === CODES.SUCCESS){
                     this.$toast.success(this.$t('toast16'));
-                    this.$router.push("/home")
+                    this.$router.push("/")
                 }
                 // else{
                 //     this.$toast(res.message)

@@ -48,7 +48,7 @@ export default {
         if (!this.form.username) return this.$toast( this.$t('toast1') )
         if (!this.form.password) return this.$toast(this.$t('toast2'))
         // const params = `{ username: ${this.form.username}, password: ${this.$md5(this.form.password)}, code: ${this.form.code}}`
-        const res = await postLogin(params)
+        const res = await this.$homeApi.postLogin(params)
         if (res.code === CODES.SUCCESS) {
           // this.code = res.body
           const userinfo = {

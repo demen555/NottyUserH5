@@ -102,7 +102,7 @@ methods: {
           }
           console.log(params, 'params')
           try {
-            const res = await postCollectDelete(params)
+            const res = await this.$collectApi.postCollectDelete(params)
             if(res.code === CODES.SUCCESS){
               this.loading = false
               this.onRefresh()
@@ -143,7 +143,7 @@ methods: {
     try {
       isRefresh  === 'first' && (this.spainnerLoading = true)
       const params = { page: this.pageInfo.page, size: this.pageInfo.size}
-      const res = await postCollectList(params)
+      const res = await this.$collectApi.postCollectList(params)
       console.log(res, 'res')
       const { code, data = {} } = res
       if(code === CODES.SUCCESS){

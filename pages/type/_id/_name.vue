@@ -23,9 +23,9 @@
   </div>
 </template>
 <script>
-import Nav from '@/components/nav'
-import Cover from '@/components/cover'
-import Empty from '@/components/empty'
+import Nav from '~/components/nav'
+import Cover from '~/components/cover'
+import Empty from '~/components/empty'
 import commonMinxin from '~/plugins/mixins/common'
 import CODES from "~/plugins/enums/codes"
 
@@ -82,7 +82,7 @@ methods: {
     
       params.tagId = this.detail.id //标签
 
-      const { code, data } = await requestvodpage(params)
+      const { code, data } = await this.$homeApi.requestvodpage(params)
       if(code === CODES.SUCCESS){
         if(isRefresh){
           // this.dataList = [ ...body.records, ...this.dataList ]

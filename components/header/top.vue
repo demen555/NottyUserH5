@@ -21,30 +21,7 @@
          <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
          <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
         </div>
-        <!-- 版本影藏需要v1.1.0 -->
-        <!-- <div class="nav-list-tags type">
-          <div class="nav-menu-list-tag" @click="handleShowExpand('type')">
-            <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_leixing_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
-              <div>{{ $t('str_tags') }}</div>
-            </div>
-            <div :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
-          </div>
-          <template v-if="!showTypeExpand">
-            <div class="nav-menu-list-tag-sub" v-for="(item) in typeList" :key="item.typeId" @click="handleClickType(item)">
-              <div class="nav-menu-left">
-                <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
-                <div class="typeName">{{ item.typeName }}</div>
-              </div>
-              <div class="nav-menu-right" v-if="item.typeId === typeId && routeName == 'categories' ">
-                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
-              </div>
-            </div>
-            
-            <div class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" @click.stop="handleGoPage('allcategories')"> {{ $t('str_menu_type_all') }}</div>
-            <div class="nav-menu-list-tag-empty"></div>
-          </template>
-        </div>-->
+
         <div v-if="!showTypeExpand" class="type-div"></div> 
         <div class="nav-list-tags">
           <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
@@ -338,10 +315,10 @@ export default {
         id: item.id,
         name: item.name,
       });
-      console.log(item)
+
       this.set_tagid(item.id)
       this.$router.push({
-        name: 'type',
+        name: 'type-id-name',
         params:{
           id: item.id,
           name: item.name,
@@ -349,21 +326,7 @@ export default {
         },
       });
     },
-    handleClickType(item){
-      gtag('event', 'gt4_click_type', {
-        typeId: item.typeId,
-        typeName: item.typeName,
-      });
-      this.set_typeid(item.typeId)
-      this.$router.push({
-        name: 'categories',
-        params:{
-          id: item.typeId,
-          name: item.typeName,
-          refresh: true,
-        },
-      })
-    },
+
     async initTagList(){
       try {
         const res = await this.$homeApi.postTagListPage(this.pageInfo)
@@ -379,13 +342,13 @@ export default {
 
     async handleLoginOut(){
       try {
-        const res = await postLoginOut()
+        const res = await this.$homeApi.postLoginOut()
         if(res.code === CODES.SUCCESS){
           this.$toast(this.$t('toast7'))
           this.set_userinfo({})
           this.clearAccessToken()
           this.$refs.dialogLoginRef.onShow()
-          this.$router.push({name: 'home'})
+          this.$router.push("/")
         }
       } catch (error) {
         console.error(error)

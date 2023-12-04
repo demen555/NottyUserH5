@@ -185,7 +185,7 @@
       },
       async getUserInfo(userinfo){
         try {
-          const res = await userApi.requestUserinfo()
+          const res = await this.$userApi.requestUserinfo()
           if(res.code === 100){
             this.$toast(this.$t('toast4'))
             const user = res.data

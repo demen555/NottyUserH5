@@ -1,6 +1,5 @@
 export default {
   ssr: true,
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Nottyhub',
     htmlAttrs: {
@@ -17,18 +16,19 @@ export default {
       },
       {
         src: "https://www.googletagmanager.com/gtag/js",
-        async: true,
+        async: false,
+        mode: 'client'
       },
-      
-      { src: "~/plugins/analitics.js", mode: 'client' },
+      { 
+        src: "/js/analitics.js", 
+        mode: 'client' 
+      },
     ],
-
 
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'format-detection', content: 'telephone=no' },
-
       { property: 'og:site_name', content: "Nottyhub" },
       { property: 'og:type', content: "video.movie" },
       { property: 'og:url', content: "https://www.Nottyhub.com/" },
@@ -37,9 +37,6 @@ export default {
       { property: 'og:description', content: "Assista gratuitamente. Sem compromissos." },
       { name: 'description', content: "Assista gratuitamente. Sem compromissos." },
     ],
-    // link: [
-    //   { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    // ]
   },
   manifest: {
     name: "NottyHub",
@@ -48,27 +45,20 @@ export default {
     orientation: "portrait"
   },
 
-  // loading: '~/components/Loading.vue',
-
   css: [
     'vant/lib/index.css',
-    '~/static/less/common.less'
+    '~/static/less/common.less',
+    '~/static/less/theme.less'
   ],
 
 
   plugins: [
-    '~/plugins/theme/init.js',
     '~/plugins/utils.js',
-    
-    // '~/plugins/uuid.js',
     '~/plugins/vant.js',
     "~/plugins/axios/index.js",
-    // '~/plugins/fetch.js',
   ],
-
   
   components: true,
-
 
   buildModules: [
   ],
@@ -105,6 +95,7 @@ export default {
         name: 'Português',
       },
     ],
+    strategy: 'no_prefix',
     defaultLocale: 'pt_PT',
     vueI18n: {
       fallbackLocale: 'pt_PT',
@@ -114,9 +105,12 @@ export default {
         pt_PT: require('./locales/pt_PT.json'),
       },
     },
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'lang',
+    }
   },
 
- 
   build: {
     // 配置less
     loaders: {

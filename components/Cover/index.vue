@@ -86,15 +86,13 @@ export default{
     formatNumber,
     formatPer,
     handleGoDetail(item){
+
       this.$router.push({
-        path: `/video/${item.vodId}`
+        name: 'video-id',
+        params: {
+          id: item.vodId
+        }
       })
-      // this.$router.push({
-      //   name: 'video',
-      //   params: {
-      //     id: item.vodId
-      //   }
-      // })
     },
     longpressVideo(item){
       this.$store.commit("SET_VODID", item.vodId)
@@ -140,6 +138,7 @@ export default{
 .main-img{
   width: 100vw;
   height: 212px;
+  overflow: hidden;
   &.main-img-opacity{
     display: none;
   }

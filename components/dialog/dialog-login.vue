@@ -113,7 +113,7 @@ export default {
           this.email.showError && this.validatorEmail()
           this.password.showError && this.validatorPassword()
         } else {
-          const res = await postEmailLogin(params)
+          const res = await this.$homeApi.postEmailLogin(params)
           if (res.code === CODES.SUCCESS) {
             this.setAccessToken(res.data.accessToken)
             this.getUserInfo(res.data)
@@ -131,27 +131,13 @@ export default {
     },
     async getUserInfo(info){
       try {
-        const res = await requestUserinfo()
+        const res = await this.$homeApi.requestUserinfo()
         if(res.code === CODES.SUCCESS){
           const user = res.data
           this.set_userinfo({...user, ...info})
           this.$toast(this.$t('toast4'))
           this.show = false
-          this.$router.push({ name: 'home' })
-          // if(!user.userPwdQuestion){
-          //   this.$dialog.confirm({
-          //     title: this.$t('str_tip'),
-          //     message: this.$t('Setsecurityquestion'), 
-          //     confirmButtonText:  this.$t('str_to_set'), 
-          //     cancelButtonText: this.$t('str_not_now'),
-          //   }).then(() =>{
-          //     this.$router.push({
-          //       name: 'setMyitbo'
-          //     })
-          //   }).catch(() => {
-          //     this.$toast(this.$t('toast5'))
-          //   })
-          // }
+          this.$router.push("/")
         }
       } catch (error) {
         this.$toast(error.message)
