@@ -132,7 +132,7 @@ export default {
         plugins: {
           'postcss-px-to-viewport-8-plugin': {
             viewportWidth: 375, // 设计稿的宽度
-            viewportHeight: 667, // 设计稿的高度
+            // viewportHeight: 667, // 设计稿的高度
             unitPrecision: 3, // px to vw无法整除时，保留几位小数
             viewportUnit: 'vw', // 转换成vw单位
             selectorBlackList: ['.ignore', '.hairlines'], // 不转换的类名
