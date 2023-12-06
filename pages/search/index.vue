@@ -180,8 +180,8 @@ methods: {
       }
       console.log(params, 'params')
       console.log(this.pageInfo, 'pageInfo')
-      const res = await this.$requestvodpageSearch(JSON.stringify(params)) 
-      console.log(res, '666')
+      const res = await this.$homeApi.requestvodpageSearch(JSON.stringify(params)) 
+      console.log(res, 'initSearchVideoList')
       const { code, data = {} } = res
       console.log(code, data, 111)
       if(code === 100){
