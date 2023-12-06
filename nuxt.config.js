@@ -75,7 +75,8 @@ export default {
 
   proxy: {
     '/api': {
-      target: "https://api.uw1wieda.com",
+      // target: "https://api.uw1wieda.com",
+      target: "https://api.jdsesasc.com",
       changeOrigin: true,
       logLevel: "debug",
       secure: false
