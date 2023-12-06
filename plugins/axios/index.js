@@ -16,6 +16,9 @@ export default function ({ app, $axios, store }, inject) {
   });
 
   $axios.onResponse((response) => {
+    if (response.data.code == 200) {
+      response.data.code = 100
+    }
     return response.data
   });
   $axios.onError(error => {

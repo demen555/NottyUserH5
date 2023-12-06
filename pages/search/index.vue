@@ -144,9 +144,13 @@ methods: {
     this.$refs.searchRef && this.$refs.searchRef.focus()
   },
   getHistoryList(){
-    const list = JSON.parse(localStorage.getItem('historyList') || '[]')
-    this.historyList1 = list
-    this.historyList = list.length > 5 ? list.slice(1, list.length) : list
+    if(process.client) {
+      const list = JSON.parse(localStorage.getItem('historyList') || '[]')
+      this.historyList1 = list
+      this.historyList = list.length > 5 ? list.slice(1, list.length) : list
+    } else {
+      this.historyList = []
+    }
     console.log(this.historyList, 'getHistoryList')
   },
   handleClearCurrentHistory(){
@@ -232,8 +236,8 @@ methods: {
   async initKyesList(){
     try {
       const params = { size: 20 }
-      const res = await searchApi.postSearchKeys(JSON.stringify(params))
-      console.log(res, 'key')
+      const res = await this.$searchApi.postSearchKeys(JSON.stringify(params))
+      console.log(res, 'initKyesList')
       if(res.code === 100){
         this.keysList = res.data
       }
