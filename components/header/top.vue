@@ -88,7 +88,7 @@
          <img class="close-pop" @click="showRightPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
          <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
         </div>
-        <div class="nav-menu-btns" v-if="!userinfo.userId">
+        <div class="nav-menu-btns" v-if="!isLogin">
           <div class="nav-menu-btns-left">
             <div class="nav-menu-login" @click="handleLoginorRegister('login')">
               <img :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="">

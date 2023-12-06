@@ -11,9 +11,16 @@ const state = {
   noLoginUpVod: [], // 未登录点赞列表
 
   noLoginDownVod: [], // 未登录点踩列表
+  accessToken: '',
 }
 
 const actions = {
+  setAccessToken({commit}, data) {
+    commit('UPDATE_ACCESSTOKEN', data)
+  },
+  clearAccessToken({commit}) {
+      commit('CLEAR_ACCESSTOKEN')
+  },
   set_register(context, data){
     context.commit('SET_REGISTER', data)
   },
@@ -44,12 +51,20 @@ const getters = {
   historyVod: (state) => state.historyVod,  
   theme: (state) => state.theme, 
   vodId: (state) => state.vodId, 
-  isLogin: (state) => state.userinfo.token, 
+  isLogin: (state) => state.userinfo.accessToken, 
   noLoginUpVod: (state) => state.noLoginUpVod, 
-  noLoginDownVod: (state) => state.noLoginDownVod,   
+  noLoginDownVod: (state) => state.noLoginDownVod,  
+  accessToken: (state) => state.accessToken, 
 }
 
 const mutations = {
+  //设置accessToken
+  UPDATE_ACCESSTOKEN(state, data) {
+    state.accessToken = data
+  },
+  CLEAR_ACCESSTOKEN(state, data){
+      state.accessToken = ''
+  },
   SET_ENCRYPTION(state, data){
       state.encryption = data
   },

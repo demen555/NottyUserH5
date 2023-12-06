@@ -1,4 +1,10 @@
 export default {
+  vue: {
+    config: {
+      productionTip: true,
+      devtools: true
+    }
+  },
   ssr: true,
   head: {
     title: 'Nottyhub',
@@ -50,12 +56,11 @@ export default {
     '~/static/less/common.less',
     '~/static/less/theme.less'
   ],
-
-
   plugins: [
     '~/plugins/utils.js',
     '~/plugins/vant.js',
     "~/plugins/axios/index.js",
+    { src: '~/plugins/store-cache', ssr: false },
   ],
   
   components: true,

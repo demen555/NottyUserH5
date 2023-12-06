@@ -101,6 +101,7 @@ export default {
         this.show  = false
       },
     async handleSubmit() {
+      console.log(this, 'this')
       try {
         const params = {
           account: this.form.email,
@@ -131,7 +132,7 @@ export default {
     },
     async getUserInfo(info){
       try {
-        const res = await this.$homeApi.requestUserinfo()
+        const res = await this.$userApi.requestUserinfo()
         if(res.code === CODES.SUCCESS){
           const user = res.data
           this.set_userinfo({...user, ...info})
