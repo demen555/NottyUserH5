@@ -98,6 +98,7 @@ export default{
       this.$store.commit("SET_VODID", item.vodId)
     },
     mouseenterVideo(item){
+      
       if( isPc() ){
         this.$store.commit("SET_VODID", item.vodId)
       }else{
