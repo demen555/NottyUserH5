@@ -2,7 +2,7 @@
  * 响应状态码
  */
 export default {
-    SUCCESS: 200,
+    SUCCESS: 100,
     CREATED: 201,
     ACCEPTED: 202,
     NO_CONTENT: 204,

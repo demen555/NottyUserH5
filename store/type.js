@@ -39,7 +39,8 @@ const mutations = {
   },
   SET_TYPEID(state, data){
     state.typeId = data
-  }
+  },
+  
 }
 
 export default {

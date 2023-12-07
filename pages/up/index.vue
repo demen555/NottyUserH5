@@ -56,15 +56,13 @@ data() {
   }
 },
 computed: {
-  ...mapGetters(['userinfo','noLoginUpVod','accessToken']),
+  ...mapGetters(['userinfo','noLoginUpVod','isLogin']),
   txtTitle(){
     return this.detail.typeName
   }
 },
-// 重新进入点赞，更新当前未登录点赞视频
-
-activated(){
-  if(this.accessToken){
+created(){
+  if(this.isLogin){
     this.pageInfo = {
       page: 1,
       size: 20
@@ -73,8 +71,18 @@ activated(){
   }else{
     this.dataList = this.noLoginUpVod || []
   }
-  
-  console.log(this.detail)
+},
+// 重新进入点赞，更新当前未登录点赞视频
+activated(){
+  if(this.isLogin){
+    this.pageInfo = {
+      page: 1,
+      size: 20
+    }
+    this.getList('first')
+  }else{
+    this.dataList = this.noLoginUpVod || []
+  }
 },
 
 components: {

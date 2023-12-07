@@ -240,6 +240,7 @@ export default {
   },
   created(){
     // const theme=  localStorage.getItem('data-theme')
+    console.log(CODES, 'CODES')
     this.themeChecked = this.theme === 'dark'
     this.initTagList()
     if(process.client){
@@ -330,6 +331,7 @@ export default {
     async initTagList(){
       try {
         const res = await this.$homeApi.postTagListPage(this.pageInfo)
+        console.log(res, 'tagList334')
         if(res.code === CODES.SUCCESS){
           console.log(res.data, 'initTagList')
           this.tagList = res.data.data || []
