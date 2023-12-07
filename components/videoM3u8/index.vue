@@ -81,7 +81,7 @@ export default {
             // 如果是开始播放之后捕获异常直接跳出播放器
             if( !this.isOpen ){
                 // this.$store.commit("SET_VODID", "")
-                this.player.load(); // 捕获异常重新载入
+                // this.player.load(); // 捕获异常重新载入
             }
             
         });
