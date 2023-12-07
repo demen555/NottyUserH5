@@ -103,7 +103,7 @@
                             <div class="review-list" v-for="item in vodReviewList" :key="item.commentId">
                                 <div class="list-top">
                                     <img class="top-img" src="~/static/images/avatar.png" alt="">
-                                    <div class="top-name">{{ item.userNickName || item.userName ||   $t('str_tourist') }}</div>
+                                    <div class="top-name">{{ item.commentName || item.userName ||   $t('str_tourist') }}</div>
                                     <div class="top-time">{{ $t(dateFormat(item.commentTime)) }}</div> 
                                 </div>
                                 <div class="list-bottom">
@@ -130,19 +130,17 @@
 </template>
 <script>
 import videoContainer from "./video.vue";
-import cover from "@/components/cover";
+import cover from "~/components/cover";
 import { mapGetters } from "vuex";
-import commonMinxin from '~/plugins/mixins/common';
-import { dateFormat, getQueryString } from '@/utils/format.js';
-import Empty from '@/components/empty'
-import cardLoad from "@/components/skeleton/cardLoad.vue"
-import videoLoad from "@/components/skeleton/videoLoad.vue"
+import commonMinxin from '~/plugins/mixins/common'
+import { dateFormat, getQueryString } from '~/utils/format.js';
+import Empty from '~/components/empty'
+import cardLoad from "~/components/skeleton/cardLoad.vue"
+import videoLoad from "~/components/skeleton/videoLoad.vue"
 import CODES from "~/plugins/enums/codes"
 
-
-
 export default {
-    // inject: ["reload"],
+
     mixins: [commonMinxin],
     data(){
         return {
@@ -228,26 +226,14 @@ export default {
         Empty,
         cardLoad,
         videoLoad,
-        dialogLogin: () => import('@/components/dialog/dialog-login.vue'),
-        dialogRegister: () => import('@/components/dialog/dialog-register.vue'),
+        dialogLogin: () => import('~/components/dialog/dialog-login.vue'),
+        dialogRegister: () => import('~/components/dialog/dialog-register.vue'),
     },
 
     created(){
         this.initVideo();
-        gtag('event', 'start_video', {
-            share_name: this.videoInfo.vodName,
-        });
     },
-    beforeCreate(){
-        if( process.client ){
-            document.documentElement.scrollTop = 0
-        }
-    },
-    // watch: {
-    //     '$route' () {
-    //         this.reload();
-    //     }
-    // },
+
 
     
     methods:{
@@ -286,6 +272,7 @@ export default {
                         down: isDisLike,
                         collect: isCollect,
                         collectNumber: totalCollect,
+                        vodId: vodId
                     }
                 }
             }).finally( () => {
@@ -295,9 +282,12 @@ export default {
 
         // 视频详情;
         getVideo(vodId){
-            // gtag('event', 'gt4_look_video', {
-            //     video_name: this.videoInfo.vodName
-            // });
+            if(process.client){
+                gtag('event', 'gt4_look_video', {
+                    video_name: this.videoInfo.vodName
+                });
+            }
+
             this.$videoApi.requestVodComment({
               vodId: vodId,
             }).then(res => {
@@ -305,6 +295,7 @@ export default {
                     res.data['tags'] = res.data.tags || [];
                     res.data.tags = res.data.tags.filter( ele => ele );
                     this.videoInfo = res.data;
+                    
                     this.addHisVod(res.data);
                 }
             }).finally( () => {
@@ -360,7 +351,7 @@ export default {
                         ...this.vodReviewList,
                         ...res.data.data
                     ];
-                    if( this.vodReviewPage.page >= res.data.meta.pagination.total ){
+                    if( this.vodReviewPage.page >= res.data.meta.pagination.total_pages ){
                         this.finishedReview = true;
                         this.loadingReview = false;
                     }else{
@@ -373,6 +364,9 @@ export default {
 
         // 点赞 取消点赞 
         setVodUp(){
+            if( !this.isLogin ){
+                return this.goLogin()
+            }
             const vodId = this.$route.params.id;
             const isUpVod = this.isUpVod(this.videoStatus);
             if( this.onClick ){
@@ -478,6 +472,9 @@ export default {
 
         // 点踩
         setVodDown(){
+            if( !this.isLogin ){
+                return this.goLogin()
+            }
             const vodId = this.$route.params.id;
             const isdownVod = this.isdownVod(this.videoStatus);
             if( this.onClick ){
@@ -556,36 +553,16 @@ export default {
                 return 
             }
             this.onClick = true;
-            this.vodReviewList = [
-                {
-                    commentName: this.userinfo.userNickName,
-                    userNickName: this.userinfo.userName,
-                    commentId: this.vodReviewList.length + 1,
-                    commentTime: new Date().getTime() / 1000,
-                    commentContent: this.content,
-                    isAdd: true
-                },
-                ...this.vodReviewList
-            ]
+            // 需要审核，不能直接显示
             this.showInput = false;
             this.$videoApi.requestVodReviewInput({
               vodId: this.$route.params.id,
               content: this.content
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
-                    this.$videoApi.requestVodReviewe({
-                      vodId: this.$route.params.id,
-                      ...this.vodReviewPage
-                    }).then(res => {
-                      console.log('res',res)
-                        if( res.code === CODES.SUCCESS ){
-                            this.vodReviewList = res.data.data;
-                        } 
-                    })
                     this.$toast(this.$t('str_show_when_allow'))
-                }else{
-                    this.vodReviewList = this.vodReviewList.filter( ele => !ele.isAdd )
                 }
+
             }).finally( () => {
                 this.onClick = false;
                 this.showInput = false;
@@ -634,7 +611,7 @@ export default {
             if( this.isLogin ){
                 return videoInfo.up
             }else{
-                return this.upvodIds.includes(videoInfo.vodId)
+                return this.upvodIds.includes(Number(videoInfo.vodId))
             }
         },
 
@@ -643,14 +620,14 @@ export default {
             if( this.isLogin ){
                 return videoInfo.down
             }else{
-                return this.downvodIds.includes(videoInfo.vodId)
+                return this.downvodIds.includes(Number(videoInfo.vodId))
             }
         },
 
         // 标签调转
         handleClickType(item){
             this.$router.push({
-                name: 'tag-id',
+                name: 'type',
                 params:{
                     id: item.id,
                     name: item.name,
