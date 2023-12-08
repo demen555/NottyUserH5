@@ -215,10 +215,10 @@ export default {
       showExpand: true, // 标签
       
       languageList: langMap, // 语言数据
-      // language: localStorage.getItem('language'), //语言
-      // location: localStorage.getItem('location') || 'US1', //国家
-      language: "pt_PT",
-      location: "US",
+      language: process.client ? localStorage.getItem('language') : 'pt_PT', //语言
+      location:  process.client ? localStorage.getItem('location') : 'US1', //国家
+      // language: "pt_PT",
+      // location: "US",
       locationList: areaList, // 国家数据
       themeChecked: true, // 主题切换
       typeList: [],  // 分类数据
@@ -387,7 +387,9 @@ export default {
       Toast('按钮');
     },
     handleChangLanguage(item){
-      localStorage.setItem("language", item.language)
+      if(process.client){
+        localStorage.setItem("language", item.language)
+      }
       location.reload(); // 重启载入
     },
     handleChangLocation(item){

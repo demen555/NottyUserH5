@@ -9,9 +9,17 @@ export default function ({ app, $axios, store }, inject) {
   console.log(app, 'app')
   $axios.onRequest((config) => {
     const token =  store.state.user.accessToken;
+    if (process.client) {
+      const language = localStorage.getItem('language')
+      const location = localStorage.getItem('location')
+      config.headers["Request-Country"] = location;
+      config.headers["Request-Lang"] = language;
+    } else {
+      config.headers["Request-Country"] = "US";
+      config.headers["Request-Lang"] = "pt_PT";
+    }
     config.headers["App-Type"] = 3;
-    config.headers["Request-Country"] = "US";
-    config.headers["Request-Lang"] = "pt_PT";
+    
     if (token) config.headers['Authorization'] = `Bearer ${token}`
   });
 
