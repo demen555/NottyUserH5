@@ -37,7 +37,7 @@
                 <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
                 <div>{{ tag.name }}</div>
               </div>
-              <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type'">
+              <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type-id-name'">
                 <img src="~/static/images/com_select_on.svg" alt="com_select_on">
               </div>
             </div>
