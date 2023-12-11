@@ -177,7 +177,7 @@
             }
           }
         } catch (error) {
-          // this.$toast(error.message)
+          this.$toast(error.message)
           console.error(error)
         } finally {
           this.showLoading = false
