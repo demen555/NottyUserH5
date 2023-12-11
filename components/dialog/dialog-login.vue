@@ -124,7 +124,7 @@ export default {
           console.log(res, '666')
         }
       } catch (error) {
-        // this.$toast(error.message)
+        this.$toast(error.message)
         console.error(error)
       } finally {
         this.showLoading = false
