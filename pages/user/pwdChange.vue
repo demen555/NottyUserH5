@@ -51,6 +51,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default {
+    name: 'user-pwdChange',
     mixins: [userMinxin, commonMinxin],
     data(){
         return {

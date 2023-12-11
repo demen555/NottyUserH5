@@ -32,7 +32,7 @@
             
         </div>
 
-        <div class="user-content pwdChange" @click="goPages('/user/pwdChange')">
+        <div class="user-content pwdChange" @click="goPages('user-pwdChange')">
             <span class="title"> {{ $t('str_change_pwd') }} </span>
             <i class="words" :class="themeChecked?'icon': 'icon-white'"></i>
         </div>
@@ -50,7 +50,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default {
-    name: "userInfo",
+    name: "user",
     mixins: [userMinxin, commonMinxin],
    
     computed:{
@@ -72,7 +72,7 @@ export default {
         },
         // 获取用户信息
         getUserInfo(){
-            requestUserinfo().then( res => {
+            this.$userApi.requestUserinfo().then( res => {
                 if( res.code === CODES.SUCCESS ){
                     this.$store.commit('UPDATE_USERINFO', res.body)
                 } 
@@ -81,6 +81,7 @@ export default {
 
         // 跳转页面
         goPages(page, type){
+          console.log(page)
             if(type){
                 return
             }
