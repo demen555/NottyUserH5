@@ -42,6 +42,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default {
+    name: 'user-pwdForgot',
     mixins: [userMinxin, commonMinxin],
     data(){
         return {

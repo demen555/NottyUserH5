@@ -352,7 +352,7 @@ export default {
           this.set_userinfo({})
           this.clearAccessToken()
           this.$refs.dialogLoginRef.onShow()
-          this.$router.push("/")
+          // this.$router.push("/")
         }
       } catch (error) {
         console.error(error)

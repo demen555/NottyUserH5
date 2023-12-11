@@ -192,7 +192,7 @@
             const user = res.data
             this.set_userinfo({...user, ...userinfo})
             // this.show = false
-            this.$router.push({ name: '/' })
+            this.$router.push({ name: 'index' })
           }
         } catch (error) {
           console.error(error)
