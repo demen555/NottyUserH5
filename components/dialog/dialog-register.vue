@@ -159,7 +159,7 @@
             this.user.showError && this.validatorUser() 
             this.pwd.showError && this.validatorEmail()
           } else {
-            const res  = await this.$postEmailRegister(JSON.stringify(params))
+            const res  = await this.$homeApi.postEmailRegister(JSON.stringify(params))
             if(res.code === 100){
               this.set_userinfo(res.data)
               this.getUserInfo(res.data)
