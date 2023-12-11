@@ -18,6 +18,7 @@
     "less-loader": "^6.2.0",
     "nuxt": "^2.15.8",
     "nuxt-i18n": "^6.28.1",
+    "postcss-mobile-forever": "^4.0.0",
     "postcss-px-to-viewport": "^1.1.1",
     "postcss-px-to-viewport-8-plugin": "^1.2.3",
     "uuid": "^9.0.1",
