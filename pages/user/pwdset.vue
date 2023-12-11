@@ -3,7 +3,7 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <Nav :title="$t('str_setting')" text></Nav>
     <div class="pwd-set">
-        <div class="user-item" @click="goPages('pwdChange')">
+        <div class="user-item" @click="goPages('/user/pwdChange')">
             <span class="words"> {{ $t('str_change_pwd') }} </span>
             <i :class="themeChecked?'icon': 'icon-white'"></i>
         </div>

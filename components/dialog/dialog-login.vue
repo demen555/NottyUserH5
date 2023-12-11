@@ -25,7 +25,7 @@
       <div class="dialog-submits">
         <div @click="handleRegister">{{ $t('str_reg_user') }}</div>
         <div class="dialog-line"></div>
-        <div @click="$router.push('/sendEmail')">{{ $t('str_pwd_fog') }}</div>
+        <div @click="$router.push('/user/sendEmail')">{{ $t('str_pwd_fog') }}</div>
       </div>
     </div>
   </van-popup>

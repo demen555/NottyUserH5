@@ -142,7 +142,7 @@ export default {
                     newPassword: this.form.newPassword,
                     oldPassword: this.form.oldPassword
                 })
-                requestSetpassword({
+                this.$userApi.requestSetpassword({
                   newPassword: newPassword,
                   oldPassword: oldPassword
                 }).then( res => {

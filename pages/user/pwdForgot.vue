@@ -132,7 +132,7 @@ export default {
     }
 }
 </script>
-<style src="~/static/less/user.less" lang="less scoped></style>
+<style src="~/static/less/user.less" lang="less" scoped></style>
 <style lang="less" scoped>
 .pwdForgot{
     padding: 0 32px;

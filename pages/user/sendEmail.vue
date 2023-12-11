@@ -82,7 +82,7 @@ export default {
                 this.email.showError && this.validatorEmail()
             } else{
                 this.showLoading = true;
-                requestSendEmail({
+                this.$userApi.requestSendEmail({
                   email: email,
                 }).then( res => {
                     if(res.code === CODES.SUCCESS){
@@ -99,7 +99,7 @@ export default {
     }
 }
 </script>
-<style src="~/static/less/user.less" lang="less scoped></style>
+<style src="~/static/less/user.less" lang="less" scoped></style>
 <style lang="less" scoped>
 .sendEmail{
     padding: 0 32px;

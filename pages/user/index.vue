@@ -32,7 +32,7 @@
             
         </div>
 
-        <div class="user-content pwdChange" @click="goPages('pwdChange')">
+        <div class="user-content pwdChange" @click="goPages('/user/pwdChange')">
             <span class="title"> {{ $t('str_change_pwd') }} </span>
             <i class="words" :class="themeChecked?'icon': 'icon-white'"></i>
         </div>
