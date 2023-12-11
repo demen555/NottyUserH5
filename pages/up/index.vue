@@ -126,7 +126,7 @@ methods: {
             ids: this.getIds(this.dataList, this.result )
           }
           console.log(params, 'params')
-          if( !this.accessToken ){
+          if( !this.isLogin ){
             // 未登录
             if(this.result.length === this.dataList.length){
               //清除全部
@@ -147,6 +147,7 @@ methods: {
             this.dataList = this.noLoginUpVod || []
           } else {
             try {
+              console.log(params, '8888999')
               const res = await this.$upApi.postUpDelete(params)
               if(res.code === CODES.SUCCESS){
                 this.$toast(this.$t('toast9'))
