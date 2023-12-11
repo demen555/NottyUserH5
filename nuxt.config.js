@@ -71,7 +71,7 @@ export default {
   ],
   plugins: [
     '~/plugins/utils.js',
-    '~/plugins/vant.js',
+    {src: '~/plugins/vant.js', ssr: false },
     "~/plugins/axios/index.js",
     { src: '~/plugins/store-cache', ssr: false },
   ],
