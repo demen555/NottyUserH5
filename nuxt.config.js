@@ -33,7 +33,8 @@ export default {
 
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui' },
+      { name: 'theme-color', content: '#1E1E1E' },
       { name: 'format-detection', content: 'telephone=no' },
       { property: 'og:site_name', content: "Nottyhub" },
       { property: 'og:type', content: "video.movie" },
@@ -43,12 +44,24 @@ export default {
       { property: 'og:description', content: "Assista gratuitamente. Sem compromissos." },
       { name: 'description', content: "Assista gratuitamente. Sem compromissos." },
     ],
-  },
-  manifest: {
-    name: "NottyHub",
-    short_name: "NottyHub",
-    display: "standalone",
-    orientation: "portrait"
+
+    link: [
+    
+      { rel: "icon", sizes: "192x192", href: "/linklogo/ic_launcher192x192.png" },
+      { rel: "icon", sizes: "36x36", href: "/linklogo/ic_launcher36x36.png"},
+      { rel: "icon", sizes: "48x48", href: "/linklogo/ic_launcher48x48.png"},
+      { rel: "icon", sizes: "72x72", href: "/linklogo/ic_launcher72x72.png"},
+      { rel: "icon", sizes: "96x96", href: "/linklogo/ic_launcher96x96.png"},
+      { rel: "icon", sizes: "144x144", href: "/linklogo/ic_launcher144x144.png"},
+      
+
+  
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/linklogo/icon-60@3x.png"},
+      { rel: "apple-touch-icon", sizes: "120x120", href: "/linklogo/icon-60@2x.png"},
+      { rel: "apple-touch-icon", sizes: "128x128", href: "/linklogo/icon-64@2x.png"},
+      { rel: "apple-touch-icon", sizes: "152x152", href: "/linklogo/icon-76@2x.png"},
+      { rel: "manifest", href: "/site.webmanifest" }
+    ]
   },
 
   css: [

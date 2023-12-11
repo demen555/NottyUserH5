@@ -90,6 +90,7 @@
                         v-model="loadingReview"
                         :finished="finishedReview"
                         loading-text="loading"
+                        :immediate-check='false'
                         @load="onLoadReview"
                         >
                         <template #finished>
@@ -172,12 +173,26 @@ export default {
             finishedChange: false,
             vodChangePage:{
                 size: 20,
-                page: 0
+                page: 1
             },
+        }
+    },
 
-
-
-            
+    async asyncData({ $videoApi, $homeApi, params }) {
+        const vodChangePage = {
+            size: 20,
+            page: 1
+        }
+        const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
+        const res = await $homeApi.requestvodpage({ 
+            ...vodChangePage,
+            typeId: res1.data.typeId,
+            excludes: params.id,
+        })
+        return { 
+            videoInfo: res1.data,
+            vodChange: res.data.data,
+            vodChangePage: vodChangePage
         }
     },
 
