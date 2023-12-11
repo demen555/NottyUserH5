@@ -75,7 +75,10 @@ export default {
     "~/plugins/axios/index.js",
     { src: '~/plugins/store-cache', ssr: false },
   ],
-  
+  loading: {
+    color: '#FF5502',
+    height: '2px'
+  },
   components: true,
 
   buildModules: [

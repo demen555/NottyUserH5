@@ -262,7 +262,7 @@ export default {
   computed: {
     ...mapGetters(['userinfo', 'theme', 'isLogin', 'tagId', 'typeId','accessToken']),
     languageText({ language,  languageList}) {
-      const obj = languageList[language];
+      const obj = languageList[language || 'pt_PT'];
       return obj.title
     },
     locationText() {

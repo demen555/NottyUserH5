@@ -10,8 +10,18 @@ export default function ({ app, $axios, store }, inject) {
   $axios.onRequest((config) => {
     const token =  store.state.user.accessToken;
     if (process.client) {
-      const language = localStorage.getItem('language')
-      const location = localStorage.getItem('location')
+      let language = localStorage.getItem('language') 
+      let location = localStorage.getItem('location') 
+
+      if( !language ){
+        language = 'pt_PT'
+        localStorage.setItem('language', 'pt_PT')
+      }
+      if( !language ){
+        location = 'US'
+        localStorage.setItem('location', 'US')
+      }
+
       config.headers["Request-Country"] = location;
       config.headers["Request-Lang"] = language;
     } else {
