@@ -8,6 +8,7 @@ import { Toast } from 'vant'
 export default function ({ app, $axios, store }, inject) {
   console.log(app, 'app')
   $axios.onRequest((config) => {
+    config.headers['Content-Type'] = 'application/json'
     const token =  store.state.user.accessToken;
     if (process.client) {
       let language = localStorage.getItem('language') 

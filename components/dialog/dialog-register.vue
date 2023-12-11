@@ -85,7 +85,7 @@
       this.initCode()
     },
     methods: {
-      ...mapActions(['set_register', 'set_userinfo']),
+      ...mapActions(['set_register', 'set_userinfo', 'setAccessToken']),
       handleShow(){
         this.show = true
       },
@@ -161,6 +161,7 @@
           } else {
             const res  = await this.$homeApi.postEmailRegister(JSON.stringify(params))
             if(res.code === 100){
+              this.setAccessToken(res.data.accessToken)
               this.set_userinfo(res.data)
               this.getUserInfo(res.data)
               this.show = false
@@ -191,7 +192,7 @@
             const user = res.data
             this.set_userinfo({...user, ...userinfo})
             // this.show = false
-            this.$router.push({ name: 'home' })
+            this.$router.push({ name: '/' })
           }
         } catch (error) {
           console.error(error)

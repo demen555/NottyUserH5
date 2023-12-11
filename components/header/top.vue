@@ -344,6 +344,7 @@ export default {
 
     async handleLoginOut(){
       try {
+        this.set_userinfo({})
         const res = await this.$homeApi.postLoginOut()
         if(res.code === CODES.SUCCESS){
           this.$toast(this.$t('toast7'))
