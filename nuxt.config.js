@@ -127,8 +127,9 @@ export default {
       },
     },
     detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'lang',
+      useCookie: false,
+      // fallbackLocale: 'pt_PT',
+      // cookieKey: 'lang',
     }
   },
 
