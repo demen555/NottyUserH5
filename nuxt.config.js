@@ -126,11 +126,8 @@ export default {
         pt_PT: require('./locales/pt_PT.json'),
       },
     },
-    detectBrowserLanguage: {
-      useCookie: false,
-      // fallbackLocale: 'pt_PT',
-      // cookieKey: 'lang',
-    }
+    detectBrowserLanguage: false,
+
   },
 
   build: {
