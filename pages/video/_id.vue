@@ -642,13 +642,13 @@ export default {
         // 标签调转
         handleClickType(item){
             this.$router.push({
-                name: 'type',
+                name: 'type-id-name',
                 params:{
                     id: item.id,
                     name: item.name,
                     refresh: true,
-                }
-            })
+                },
+            });
         },
         onRefresh(){
           console.log('onRefresh')

@@ -248,6 +248,11 @@ export default {
       this.$nextTick(() => {
         !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
       })
+      const selectedLanguage = localStorage.getItem('language')
+      if (selectedLanguage) {
+        this.$i18n.setLocale(selectedLanguage)
+        // this.$nuxtI18nSetLanguage(selectedLanguage)
+      }
     }
   },
   activated(){
@@ -395,7 +400,9 @@ export default {
       location.reload(); // 重启载入
     },
     handleChangLocation(item){
-      this.location = item.code
+      this.location = item.code;
+      this.$i18n.setLocale(item.code)
+      // this.$nuxtI18nSetLanguage(item.code)
       localStorage.setItem("location", item.code)
       location.reload(); // 重启载入
     },
