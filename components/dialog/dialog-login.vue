@@ -138,7 +138,7 @@ export default {
           this.set_userinfo({...user, ...info})
           this.$toast(this.$t('toast4'))
           this.show = false
-          this.$router.push("index")
+          this.$router.push("/")
         }
       } catch (error) {
         this.$toast(error.message)
