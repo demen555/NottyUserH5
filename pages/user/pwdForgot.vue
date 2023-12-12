@@ -112,7 +112,7 @@ export default {
             }
 
             this.showLoading = true;
-            requestEmailVerify({
+            this.$userApi.requestEmailVerify({
               hash: getQueryString('hash'),
               password: password,
             }).then( res => {
