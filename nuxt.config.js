@@ -96,8 +96,7 @@ export default {
 
   proxy: {
     '/api': {
-      // target: "https://api.uw1wieda.com",
-      target: "https://api.jdsesasc.com",
+      target: process.env.BASE_URL,
       changeOrigin: true,
       logLevel: "debug",
       secure: false
