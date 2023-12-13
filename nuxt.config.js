@@ -43,6 +43,8 @@ export default {
       { property: 'og:locale', content: "pt_PT" },
       { property: 'og:description', content: "Assista gratuitamente. Sem compromissos." },
       { name: 'description', content: "Assista gratuitamente. Sem compromissos." },
+      { name: 'BASE_URL', content: process.env.BASE_URL },
+      
     ],
 
     link: [
