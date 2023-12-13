@@ -261,15 +261,17 @@
 "toast16": "Operation successful",
 
 "str_response_code1": "System error",
-"str_response_code2": "Account not registered",
-"str_response_code3": "Operation failed",
 "str_response_code4": "Forced logout due to account login on another device",
-"str_response_code5": "Failed to create membership",
-"str_response_code6": "Account already registered",
-"str_response_code7": "Incorrect password",
 "str_response_code8": "Login expired",
-"str_response_code9": "Incorrect verification code",
 "str_response_code10": "Incorrect security question",
+
+
+"str_response_code3": "Operation failed, please try again later.",
+"str_response_code9": "Verification code error, please check.",
+"str_response_code5": "Membership creation failed, please try again later.",
+"str_response_code6": "User already registered.",
+"str_response_code2": "Invalid email/ password.",
+"str_response_code7": "Invalid email/ password.",
 "str_response_code11": "Parameter error",
 
 "str_get_back_pwd": "Please use this page to reset your password!",

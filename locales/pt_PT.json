@@ -266,16 +266,17 @@
 "toast16": "Operação bem sucedida",
 
 "str_response_code1": "Erro do sistema",
-"str_response_code2": "Conta não registrada",
-"str_response_code3": "Operação falhou",
 "str_response_code4": "Conta deslogada por login em outro dispositivo",
-"str_response_code5": "Falha ao criar associação",
-"str_response_code6": "Conta já registrada",
-"str_response_code7": "Senha incorreta",
 "str_response_code8": "Login expirado",
-"str_response_code9": "Código de verificação incorreto",
 "str_response_code10": "Pergunta de segurança incorreta",
-"str_response_code11": "Erro de parâmetro",
+
+"str_response_code3": "Operação falhou, por favor tente novamente mais tarde.",
+"str_response_code9": "Erro no código de verificação, por favor verifique.",
+"str_response_code5": "Falha na criação da associação, por favor tente novamente mais tarde.",
+"str_response_code6": "Usuário já registrado.",
+"str_response_code2": "Email/senha inválido.",
+"str_response_code7": "Email/senha inválido.",
+"str_response_code11": "Erro de parâmetro.",
 
 
 "str_get_back_pwd": "Please use this page to reset your password!",
