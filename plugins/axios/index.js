@@ -5,6 +5,31 @@ import searchApi from "./search.js";
 import upApi from "./up.js";
 import videoApi from "./video.js";
 import { Toast } from 'vant'
+function codeToast(code, app, store){
+  switch(code){
+      case 400000:
+          Toast(app.$i18n.t("str_response_code3"));
+          break;
+      case 400001:
+          Toast(app.i18n.t("str_response_code9"));
+          break;
+      case 400002:
+          Toast(app.i18n.t("str_response_code5"));
+          break;
+      case 400003:
+          Toast(app.i18n.t("str_response_code6"));
+          break;
+      case 400004:
+          Toast(app.i18n.t("str_response_code2"));
+          break;
+      case 400005:
+          Toast(app.i18n.t("str_response_code7"));
+          break;
+      case 400006:
+          Toast(app.i18n.t("str_response_code11"));
+          break;
+  }
+}
 export default function ({ app, $axios, store }, inject) {
   console.log(app, 'app')
   $axios.onRequest((config) => {
@@ -35,12 +60,15 @@ export default function ({ app, $axios, store }, inject) {
   });
 
   $axios.onResponse((response) => {
-    if (response.data.code == 200) {
+    console.log(response, 'onResponse')
+    codeToast(response.data.code, app, store)
+    if ([200000, 200101, 200102, 200].includes(response.data.code)) {
       response.data.code = 100
     }
     return response.data
   });
   $axios.onError(error => {
+    codeToast(error.response.data.code, app, store)
     return Promise.reject(error)
   });
 
