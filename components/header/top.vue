@@ -401,7 +401,7 @@ export default {
     },
     handleChangLocation(item){
       this.location = item.code;
-      this.$i18n.setLocale(item.code)
+      // this.$i18n.setLocale(item.code)
       // this.$nuxtI18nSetLanguage(item.code)
       localStorage.setItem("location", item.code)
       location.reload(); // 重启载入
