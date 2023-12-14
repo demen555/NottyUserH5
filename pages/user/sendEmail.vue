@@ -91,9 +91,10 @@ export default {
                     if(res.code === CODES.SUCCESS){
                         this.sucEmail = true
                         this.$toast.success(this.$t('toast16'));
-                    }else{
-                        this.$toast.fail(res.message);
                     }
+                    // else{
+                    //     this.$toast.fail(res.message);
+                    // }
                 }).finally( res => {
                     this.showLoading = false;
                 })
