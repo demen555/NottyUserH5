@@ -75,6 +75,7 @@
                     <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
                 </h1>
             </div>
+            <vote v-if="showVote" :tagsList="videoInfo.tags" :themeChecked="themeChecked" @refresh="handleRefesh"></vote>
             <div class="video-line"></div>
             <van-tabs v-model="activeNav" class="video-more" v-if="videoInfo.vodId">
                 <van-tab name="about" :title="$t('str_video_about')">
@@ -157,6 +158,7 @@ import { dateFormat, getQueryString } from '~/utils/format.js';
 import Empty from '~/components/empty'
 import cardLoad from "~/components/skeleton/cardLoad.vue"
 import videoLoad from "~/components/skeleton/videoLoad.vue"
+import vote from "~/components/vote/index.vue"
 import CODES from "~/plugins/enums/codes"
 
 export default {
@@ -261,6 +263,7 @@ export default {
         Empty,
         cardLoad,
         videoLoad,
+        vote,
         dialogLogin: () => import('~/components/dialog/dialog-login.vue'),
         dialogRegister: () => import('~/components/dialog/dialog-register.vue'),
     },
@@ -273,6 +276,10 @@ export default {
     
     methods:{
         dateFormat,
+        handleRefesh(){
+          console.log('handleRefresh')
+          this.initVideo()
+        },
         changeVoteShow(){
             if( !this.isLogin ){
                 return this.goLogin()

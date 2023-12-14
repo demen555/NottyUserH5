@@ -188,8 +188,20 @@ export default ($axios) => ({
      * @tag  搜索的tag
      * */ 
     requestVideoTagSuggest(data){
-      return request({
+      return $axios({
           url: Api.video.videoTagSuggest,
+          method: "POST",
+          data: data
+      })
+    },
+    /***
+     * @标签联想
+     * @参数
+     * @tag  搜索的tag
+     * */ 
+    requestVideoTagSearch(data){
+      return $axios({
+          url: Api.video.videoTagSearch,
           method: "POST",
           data: data
       })

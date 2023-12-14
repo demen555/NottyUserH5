@@ -277,5 +277,12 @@
 "str_get_back_pwd": "Please use this page to reset your password!",
 "str_get_back_pwd_sub": "Please enter your email which you first registered with.",
 "str_email": "Email",
-"str_email_code": "Verification code from Email"
+"str_email_code": "Verification code from Email",
+
+"str_tag_vote":"Vote on tags",
+"str_tag_suggest": "Suggest new tags",
+"str_add": "Add",
+"str_suggest": "Suggest",
+"str_suggest_suc": "Submission successfully",
+"tag_suggest_success_tip": "Thank you for contribution. Tag names are added once enough different users submit the same tag name"
 }
