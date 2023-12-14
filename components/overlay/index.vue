@@ -5,10 +5,10 @@
         <!-- <img src="~~/static/images/add_main.svg"> -->
         <div class="add">
           <div>{{ $t('Addvideo') }}</div>
-          <div><img src="~/static/images/xz_tjzpm_tj.svg" alt=""></div>
+          <div><img src="~/static/images/xz_tjzpm_tj.svg" alt="xz_tjzpm_tj"></div>
         </div>
         <div class="triangle"></div>
-        <div class="circle"><img src="~/static/images/xz_tjzpm_fx.svg" alt=""></div>
+        <div class="circle"><img src="~/static/images/xz_tjzpm_fx.svg" alt="xz_tjzpm_fx"></div>
         <div class="text">{{ $t('Addvideotoscreen') }}</div>
         <div class="know">{{ $t('Gotit') }}</div>
       </div>

@@ -2,7 +2,7 @@
   <div class="search-page">
     <HeaderTop></HeaderTop>
     <div class="search">
-      <div class="search-img" @click="handleGoHome"><img class="svg-icon" src="~/static/images/com_jt_sx_zuo.svg" alt=""></div>
+      <div class="search-img" @click="handleGoHome"><img class="svg-icon" src="~/static/images/com_jt_sx_zuo.svg" alt="com_jt_sx_zuo"></div>
       <div class="search-btn">
         <input v-model="search" placeholder="搜索点什么" class="search-input" type="text" clearable>
         <img class="header-common com-sousuo svg-icon" src="~/static/images/com_sousuo_1.svg" alt="com_sousuo_1">

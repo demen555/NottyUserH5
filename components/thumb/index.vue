@@ -5,10 +5,10 @@
       :src="tag.thumb"
     >
       <template slot="loading">
-        <img class="loading-img" :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="">
+        <img class="loading-img" :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_white">
       </template>
       <template slot="error">
-        <img class="error-img" :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="">
+        <img class="error-img" :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_white">
       </template>
     </van-image>
     <div class="thumb-text">

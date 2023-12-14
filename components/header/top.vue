@@ -26,7 +26,7 @@
         <div class="nav-list-tags">
           <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
             <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_biaoqian_1.svg'): require('~/static/images/my_gn_biaoqian.svg')" alt=""></div>
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_biaoqian_1.svg'): require('~/static/images/my_gn_biaoqian.svg')" alt="my_gn_biaoqian"></div>
               <div>{{ $t('str_menu_tag') }}</div>
             </div>
             <div :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
@@ -34,7 +34,7 @@
           <template v-if="!showExpand">
             <div class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" @click.stop="handleClickTag(tag)">
               <div class="nav-menu-left">
-                <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                 <div>{{ tag.name }}</div>
               </div>
               <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type-id-name'">
@@ -48,13 +48,13 @@
         </div>
         <div class="nav-menu-list" @click="handleGoPage('history')" >
           <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt=""></div>
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt="my_gn_lsjl"></div>
             <div>{{ $t('str_his') }}</div>
           </div>
         </div>
         <div class="nav-menu-list" @click="handleGoPage('collect')">
           <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt=""></div>
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
             <div>{{ $t('str_collect') }}</div>
           </div>
         </div>
@@ -91,13 +91,13 @@
         <div class="nav-menu-btns" v-if="!isLogin">
           <div class="nav-menu-btns-left">
             <div class="nav-menu-login" @click="handleLoginorRegister('login')">
-              <img :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="">
+              <img :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_2">
             </div>
             <div>{{ $t('str_login') }}</div>
         </div>
         <div class="nav-menu-btns-left">
           <div class="nav-menu-res" @click="handleLoginorRegister('register')">
-            <img :src="themeChecked? require('~/static/images/home_top_zhuce_1.svg'): require('~/static/images/home_top_zhuce.svg')" alt="">
+            <img :src="themeChecked? require('~/static/images/home_top_zhuce_1.svg'): require('~/static/images/home_top_zhuce.svg')" alt="home_top_zhuce">
           </div>
           <div>{{ $t('str_register') }}</div>
         </div>
@@ -105,19 +105,19 @@
         <div class="nav-list-tags" @click="handleGoPage('user')" v-show="isLogin">
           <div class="nav-menu-list-tag nav-menu-list-spec">
             <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img src="~/static/images/home_top_gaoliang.svg" alt=""></div>
+              <div class="nav-menu-tag"><img src="~/static/images/home_top_gaoliang.svg" alt="home_top_gaoliang"></div>
               <!-- {{ $t('str_user_account') }}  -->
               <div>{{  userinfo.userNickName || userinfo.userName }}</div>
             </div>
             <div @click="handleGoPage('user')">
-              <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
+              <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="com_jt_sx_you_rj">
             </div>
           </div>
         </div>
         <div class="nav-list-tags">
           <div class="nav-menu-list-tag" @click="handleShowExpand('language')">
             <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_yuyan_1.svg'): require('~/static/images/my_gn_yuyan.svg')" alt=""></div>
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_yuyan_1.svg'): require('~/static/images/my_gn_yuyan.svg')" alt="my_gn_yuyan"></div>
               <div>{{ $t('str_change_lang') }}</div>
             </div>
             <div class="nav-menu-right">
@@ -128,7 +128,7 @@
           <template v-if="!showLanguageExpand">
             <div class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.language" @click="handleChangLanguage(item)">
               <div class="nav-menu-left">
-                <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                 <div>{{ item.title }}</div>
               </div>
               <div class="nav-menu-right" v-if="item.language === language">
@@ -141,7 +141,7 @@
         <div class="nav-list-tags" ref="main">
           <div class="nav-menu-list-tag" @click="handleShowExpand('location')">
             <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_guojia_1.svg'): require('~/static/images/my_gn_guojia.svg')" alt=""></div>
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_guojia_1.svg'): require('~/static/images/my_gn_guojia.svg')" alt="my_gn_guojia"></div>
               <div> {{ $t('str_change_cuy') }} </div>
             </div>
             <div class="nav-menu-right">
@@ -153,7 +153,7 @@
             <div class="location-menu" ref="content">
               <div class="nav-menu-list-tag-sub" v-for="(item, index) in locationList" :key="item.id" @click="handleChangLocation(item)">
                 <div class="nav-menu-left">
-                  <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                  <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                   <div>{{ $t(item.country) }}</div>
                 </div>
                 <div class="nav-menu-right" v-if="item.code === location">
@@ -166,7 +166,7 @@
         <div v-if="!showLocationExpand" class="type-div"></div>
         <div class="nav-menu-list">
           <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_zhuti_1.svg'): require('~/static/images/my_gn_zhuti.svg')" alt=""></div>
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_zhuti_1.svg'): require('~/static/images/my_gn_zhuti.svg')" alt="my_gn_zhuti"></div>
             <div>{{ $t('str_change_bg') }} </div>
           </div>
           <div class="nav-menu-right">

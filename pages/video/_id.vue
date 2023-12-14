@@ -103,7 +103,7 @@
             
                             <div class="review-list" v-for="item in vodReviewList" :key="item.commentId">
                                 <div class="list-top">
-                                    <img class="top-img" src="~/static/images/avatar.png" alt="">
+                                    <img class="top-img" src="~/static/images/avatar.png" alt="avatar">
                                     <div class="top-name">{{ item.commentName || item.userName ||   $t('str_tourist') }}</div>
                                     <div class="top-time">{{ $t(dateFormat(item.commentTime)) }}</div> 
                                 </div>

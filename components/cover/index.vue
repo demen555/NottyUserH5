@@ -18,10 +18,10 @@
               :src="item.vodPic"
             >
             <template slot="loading">
-              <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="">
+              <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_black">
             </template>
             <template slot="error">
-              <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="">
+              <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_black">
             </template>
           </van-image>
             <!-- <img v-if="item.vodPic" :src="item.vodPic" alt="part1"> -->

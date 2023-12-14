@@ -1,7 +1,7 @@
 <template>
   <main class="main-list-no">
     <div class="main-list-empty">
-      <div class="main-list-empty-img"><img src="~/static/images/com_qsy_nothing.svg" alt=""></div>
+      <div class="main-list-empty-img"><img src="~/static/images/com_qsy_nothing.svg" alt="com_qsy_nothing"></div>
       <div class="mian-list-empty-tit">{{ $t('str_no_data') }}</div>
     </div>
   </main>

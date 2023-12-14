@@ -14,7 +14,7 @@
         </div>
         <div class="error-msg" v-show="password.showError">{{ password.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
-          <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
+          <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt="login_mima"></div>
           <input @blur="validatorPassword" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd')">
         </div>
       </div>

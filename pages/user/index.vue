@@ -15,7 +15,7 @@
         </van-nav-bar> -->
         <div class="user-content avatar">
             <span class="title">{{ $t('str_header') }}</span>
-            <img class="img" src="~/static/images/avatar.png" alt="">
+            <img class="img" src="~/static/images/avatar.png" alt="avatar">
         </div>
         <!-- <div class="user-content name" @click="goPages('setName')" >
             <span class="title">{{ $t('str_nick_name') }}</span>

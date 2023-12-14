@@ -30,5 +30,8 @@
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
     "webpack": "^4.46.0"
+  },
+  "devDependencies": {
+    "compression-webpack-plugin": "^4.0.1"
   }
 }

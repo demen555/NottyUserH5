@@ -1,3 +1,5 @@
+const CompressionPlugin = require('compression-webpack-plugin');
+
 export default {
   vue: {
     config: {
@@ -14,15 +16,17 @@ export default {
     script: [
       {
         src: "https://cdn.jsdelivr.net/npm/hls.js@0.14.6/dist/hls.min.js",
-        async: false,
+        async: true,
+        mode: 'client'
       },
       {
         src: "https://cdn.jsdelivr.net/npm/dplayer@1.26.0/dist/DPlayer.min.js",
-        async: false,
+        async: true,
+        mode: 'client'
       },
       {
         src: "https://www.googletagmanager.com/gtag/js",
-        async: false,
+        async: true,
         mode: 'client'
       },
       { 
@@ -159,6 +163,36 @@ export default {
             "appSelector": "#__nuxt",
             "maxDisplayWidth": 600
           }
+        },
+      },
+    },
+
+    plugins: [
+      new CompressionPlugin({
+        test: /\.js$|\.html$|\.css/,
+        threshold: 10240, 
+        deleteOriginalAssets: false 
+      })
+    ],
+
+    optimization: {
+      minimize: true,
+      minimizer: [],
+      splitChunks: {
+        chunks: "all",
+        automaticNameDelimiter: "-",
+        maxSize: 102400,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10, //优先级
+            reuseExistingChunk: true,
+          },
+          common: {
+            minChunks: 2,
+            priority: -20, //优先级
+            reuseExistingChunk: true,
+          },
         },
       },
     },

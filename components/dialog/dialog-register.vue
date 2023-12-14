@@ -4,23 +4,23 @@
       <div class="dialog-top">
         <div></div>
         <div class="dialog-title">{{ $t('str_reg') }}</div>
-        <div class="dialog-close" @click="show = false"><img :src="themeChecked ? require('~/static/images/home_top_guanbi_1.svg'): require('~/static/images/home_top_guanbi.svg')" alt=""></div>
+        <div class="dialog-close" @click="show = false"><img :src="themeChecked ? require('~/static/images/home_top_guanbi_1.svg'): require('~/static/images/home_top_guanbi.svg')" alt="home_top_guanbi"></div>
       </div>
       <div class="dialog-form">
         <!-- <div class="error-msg">123</div> -->
         <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
-          <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_email_1.svg'): require('~/static/images/login_email.svg')" alt=""></div>
+          <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_email_1.svg'): require('~/static/images/login_email.svg')" alt="login_email"></div>
           <input @blur="validatorEmail" v-model="form.email" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_email')" type="text">
         </div>
         <div class="error-msg" v-show="user.showError">{{ user.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
-          <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_zhanghao_1.svg'): require('~/static/images/login_zhanghao.svg')" alt=""></div>
+          <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_zhanghao_1.svg'): require('~/static/images/login_zhanghao.svg')" alt="login_zhanghao"></div>
           <input @blur="validatorUser" v-model="form.username" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_num')" type="text">
         </div>
         <div class="error-msg" v-show="pwd.showError">{{ pwd.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
-          <div class="dialog-img img-mima"><img  :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
+          <div class="dialog-img img-mima"><img  :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt="login_mima"></div>
           <input @blur="validatorPwd" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd')">
         </div>
         <!-- <div class="user-center-info-input dialog-input">
