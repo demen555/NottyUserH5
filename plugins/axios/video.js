@@ -182,6 +182,18 @@ export default ($axios) => ({
             data: data
         })
     },
+    /***
+     * @标签建议
+     * @参数
+     * @tag  搜索的tag
+     * */ 
+    requestVideoTagSuggest(data){
+      return request({
+          url: Api.video.videoTagSuggest,
+          method: "POST",
+          data: data
+      })
+    }
 });
 
 
