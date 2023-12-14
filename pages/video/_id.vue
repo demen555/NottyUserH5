@@ -53,8 +53,27 @@
                     <span class="words">{{ $t('str_share') }}</span>
                 </div>
             </div>
-            <div class="video-title" v-if="videoInfo.tags">
+            <!-- <div class="video-title" v-if="videoInfo.tags">
                 <h1 class="title" @click="handleClickType(row)" v-for="row in videoInfo.tags" :key="row.id">{{ row.name }}</h1>
+            </div> -->
+            <div class="video-title" v-if="videoInfo.tags && videoInfo.tags.length">
+                <h1 
+                    class="title" 
+                    @click="handleClickType(row)" 
+                    v-for="row in videoInfo.tags" 
+                    :key="row.id">
+                    {{ row.name }}
+                </h1>
+                <h1 class="title" @click="changeVoteShow">
+                    <img class="icon" v-if="showVote" src="~/static/images/com_bq_shouqi_1.svg" />
+                    <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
+                </h1>
+            </div>
+            <div class="video-title" v-else>
+              <h1 class="title" @click="changeVoteShow">
+                    <img class="icon" v-if="showVote" src="~/static/images/com_bq_shouqi_1.svg" />
+                    <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
+                </h1>
             </div>
             <div class="video-line"></div>
             <van-tabs v-model="activeNav" class="video-more" v-if="videoInfo.vodId">
@@ -175,6 +194,7 @@ export default {
                 size: 20,
                 page: 1
             },
+            showVote: false
         }
     },
 
@@ -253,7 +273,23 @@ export default {
     
     methods:{
         dateFormat,
-
+        changeVoteShow(){
+            if( !this.isLogin ){
+                return this.goLogin()
+            }
+            this.showVote = !this.showVote
+        },
+         // 标签调转
+         handleClickType(item){
+            this.$router.push({
+                name: 'type-id-name',
+                params:{
+                    id: item.id,
+                    name: item.name,
+                    refresh: true,
+                }
+            })
+        },
         initVideo(){
             const vodId = this.$route.params.id;
             this.getVideo(vodId);
