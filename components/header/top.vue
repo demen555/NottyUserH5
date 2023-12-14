@@ -433,6 +433,7 @@ export default {
       if(val === 'line') {
         this.$refs.dialogLineRef.onLineShow()
       } else if (val === 'search') {
+        this.set_show(true)
         if(this.$route.name === 'search') {
           this.set_show(true)
           // this.handleScroll()
