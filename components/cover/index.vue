@@ -29,11 +29,9 @@
           </div>
           
           <!-- 只加载当前视频id -->
-          <client-only>
-            <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId">
-              <videoM3u8 :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8>
-            </div>
-          </client-only>
+          <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId">
+            <videoM3u8 :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8>
+          </div>
           <div class="main-time">{{ item.vodDuration }}</div>
         </div>
         <div class="main-title">{{ item.vodName }}</div>
