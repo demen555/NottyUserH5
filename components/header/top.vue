@@ -245,6 +245,7 @@ export default {
     this.themeChecked = this.theme === 'dark'
     this.initTagList()
     if(process.client){
+      document.documentElement.setAttribute('data-theme', this.theme)
       this.$nextTick(() => {
         !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
       })
