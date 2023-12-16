@@ -64,18 +64,18 @@
                     :key="row.id">
                     {{ row.name }}
                 </h1>
-                <h1 class="title" @click="changeVoteShow">
+                <!-- <h1 class="title" @click="changeVoteShow">
                     <img class="icon" v-if="showVote" src="~/static/images/com_bq_shouqi_1.svg" />
                     <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
-                </h1>
+                </h1> -->
             </div>
-            <div class="video-title" v-else>
+            <!-- <div class="video-title" v-else>
               <h1 class="title" @click="changeVoteShow">
                     <img class="icon" v-if="showVote" src="~/static/images/com_bq_shouqi_1.svg" />
                     <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
                 </h1>
-            </div>
-            <vote v-if="showVote" :tagsList="videoInfo.tags" :themeChecked="themeChecked" @refresh="handleRefesh"></vote>
+            </div> -->
+            <!-- <vote v-if="showVote" :tagsList="videoInfo.tags" :themeChecked="themeChecked" @refresh="handleRefesh"></vote> -->
             <div class="video-line"></div>
             <van-tabs v-model="activeNav" class="video-more" v-if="videoInfo.vodId">
                 <van-tab name="about" :title="$t('str_video_about')">
