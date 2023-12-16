@@ -70,6 +70,9 @@ export default {
 
         onClickRight(){
             const { email } = this.form;
+            if( !email ){
+                return
+            }
             if( this.sucEmail ){
                 return
             }
