@@ -253,7 +253,12 @@ methods: {
     }
   },
   handleGoToResult(search){
-    console.log(search)
+    console.log(search, 'search')
+    gtag('event', 'view_search_results', {
+        keyword: search,
+    });
+    
+
     this.dataList = []
     this.search = search
     this.historyList.unshift(this.search)
