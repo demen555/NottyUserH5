@@ -238,13 +238,14 @@ export default {
       themeChecked: true, // 主题切换
       typeList: [],  // 分类数据
       overlayShow: false,  // 指引遮罩层
-      tagList: [], //标签数据
+      // tagList: [], //标签数据
       pageInfo: {
         page: 1,
         size: 10
       }
     }
   },
+  props:["tagList"],
   components: {
     dialogLogin: () => import('@/components/dialog/dialog-login.vue'),
     dialogRegister: () => import('@/components/dialog/dialog-register.vue'),
@@ -258,7 +259,7 @@ export default {
     // const theme=  localStorage.getItem('data-theme')
     console.log(CODES, 'CODES')
     this.themeChecked = this.theme === 'dark'
-    this.initTagList()
+    // this.initTagList()
     if(process.client){
       document.documentElement.setAttribute('data-theme', this.theme)
       this.$nextTick(() => {
