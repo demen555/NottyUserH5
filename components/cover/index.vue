@@ -1,8 +1,7 @@
 <template>
-  <div class="cover">
-    <nuxt-link class="main-list" :to="`/video/${item.vodId}`"
-      @touchmove="longpressVideo(item)">
-      <div class="main-list-group">
+  <div class="cover" >
+    <nuxt-link class="main-list" :to="`/video/${item.vodId}`">
+      <div class="main-list-group" @touchmove="longpressVideo(item)">
         <div class="main-video">
           <div class="main-like-radio" v-if="showCheck" @click.stop>
             <van-checkbox :name="item.vodId"></van-checkbox>
