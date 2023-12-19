@@ -8,6 +8,12 @@ export default {
     }
   },
   ssr: true,
+  
+  hooks: {
+    'render:route': (url, result) => {
+      result.html = result.html.replace(/data-n-head=\"ssr\"/gi,'')
+    }
+  },
   head: {
     title: 'Nottyhub',
     htmlAttrs: {

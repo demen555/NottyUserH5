@@ -1,7 +1,6 @@
 <template>
   <div class="cover">
-    <main class="main-list"
-      @click="handleGoDetail(item)"
+    <nuxt-link class="main-list" :to="`/video/${item.vodId}`"
       @touchmove="longpressVideo(item)">
       <div class="main-list-group">
         <div class="main-video">
@@ -16,7 +15,7 @@
            <van-image
               lazy-load
               :src="item.vodPic"
-            >
+              :alt="item.vodName">
             <template slot="loading">
               <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_black">
             </template>
@@ -46,7 +45,7 @@
           </div>
         </div>
       </div>
-    </main>
+    </nuxt-link>
   </div>
 </template>
 <script>

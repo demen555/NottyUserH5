@@ -5,7 +5,10 @@
         <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common" alt="more">
         <div @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
         <div class="header-right">
-          <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search" alt="com_sousuo">
+          <nuxt-link to="/search">
+            <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search" alt="com_sousuo">
+          </nuxt-link>
+          
           <img @click="handleExpand('right')" class="header-common1" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
         </div>
       </header>
@@ -32,7 +35,7 @@
             <div :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
           <template v-if="!showExpand">
-            <div class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" @click.stop="handleClickTag(tag)">
+            <nuxt-link :to="`/type/${tag.id}/${tag.name}`" class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" >
               <div class="nav-menu-left">
                 <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                 <div>{{ tag.name }}</div>
@@ -40,30 +43,30 @@
               <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type-id-name'">
                 <img src="~/static/images/com_select_on.svg" alt="com_select_on">
               </div>
-            </div>
+            </nuxt-link>
             <!-- 所有标签 -->
-            <div class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" @click.stop="handleGoPage('tag')"> {{ $t('str_menu_tag_all') }}</div>
+            <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'"  to="/tag" > {{ $t('str_menu_tag_all') }}</nuxt-link>
             <div class="nav-menu-list-tag-empty"></div>
           </template>
         </div>
-        <div class="nav-menu-list" @click="handleGoPage('history')" >
+        <nuxt-link class="nav-menu-list" to="/history" >
           <div class="nav-menu-left">
             <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt="my_gn_lsjl"></div>
             <div>{{ $t('str_his') }}</div>
           </div>
-        </div>
-        <div class="nav-menu-list" @click="handleGoPage('collect')">
+        </nuxt-link>
+        <nuxt-link class="nav-menu-list" to="/collect">
           <div class="nav-menu-left">
             <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
             <div>{{ $t('str_collect') }}</div>
           </div>
-        </div>
-        <div class="nav-menu-list" @click="handleGoPage('up')" >
+        </nuxt-link>
+        <nuxt-link class="nav-menu-list" to="/up" >
           <div class="nav-menu-left">
             <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
             <div>{{ $t('str_like') }}</div>
           </div>
-        </div>
+        </nuxt-link>
         <div class="nav-menu-dl">
           <div class="nav-menu-btn nav-ios" @click="handleAddMain">
             <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
@@ -173,12 +176,6 @@
             <van-switch @change="handleChangeTheme" v-model="themeChecked" size="16px"/>
           </div>
         </div>
-        <!-- <div class="nav-menu-list" @click="handleGoPage('pwdset')" >
-          <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_sz_1.svg'): require('~/static/images/my_gn_sz.svg')" alt=""></div>
-            <div>{{ $t('str_setting') }}</div>
-          </div>
-        </div> -->
         <div class="nav-menu-list" @click="handleLoginOut" v-show="isLogin">
           <div class="nav-menu-left">
             <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_tuideng_1.svg'): require('~/static/images/my_gn_tuideng.svg')"></div>
