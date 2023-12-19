@@ -55,18 +55,36 @@
             <div>{{ $t('str_his') }}</div>
           </div>
         </nuxt-link>
-        <nuxt-link class="nav-menu-list" to="/collect">
-          <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
-            <div>{{ $t('str_collect') }}</div>
+
+        <template v-if="isLogin">
+          <nuxt-link class="nav-menu-list" to="/collect">
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
+              <div>{{ $t('str_collect') }}</div>
+            </div>
+          </nuxt-link>
+          <nuxt-link class="nav-menu-list" to="/up" >
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
+              <div>{{ $t('str_like') }}</div>
+            </div>
+          </nuxt-link>
+        </template>
+        <template v-else>
+          <div class="nav-menu-list" @click="handleGoPage('collect')" >
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
+              <div>{{ $t('str_collect') }}</div>
+            </div>
           </div>
-        </nuxt-link>
-        <nuxt-link class="nav-menu-list" to="/up" >
-          <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
-            <div>{{ $t('str_like') }}</div>
+          <div class="nav-menu-list" @click="handleGoPage('up')"  >
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
+              <div>{{ $t('str_like') }}</div>
+            </div>
           </div>
-        </nuxt-link>
+        </template>
+
         <div class="nav-menu-dl">
           <div class="nav-menu-btn nav-ios" @click="handleAddMain">
             <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
@@ -423,6 +441,9 @@ export default {
     },
     handleGoPage(val){
       if( val == "collect" && !this.isLogin ){
+        return this.$refs.dialogLoginRef.onShow()
+      }
+      if( val == "up" && !this.isLogin ){
         return this.$refs.dialogLoginRef.onShow()
       }
       if( val == "pwdset" && !this.isLogin ){
