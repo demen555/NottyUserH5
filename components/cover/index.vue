@@ -25,11 +25,12 @@
             <!-- <img v-if="item.vodPic" :src="item.vodPic" alt="part1"> -->
             <!-- <img v-else src="~/static/images/cover1.svg" alt="part1"> -->
           </div>
-          
-          <!-- 只加载当前视频id -->
-          <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId">
-            <videoM3u8 :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8>
-          </div>
+          <client-only>
+            <!-- 只加载当前视频id -->
+            <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId">
+              <videoM3u8 :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8>
+            </div>
+          </client-only>
           <div class="main-time">{{ item.vodDuration }}</div>
         </div>
         <div class="main-title">{{ item.vodName }}</div>

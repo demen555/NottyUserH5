@@ -17,7 +17,7 @@
       v-model="showPop"
       position="left"
       class="vant-pop-320"
-     
+      :lazy-render="false"
     >
       <div id="drawer" class="nav-menu menu-right">
         <div class="menu-header">
@@ -34,7 +34,7 @@
             </div>
             <div :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
-          <template v-if="!showExpand">
+          <div v-show="!showExpand">
             <nuxt-link :to="`/type/${tag.id}/${tag.name}`" class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" >
               <div class="nav-menu-left">
                 <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
@@ -47,7 +47,7 @@
             <!-- 所有标签 -->
             <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'"  to="/tag" > {{ $t('str_menu_tag_all') }}</nuxt-link>
             <div class="nav-menu-list-tag-empty"></div>
-          </template>
+          </div>
         </div>
         <nuxt-link class="nav-menu-list" to="/history" >
           <div class="nav-menu-left">
