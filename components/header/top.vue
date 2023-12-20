@@ -213,7 +213,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import Overlay from '@/components/overlay'
 import dialogGuild from '@/components/dialog/dialog-guild.vue'
-import { langMap } from "~/locales/langMap.js"
+import { langMap } from "~/locales/lang.js"
 import { areaList } from '~/plugins/enums/country.js'
 import CODES from "~/plugins/enums/codes"
 
@@ -232,8 +232,6 @@ export default {
       languageList: langMap, // 语言数据
       language: process.client ? localStorage.getItem('language') : 'pt_PT', //语言
       location:  (process.client ? localStorage.getItem('location') : 'US1') || 'US1', //国家
-      // language: "pt_PT",
-      // location: "US",
       locationList: areaList, // 国家数据
       themeChecked: true, // 主题切换
       typeList: [],  // 分类数据

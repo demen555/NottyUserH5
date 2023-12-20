@@ -15,10 +15,10 @@ export default {
     }
   },
   head: {
-    title: 'Nottyhub',
-    htmlAttrs: {
-      lang: 'pt_PT'
-    },
+    title: 'Free Porn Videos in HD, Porno Sex Movies, and XXX Porn Tube | Nottyhub.com',
+    // htmlAttrs: {
+    //   lang: 'pt_PT'
+    // },
     script: [
       {
         src: "https://cdn.jsdelivr.net/npm/hls.js@0.14.6/dist/hls.min.js",
@@ -46,13 +46,14 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui' },
       { name: 'theme-color', content: '#1E1E1E' },
       { name: 'format-detection', content: 'telephone=no' },
-      { property: 'og:site_name', content: "Nottyhub" },
-      { property: 'og:type', content: "video.movie" },
-      { property: 'og:url', content: "https://www.Nottyhub.com/" },
-      { property: 'og:image', content: "https://busa.dasao88.com/brazil-bikini-girl-440x440.png" },
-      { property: 'og:locale', content: "pt_PT" },
-      { property: 'og:description', content: "Assista gratuitamente. Sem compromissos." },
-      { name: 'description', content: "Assista gratuitamente. Sem compromissos." },
+      // { property: 'og:site_name', content: "Nottyhub" },
+      // { property: 'og:type', content: "video.movie" },
+      // { property: 'og:url', content: "https://www.Nottyhub.com/" },
+      // { property: 'og:image', content: "https://busa.dasao88.com/brazil-bikini-girl-440x440.png" },
+      // { property: 'og:locale', content: "pt_PT" },
+      // { property: 'og:description', content: "Assista gratuitamente. Sem compromissos." },
+      { name: 'description', content: "With Nottyhub, you can watch Free Porn Videos in HD! Daily New XXX Porn Movies and Clips. " },
+      { name: 'keywords', content: "Free Porn Videos " },
       { name: 'BASE_URL', content: process.env.BASE_URL },
       
     ],
@@ -118,20 +119,20 @@ export default {
   i18n: {
     locales: [
       {
-        code: 'en_US',
+        code: 'en',
         iso: 'en-US',
         name: 'English',
       },
       {
-        code: 'pt_PT',
+        code: 'pt',
         iso: 'pt-PT',
         name: 'Português',
       },
     ],
-    strategy: 'no_prefix',
-    defaultLocale: 'pt_PT',
+    strategy: 'prefix',
+    defaultLocale: 'pt',
     vueI18n: {
-      fallbackLocale: 'pt_PT',
+      fallbackLocale: 'pt',
       lazy: true,
       messages: {
         en_US: require('./locales/en_US.json'),
