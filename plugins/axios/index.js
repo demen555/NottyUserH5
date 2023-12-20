@@ -31,30 +31,28 @@ function codeToast(code, app, store){
           break;
   }
 }
+const lanMap = {
+  en: "en_US",
+  pt: "pt_PT"
+}
 export default function ({ app, $axios, store }, inject) {
   console.log(app, 'app')
   $axios.onRequest((config) => {
     config.headers['Content-Type'] = 'application/json'
     const token =  store.state.user.accessToken;
     if (process.client) {
-      let language = localStorage.getItem('language') 
       let location = localStorage.getItem('location') 
-
-      if( !language ){
-        language = 'pt_PT'
-        localStorage.setItem('language', 'pt_PT')
-      }
-      if( !language ){
+      if( !location ){
         location = 'US'
         localStorage.setItem('location', 'US')
       }
-
       config.headers["Request-Country"] = location;
-      config.headers["Request-Lang"] = language;
     } else {
       config.headers["Request-Country"] = "US";
-      config.headers["Request-Lang"] = "pt_PT";
     }
+
+    config.headers["Request-Lang"] = lanMap[app.i18n.locale] || "pt_PT";
+    
     config.headers["App-Type"] = 3;
     
     if (token) config.headers['Authorization'] = `Bearer ${token}`
@@ -69,6 +67,7 @@ export default function ({ app, $axios, store }, inject) {
     return response.data
   });
   $axios.onError(error => {
+    console.error('error', error)
     codeToast(error.response.data.code, app, store)
     return Promise.reject(error)
   });

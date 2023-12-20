@@ -85,9 +85,8 @@ export default {
             if(type){
                 return
             }
-            this.$router.push({
-                name: page
-            })
+            
+            this.$router.push(this.localePath(page))
         }
     },
     

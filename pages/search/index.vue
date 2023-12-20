@@ -266,12 +266,6 @@ methods: {
     localStorage.setItem('historyList', JSON.stringify(this.historyList))
     this.set_show(false)
     this.initSearchVideoList('first')
-    // this.$router.push({
-    //   name: 'result',
-    //   query: {
-    //     search: '中文字幕'
-    //   }
-    // })
   },
   handleGoHome(){
     this.$router.go('-1')

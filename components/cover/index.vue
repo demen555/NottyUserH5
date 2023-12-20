@@ -1,6 +1,9 @@
 <template>
   <div class="cover" >
-    <nuxt-link class="main-list" :to="`/video/${item.vodId}`">
+    <nuxt-link class="main-list" :to="localePath({
+        name: 'video-id',
+        params: { id: item.vodId }
+    })">
       <div class="main-list-group" @touchmove="longpressVideo(item)">
         <div class="main-video">
           <div class="main-like-radio" v-if="showCheck" @click.stop>
@@ -89,12 +92,12 @@ export default{
     formatPer,
     handleGoDetail(item){
 
-      this.$router.push({
+      this.$router.push( this.localePath({
         name: 'video-id',
         params: {
           id: item.vodId
         }
-      })
+      }))
     },
     longpressVideo(item){
       this.$store.commit("SET_VODID", item.vodId)
