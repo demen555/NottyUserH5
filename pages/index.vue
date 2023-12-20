@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-      <HeaderTop @refresh="onRefresh"  id="home-top"></HeaderTop>
+      <HeaderTop @refresh="onRefresh" :tagList="tagList"  id="home-top"></HeaderTop>
       
       <div class="loading-box" v-if="spainnerLoading">
         <cardLoad></cardLoad>
@@ -35,7 +35,8 @@ export default{
       pageInfo: {
         page: 1,
         size: 20
-      }
+      },
+      tagList:[]
     }
   },
   created(){
@@ -48,8 +49,12 @@ export default{
   },
   async asyncData({ $homeApi }) {
     const res = await $homeApi.requestvodpageHome({ page: 1, size: 20})
+    const res1 = await $homeApi.postTagListPage({ page: 1, size: 10})
     const { data } = res
-    return { dataList: data.data }
+    return { 
+      tagList: res1.data.data,
+      dataList: data.data 
+    }
   },
   methods: {
     onLoad(){
