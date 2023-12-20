@@ -72,6 +72,9 @@ export default {
   created() {
     if(process.client){
       this.hostname = window.location.hostname
+      const user = JSON.parse(localStorage.getItem('user') || '{}')
+      this.form.email = user.account
+      this.form.password = user.password
     }
     console.log(this.register, 'register')
   },
@@ -151,6 +154,15 @@ export default {
         if(res.code === CODES.SUCCESS){
           const user = res.data
           this.set_userinfo({...user, ...info})
+          if (this.isLocale) {
+            if(process.client){
+              const params = {
+                account: this.form.email,
+                password: this.form.password,
+              }
+              localStorage.setItem('user', JSON.stringify(params))
+            }
+          }
           this.$toast(this.$t('toast4'))
           this.show = false
           this.$router.push("/")
