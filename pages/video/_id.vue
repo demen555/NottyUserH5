@@ -3,12 +3,7 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <div class="main-video">
         <div class="video-container"> 
-            <!-- <img 
-                @click="onClickLeft"
-                class="left-arrow" 
-                :src="themeChecked? require('~/static/images/com_jt_sx_zuo.svg'): require('~/static/images/com_jt_sx_zuo_rj.svg')" 
-                alt="com_jt_sx_zuo"
-            > -->
+
             <videoContainer v-if="videoInfo.vodPlayUrl" :videoInfo="videoInfo"></videoContainer>
             <van-loading 
                 color="var(--bg-primary)" 
@@ -288,14 +283,14 @@ export default {
         },
          // 标签调转
          handleClickType(item){
-            this.$router.push({
+            this.$router.push(this.localePath({
                 name: 'type-id-name',
                 params:{
                     id: item.id,
                     name: item.name,
                     refresh: true,
                 }
-            })
+            }))
         },
         initVideo(){
             const vodId = this.$route.params.id;
@@ -646,16 +641,6 @@ export default {
             this.content = ""
         },
 
-        //  返回上一页
-        onClickLeft(){
-            const $name = getQueryString('back')
-            if( $name ){
-                this.$router.push(`/${$name}`)
-            }else{
-                this.$router.go(-1)
-            }
-        },
-
         // 添加历史记录
         addHisVod(item){
             const idAdd = this.historyVod.some(  ele => ele.vodId === item.vodId);
@@ -684,14 +669,14 @@ export default {
 
         // 标签调转
         handleClickType(item){
-            this.$router.push({
+            this.$router.push(this.localePath({
                 name: 'type-id-name',
                 params:{
                     id: item.id,
                     name: item.name,
                     refresh: true,
                 },
-            });
+            }));
         },
         onRefresh(){
           console.log('onRefresh')

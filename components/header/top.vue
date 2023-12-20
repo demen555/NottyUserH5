@@ -5,7 +5,7 @@
         <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common" alt="more">
         <div @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
         <div class="header-right">
-          <nuxt-link to="/search">
+          <nuxt-link :to="localePath('search')">
             <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search" alt="com_sousuo">
           </nuxt-link>
           
@@ -35,7 +35,10 @@
             <div :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
           <div v-show="!showExpand">
-            <nuxt-link :to="`/type/${tag.id}/${tag.name}`" class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" >
+            <nuxt-link :to="localePath({
+              name: 'type-id-name',
+              params: { id: tag.id, name: tag.name }
+            })"  class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" >
               <div class="nav-menu-left">
                 <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                 <div>{{ tag.name }}</div>
@@ -45,45 +48,29 @@
               </div>
             </nuxt-link>
             <!-- 所有标签 -->
-            <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'"  to="/tag" > {{ $t('str_menu_tag_all') }}</nuxt-link>
+            <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
             <div class="nav-menu-list-tag-empty"></div>
           </div>
         </div>
-        <nuxt-link class="nav-menu-list" to="/history" >
+        <nuxt-link class="nav-menu-list" :to="localePath('history')" >
           <div class="nav-menu-left">
             <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt="my_gn_lsjl"></div>
             <div>{{ $t('str_his') }}</div>
           </div>
         </nuxt-link>
 
-        <template v-if="isLogin">
-          <nuxt-link class="nav-menu-list" to="/collect">
-            <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
-              <div>{{ $t('str_collect') }}</div>
-            </div>
-          </nuxt-link>
-          <nuxt-link class="nav-menu-list" to="/up" >
-            <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
-              <div>{{ $t('str_like') }}</div>
-            </div>
-          </nuxt-link>
-        </template>
-        <template v-else>
-          <div class="nav-menu-list" @click="handleGoPage('collect')" >
-            <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
-              <div>{{ $t('str_collect') }}</div>
-            </div>
+        <div class="nav-menu-list" @click="handleGoPage('collect')" >
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
+            <div>{{ $t('str_collect') }}</div>
           </div>
-          <div class="nav-menu-list" @click="handleGoPage('up')"  >
-            <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
-              <div>{{ $t('str_like') }}</div>
-            </div>
+        </div>
+        <div class="nav-menu-list" @click="handleGoPage('up')"  >
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
+            <div>{{ $t('str_like') }}</div>
           </div>
-        </template>
+        </div>
 
         <div class="nav-menu-dl">
           <div class="nav-menu-btn nav-ios" @click="handleAddMain">
@@ -147,7 +134,7 @@
             </div>
           </div>
           <template v-if="!showLanguageExpand">
-            <div class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.language" @click="handleChangLanguage(item)">
+            <nuxt-link class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.language" :to="switchLocalePath(item.language)">
               <div class="nav-menu-left">
                 <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                 <div>{{ item.title }}</div>
@@ -155,7 +142,7 @@
               <div class="nav-menu-right" v-if="item.language === language">
                 <img src="~/static/images/com_select_on.svg" alt="com_select_on">
               </div>
-            </div>
+            </nuxt-link>
           </template>
         </div>
         <div v-if="!showLanguageExpand" class="type-div"></div>
@@ -172,7 +159,7 @@
           </div>
           <template v-if="!showLocationExpand">
             <div class="location-menu" ref="content">
-              <div class="nav-menu-list-tag-sub" v-for="(item, index) in locationList" :key="item.id" @click="handleChangLocation(item)">
+              <div class="nav-menu-list-tag-sub" v-for="item in locationList" :key="item.id" @click="handleChangLocation(item)">
                 <div class="nav-menu-left">
                   <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                   <div>{{ $t(item.country) }}</div>
@@ -213,13 +200,17 @@
 import { mapGetters, mapActions } from 'vuex'
 import Overlay from '@/components/overlay'
 import dialogGuild from '@/components/dialog/dialog-guild.vue'
-import { langMap } from "~/locales/lang.js"
-import { areaList } from '~/plugins/enums/country.js'
+import { langMap, areaList } from "~/locales/lang.js"
 import CODES from "~/plugins/enums/codes"
 
 
 
 export default {
+  async fetch() {
+    const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
+    this.tagList = res1.data.data;
+  },
+  fetchOnServer: true,
   data() {
     return {
       showPop: false, // 左边抽屉
@@ -230,20 +221,20 @@ export default {
       showExpand: true, // 标签
       
       languageList: langMap, // 语言数据
-      language: process.client ? localStorage.getItem('language') : 'pt_PT', //语言
+      language: this.$i18n.locale, //语言
       location:  (process.client ? localStorage.getItem('location') : 'US1') || 'US1', //国家
       locationList: areaList, // 国家数据
       themeChecked: true, // 主题切换
       typeList: [],  // 分类数据
       overlayShow: false,  // 指引遮罩层
-      // tagList: [], //标签数据
+      tagList: [], //标签数据
       pageInfo: {
         page: 1,
         size: 10
       }
     }
   },
-  props:["tagList"],
+
   components: {
     dialogLogin: () => import('@/components/dialog/dialog-login.vue'),
     dialogRegister: () => import('@/components/dialog/dialog-register.vue'),
@@ -253,23 +244,15 @@ export default {
     Overlay
   },
   created(){
-    console.log(this.$route.name, 'nnnnnn')
-    // const theme=  localStorage.getItem('data-theme')
-    console.log(CODES, 'CODES')
     this.themeChecked = this.theme === 'dark'
-    // this.initTagList()
     if(process.client){
       document.documentElement.setAttribute('data-theme', this.theme)
       this.$nextTick(() => {
         !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
       })
-      const selectedLanguage = localStorage.getItem('language')
-      if (selectedLanguage) {
-        this.$i18n.setLocale(selectedLanguage)
-        // this.$nuxtI18nSetLanguage(selectedLanguage)
-      }
     }
   },
+
   activated(){
     console.log( 'this.$route.name', this.$route.name )
     this.showPop = false
@@ -283,7 +266,8 @@ export default {
   computed: {
     ...mapGetters(['userinfo', 'theme', 'isLogin', 'tagId', 'typeId','accessToken']),
     languageText({ language,  languageList}) {
-      const obj = languageList[language || 'pt_PT'];
+      console.log( 'languageList', languageList, language )
+      const obj = languageList[language];
       return obj.title
     },
     locationText() {
@@ -302,7 +286,7 @@ export default {
         this.$emit('refresh')
         this.handleScroll()
       } else {
-        this.$router.push("/")
+        this.$router.push(this.localePath('home'))
         this.$emit('refresh')
       }
     },
@@ -311,7 +295,7 @@ export default {
       if(this.$route.name === 'search') {
         this.handleScroll()
       }else{
-        this.$router.push('/')
+        this.$router.push(this.localePath('home'))
       }
     },
     handleScroll() {
@@ -330,7 +314,7 @@ export default {
       this.overlayShow = true
     },
     handleGoTag(){
-      this.$router.push("/tag")
+      this.$router.push(this.localePath('tag'))
     },
     handleClickTag(item){
       gtag('event', 'gt4_click_tags', {
@@ -339,14 +323,14 @@ export default {
       });
 
       this.set_tagid(item.id)
-      this.$router.push({
+      this.$router.push(this.localePath({
         name: 'type-id-name',
         params:{
           id: item.id,
           name: item.name,
           refresh: true,
         },
-      });
+      }));
     },
 
     async initTagList(){
@@ -372,7 +356,6 @@ export default {
           this.set_userinfo({})
           this.clearAccessToken()
           this.$refs.dialogLoginRef.onShow()
-          // this.$router.push("/")
         }
       } catch (error) {
         console.error(error)
@@ -408,12 +391,7 @@ export default {
     onClickRight() {
       Toast('按钮');
     },
-    handleChangLanguage(item){
-      if(process.client){
-        localStorage.setItem("language", item.language)
-      }
-      location.reload(); // 重启载入
-    },
+
     handleChangLocation(item){
       this.location = item.code;
       // this.$i18n.setLocale(item.code)
@@ -456,14 +434,12 @@ export default {
           this.set_show(true)
           // this.handleScroll()
         }else{
-          this.$router.push({name: val,  params:{
+          this.$router.push(this.localePath({name: val,  params:{
             refresh: true,
-          }})
+          }}))
         }
       } else {
-        this.$router.push({
-          name: val
-        })
+        this.$router.push(this.localePath(val))
       }
     },
     downloadApp() {
