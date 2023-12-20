@@ -44,7 +44,7 @@
       </div>
       <div class="dialog-submit-text">
         <div>{{ $t('str_login_text3') }}</div>
-        <div @click="handleRegister" class="tip">{{ $t('str_login_account2') }}</div>
+        <div @click="handleLogin" class="tip">{{ $t('str_login_account2') }}</div>
       </div>
       <div class="land_footer">
           <p class="com">  © {{ hostname }}, 2023 </p>
