@@ -24,11 +24,12 @@
           </van-image>
             <!-- <img v-if="item.vodPic" :src="item.vodPic" alt="part1"> -->
             <!-- <img v-else src="~/static/images/cover1.svg" alt="part1"> -->
-          </div>
+          </div>      
           <client-only>
             <!-- 只加载当前视频id -->
             <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId">
-              <videoM3u8 :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8>
+              <videoMp4 v-if="item.vodPreviewUrl" :vodPic="item.vodPic" :videoSrc="item.vodPreviewUrl" ></videoMp4>
+              <videoM3u8 v-else :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8>
             </div>
           </client-only>
           <div class="main-time">{{ item.vodDuration }}</div>
@@ -53,6 +54,7 @@ import Cover from '@/components/cover'
 import { formatNumber, formatPer } from '@/utils/format.js'
 import { mapGetters } from 'vuex';
 import videoM3u8 from "@/components/videoM3u8"
+import videoMp4 from "@/components/videoMp4"
 import { isPc } from '@/utils/format.js'
 export default{
   props: {
@@ -79,7 +81,8 @@ export default{
   },
   components: {
     Cover,
-    videoM3u8
+    videoM3u8,
+    videoMp4
   },
   methods: {
     formatNumber,
