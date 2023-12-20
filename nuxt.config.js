@@ -11,7 +11,7 @@ export default {
   router: {
     extendRoutes (routes, resolve) {
       routes.push({
-        path: '/',
+        path: '*',
         redirect: '/pt/home'
       })
     }
