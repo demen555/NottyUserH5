@@ -8,7 +8,14 @@ export default {
     }
   },
   ssr: true,
-  
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        path: '/',
+        redirect: '/pt/home'
+      })
+    }
+  },
   hooks: {
     'render:route': (url, result) => {
       result.html = result.html.replace(/data-n-head=\"ssr\"/gi,'')
