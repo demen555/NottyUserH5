@@ -9,12 +9,7 @@ export default {
   },
   ssr: true,
   router: {
-    extendRoutes (routes, resolve) {
-      routes.push({
-        path: '*',
-        redirect: '/pt/home'
-      })
-    }
+    middleware: 'redirect'
   },
   hooks: {
     'render:route': (url, result) => {
