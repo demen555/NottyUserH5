@@ -22,10 +22,10 @@ export default {
     }
   },
   head: {
-    title: 'Free Porn Videos in HD, Porno Sex Movies, and XXX Porn Tube | Nottyhub.com',
-    // htmlAttrs: {
-    //   lang: 'pt_PT'
-    // },
+    title: 'Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube | Nottyhub.com',
+    htmlAttrs: {
+      lang: 'pt_PT'
+    },
     script: [
       {
         src: "https://cdn.jsdelivr.net/npm/hls.js@0.14.6/dist/hls.min.js",
@@ -53,14 +53,16 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui' },
       { name: 'theme-color', content: '#1E1E1E' },
       { name: 'format-detection', content: 'telephone=no' },
-      // { property: 'og:site_name', content: "Nottyhub" },
-      // { property: 'og:type', content: "video.movie" },
-      // { property: 'og:url', content: "https://www.Nottyhub.com/" },
-      // { property: 'og:image', content: "https://busa.dasao88.com/brazil-bikini-girl-440x440.png" },
-      // { property: 'og:locale', content: "pt_PT" },
-      // { property: 'og:description', content: "Assista gratuitamente. Sem compromissos." },
-      { name: 'description', content: "With Nottyhub, you can watch Free Porn Videos in HD! Daily New XXX Porn Movies and Clips. " },
-      { name: 'keywords', content: "Free Porn Videos " },
+
+
+      { name: 'title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
+      { name: 'description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
+      { name: 'keywords', content: "XXX / Video de sexo / porno gratis / filme porno gratis / assistir filme porno gratis" },
+
+      { property: 'og:title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
+      { property: 'og:description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
+      { property: 'og:keywords', content: "XXX / Video de sexo / porno gratis / filme porno gratis / assistir filme porno gratis" },
+      
       { name: 'BASE_URL', content: process.env.BASE_URL },
       
     ],
