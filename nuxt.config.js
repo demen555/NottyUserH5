@@ -175,11 +175,11 @@ export default {
             minPixelValue: 1, // 小于1px不转换
             mediaQuery: false, // 允许在媒体查询中转换px
           },
-          'postcss-mobile-forever': {
-            "viewportWidth": 750,
-            "appSelector": "#__nuxt",
-            "maxDisplayWidth": 600
-          }
+          // 'postcss-mobile-forever': {
+          //   "viewportWidth": 750,
+          //   "appSelector": "#__nuxt",
+          //   "maxDisplayWidth": 600
+          // }
         },
       },
     },
