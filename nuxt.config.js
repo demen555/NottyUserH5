@@ -35,6 +35,14 @@ export default {
         async: true,
         mode: 'client'
       },
+      {
+        src: "https://a.exoclick.com/tag_gen.js",
+        'data-goal': "1748fdaba3d5f04bb0082c086621ebc9",
+        'data-value': "{conversion_value}",
+        type: "application/javascript",
+        async: true,
+        mode: 'client'
+      },
       { 
         src: "/js/analitics.js", 
         mode: 'client' 
