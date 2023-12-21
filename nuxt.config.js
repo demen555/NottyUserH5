@@ -179,7 +179,7 @@ export default {
           //   "viewportWidth": 750,
           //   "appSelector": "#__nuxt",
           //   "maxDisplayWidth": 600
-          // }
+          // },
         },
       },
     },
@@ -213,5 +213,39 @@ export default {
         },
       },
     },
+
+    extend(config, { isDev, isClient }) {
+      // 找到 babel-loader 配置或创建一个新的规则
+      const babelLoader = config.module.rules.find(rule => rule.test.toString() === '/\\.m?js$/') || {
+        test: /\.m?js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      };
+
+      // 如果找到规则，添加 include，否则创建新规则并添加 include
+      if (babelLoader.include) {
+        babelLoader.include.push(/(node_modules|other_module_to_include)/);
+      } else {
+        babelLoader.include = [/(node_modules|other_module_to_include)/];
+        config.module.rules.push(babelLoader);
+      }
+
+      // 添加额外的 babel-loader 配置，排除其他模块
+      config.module.rules.push({
+        test: /\.m?js$/,
+        exclude: /(node_modules|other_module_to_exclude)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      });
+    },
+
   },
 }

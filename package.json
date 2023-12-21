@@ -32,6 +32,9 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
+    "babel-loader": "^8.2.3",
     "compression-webpack-plugin": "^4.0.1"
   }
 }
