@@ -5,8 +5,7 @@
       <div class="loading-box" v-if="spainnerLoading">
         <cardLoad></cardLoad>
       </div>
-      <van-pull-refresh v-model="refreshing" @refresh="onRefresh" class="paddingTop52">
-         <!-- <p>刷新次数: {{ count }}</p> -->
+      <!-- <van-pull-refresh v-model="refreshing" @refresh="onRefresh" class="paddingTop52">
         <van-list
           v-model="loading"
           :finished="finished"
@@ -16,10 +15,35 @@
         >
           <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         </van-list>
-      </van-pull-refresh>
+      </van-pull-refresh> -->
+      <div class="video-list paddingTop52" >
+        <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+        <div class="home-footer">
+          <van-pagination class="pagination" v-model="pageInfo.size" :total-items="24" :items-per-page="5" />
+          <div class="home-footer-list" v-for="(item, index) in footerList" :key="index">
+            <div class="home-footer-tag">{{ item.name }}</div>
+            <div class="home-footer-right">
+              <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
+            </div>
+          </div>
+          <div class="home-footer-com">  © {{ hostname }}, 2023 </div>
+          <div class="home-footer-icon">
+            <div><img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta"></div>
+            <div>
+              <img class="common" :src="themeChecked? require('~/static/images/facebook_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
+              <img class="common" :src="themeChecked? require('~/static/images/instagram_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
+              <img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
+              <img class="common" :src="themeChecked? require('~/static/images/twitter_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
+              <img class="common" :src="themeChecked? require('~/static/images/tiktok_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
+              <img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 </template>
 <script>
+import { mapGetters } from "vuex"
 import HeaderTop from '~/components/header/top.vue'
 import Cover from '~/components/cover'
 import cardLoad from "~/components/skeleton/cardLoad.vue"
@@ -35,10 +59,26 @@ export default{
       pageInfo: {
         page: 1,
         size: 20
-      }
+      },
+      footerList: [
+        { name: 'CSAM Policy', id: 'csam'},
+        { name: 'CSAM Policy1', id: 'csam1'},
+        { name: 'CSAM Policy2', id: 'csam2'},
+        { name: 'CSAM Policy3', id: 'csam3'},
+      ],
+      hostname: ''
+    }
+  },
+  computed: {
+    ...mapGetters(['theme']),
+    themeChecked(){
+      return this.theme === 'dark'
     }
   },
   created(){
+    if(process.client){
+      this.hostname = window.location.hostname
+    }
     this.getList('first')
   },
   components: {
@@ -98,5 +138,44 @@ export default{
 .color{
     color: var(--text-color3);
     font-size: 15px;
+}
+.home-footer{
+  margin: 0 12px;
+  color: var(--text-color2);
+  padding-bottom: 24px;
+  .home-footer-list{
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1PX solid var(--border-line);
+    // border-bottom: 1PX solid var(--border-line);
+  }
+  .home-footer-com{
+    font-size: 14px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .home-footer-icon{
+    display: flex;
+    justify-content: space-between;
+    .rta{
+      width: 42px;
+      height: 16px;
+    }
+    .common{
+      width: 16px;
+      height: 16px;
+      margin-left: 12px;
+    }
+  }
+}
+.home-footer-list:nth-last-child(3) {
+  // color: red;
+  border-bottom: 1PX solid var(--border-line);
+}
+.pagination{
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
 }
 </style>
