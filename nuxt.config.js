@@ -37,6 +37,14 @@ export default {
         async: true,
         mode: 'client'
       },
+      {
+        src: "https://a.exoclick.com/tag_gen.js",
+        'data-goal': "1748fdaba3d5f04bb0082c086621ebc9",
+        'data-value': "{conversion_value}",
+        type: "application/javascript",
+        async: true,
+        mode: 'client'
+      },
       { 
         src: "/js/analitics.js", 
         mode: 'client' 
@@ -169,11 +177,11 @@ export default {
             minPixelValue: 1, // 小于1px不转换
             mediaQuery: false, // 允许在媒体查询中转换px
           },
-          'postcss-mobile-forever': {
-            "viewportWidth": 750,
-            "appSelector": "#__nuxt",
-            "maxDisplayWidth": 600
-          }
+          // 'postcss-mobile-forever': {
+          //   "viewportWidth": 750,
+          //   "appSelector": "#__nuxt",
+          //   "maxDisplayWidth": 600
+          // }
         },
       },
     },

@@ -30,7 +30,7 @@ function debounce(func, delay) {
 function vodPlayUrl (url){
     const arr = url.split('$')
     const str = arr.find(  ele => ele.includes('.m3u8'))
-    return str || "";
+    return str || ""
 }
 
 export default {
@@ -97,8 +97,15 @@ export default {
                     hotkey:true,
                     customType: {
                         customHls: function (video, player) {
-                            console.log(video.src)
-                            const hls = new Hls()
+     
+                            const hls = new Hls({
+                                // xhrSetup: function(xhr) {
+                                //     xhr.withCredentials = true;
+                                //     xhr.setRequestHeader('Cache-Control', 'no-cache');
+                                //     xhr.setRequestHeader('Pragma', 'no-cache');
+                                //     xhr.setRequestHeader('Expires', '0');
+                                // }
+                            })
                   			hls.loadSource(video.src)
                             hls.attachMedia(video)
                         }
