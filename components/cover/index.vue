@@ -1,5 +1,5 @@
 <template>
-  <div class="cover">
+  <div class="cover" :id="item.vodId">
     <main class="main-list"
       @click="handleGoDetail(item)"
       @touchmove="longpressVideo(item)">
@@ -8,11 +8,7 @@
           <div class="main-like-radio" v-if="showCheck" @click.stop>
             <van-checkbox :name="item.vodId"></van-checkbox>
           </div>
-          <div 
-            :class="['main-img', { 'main-img-opacity' : vodId == item.vodId}]" 
-           
-            @mouseenter="mouseenterVideo(item)"
-           >
+          <div :class="['main-img', { 'main-img-opacity' : vodId == item.vodId && item.vodPreviewUrl }]" >
            <van-image
               lazy-load
               :src="item.vodPic"
@@ -27,11 +23,13 @@
             <!-- <img v-if="item.vodPic" :src="item.vodPic" alt="part1"> -->
             <!-- <img v-else src="~/static/images/cover1.svg" alt="part1"> -->
           </div>
-          <!-- 只加载当前视频id -->
-          <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId">
-            <videoMp4 v-if="item.vodPreviewUrl" :vodPic="item.vodPic" :videoSrc="item.vodPreviewUrl" ></videoMp4>
-            <videoM3u8 v-else :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8>
-          </div>
+          <client-only>
+            <!-- 只加载当前视频id -->
+            <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId && item.vodPreviewUrl">
+              <videoMp4 :vodPic="item.vodPic" :videoSrc="item.vodPreviewUrl" ></videoMp4>
+            </div>
+          </client-only>  
+
           <div class="main-time">{{ item.vodDuration }}</div>
         </div>
         <div class="main-title">{{ item.vodName }}</div>
