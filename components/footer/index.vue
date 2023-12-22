@@ -54,21 +54,21 @@
   align-items: center;
   justify-content: space-between;
   z-index: 88;
-  background-color: var(--bg-color1);
-  border-top: 1px solid var(--bg-color2);
+  background-color: var(--bg-color1, #0E0E0F);
+  border-top: 1px solid var(--bg-color2, rgba(255, 255, 255, 0.06));
   text-align: center;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }
 .footer-sz div{
   width: 35%;
   margin: 0 auto;
 }
 .footer-del{
-  color: var(--bg-primary);
+  color: var(--bg-primary, #FF5502);
 }
 .footer-line{
   width: 1px;
   height: 16px;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
 }
 </style>

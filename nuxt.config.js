@@ -180,6 +180,11 @@ export default {
           //   "appSelector": "#__nuxt",
           //   "maxDisplayWidth": 600
           // },
+          'postcss-css-variables': {},
+          'postcss-import': {},
+          'postcss-preset-env': {
+            browsers: 'last 2 versions, IE 9', // 添加 IE 9 兼容
+          },
         },
       },
     },

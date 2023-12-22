@@ -49,7 +49,7 @@ export default {
     background-color: transparent;
 }
 .dialog {
-    background-color: var(--dialog-bg-color);
+    background-color: var(--dialog-bg-color, #18181C);
     border-radius: 16px;
     width: 343px;
     padding: 16px;
@@ -69,11 +69,11 @@ export default {
     width: 100%;
     height: 68px;
     border-radius: 8px;
-    background: var(--bg-color2);
+    background: var(--bg-color2, rgba(255, 255, 255, 0.06));
     padding: 12px;
     position: relative;
     .title{
-        color: var(--text-color2);
+        color: var(--text-color2,  rgba(255, 255, 255, 0.70));
         font-family: PingFang SC;
         font-size: 12px;
         font-style: normal;
@@ -83,7 +83,7 @@ export default {
 
     .words{
         width: 223px;
-        color: var(---text-color1);
+        color: var(---text-color1, #FFFFFF);
         font-family: PingFang SC;
         font-size: 14px;
         font-style: normal;

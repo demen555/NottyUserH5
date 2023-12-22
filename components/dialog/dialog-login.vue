@@ -153,7 +153,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .van-popup {
-  background-color: var(--dialog-bg-color);
+  background-color: var(--dialog-bg-color, #18181C);
   width: 343px;
   height: auto;
   padding: 16px;
@@ -181,14 +181,14 @@ export default {
   .user-center-info-btn {
     width: 100%;
     margin: 0 auto;
-    background-color: var(--bg-color2);
+    background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
     font-size: 14px;
-    color: var(--text-color1);
+    color: var(--text-color1, #FFFFFF);
     border-radius: 8px;
     height: 40px;
     text-indent: 2em;
     height: 40px;
-    border: 1px solid var(--text-color3);
+    border: 1px solid var(--text-color3, rgba(96, 105, 128, 0.40));
   }
 
   .white{
@@ -237,8 +237,8 @@ export default {
     margin: 0 auto;
     height: 40px;
     border-radius: 20px;
-    background-color: var(--bg-primary);
-    color: var(--dialog-text-color);
+    background-color: var(--bg-primary, #FF5502);
+    color: var(--dialog-text-color, #FFFFFF);
     text-align: center;
     line-height: 40px;
     font-size: 16px;
@@ -260,20 +260,20 @@ export default {
     width: 80%;
     margin: 0 auto;
     font-size: 14px;
-    color: var(--text-color2);
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
     display: flex;
     justify-content: space-between;
     margin-top: 16px;
   }
 
   .dialog-submits a {
-    color: var(--text-color2);
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   }
 
   .dialog-line {
     width: 1px;
     height: 16px;
-    background-color: var(--bg-color2);
+    background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   }
 }
 

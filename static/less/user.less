@@ -1,6 +1,6 @@
 // 个人中心公用样式
 .user-title{
-    color: var(--text-color1);
+    color: var(--text-color1, #FFFFFF);
     text-align: center;
     font-family: PingFang SC;
     font-size: 18px;
@@ -13,7 +13,7 @@
     width: 100%;
     height: 1px;
     padding-top: 1px;
-    background-color: var(--border-line);
+    background-color: var(--border-line, rgba(245, 245, 247, 0.06));
 }
 .user-icon{
     /deep/.van-loading__spinner{
@@ -23,7 +23,7 @@
     }
 }
 .user-submit{
-    color: var(--text-color2);
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
     text-align: right;
     font-family: PingFang SC;
     font-size: 14px;
@@ -48,7 +48,7 @@
     position: relative;
     
     .lable{
-        color: var(--text-color2);
+        color: var(--text-color2,  rgba(255, 255, 255, 0.70));
         font-family: PingFang SC;
         font-size: 14px;
         font-style: normal;
@@ -61,12 +61,12 @@
         height: 40px;
         flex-shrink: 0;
         border-radius: 8px;
-        border: 1px solid var(--border-line);
-        background: var(--bg-color2);
+        border: 1px solid var(--border-line, rgba(245, 245, 247, 0.06));
+        background: var(--bg-color2, rgba(255, 255, 255, 0.06));
         padding: 0 12px;
         
         &::placeholder{
-            color: var(--text-color4);
+            color: var(--text-color4, rgba(255, 255, 255, 0.20));
             font-size: 14px;
             font-style: normal;
             line-height: normal;
@@ -79,7 +79,7 @@
         width: 80px;
         height: 28px;
         border-radius: 2px;
-        background-color: var(--bg-color2);
+        background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
         text-align: center;
         line-height: 28px;
     }
@@ -92,10 +92,10 @@
 .user-btn-submit{
     width: 343px;
     height: 40px;
-    background-color: var(--bg-primary);
+    background-color: var(--bg-primary, #FF5502);
     border-radius: 40px;
 
-    color: var(--dialog-text-color);
+    color: var(--dialog-text-color, #FFFFFF);
     font-family: PingFang SC;
     font-size: 16px;
     font-weight: 500;

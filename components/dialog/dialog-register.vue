@@ -213,7 +213,7 @@
 </script>
 <style lang="less" scoped>
 .van-popup{
-  background-color: var(--dialog-bg-color);
+  background-color: var(--dialog-bg-color, #18181C);
   width: 343px;
   height: auto;
   padding: 16px;
@@ -225,7 +225,7 @@
   font-size: 12px;
 }
 .go-login{
-  color: var(--bg-primary);
+  color: var(--bg-primary, #FF5502);
   margin-left: 5px;
 }
 .dialog{
@@ -241,14 +241,14 @@
   .user-center-info-btn{
     width: 100%;
     margin: 0 auto;
-    background-color: var(--bg-color2);
+    background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
     font-size: 14px;
     border-radius: 8px;
     height: 40px;
     text-indent: 2em;
     height: 40px;
-    color: var(--text-color1);
-    border: 1px solid var(--text-color3);
+    color: var(--text-color1, #FFFFFF);
+    border: 1px solid var(--text-color3, rgba(96, 105, 128, 0.40));
   }
 .white{
   color: rgba(96, 105, 128, 0.4);
@@ -289,8 +289,8 @@
     margin: 0 auto;
     height: 40px;
     border-radius: 20px;
-    background-color:var(--bg-primary);
-    color: var(--dialog-text-color);
+    background-color:var(--bg-primary, #FF5502);
+    color: var(--dialog-text-color, #FFFFFF);
     text-align: center;
     line-height: 40px;
     font-size: 16px;
@@ -310,13 +310,13 @@
     width: 80%;
     margin: 0 auto;
     font-size: 14px;
-    color: var(--text-color2);
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
     display: flex;
     justify-content: center;
     margin-top: 16px;
   }
   .dialog-submits a{
-    color:var(--text-color2);
+    color:var(--text-color2,  rgba(255, 255, 255, 0.70));
   }
 }
 .dialog-top{
@@ -331,7 +331,7 @@
 .dialog-line{
   width: 1px;
   height: 16px;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
 }
 .input-code{
   position: relative;
@@ -347,14 +347,14 @@
   width: 68px;
   height: 32px;
   border-radius: 2px;
-  background-color: var(--text-color1);
+  background-color: var(--text-color1, #FFFFFF);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .input-code{
   z-index: 2;
-  color: var(--bg-color1);
+  color: var(--bg-color1, #0E0E0F);
   letter-spacing: 2px;
 }
 </style>

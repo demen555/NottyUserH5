@@ -76,7 +76,7 @@ export default{
   padding: 0 8px;
   .thumb-left{
     font-size: 14px;
-    color: var(--text-color1);
+    color: var(--text-color1, #FFFFFF);
     word-break: break-all;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -87,7 +87,7 @@ export default{
   }
   .thumb-right{
     font-size: 12px;
-    color: var(--text-color2);
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
     display: flex;
     align-items: center;
     line-height: 16.8px;

@@ -109,15 +109,15 @@ methods: {
 }
 .search-input{
   width: 100%;
-  background-color: var(--bg-color3);
+  background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
   border-radius: 16px;
   text-indent: 6em;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   height: 32px;
   border: none;
 }
 input::placeholder{
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }
 .com-sousuo{
   position: absolute;
@@ -135,13 +135,13 @@ input::placeholder{
 }
 .search-result{
   font-size: 14px;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   width: 90%;
   margin: 0 auto;
   margin-top: 12px;
   margin-bottom: 12px
 }
 .search-result span{
-  color: var(--bg-primary);
+  color: var(--bg-primary, #FF5502);
 }
 </style>

@@ -84,7 +84,7 @@ export default {
   overflow: auto;
 }
 .str-page-text{
-  color: var(--bg-primary);
+  color: var(--bg-primary, #FF5502);
 }
 .logo-black{
   width: 86px;
@@ -123,14 +123,14 @@ export default {
   .user-center-info-btn {
     width: 100%;
     margin: 0 auto;
-    background-color: var(--bg-color2);
+    background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
     font-size: 14px;
-    color: var(--text-color1);
+    color: var(--text-color1, #FFFFFF);
     border-radius: 8px;
     height: 40px;
     text-indent: 2em;
     height: 40px;
-    border: 1px solid var(--text-color3);
+    border: 1px solid var(--text-color3, rgba(96, 105, 128, 0.40));
   }
 
   .white{
@@ -179,8 +179,8 @@ export default {
     margin: 0 auto;
     height: 40px;
     border-radius: 20px;
-    background-color: var(--bg-primary);
-    color: var(--dialog-text-color);
+    background-color: var(--bg-primary, #FF5502);
+    color: var(--dialog-text-color, #FFFFFF);
     text-align: center;
     line-height: 40px;
     font-size: 16px;
@@ -190,7 +190,7 @@ export default {
     justify-content: center;
   }
 .dialog-exit{
-  background-color: var(--bg-color3);
+  background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
   margin-top: 12px;
   margin-bottom: 24px;
 }
@@ -210,20 +210,20 @@ export default {
     width: 80%;
     margin: 0 auto;
     font-size: 14px;
-    color: var(--text-color2);
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
     display: flex;
     justify-content: space-between;
     margin-top: 16px;
   }
 
   .dialog-submits a {
-    color: var(--text-color2);
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   }
 
   .dialog-line {
     width: 1px;
     height: 16px;
-    background-color: var(--bg-color2);
+    background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   }
 }
 
@@ -236,14 +236,14 @@ export default {
 .dialog-text{
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-color1);
+  color: var(--text-color1, #FFFFFF);
   text-align: center;
   margin-top: 24px;
   margin-bottom: 16px;
 }
 .dialog-subtitle{
   font-size: 14px;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   font-weight: 400;
   line-height: 22px;
   text-align: center;
