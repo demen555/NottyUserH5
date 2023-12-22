@@ -145,14 +145,14 @@ export default {
 }
 /deep/ .video-progress{
     height: 2px;
-    background-color: var(--bg-color4);
+    background-color: var(--bg-color4, rgba(0, 0, 0, 0.6));
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     z-index: 3;
     .van-progress__portion{
-        background-color: var(--bg-primary);
+        background-color: var(--bg-primary, #FF5502);
     }
     .van-progress__pivot{
         display: none;
