@@ -9,8 +9,8 @@
     </div>
 </template>
 <script>
-import videojs from 'video.js';
-import 'video.js/dist/video-js.css';
+// import videojs from 'video.js';
+// import 'video.js/dist/video-js.css';
 import { mapGetters } from 'vuex';
 export default {
     name: 'videoM3u8',
