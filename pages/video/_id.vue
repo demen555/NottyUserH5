@@ -6,8 +6,8 @@
 
             <videoContainer v-if="videoInfo.vodPlayUrl" :videoInfo="videoInfo"></videoContainer>
             <van-loading 
-                color="var(--bg-primary)" 
-                text-color="var(--bg-primary)" 
+                color="var(--bg-primary, #FF5502)" 
+                text-color="var(--bg-primary, #FF5502)" 
                 v-else 
                 type="spinner" 
                 vertical>
@@ -712,15 +712,15 @@ export default {
         margin-top: 20px;
     }
     /deep/ .van-tabs__nav{
-        background-color: var(--bg-color1);
+        background-color: var(--bg-color1, #0E0E0F);
         .van-tab{
             padding: 0 12px;
             flex: inherit;
-            color: var(--text-color2);
+            color: var(--text-color2,  rgba(255, 255, 255, 0.70));
             font-size: 14px;
         }
         .van-tab--active{
-            color: var(--text-color1);
+            color: var(--text-color1, #FFFFFF);
             font-size: 18px;
         }
         .van-tabs__line{
@@ -761,7 +761,7 @@ export default {
     padding-bottom: 8px;
     padding-left: 12px;
     padding-right: 12px;
-    color: var(--text-color1);
+    color: var(--text-color1, #FFFFFF);
     font-family: PingFang SC;
     font-size: 14px;
     font-style: normal;
@@ -777,17 +777,17 @@ export default {
     .icon{
         width: 16px;
         height: 16px;
-        background: var(--icon-bofangliang);
+        // background: var(--icon-bofangliang);
         background-size: cover;
     }
     .words{
-        color: var(--text-color2);
+        color: var(--text-color2,  rgba(255, 255, 255, 0.70));
         font-size: 12px;
         margin-left: 4px;
     }
     .data-time{
         margin-left: 12px;
-        color: var(--text-color2);
+        color: var(--text-color2,  rgba(255, 255, 255, 0.70));
         font-size: 12px;
     }
 }
@@ -842,7 +842,7 @@ export default {
         
     }
     .words{
-        color: var(--text-color2);
+        color: var(--text-color2,  rgba(255, 255, 255, 0.70));
         font-size: 12px;
         // transform: scale(0.83); // 10px
     }
@@ -852,7 +852,7 @@ export default {
     flex-wrap: wrap;
     .padding-8-12;
     .title{
-        color: var(--text-color2);
+        color: var(--text-color2,  rgba(255, 255, 255, 0.70));
         text-align: center;
         font-family: PingFang SC;
         font-size: 12px;
@@ -865,7 +865,7 @@ export default {
         align-items: center;
         gap: 10px;
         border-radius: 4px;
-        background: var(--bg-color3);
+        background: var(--bg-color3, rgba(255, 255, 255, 0.10));
         margin: 0 4px 4px 0;
     }
 }
@@ -874,7 +874,7 @@ export default {
     width: 100%;
     height: 1px;
     padding-top: 1px;
-    background-color: var(--border-line);
+    background-color: var(--border-line, rgba(245, 245, 247, 0.06));
 }
 .review-list{
     .padding-8-12;
@@ -887,17 +887,17 @@ export default {
         }
         .top-name{
             flex: 1;
-            color: var(--text-color2);
+            color: var(--text-color2,  rgba(255, 255, 255, 0.70));
             font-size: 14px;
             padding-left: 8px;
         }
         .top-time{
-            color: var(--text-color2);
+            color: var(--text-color2,  rgba(255, 255, 255, 0.70));
             font-size: 12px;
         }
     }
     .list-bottom{
-        color: var(--text-color1);
+        color: var(--text-color1, #FFFFFF);
         font-size: 14px;
         padding-left: 40px;
     }
@@ -907,7 +907,7 @@ export default {
     .padding-8-12;
     justify-content: space-between;
     .num{
-        color: var(--text-color2);
+        color: var(--text-color2,  rgba(255, 255, 255, 0.70));
         font-family: PingFang SC;
         font-size: 14px;
         font-style: normal;
@@ -919,8 +919,8 @@ export default {
         height: 32px;
         text-align: center;
         line-height: 32px;
-        background-color: var(--bg-primary);
-        color: var(--text-color1);
+        background-color: var(--bg-primary, #FF5502);
+        color: var(--text-color1, #FFFFFF);
         font-size: 14px;
         cursor: pointer;
         border-radius: 32px;
@@ -934,15 +934,15 @@ export default {
     left: 0;
     bottom: 0;
     z-index: 998;
-    background-color: var(--bg-color1);
+    background-color: var(--bg-color1, #0E0E0F);
     height: 56px;
     .input{
         width: 100%;
         height: 40px;
         flex-shrink: 0;
         border-radius: 8px;
-        border: 1px solid var(--border-line);
-        background: var(--bg-color2);
+        border: 1px solid var(--border-line, rgba(245, 245, 247, 0.06));
+        background: var(--bg-color2, rgba(255, 255, 255, 0.06));
         padding: 0 12px;
     }
 }

@@ -145,8 +145,8 @@ export default{
   margin: 10px 12px;
   height: 44px;
   border-radius: 4px;
-  background-color: var(--bg-color3);
-  border: 1px solid var(--bg-color3);
+  background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
+  border: 1px solid var(--bg-color3, rgba(255, 255, 255, 0.10));
   display: flex;
   flex-wrap: wrap;
   padding: 4px 8px;
@@ -159,7 +159,7 @@ export default{
     text-underline-offset: 3px;
   }
   .tag-color{
-    color: var(--bg-primary);
+    color: var(--bg-primary, #FF5502);
   }
   .tag-line{
     text-decoration: none;
@@ -169,13 +169,13 @@ export default{
   width: 172px;
   height: 32px;
   border-radius: 4px;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
   font-size: 12px;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   text-align: center;
 }
 </style>

@@ -172,7 +172,7 @@
           </template>
         </div>
         <div v-if="!showLocationExpand" class="type-div"></div>
-        <div class="nav-menu-list">
+        <!-- <div class="nav-menu-list">
           <div class="nav-menu-left">
             <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_zhuti_1.svg'): require('~/static/images/my_gn_zhuti.svg')" alt="my_gn_zhuti"></div>
             <div>{{ $t('str_change_bg') }} </div>
@@ -180,7 +180,7 @@
           <div class="nav-menu-right">
             <van-switch @change="handleChangeTheme" v-model="themeChecked" size="16px"/>
           </div>
-        </div>
+        </div> -->
         <div class="nav-menu-list" @click="handleLoginOut" v-show="isLogin">
           <div class="nav-menu-left">
             <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_tuideng_1.svg'): require('~/static/images/my_gn_tuideng.svg')"></div>
@@ -467,8 +467,8 @@ header{
   justify-content: space-between;
   align-items: center;
   padding: 0 12px;
-  background-color: var(--bg-color1);
-  border-bottom: 1px solid var(--bg-color2);
+  background-color: var(--bg-color1, #0E0E0F);
+  border-bottom: 1px solid var(--bg-color2, rgba(255, 255, 255, 0.06));
   z-index: 999;
   position: fixed;
   top: 0;
@@ -499,7 +499,7 @@ header{
   height: 100%;
 }
 .color{
-  color: var(--text-color3);
+  color: var(--text-color3, rgba(96, 105, 128, 0.40));
   font-size: 15px;
 }
 .logo-black{
@@ -537,7 +537,7 @@ header{
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -550,20 +550,20 @@ header{
   overflow: auto;
 }
 .nav-list-tags{
-  background-color: var(--bg-color2);
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   border-radius: 7.992px;
 }
 .type-div{
   height: 4px;
-  background-color: var(--bg-color1);
+  background-color: var(--bg-color1, #0E0E0F);
 }
 // .nav-list-tags:first-child{
 //   margin-top: 16px;
 // }
 .nav-menu-list-tag{
-  /* background-color: var(--bg-color2); */
+  /* background-color: var(--bg-color2, rgba(255, 255, 255, 0.06)); */
   line-height: 40px;
-  color: var(--text-color1);
+  color: var(--text-color1, #FFFFFF);
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -576,7 +576,7 @@ header{
 .nav-menu-list-tag-sub{
   height: 32px;
   line-height: 32px;
-  color: var(--text-color1);
+  color: var(--text-color1, #FFFFFF);
   font-size: 14px;
   border-radius: 8px;
   padding: 0 12px;
@@ -586,9 +586,9 @@ header{
 }
 .nav-menu-list{
   height: 40px;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   line-height: 40px;
-  color: var(--text-color1);
+  color: var(--text-color1, #FFFFFF);
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -599,10 +599,10 @@ header{
 }
 .nav-menu-lang{
   margin-right: 8px;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }
 .nav-menu-theme{
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }
 .nav-menu-switch{
   margin: 0 8px;
@@ -611,7 +611,7 @@ header{
   width: 232px;
   height: 28px;
   border-radius: 8px;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   margin: 0 auto;
   text-align: center;
   // margin-bottom: 4px;
@@ -638,7 +638,7 @@ header{
   font-size: 14px;
 }
 .nav-text{
-  color: var(--text-color1);
+  color: var(--text-color1, #FFFFFF);
   line-height: 19.6px;
   margin-top: 9px;
 }
@@ -646,7 +646,7 @@ header{
   width: 146px;
   height: 68px;
   border-radius: 8px;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   display: flex;
   flex-direction: column;
   align-items: flex-start;

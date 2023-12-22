@@ -252,11 +252,11 @@ export default {
       margin-top: 16px;
   }
   .title{
-      color: var(--text-color1);
+      color: var(--text-color1, #FFFFFF);
       font-size: 16px;
   }
   .btn{
-      color: var(--text-color2);
+      color: var(--text-color2,  rgba(255, 255, 255, 0.70));
       font-size: 14px;
   }
 }
@@ -275,7 +275,7 @@ export default {
 }
 
 .name{
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   font-size: 14px;
   margin-left: 8px;
 }
@@ -284,11 +284,11 @@ export default {
 
   width: 100%;
   height: 40px;
-  border: 1px solid var(--border-line);
-  background: var(--bg-color2);
+  border: 1px solid var(--border-line, rgba(245, 245, 247, 0.06));
+  background: var(--bg-color2, rgba(255, 255, 255, 0.06));
 
   border-radius: 8px;
-  background: var(--bg-color2);
+  background: var(--bg-color2, rgba(255, 255, 255, 0.06));
   margin-top: 8px;
   padding: 8px;
   display: flex;
@@ -302,7 +302,7 @@ export default {
       border: none;
       font-size: 14px;
       &::placeholder{
-          color: var(--text-color4);
+          color: var(--text-color4, rgba(255, 255, 255, 0.20));
           font-size: 14px;
           font-style: normal;
           line-height: normal;
@@ -313,7 +313,7 @@ export default {
 
       flex-shrink: 0;
       border-radius: 4px;
-      border: 1px solid var(--bg-primary);
+      border: 1px solid var(--bg-primary, #FF5502);
   
       background: rgba(255, 85, 2, 0.10);
       color: var(--ff-5502, #FF5502);
@@ -330,14 +330,14 @@ export default {
       left: 0;
       border-radius: 8px;
       overflow: hidden;
-      background-color: var(--bg-color1);
+      background-color: var(--bg-color1, #0E0E0F);
       .item{
           display: block;
           width: 100%;
           height: 40px;
           padding: 0 12px;
           line-height: 40px;
-          background-color: var(--bg-color2);
+          background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
       }
   }
 }
@@ -348,7 +348,7 @@ export default {
   margin: 16px auto;
   text-align: center;
   line-height: 40px;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-primary, #FF5502);
   color: #FFF;
   font-size: 16px;
 
@@ -363,7 +363,7 @@ export default {
   }
 }
 .vote-err{
-  color: var(--bg-primary);
+  color: var(--bg-primary, #FF5502);
   margin-top: 8px;
   font-family: PingFang SC;
   font-size: 14px;
@@ -391,7 +391,7 @@ export default {
       background: rgba(255, 255, 255, 0.10);
       padding: 4px 8px;
       font-size: 12px;
-      color: var(--text-color2);
+      color: var(--text-color2,  rgba(255, 255, 255, 0.70));
       margin-right: 4px;
   }
 }

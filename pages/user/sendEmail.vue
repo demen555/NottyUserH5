@@ -141,8 +141,8 @@ export default {
         align-items: center;
         flex-direction: row;
         border-radius: 8px;
-        border: 1px solid var(--border-line);
-        background: var(--bg-color2);
+        border: 1px solid var(--border-line, rgba(245, 245, 247, 0.06));
+        background: var(--bg-color2, rgba(255, 255, 255, 0.06));
         .img{
             width: 24px;
             height: 24px;

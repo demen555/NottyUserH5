@@ -5,8 +5,8 @@
             width="375" 
             viewBox="0 0 375 278"
             :speed="2"
-            primaryColor="var(--bg-color2)"
-            secondaryColor="var(--bg-color3)">
+            primaryColor="var(--bg-color2, rgba(255, 255, 255, 0.06))"
+            secondaryColor="var(--bg-color3, rgba(255, 255, 255, 0.10))">
             <rect x="8" y="0" width="353" height="32" />
             <rect x="8" y="36" width="120" height="32" />
             <rect x="8" y="78"  width="50" height="50" />

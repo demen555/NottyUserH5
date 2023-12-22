@@ -102,7 +102,7 @@ export default {
     padding: 98px 16px 0;
 }
 .user-title{
-    color: var(--text-color1);
+    color: var(--text-color1, #FFFFFF);
     text-align: center;
     font-family: PingFang SC;
     font-size: 18px;
@@ -117,7 +117,7 @@ export default {
     cursor: pointer;
     position: relative;
     .title, .placeholder{
-        color: var(--text-color2);
+        color: var(--text-color2,  rgba(255, 255, 255, 0.70));
         font-family: PingFang SC;
         font-size: 16px;
         font-style: normal;
@@ -129,7 +129,7 @@ export default {
         margin-right: 20px;
     }
     .words{
-        color: var(--text-color1);
+        color: var(--text-color1, #FFFFFF);
         text-align: right;
         font-family: PingFang SC;
         font-size: 14px;

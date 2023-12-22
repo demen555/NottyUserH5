@@ -60,7 +60,7 @@ export default {
   padding-top:  88px;
 }
 .user-title{
-    color: var(--text-color1);
+    color: var(--text-color1, #FFFFFF);
     text-align: center;
     font-family: PingFang SC;
     font-size: 18px;
@@ -77,7 +77,7 @@ export default {
     justify-content: space-between;
     position: relative;
     .words{
-        color: var(--text-color2);
+        color: var(--text-color2,  rgba(255, 255, 255, 0.70));
         font-family: PingFang SC;
         font-size: 16px;
         font-style: normal;

@@ -30,9 +30,9 @@
           </div>      
           <client-only>
             <!-- 只加载当前视频id -->
-            <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId">
+            <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId && item.vodPreviewUrl" >
               <videoMp4 v-if="item.vodPreviewUrl" :vodPic="item.vodPic" :videoSrc="item.vodPreviewUrl" ></videoMp4>
-              <videoM3u8 v-else :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8>
+              <!-- <videoM3u8 v-else :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8> -->
             </div>
           </client-only>
           <div class="main-time">{{ item.vodDuration }}</div>
@@ -164,7 +164,7 @@ export default{
   padding: 0 8px;
   height: 24px;
   border-radius: 4px;
-  background: var(--bg-color4);
+  background: var(--bg-color4, rgba(0, 0, 0, 0.6));
   font-size: 14px;
 
   text-align: center;
@@ -175,7 +175,7 @@ export default{
 .main-title{
   font-size: 14px;
   font-weight: 400;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   margin-top: 8px;
   // word-break: break-all;
   word-break: break-word;
@@ -190,7 +190,7 @@ export default{
 .main-btn{
   display: flex;
   align-items: center;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   height: 17px;
   padding-left: 12px;
 }

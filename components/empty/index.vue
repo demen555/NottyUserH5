@@ -21,7 +21,7 @@
   }
   .mian-list-empty-tit{
     font-size: 14px;
-    color: var(--text-color2);
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
     line-height: 19.6px;
   }
 }

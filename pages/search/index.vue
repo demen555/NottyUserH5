@@ -304,15 +304,15 @@ methods: {
 }
 .search-input{
   width: 294px;
-  background-color: var(--bg-color3);
+  background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
   border-radius: 16px;
   text-indent: 2.5em;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   height: 32px;
   border: none;
 }
 input::placeholder{
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }
 .com-sousuo{
   position: absolute;
@@ -331,7 +331,7 @@ input::placeholder{
 }
 .search-cancel{
   font-size: 14px;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }
 .com-close{
   position: absolute;
@@ -351,17 +351,17 @@ input::placeholder{
   align-items: center;
   justify-content: space-between;
   .search-clear {
-    color: var(--text-color2);
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
     font-size: 12px;
   }
 }
 .search-title{
-  color: var(--text-color1);
+  color: var(--text-color1, #FFFFFF);
   font-size: 16px;
   font-weight: bold;
 }
 .search-list-new{
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   font-size: 14px;
   .search-list-li{
     display: flex;
@@ -371,7 +371,7 @@ input::placeholder{
   }
 }
 .search-list{
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   font-size: 12px;
   display: flex;
   flex-wrap: wrap;
@@ -379,22 +379,22 @@ input::placeholder{
 .search-list a{
   margin-top: 8px;
   padding: 3.5px 8px;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   margin-right: 8px;
   font-size: 12px;
   border-radius: 4px;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }
 .search-result{
   font-size: 14px;
-  color: var(--text-color1);
+  color: var(--text-color1, #FFFFFF);
   width: 90%;
   margin: 0 auto;
   padding-top: 55px; //遮盖元素的高度，即导航栏高度
   margin-bottom: -6px;
 }
 .search-result span{
-  color: var(--bg-primary);
+  color: var(--bg-primary, #FF5502);
 }
 .search-page {
   z-index: 10;
