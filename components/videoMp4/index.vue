@@ -1,5 +1,5 @@
 <template>
-    <div :class="['video-m3u8', { 'video-m3u8-img': isCompleted }]">
+    <div :class="['video-m3u8', { 'video-m3u8-img': isCompleted }]" :id="`video-mp4-${vodId}`">
         <van-progress class="video-progress" v-show="!isCompleted" :percentage="progress" />
         <img class="img" v-if="vodPic" :src="vodPic" alt="part1">
         <img class="img" v-else src="~/static/images/cover1.svg" alt="part1">
@@ -12,12 +12,14 @@
           muted="muted" 
           crossorigin="anonymous" 
           @loadedmetadata="handleLoadedMetadata"
-          :src="vodPlayUrl()"></video>
-
+          :src="videoSrc">
+        </video>
+        <!-- :src="videoSrc" -->
         </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
+// https://stream7.iqilu.com/10339/upload_transcode/202002/18/20200218093206z8V1JuPlpe.mp4
 export default {
     name: 'videoM3u8',
     props: {
@@ -64,11 +66,9 @@ export default {
         );
     },
     methods:{
-        vodPlayUrl (){
-          return `https://asd.uw1wieda.com/preview/${this.vodId}.mp4`
-        },
+
         contains(e){
-            let $video = document.querySelector(`#hls-video-${this.vodId}`);
+            let $video = document.querySelector(`#video-mp4-${this.vodId}`);
             if( !$video ){
                 return;
             }
