@@ -20,7 +20,7 @@
         <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         <div class="home-footer">
           <van-pagination class="pagination" v-model="pageInfo.size" :total-items="24" :items-per-page="5" />
-          <div class="home-footer-list" v-for="(item, index) in footerList" :key="index">
+          <div class="home-footer-list" v-for="(item, index) in footerList" :key="index" @click="handleClickPage(item.id)">
             <div class="home-footer-tag">{{ item.name }}</div>
             <div class="home-footer-right">
               <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
@@ -61,7 +61,7 @@ export default{
         size: 20
       },
       footerList: [
-        { name: 'CSAM Policy', id: 'csam'},
+        { name: 'CSAM Policy', id: 'policy-csam'},
         { name: 'CSAM Policy1', id: 'csam1'},
         { name: 'CSAM Policy2', id: 'csam2'},
         { name: 'CSAM Policy3', id: 'csam3'},
@@ -92,6 +92,11 @@ export default{
     return { dataList: data.data }
   },
   methods: {
+    handleClickPage(name){
+      this.$router.push({
+        name
+      })
+    },
     onLoad(){
       this.pageInfo.page += 1
       this.getList();
