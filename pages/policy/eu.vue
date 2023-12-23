@@ -22,7 +22,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'policy-csam',
+  name: 'policy-eu',
   mixins: [commonMinxin],
   data() {
     return {

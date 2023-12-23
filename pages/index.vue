@@ -64,7 +64,7 @@ export default{
         { name: 'CSAM Policy', id: 'policy-csam'},
         { name: 'Terms & Conditions', id: 'policy-terms'},
         { name: 'Content Removal', id: 'policy-content'},
-        { name: 'CSAM Policy3', id: 'csam3'},
+        { name: 'NCC Policy', id: 'policy-ncc'},
         { name: '2257', id: 'policy-2257'},
         { name: 'EU DSA', id: 'policy-eu'},
       ],

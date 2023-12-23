@@ -61,7 +61,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'policy-csam',
+  name: 'policy-terms',
   mixins: [commonMinxin],
   data() {
     return {
