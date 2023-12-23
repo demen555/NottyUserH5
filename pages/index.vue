@@ -62,9 +62,11 @@ export default{
       },
       footerList: [
         { name: 'CSAM Policy', id: 'policy-csam'},
-        { name: 'CSAM Policy1', id: 'csam1'},
-        { name: 'CSAM Policy2', id: 'csam2'},
+        { name: 'Terms & Conditions', id: 'policy-terms'},
+        { name: 'Content Removal', id: 'policy-content'},
         { name: 'CSAM Policy3', id: 'csam3'},
+        { name: '2257', id: 'policy-2257'},
+        { name: 'EU DSA', id: 'policy-eu'},
       ],
       hostname: ''
     }
