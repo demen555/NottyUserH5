@@ -10,7 +10,9 @@
       <div class="police-text-content">Please direct any request you may have regarding §2257 records in relation to any content found on nottyhub, directly to the respective uploader, amateur, producer, studio or account holder of the content (“Verified Uploaders”).</div>
       <div class="police-text-content">For further assistance in communicating with the Verified Uploaders or any questions regarding this notice, please contact nottyhub’s compliance department at support@nottyhub.com.</div>
       <div class="police-title">nottyhub abides by the following strict compliance procedures regarding uploaded content:</div>
-      <div class="police-text-content">All Verified Uploaders must be over eighteen (18) years of age (or age required by their State, jurisdiction or Country if more than 18 years old) and are personally identified and verified by nottyhub at account activation prior to being able to upload, share and sell content on nottyhub;</div>
+      <div class="police-text-content-next">● All Verified Uploaders must be over eighteen (18) years of age (or age required by their State, jurisdiction or Country if more than 18 years old) and are personally identified and verified by nottyhub at account activation prior to being able to upload, share and sell content on nottyhub;</div>
+      <div class="police-text-content-next">● as producer of said content, the Verified Uploader certifies being compliant with record keeping requirements under U.S.C. § 2257 for all content uploaded on nottyhub, and agrees to deliver such documentation promptly upon request;</div>
+      <div class="police-text-content-next">● the uploaded content does not violate nottyhub’s Terms of Service, and any of its related policies namely but without limitation, its Child Sexual Abuse Material Policy, or Non-Consensual Content Policy.</div>
     </div>
   </div>
 </template>
