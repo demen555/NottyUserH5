@@ -366,17 +366,17 @@ export default {
 .dialog-tishi{
   margin-left: 22px;
   margin-top: -20px;
-  color: var(--text-color2);
+  color: var(--text-color2, rgba(255, 255, 255, 0.70));
 }
 .dialog-submit-text{
   width: 80%;
   margin: 0 auto;
   margin-top: 6px;
   text-align: center;
-  color: var(--text-color2);
+  color: var(--text-color2, rgba(255, 255, 255, 0.70));
   line-height: 24px;
   .tip{
-    color: var(--bg-primary);
+    color: var(--bg-primary, #FF5502);
   }
   div{
     display: inline-block;
@@ -386,7 +386,7 @@ export default {
   margin-top: 24px;
   font-size: 14px;
   font-weight: 400;
-  color: var(--text-color2);
+  color: var(--text-color2, rgba(255, 255, 255, 0.70));
   text-align: center;
   font-family: PingFang SC;
   font-style: normal;
@@ -402,7 +402,7 @@ export default {
     margin-top: 8px;
   }
   /deep/ b{
-    color: var(--bg-primary);
+    color: var(--bg-primary, #FF5502);
     font-weight: 400;
   }
 }
