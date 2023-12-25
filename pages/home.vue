@@ -34,9 +34,8 @@ export default{
       dataList: [],
       pageInfo: {
         page: 1,
-        size: 20
-      },
-
+        size: 50
+      }
     }
   },
   created(){
@@ -48,7 +47,7 @@ export default{
     cardLoad
   },
   async asyncData({ $homeApi }) {
-    const res = await $homeApi.requestvodpageHome({ page: 1, size: 20})
+    const res = await $homeApi.requestvodpageHome({ page: 1, size: 50})
     const { data } = res
     return { 
       dataList: data.data 
