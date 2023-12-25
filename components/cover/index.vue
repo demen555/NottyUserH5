@@ -9,11 +9,7 @@
           <div class="main-like-radio" v-if="showCheck" @click.stop>
             <van-checkbox :name="item.vodId"></van-checkbox>
           </div>
-          <div 
-            :class="['main-img', { 'main-img-opacity' : vodId == item.vodId}]" 
-           
-            @mouseenter="mouseenterVideo(item)"
-           >
+          <div :class="['main-img', { 'main-img-opacity' : vodId == item.vodId && item.vodPreviewUrl }]" >
            <van-image
               lazy-load
               :src="item.vodPic"
@@ -30,10 +26,11 @@
           </div>
           <client-only>
             <!-- 只加载当前视频id -->
-            <!-- <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId">
-              <videoM3u8 :vodPic="item.vodPic" :videoSrc="item.vodPlayUrl"></videoM3u8>
-            </div> -->
-          </client-only>
+            <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId && item.vodPreviewUrl">
+              <videoMp4 :vodPic="item.vodPic" :videoSrc="item.vodPreviewUrl" ></videoMp4>
+            </div>
+          </client-only>  
+
           <div class="main-time">{{ item.vodDuration }}</div>
         </div>
         <div class="main-title">{{ item.vodName }}</div>
@@ -56,6 +53,7 @@ import Cover from '@/components/cover'
 import { formatNumber, formatPer } from '@/utils/format.js'
 import { mapGetters } from 'vuex';
 import videoM3u8 from "@/components/videoM3u8"
+import videoMp4 from "@/components/videoMp4"
 import { isPc } from '@/utils/format.js'
 export default{
   props: {
@@ -82,7 +80,8 @@ export default{
   },
   components: {
     Cover,
-    videoM3u8
+    videoM3u8,
+    videoMp4
   },
   methods: {
     formatNumber,
