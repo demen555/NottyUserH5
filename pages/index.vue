@@ -62,8 +62,8 @@ export default{
       },
       footerList: [
         { name: 'CSAM Policy', id: 'policy-csam'},
-        { name: 'Terms & Conditions', id: 'policy-terms'},
         { name: 'Content Removal', id: 'policy-content'},
+        { name: 'DMCA', id: 'policy-terms'},
         { name: 'NCC Policy', id: 'policy-ncc'},
         { name: '2257', id: 'policy-2257'},
         { name: 'EU DSA', id: 'policy-eu'},
