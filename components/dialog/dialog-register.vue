@@ -1,11 +1,11 @@
 <template>
   <van-popup v-model="show">
+    <div class="dialog-top-img">
+      <div class="dialog-top-img-close" @click="show = false"><img :src="themeChecked ? require('~/static/images/home_top_guanbi_1.svg'): require('~/static/images/home_top_guanbi.svg')"></div>
+      <div class="logo-pop" :class="themeChecked? 'logo-black': 'logo-white'"></div>
+      <div class="dialog-top-img-title">{{ $t('str_reg') }}</div>
+    </div>
     <div class="dialog">
-      <div class="dialog-top">
-        <div></div>
-        <div class="dialog-title">{{ $t('str_reg') }}</div>
-        <div class="dialog-close" @click="show = false"><img :src="themeChecked ? require('~/static/images/home_top_guanbi_1.svg'): require('~/static/images/home_top_guanbi.svg')" alt="home_top_guanbi"></div>
-      </div>
       <div class="dialog-form">
         <!-- <div class="error-msg">123</div> -->
         <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
@@ -40,11 +40,15 @@
       </div>
       <div class="dialog-btns" @click="handleSubmit">
         {{ $t('str_register') }}
-        <van-loading class="user-icon" type="spinner" v-show="showLoading" /></div>
-      <div class="dialog-submits">
-        <!-- <div @click="show = false">{{ $t('str_back_home') }}</div> -->
-        <!-- <div class="dialog-line"></div> -->
-        <div @click="handleLogin"> {{ $t('str_login_account1') }}<span class="go-login">{{ $t('str_login_account2') }}</span></div>
+        <van-loading class="user-icon" type="spinner" v-show="showLoading" />
+      </div>
+      <div class="dialog-submit-text">
+        <div>{{ $t('str_login_text3') }}</div>
+        <div @click="handleRegister" class="tip">{{ $t('str_login_account2') }}</div>
+      </div>
+      <div class="land_footer">
+          <p class="com">  © {{ hostname }}, 2023 </p>
+          <img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta">
       </div>
     </div>
   </van-popup>
@@ -78,10 +82,14 @@
         pwd: {
           showError: false,
           errorMsg: ''
-        }
+        },
+        hostname: ''
       }
     },
     created(){
+      if(process.client){
+        this.hostname = window.location.hostname
+      }
       this.initCode()
     },
     methods: {
@@ -216,9 +224,54 @@
   background-color: var(--dialog-bg-color, #18181C);
   width: 343px;
   height: auto;
-  padding: 16px;
+  // padding: 16px;
   border-radius: 16px;
   overflow: hidden;
+}
+.dialog-top-img{
+  // position: absolute;
+  // left: 0;
+  // right: 0;
+  // top: 0;
+  height: 194px;
+  background-image: url('~/static/images/login_top.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  .dialog-top-img-close{
+    position: absolute;
+    right: 16px;
+    top: 16px
+  }
+  .dialog-top-img-title{
+    position: absolute;
+    font-size: 24px;
+    text-align: center;
+    top: 148px;
+    left: 0;
+    right: 0;
+  }
+}
+.logo-pop{
+  width: 108px;
+  height: 24px;
+  position: absolute;
+  top: 120px;
+  left: 119px;
+}
+.logo-black{
+  width: 108px;
+  height: 24px;
+  background-image: url('~~/static/images/logo-black.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.logo-white{
+  width: 108px;
+  height: 24px;
+  background-image: url('~~/static/images/logo-white.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .error-msg{
   color: #EA3D32;
@@ -285,7 +338,7 @@
     top: 8px
   }
   .dialog-btns{
-    width: 90%;
+    width: 200px;
     margin: 0 auto;
     height: 40px;
     border-radius: 20px;
@@ -307,7 +360,7 @@
     }
 }
   .dialog-submits{
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     font-size: 14px;
     color: var(--text-color2,  rgba(255, 255, 255, 0.70));
@@ -356,5 +409,48 @@
   z-index: 2;
   color: var(--bg-color1, #0E0E0F);
   letter-spacing: 2px;
+}
+.dialog-tishi{
+  margin-left: 22px;
+  margin-top: -20px;
+  color: var(--text-color2);
+}
+.dialog-submit-text{
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 6px;
+  text-align: center;
+  color: var(--text-color2);
+  line-height: 24px;
+  .tip{
+    color: var(--bg-primary);
+  }
+  div{
+    display: inline-block;
+  }
+}
+.land_footer{
+  margin-top: 24px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-color2);
+  text-align: center;
+  font-family: PingFang SC;
+  font-style: normal;
+  line-height: normal;
+  padding: 0 !important;
+  margin-bottom: 16px;
+  .com {
+    margin-top: 16px;
+  }
+  .rta {
+    width: 63px;
+    height: 24px;
+    margin-top: 8px;
+  }
+  /deep/ b{
+    color: var(--bg-primary);
+    font-weight: 400;
+  }
 }
 </style>
