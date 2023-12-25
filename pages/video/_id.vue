@@ -200,17 +200,18 @@ export default {
         }
     },
 
-    async asyncData({ $videoApi, $homeApi, params }) {
+    async asyncData({ $videoApi, params }) {
         const vodChangePage = {
             size: 20,
             page: 1
         }
         const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
-        const res = await $homeApi.requestvodpage({ 
+        const res = await $videoApi.requestVodChange({ 
             ...vodChangePage,
             typeId: res1.data.typeId,
             excludes: params.id,
         })
+        console.log(res, 'requestVodChange')
         return { 
             videoInfo: res1.data,
             vodChange: res.data.data,
@@ -370,7 +371,7 @@ export default {
             excludes: this.videoInfo.vodId,
             ...this.vodChangePage
           });
-            this.$homeApi.requestvodpage({
+            this.$videoApi.requestVodChange({
               typeId: this.videoInfo.typeId,
               excludes: this.videoInfo.vodId,
               ...this.vodChangePage

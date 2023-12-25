@@ -37,7 +37,7 @@ let Api = {
   video: {
     vodComment: "/api/v1/vod/detail", //  视频详情
     vodComment1: "/api/v1/vod/detail", //  视频详情v1.2.0
-    vodChange: "/api/v1/vod/change",  // 相关视频
+    vodChange: "/api/v1/vod/related",  // 相关视频 related
     vodReview: "/api/v1/comment/comments", // 评论列表
     voddown: "/api/v1/comment/dislike", // 踩
     voddowncancel: "/api/v1/comment/dislike", // 取踩
