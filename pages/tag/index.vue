@@ -75,14 +75,15 @@ export default{
       });
       console.log(item)
       this.set_tagid(item.id)
-      this.$router.push({
+
+      this.$router.push(this.localePath({
         name: 'type-id-name',
         params:{
           id: item.id,
           name: item.name,
           refresh: true,
         },
-      });
+      }));
     },
     handleClickTagName(item, index){
       this.tagIndex = index

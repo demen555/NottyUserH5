@@ -8,7 +8,9 @@ export default {
     }
   },
   ssr: true,
-  
+  router: {
+    middleware: 'redirect'
+  },
   hooks: {
     'render:route': (url, result) => {
       result.html = result.html.replace(/data-n-head=\"ssr\"/gi,'')
@@ -17,7 +19,7 @@ export default {
   head: {
     title: 'Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube | Nottyhub.com',
     htmlAttrs: {
-      lang: 'pt_PT'
+      lang: 'pt'
     },
     script: [
       {
@@ -129,24 +131,24 @@ export default {
   i18n: {
     locales: [
       {
-        code: 'en_US',
+        code: 'en',
         iso: 'en-US',
         name: 'English',
       },
       {
-        code: 'pt_PT',
+        code: 'pt',
         iso: 'pt-PT',
         name: 'Português',
       },
     ],
-    strategy: 'no_prefix',
-    defaultLocale: 'pt_PT',
+    strategy: 'prefix',
+    defaultLocale: 'pt',
     vueI18n: {
-      fallbackLocale: 'pt_PT',
+      fallbackLocale: 'pt',
       lazy: true,
       messages: {
-        en_US: require('./locales/en_US.json'),
-        pt_PT: require('./locales/pt_PT.json'),
+        en: require('./locales/en.json'),
+        pt: require('./locales/pt.json'),
       },
     },
     detectBrowserLanguage: false,

@@ -25,7 +25,7 @@
       <div class="dialog-submits">
         <div @click="handleRegister">{{ $t('str_reg_user') }}</div>
         <div class="dialog-line"></div>
-        <div @click="$router.push('/user/sendEmail')">{{ $t('str_pwd_fog') }}</div>
+        <div @click="$router.push(localePath('user-sendEmail'))">{{ $t('str_pwd_fog') }}</div>
       </div>
     </div>
   </van-popup>
@@ -138,7 +138,7 @@ export default {
           this.set_userinfo({...user, ...info})
           this.$toast(this.$t('toast4'))
           this.show = false
-          this.$router.push("/")
+          this.$router.push(this.localePath('home'))
         }
       } catch (error) {
         this.$toast(error.message)

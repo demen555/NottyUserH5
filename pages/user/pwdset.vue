@@ -3,7 +3,7 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <Nav :title="$t('str_setting')" text></Nav>
     <div class="pwd-set">
-        <div class="user-item" @click="goPages('/user/pwdChange')">
+        <div class="user-item" @click="goPages('user-pwdChange')">
             <span class="words"> {{ $t('str_change_pwd') }} </span>
             <i :class="themeChecked?'icon': 'icon-white'"></i>
         </div>
@@ -34,9 +34,7 @@ export default {
             if(type){
                 return
             }
-            this.$router.push({
-                name: page
-            })
+            this.$router.push(this.localePath(page))
         },
         onRefresh(){
           console.log('onRefresh')
@@ -48,7 +46,7 @@ export default {
                     this.$toast(this.$t('toast7'))
                     this.set_userinfo({})
                     this.clearAccessToken()
-                    this.$router.push("/")
+                    this.$router.push(this.localePath('home'))
                 }
             } catch (error) {
                 console.error(error)

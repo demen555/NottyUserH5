@@ -42,14 +42,14 @@ export default{
     ...mapActions(['set_detail', 'set_tagid']),
     handleClickTag(item){
       this.set_tagid(item.id)
-      this.$router.push({
+      this.$router.push(this.localePath({
         name: 'type',
         params:{
           id: item.id,
           name: item.name,
           refresh: true,
         }
-      })
+      }))
     }
   }
 }

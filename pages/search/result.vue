@@ -78,9 +78,7 @@ methods: {
     }, 500);
   },
   handleGoHome(){
-    this.$router.push({
-      name: 'home'
-    })
+    this.$router.push(this.localePath('home'))
   }
 }
 }
