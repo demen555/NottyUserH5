@@ -85,7 +85,8 @@ export default {
             this.$router.go(-1);
         },
         validatorPassword(){
-            let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,20}$/;
+            // let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,20}$/;
+            let reg = /^\S{6,}$/;
             if(!reg.test(this.form.newPassword)){
                 this.newPassword.showError = true
                 this.newPassword.errorMsg = this.$t('str_validator_pwd')
@@ -95,7 +96,8 @@ export default {
             }
         },
         validatorPassword1(){
-            let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,20}$/;
+            // let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,20}$/;
+            let reg = /^\S{6,}$/;
             if(!reg.test(this.form.oldPassword)){
                 this.oldPassword.showError = true
                 this.oldPassword.errorMsg = this.$t('str_validator_pwd')
@@ -105,7 +107,8 @@ export default {
             }
         },
         validatorPassword2(){
-            let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,20}$/;
+            // let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,20}$/;
+            let reg = /^\S{6,}$/;
             if(!reg.test(this.form.newPassword1)){
                 this.newPassword1.showError = true
                 this.newPassword1.errorMsg = this.$t('str_validator_pwd')
