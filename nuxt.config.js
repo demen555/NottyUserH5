@@ -159,6 +159,7 @@ export default {
   },
 
   build: {
+    extractCSS: true,
     // 配置less
     loaders: {
       less: {
