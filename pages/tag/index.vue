@@ -77,7 +77,7 @@ export default{
       this.set_tagid(item.id)
 
       this.$router.push(this.localePath({
-        name: 'type-id-name',
+        name: 'tag-name',
         params:{
           id: item.id,
           name: item.name,
