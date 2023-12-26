@@ -671,7 +671,7 @@ export default {
         // 标签调转
         handleClickType(item){
             this.$router.push(this.localePath({
-                name: 'type-id-name',
+                name: 'tag-name',
                 params:{
                     id: item.id,
                     name: item.name,
