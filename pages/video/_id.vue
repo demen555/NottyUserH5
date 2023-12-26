@@ -3,8 +3,10 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <div class="main-video">
         <div class="video-container"> 
-
-            <videoContainer v-if="videoInfo.vodPlayUrl" :videoInfo="videoInfo"></videoContainer>
+            <client-only v-if="videoInfo.vodPlayUrl">
+                <videoContainer  :videoInfo="videoInfo"></videoContainer>
+            </client-only>
+            
             <van-loading 
                 color="var(--bg-primary, #FF5502)" 
                 text-color="var(--bg-primary, #FF5502)" 
@@ -417,9 +419,9 @@ export default {
 
         // 点赞 取消点赞 
         setVodUp(){
-            if( !this.isLogin ){
-                return this.goLogin()
-            }
+            // if( !this.isLogin ){
+            //     return this.goLogin()
+            // }
             const vodId = this.$route.params.id;
             const isUpVod = this.isUpVod(this.videoStatus);
             if( this.onClick ){
@@ -430,7 +432,7 @@ export default {
                 gtag('event', 'gt4_click_down', {
                     down_name: this.videoInfo.vodName,
                 });
-                if( this.isLogin ){
+                // if( this.isLogin ){
                     this.$set(this.videoStatus, "up", false)
                     this.$videoApi.requestVodupcancel({
                       vodId: vodId,
@@ -446,21 +448,21 @@ export default {
                     }).finally( () => {
                         this.onClick = false
                     })
-                }else{
-                    this.$store.commit("DEL_UPVOD", vodId)
-                    this.onClick = false
-                }
+                // }else{
+                //     this.$store.commit("DEL_UPVOD", vodId)
+                //     this.onClick = false
+                // }
             }else{
                 gtag('event', 'gt4_click_up', {
                     up_name: this.videoInfo.vodName,
                 });
-                if( this.isLogin ){
+                // if( this.isLogin ){
                     this.$set(this.videoStatus, "down", false);
                     this.$set(this.videoStatus, "up", true);
-                }else{
-                    this.$store.commit("DEL_DOWNVOD", vodId)
-                    this.$store.commit("UPDATE_UPVOD", this.videoInfo )
-                }
+                // }else{
+                //     this.$store.commit("DEL_DOWNVOD", vodId)
+                //     this.$store.commit("UPDATE_UPVOD", this.videoInfo )
+                // }
                 this.$videoApi.requestVodup({
                   vodId: this.$route.params.id,
                 }).then(res => {
@@ -525,9 +527,9 @@ export default {
 
         // 点踩
         setVodDown(){
-            if( !this.isLogin ){
-                return this.goLogin()
-            }
+            // if( !this.isLogin ){
+            //     return this.goLogin()
+            // }
             const vodId = this.$route.params.id;
             const isdownVod = this.isdownVod(this.videoStatus);
             if( this.onClick ){
@@ -536,7 +538,7 @@ export default {
             this.onClick = true;
             console.log( isdownVod , this.isLogin )
             if( isdownVod ){
-                if( this.isLogin ){
+                // if( this.isLogin ){
                     this.$set(this.videoStatus, "down", false)
                     this.$videoApi.requestVoddowncancel({
                       vodId: vodId,
@@ -552,13 +554,13 @@ export default {
                     }).finally( () => {
                         this.onClick = false;
                     })
-                }else{
-                    this.$store.commit("DEL_DOWNVOD", vodId)
-                    this.onClick = false
-                }
+                // }else{
+                //     this.$store.commit("DEL_DOWNVOD", vodId)
+                //     this.onClick = false
+                // }
             }else{
                 
-                if( this.isLogin ){
+                // if( this.isLogin ){
                     this.$set(this.videoStatus, "up", false);
                     this.$set(this.videoStatus, "down", true);
                     this.$videoApi.requestVoddown({
@@ -575,11 +577,11 @@ export default {
                         this.onClick = false
                     })
 
-                }else{
-                    this.$store.commit("DEL_UPVOD", vodId)
-                    this.$store.commit("UPDATE_DOWNVOD", this.videoInfo )
-                    this.onClick = false
-                }
+                // }else{
+                //     this.$store.commit("DEL_UPVOD", vodId)
+                //     this.$store.commit("UPDATE_DOWNVOD", this.videoInfo )
+                //     this.onClick = false
+                // }
 
             }
         },
@@ -651,20 +653,22 @@ export default {
 
         // 判断是否点赞
         isUpVod(videoInfo){
-            if( this.isLogin ){
-                return videoInfo.up
-            }else{
-                return this.upvodIds.includes(Number(videoInfo.vodId))
-            }
+            // if( this.isLogin ){
+            //     return videoInfo.up
+            // }else{
+            //     return this.upvodIds.includes(Number(videoInfo.vodId))
+            // }
+            return videoInfo.up
         },
 
         // 判断是否点踩
         isdownVod(videoInfo){
-            if( this.isLogin ){
-                return videoInfo.down
-            }else{
-                return this.downvodIds.includes(Number(videoInfo.vodId))
-            }
+            // if( this.isLogin ){
+            //     return videoInfo.down
+            // }else{
+            //     return this.downvodIds.includes(Number(videoInfo.vodId))
+            // }
+            return videoInfo.down
         },
 
         // 标签调转
