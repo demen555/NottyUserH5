@@ -33,6 +33,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default {
+    name: "user-sendEmail",
     mixins: [userMinxin, commonMinxin],
     data(){
         return {

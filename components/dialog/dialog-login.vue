@@ -30,7 +30,7 @@
         <div>{{ $t('str_login_text1') }}</div>
         <div @click="handleRegister" class="tip">{{ $t('str_reg_user') }}</div>
         <div>{{ $t('str_login_text2') }}</div>
-        <div @click="$router.push('/user/sendEmail')" class="tip">{{ $t('str_pwd_fog') }}</div>
+        <div @click="$router.push(localePath('user-sendEmail'))" class="tip">{{ $t('str_pwd_fog') }}</div>
       </div>
       <div class="land_footer">
           <p class="com">  © {{ hostname }}, 2023 </p>
