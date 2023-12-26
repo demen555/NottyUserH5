@@ -16,12 +16,12 @@
         <div class="error-msg" v-show="user.showError">{{ user.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
           <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_zhanghao_1.svg'): require('~/static/images/login_zhanghao.svg')" alt=""></div>
-          <input @blur="validatorUser" v-model="form.username" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_num')" type="text">
+          <input @blur="validatorUser" v-model="form.username" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_num') +'(' +  $t('str_validator_username') +')'" type="text">
         </div>
         <div class="error-msg" v-show="pwd.showError">{{ pwd.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
           <div class="dialog-img img-mima"><img  :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
-          <input @blur="validatorPwd" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd')">
+          <input @blur="validatorPwd" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd') +'(' +  $t('str_validator_username') +')'">
         </div>
         <!-- <div class="user-center-info-input dialog-input">
           <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
@@ -108,7 +108,8 @@
         }
       },
       validatorUser(){
-        let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,10}$/;
+        // let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,10}$/;
+        let reg = /^\S{6,}$/;
         if(!reg.test(this.form.username)){
           this.user.showError = true
           this.user.errorMsg = this.$t('str_validator_username')
@@ -118,7 +119,8 @@
         }
       },
       validatorPwd(){
-        let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,20}$/;
+        // let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,20}$/;
+        let reg = /^\S{6,}$/;
         if(!reg.test(this.form.password)){
           this.pwd.showError = true
           this.pwd.errorMsg = this.$t('str_validator_pwd')
@@ -343,7 +345,7 @@
     height: 40px;
     border-radius: 20px;
     background-color:var(--bg-primary);
-    color: var(--dialog-text-color);
+    color: var(--text-color1-new);
     text-align: center;
     line-height: 40px;
     font-size: 16px;

@@ -15,9 +15,8 @@
         <div class="error-msg" v-show="password.showError">{{ password.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
           <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
-          <input @blur="validatorPassword" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd')">
+          <input @blur="validatorPassword" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd') +'(' +  $t('str_validator_username') +')'">
         </div>
-        <div class="error-msg" v-show="password.showError">{{ password.errorMsg }}</div>
         <div class="user-center-info-input dialog-checkbox">
           <van-checkbox v-model="isLocale"></van-checkbox>
           <div class="dialog-tishi">Remember me on this computer(not recommended on public or shared computers)</div>
@@ -91,6 +90,7 @@ export default {
     ...mapActions(['set_userinfo','setAccessToken']),
     validatorEmail(){
       const myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/; 
+      // const myreg = /^\S{6,}$/; 
       if(!myreg.test(this.form.email)){
         this.email.showError = true
         this.email.errorMsg = this.$t('str_error_email')
@@ -100,7 +100,8 @@ export default {
       }
     },
     validatorPassword(){
-      let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,20}$/;
+      // let reg = /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,20}$/;
+      let reg = /^\S{6,}$/;
       if(!reg.test(this.form.password)){
         this.password.showError = true
         this.password.errorMsg = this.$t('str_validator_pwd')
@@ -311,7 +312,7 @@ export default {
     height: 40px;
     border-radius: 20px;
     background-color: var(--bg-primary);
-    color: var(--dialog-text-color);
+    color: var(--text-color1-new);
     text-align: center;
     line-height: 40px;
     font-size: 16px;

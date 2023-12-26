@@ -496,8 +496,8 @@ header{
   height: 24px;
 }
 .header-logo{
-  width: 86px;
-  height: 28px;
+  width: 108px;
+  height: 24px;
 }
 .header-logo img{
   width: 100%;
@@ -508,15 +508,15 @@ header{
   font-size: 15px;
 }
 .logo-black{
-  width: 86px;
-  height: 28px;
+  width: 108px;
+  height: 24px;
   background-image: url('~~/static/images/logo-black.svg');
   background-repeat: no-repeat;
   background-size: cover;
 }
 .logo-white{
-  width: 86px;
-  height: 28px;
+  width: 108px;
+  height: 24px;
   background-image: url('~~/static/images/logo-white.svg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -725,7 +725,7 @@ header{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-43px, -14px);
+    transform: translate(-54px, -12px);
   }
 }
 
@@ -737,8 +737,8 @@ header{
   justify-content: space-between;
   margin-bottom: 10px;
   .logo-pop{
-    width: 86px;
-    height: 28px;
+    width: 108px;
+    height: 24px;
   }
   .close-pop{
     width: 24px;

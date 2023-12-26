@@ -37,8 +37,8 @@
 "str_user_login": "User login",
 "str_login": "Log in",
 "str_register_num": "Sign Up",
-"str_validator_username": "6~10 digits + letters",
-"str_validator_pwd": "6~20 digits + letters",
+"str_validator_username": "6 + Characters",
+"str_validator_pwd": "6 + Characters",
 "str_validator_pwd_same": "Password must not match username",
 
 "str_no_login_no_his": "You have not logged in yet, please log in and check the history",
