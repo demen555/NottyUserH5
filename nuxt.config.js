@@ -56,7 +56,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui' },
       { name: 'theme-color', content: '#1E1E1E' },
       { name: 'format-detection', content: 'telephone=no' },
-
+      { name: 'robots', content: 'index, follow' },
 
       { name: 'title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
       { name: 'description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
@@ -85,7 +85,10 @@ export default {
       { rel: "apple-touch-icon", sizes: "120x120", href: "/linklogo/icon-60@2x.png"},
       { rel: "apple-touch-icon", sizes: "128x128", href: "/linklogo/icon-64@2x.png"},
       { rel: "apple-touch-icon", sizes: "152x152", href: "/linklogo/icon-76@2x.png"},
-      { rel: "manifest", href: "/site.webmanifest" }
+      { rel: "manifest", href: "/site.webmanifest" },
+
+      { rel: "canonical", href: "https://nottyhub.com/" },
+
     ]
   },
 
