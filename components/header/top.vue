@@ -36,7 +36,7 @@
           </div>
           <div v-show="!showExpand">
             <nuxt-link :to="localePath({
-              name: 'type-id-name',
+              name: 'tag-name',
               params: { id: tag.id, name: tag.name }
             })"  class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" >
               <div class="nav-menu-left">
