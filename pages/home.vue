@@ -133,18 +133,18 @@ methods: {
 overflow: visible;
 }
 .color{
-  color: var(--text-color3);
+  color: var(--text-color3, rgba(96, 105, 128, 0.40));
   font-size: 15px;
 }
 .home-footer{
   padding: 0 12px;
-  color: var(--text-color2);
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   // position: fixed;
   // bottom: 0;
   // left: 0;
   // right: 0;
   // z-index: 9999;
-  background-color: var(--bg-color1);
+  background-color: var(--bg-color1, #0E0E0F);
   // padding-bottom: 24px;
 }
 .pagination{
