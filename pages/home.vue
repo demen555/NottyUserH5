@@ -43,7 +43,7 @@ data() {
     dataList: [],
     pageInfo: {
       page: 1,
-      size: 20
+      size: 60
     },
     footerList: [
       { name: 'CSAM Policy', id: 'policy-csam'},
