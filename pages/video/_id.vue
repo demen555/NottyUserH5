@@ -243,8 +243,8 @@ export default {
         },
 
         // 点赞 踩赞 百分比
-        vodPercent({ videoStatus }){
-            const { vodUp, vodDown } = videoStatus
+        vodPercent(){
+            const { vodUp, vodDown } = this.videoInfo
             const all = Number(vodUp) + Number(vodDown);
 
             return {
