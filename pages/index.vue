@@ -18,11 +18,13 @@
     <div class="video-list paddingTop52" >
       <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
       <div class="home-footer">
-        <van-pagination class="pagination" v-model="pageInfo.page" :total-items="pageInfo.total" :show-page-size="4" force-ellipses >
+        <!-- <van-pagination class="pagination" @change="handleChanege" v-model="pageInfo.page" :total-items="pageInfo.total" pages="[1,2,3,4,5]" :page-count="pageInfo.total" :show-page-size="4" force-ellipses >
           <template #prev-text>
             Prev
           </template>
-        </van-pagination>
+          <template #page="{ number,text, active }">{{ handlePage(number, text, active) }}</template>
+        </van-pagination> -->
+        <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
       </div>
     </div>
   </div>
@@ -33,6 +35,7 @@ import HeaderTop from '~/components/header/top.vue'
 import Cover from '~/components/cover'
 import cardLoad from "~/components/skeleton/cardLoad.vue"
 import CODES from "~/plugins/enums/codes"
+import vPagination from '~/components/pagination/index.vue'
 export default{
 data() {
   return {
@@ -43,7 +46,7 @@ data() {
     dataList: [],
     pageInfo: {
       page: 1,
-      size: 20
+      size: 10
     },
     footerList: [
       { name: 'CSAM Policy', id: 'policy-csam'},
@@ -71,7 +74,8 @@ created(){
 components: {
   HeaderTop,
   Cover,
-  cardLoad
+  cardLoad,
+  vPagination
 },
 watch: {
   ['pageInfo.page'](val){
@@ -88,6 +92,12 @@ watch: {
 //   return { dataList: data.data }
 // },
 methods: {
+  handlePage(val){
+    this.pageInfo.page = val
+    this.getList();
+    this.handleScroll()
+    console.log(val, 'page')
+  }, 
   handleScroll() {
     if(process.client){
       const target = document.querySelector('#home-top')
@@ -135,6 +145,9 @@ overflow: visible;
 .color{
   color: var(--text-color3);
   font-size: 15px;
+}
+.video-list{
+  // touch-action: none
 }
 .home-footer{
   padding: 0 12px;
