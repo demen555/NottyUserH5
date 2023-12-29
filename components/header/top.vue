@@ -77,7 +77,7 @@
             <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
             <div class="nav-text">{{ $t('str_tianjia_zhupin') }}</div>
           </div>
-          <div class="nav-menu-btn nav-and" @click="downloadApp">
+          <div v-if="false" class="nav-menu-btn nav-and" @click="downloadApp">
             <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_android_1.svg'): require('~/static/images/my_gn_xz_android.svg')"></div>
             <div class="nav-text">{{ $t('str_down_load') }} </div>
           </div>
