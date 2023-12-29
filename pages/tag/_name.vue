@@ -80,7 +80,9 @@ methods: {
       this.loading = true
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
     
-      params.tagId = this.detail.id //标签
+      // params.tagId = this.detail.id //标签
+      params.tagName = this.detail.name //标签
+
 
       const { code, data } = await this.$homeApi.requestvodpage(params)
       if(code === CODES.SUCCESS){
