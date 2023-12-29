@@ -1,13 +1,13 @@
 <template>
   <nav>
     <ul class="pagination">
-      <div :class="{ 'disabled': current == 1 }"><a class="pagination__prev" href="javascript:;" @click="setCurrent(current - 1)"> « </a></div>
-      <div :class="{ 'disabled': current == 1 }"><a href="javascript:;" @click="setCurrent(1)"> 1st </a></div>
+      <div :class="{ 'disabled': current == 1 }"><a class="pagination__prev" href="javascript:;" @click="setCurrent(current - 1)"> < </a></div>
+      <div :class="{ 'disabled': current == 1 }"><a href="javascript:;" @click="setCurrent(1)"> « </a></div>
       <div v-for="p in grouplist" :class="{ 'active': current == p.val }">
         <a @click="setCurrent(p.val)">{{ p.text }}</a>
       </div>
-      <div :class="{ 'disabled': current == page }"><a href="javascript:;" @click="setCurrent(page)"> Lst </a></div>
-      <div :class="{ 'disabled': current == page }"><a class="pagination__next" href="javascript:;" @click="setCurrent(current + 1)"> »</a></div>
+      <div :class="{ 'disabled': current == page }"><a href="javascript:;" @click="setCurrent(page)"> » </a></div>
+      <div :class="{ 'disabled': current == page }"><a class="pagination__next" href="javascript:;" @click="setCurrent(current + 1)"> > </a></div>
     </ul>
   </nav>
 </template>
