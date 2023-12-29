@@ -37,8 +37,8 @@
 "str_user_login": "User login",
 "str_login": "Log in",
 "str_register_num": "Sign Up",
-"str_validator_username": "6~10 digits + letters",
-"str_validator_pwd": "6~20 digits + letters",
+"str_validator_username": "6 + Characters",
+"str_validator_pwd": "6 + Characters",
 "str_validator_pwd_same": "Password must not match username",
 
 "str_no_login_no_his": "You have not logged in yet, please log in and check the history",
@@ -177,7 +177,7 @@
 "str_change_lang": "Language",
 "str_change_cuy": "Country",
 "str_change_bg": "Theme",
-"str_no_login": "Sign in to NottyHub",
+"str_no_login": "Member Sign In",
 "str_reg_user": "Sign Up",
 "str_pwd_fog": "Forgot password?",
 "str_reg": "Sign Up for Free",
@@ -204,6 +204,10 @@
 "str_location_dk": "Denmark",
 "str_location_fl": "Finland",
 "str_location_nz": "New Zealand",
+"str_login_text1": "Don't have an account yet?",
+"str_login_text3": "Already have an account?",
+"str_login_text2": "here",
+"str_login_tip": "Remember me on this computer(not recommended on public or shared computers)",
 
 
 "str_just": "Recently",

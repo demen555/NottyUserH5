@@ -39,8 +39,8 @@
 "str_user_login": "Login do usuário",
 "str_login": "Conecte-se",
 "str_register_num": "Registar Conta",
-"str_validator_username": "6~10 dígitos + letras",
-"str_validator_pwd": "6~20 dígitos + letras",
+"str_validator_username": "6 + Caracteres",
+"str_validator_pwd": "6 + Caracteres",
 "str_validator_pwd_same": "A senha não deve corresponder ao nome de usuário",
 
 "str_no_login_no_his": "Você ainda não fez login, faça login e verifique o histórico",
@@ -209,6 +209,10 @@
 "str_location_dk": "Dinamarca",
 "str_location_fl": "Finlândia",
 "str_location_nz": "Nova Zelândia",
+"str_login_text1": "Não tem uma conta ainda?",
+"str_login_text3": "Já tem uma conta?",
+"str_login_text2": "aqui",
+"str_login_tip": "Lembrar de mim neste computador(não recomendado em computadores públicos ou compartilhados)",
 
 "str_just": "Recentemente",
 "str_today": "Hoje",
