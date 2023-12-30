@@ -19,7 +19,7 @@
         </div>
         <div class="user-center-info-input dialog-checkbox">
           <van-checkbox v-model="isLocale"></van-checkbox>
-          <div class="dialog-tishi">Remember me on this computer(not recommended on public or shared computers)</div>
+          <div class="dialog-tishi">{{ $t('str_login_tip') }}</div>
         </div>
       </div>
       <div class="dialog-btns" @click.enter="handleSubmit">
