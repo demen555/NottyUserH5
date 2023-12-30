@@ -222,7 +222,7 @@ export default {
       
       languageList: langMap, // 语言数据
       language: this.$i18n.locale, //语言
-      location:  (process.client ? localStorage.getItem('location') : 'US1') || 'US1', //国家
+      location: 'US1', //国家
       locationList: areaList, // 国家数据
       themeChecked: true, // 主题切换
       typeList: [],  // 分类数据
@@ -248,6 +248,7 @@ export default {
     if(process.client){
       document.documentElement.setAttribute('data-theme', this.theme)
       this.$nextTick(() => {
+        this.location = localStorage.getItem('location') || 'US1'
         !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
       })
     }
