@@ -200,24 +200,24 @@ export default {
         }
     },
 
-    async asyncData({ $videoApi, params }) {
-        const vodChangePage = {
-            size: 20,
-            page: 1
-        }
-        const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
-        const res = await $videoApi.requestVodChange({ 
-            ...vodChangePage,
-            typeId: res1.data.typeId,
-            excludes: params.id,
-        })
-        console.log(res, 'requestVodChange')
-        return { 
-            videoInfo: res1.data,
-            vodChange: res.data.data,
-            vodChangePage: vodChangePage
-        }
-    },
+    // async asyncData({ $videoApi, params }) {
+    //     const vodChangePage = {
+    //         size: 20,
+    //         page: 1
+    //     }
+    //     const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
+    //     const res = await $videoApi.requestVodChange({ 
+    //         ...vodChangePage,
+    //         typeId: res1.data.typeId,
+    //         excludes: params.id,
+    //     })
+    //     console.log(res, 'requestVodChange')
+    //     return { 
+    //         videoInfo: res1.data,
+    //         vodChange: res.data.data,
+    //         vodChangePage: vodChangePage
+    //     }
+    // },
 
     computed:{
         ...mapGetters([

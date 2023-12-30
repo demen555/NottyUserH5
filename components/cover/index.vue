@@ -14,7 +14,7 @@
            <van-image
               lazy-load
               :src="item.vodPic"
-              :alt="item.vodName">
+              :alt="item.vodName || '-'">
             <template slot="loading">
               <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_black">
             </template>
