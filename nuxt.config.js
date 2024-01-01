@@ -19,7 +19,7 @@ export default {
   head: {
     title: 'Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube | Nottyhub.com',
     htmlAttrs: {
-      lang: 'pt'
+      lang: 'en'
     },
     script: [
       {
@@ -145,9 +145,9 @@ export default {
       },
     ],
     strategy: 'prefix',
-    defaultLocale: 'pt',
+    defaultLocale: 'en',
     vueI18n: {
-      fallbackLocale: 'pt',
+      fallbackLocale: 'en',
       lazy: true,
       messages: {
         en: require('./locales/en.json'),
