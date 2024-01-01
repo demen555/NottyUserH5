@@ -23,12 +23,12 @@ export default {
     },
     script: [
       {
-        src: "https://cdn.jsdelivr.net/npm/hls.js@0.14.6/dist/hls.min.js",
+        src: "https://cdn.dasao88.com/cdn/hls.min.js",
         async: true,
         mode: 'client'
       },
       {
-        src: "https://cdn.jsdelivr.net/npm/dplayer@1.26.0/dist/DPlayer.min.js",
+        src: "https://cdn.dasao88.com/cdn/DPlayer.min.js",
         async: true,
         mode: 'client'
       },
