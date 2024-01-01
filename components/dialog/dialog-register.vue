@@ -344,8 +344,8 @@
     margin: 0 auto;
     height: 40px;
     border-radius: 20px;
-    background-color:var(--bg-primary, #FFE500);
-    color: var(--text-color1-new, #181E2A);
+    background-color:var(--bg-primary, #FF5502);
+    color: var(--dialog-text-color, #FFFFFF);
     text-align: center;
     line-height: 40px;
     font-size: 16px;
@@ -425,7 +425,7 @@
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
   line-height: 24px;
   .tip{
-    color:var(--bg-primary, #FFE500);
+    color: var(--bg-primary, #FF5502);
   }
   div{
     display: inline-block;
@@ -451,7 +451,7 @@
     margin-top: 8px;
   }
   /deep/ b{
-    color: var(--bg-primary, #FFE500);
+    color: var(--bg-primary, #FF5502);
     font-weight: 400;
   }
 }

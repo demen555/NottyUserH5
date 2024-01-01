@@ -19,7 +19,7 @@
         </div>
         <div class="user-center-info-input dialog-checkbox">
           <van-checkbox v-model="isLocale"></van-checkbox>
-          <div class="dialog-tishi">Remember me on this computer(not recommended on public or shared computers)</div>
+          <div class="dialog-tishi">{{ $t('str_login_tip') }}</div>
         </div>
       </div>
       <div class="dialog-btns" @click.enter="handleSubmit">
@@ -311,8 +311,8 @@ export default {
     margin: 0 auto;
     height: 40px;
     border-radius: 20px;
-    background-color: var(--bg-primary, #FFE500);
-    color: var(--text-color1-new, #181E2A);
+    background-color: var(--bg-primary, #FF5502);
+    color: var(--dialog-text-color, #FFFFFF);
     text-align: center;
     line-height: 40px;
     font-size: 16px;
@@ -377,7 +377,7 @@ export default {
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
   line-height: 24px;
   .tip{
-    color: var(--bg-primary, #FFE500);
+    color: var(--bg-primary, #FF5502);
   }
   div{
     display: inline-block;
@@ -403,7 +403,7 @@ export default {
     margin-top: 8px;
   }
   /deep/ b{
-    color: var(--bg-primary, #FFE500);
+    color: var(--bg-primary, #FF5502);
     font-weight: 400;
   }
 }

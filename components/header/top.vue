@@ -222,7 +222,7 @@ export default {
       
       languageList: langMap, // 语言数据
       language: this.$i18n.locale, //语言
-      location:  'US1', //国家
+      location: 'US1', //国家
       locationList: areaList, // 国家数据
       themeChecked: true, // 主题切换
       typeList: [],  // 分类数据
