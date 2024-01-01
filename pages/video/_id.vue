@@ -170,7 +170,7 @@ export default {
 
             videoStatus:{},
             
-            videoInfoLoding: false,
+            videoInfoLoding: true,
 
             content: "",
             showInput: false,
@@ -200,42 +200,45 @@ export default {
       return {
         title: this.videoInfo.seo.title,
         meta: [
-          {
-            hid: 'description',
-            name: 'description',
-            content: this.videoInfo.seo.description
-          },
-          {
-            hid: 'keywords',
-            name: 'keyswords',
-            content: this.videoInfo.seo.keyswords
-          },
-          {
-            hid: 'title',
-            name: 'title',
-            content: this.videoInfo.seo.title
-          }
+            {
+                hid: 'description',
+                name: 'description',
+                content: this.videoInfo.seo.description
+            },
+            {
+                hid: 'keyswords',
+                name: 'keyswords',
+                content: this.videoInfo.seo.keywords
+            },
+            {
+                hid: 'title',
+                name: 'title',
+                content: this.videoInfo.seo.title
+            },
+            { hid: 'og:title', property: 'og:title', content: this.videoInfo.seo.title },
+            { hid: 'og:description', property: 'og:description', content:  this.videoInfo.seo.description},
+            { hid: 'og:keywords', property: 'og:keywords', content: this.videoInfo.seo.keywords },
         ]
       }
     },
-    // async asyncData({ $videoApi, params }) {
-    //     const vodChangePage = {
-    //         size: 20,
-    //         page: 1
-    //     }
-    //     const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
-    //     const res = await $videoApi.requestVodChange({ 
-    //         ...vodChangePage,
-    //         typeId: res1.data.typeId,
-    //         excludes: params.id,
-    //     })
-    //     console.log(res, 'requestVodChange')
-    //     return { 
-    //         videoInfo: res1.data,
-    //         vodChange: res.data.data,
-    //         vodChangePage: vodChangePage
-    //     }
-    // },
+    async asyncData({ $videoApi, params }) {
+        // const vodChangePage = {
+        //     size: 20,
+        //     page: 1
+        // }
+        const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
+        // const res = await $videoApi.requestVodChange({ 
+        //     ...vodChangePage,
+        //     typeId: res1.data.typeId,
+        //     excludes: params.id,
+        // })
+        console.log(res1.data, 'requestVodChange')
+        return { 
+            videoInfo: res1.data,
+            // vodChange: res.data.data,
+            // vodChangePage: vodChangePage
+        }
+    },
 
     computed:{
         ...mapGetters([
@@ -318,7 +321,7 @@ export default {
         },
         initVideo(){
             const vodId = this.$route.params.id;
-            this.getVideo(vodId);
+            // this.getVideo(vodId);
             this.getVodState(vodId)
         },
 
