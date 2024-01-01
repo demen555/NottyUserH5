@@ -196,7 +196,28 @@ export default {
             showVote: false
         }
     },
-
+    head(){
+      return {
+        title: this.videoInfo.seo && this.videoInfo.seo.title,
+        meta: [
+          {
+            hid: 'description',
+            name: 'description',
+            content: this.videoInfo.seo && this.videoInfo.seo.description
+          },
+          {
+            hid: 'keywords',
+            name: 'keyswords',
+            content: this.videoInfo.seo && this.videoInfo.seo.keyswords
+          },
+          {
+            hid: 'title',
+            name: 'title',
+            content: this.videoInfo.seo && this.videoInfo.seo.title
+          }
+        ]
+      }
+    },
     // async asyncData({ $videoApi, params }) {
     //     const vodChangePage = {
     //         size: 20,
