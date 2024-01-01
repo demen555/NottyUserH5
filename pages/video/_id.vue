@@ -198,22 +198,22 @@ export default {
     },
     head(){
       return {
-        title: this.videoInfo.seo.title,
+        title: this.videoInfo.seo && this.videoInfo.seo.title,
         meta: [
           {
             hid: 'description',
             name: 'description',
-            content: this.videoInfo.seo.description
+            content: this.videoInfo.seo && this.videoInfo.seo.description
           },
           {
             hid: 'keywords',
             name: 'keyswords',
-            content: this.videoInfo.seo.keyswords
+            content: this.videoInfo.seo && this.videoInfo.seo.keyswords
           },
           {
             hid: 'title',
             name: 'title',
-            content: this.videoInfo.seo.title
+            content: this.videoInfo.seo && this.videoInfo.seo.title
           }
         ]
       }
