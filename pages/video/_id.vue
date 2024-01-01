@@ -198,7 +198,7 @@ export default {
     },
     head(){
       return {
-        title: this.videoInfo.seo.title,
+        title: this.videoInfo.seo && this.videoInfo.seo.title,
         meta: [
             {
                 hid: 'description',
