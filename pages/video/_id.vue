@@ -196,7 +196,28 @@ export default {
             showVote: false
         }
     },
-
+    head(){
+      return {
+        title: this.videoInfo.seo.title,
+        meta: [
+          {
+            hid: 'description',
+            name: 'description',
+            content: this.videoInfo.seo.description
+          },
+          {
+            hid: 'keywords',
+            name: 'keyswords',
+            content: this.videoInfo.seo.keyswords
+          },
+          {
+            hid: 'title',
+            name: 'title',
+            content: this.videoInfo.seo.title
+          }
+        ]
+      }
+    },
     // async asyncData({ $videoApi, params }) {
     //     const vodChangePage = {
     //         size: 20,
@@ -244,8 +265,8 @@ export default {
         },
 
         // 点赞 踩赞 百分比
-        vodPercent({ videoStatus }){
-            const { vodUp, vodDown } = videoStatus
+        vodPercent(){
+            const { vodUp, vodDown } = this.videoInfo
             const all = Number(vodUp) + Number(vodDown);
 
             return {
