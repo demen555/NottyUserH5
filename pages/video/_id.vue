@@ -19,7 +19,8 @@
         <div class="video-space"></div>
         <template v-if="videoInfoLoding">
             
-            <h1 class="video-description"> {{ videoInfo.vodName }} </h1>
+            <h1 class="video-title"> {{ videoInfo.seo.title }} </h1>
+            <p class="video-description" v-show="videoInfo.seo.description"> {{ videoInfo.seo.description }} </p>
             <div class="video-data">
                 <div class="data-watch">
                     <img class="icon" :src="themeChecked? require('~/static/images/com_bofangliang_big_1.svg'): require('~/static/images/com_bofangliang_big.svg')"  alt="com_dianzan">
@@ -53,14 +54,14 @@
             <!-- <div class="video-title" v-if="videoInfo.tags">
                 <h1 class="title" @click="handleClickType(row)" v-for="row in videoInfo.tags" :key="row.id">{{ row.name }}</h1>
             </div> -->
-            <div class="video-title" v-if="videoInfo.tags && videoInfo.tags.length">
-                <h1 
-                    class="title" 
+            <div class="video-tag" v-if="videoInfo.tags && videoInfo.tags.length">
+                <div 
+                    class="tag" 
                     @click="handleClickType(row)" 
                     v-for="row in videoInfo.tags" 
                     :key="row.id">
                     {{ row.name }}
-                </h1>
+                </div>
                 <!-- <h1 class="title" @click="changeVoteShow">
                     <img class="icon" v-if="showVote" src="~/static/images/com_bq_shouqi_1.svg" />
                     <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
@@ -783,9 +784,20 @@ export default {
 }
 .video-space{
     width: 375px;
-    height: 212px;
+    height: 257px;
 }
 .video-description{
+    padding-bottom: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    color: var(--text-color1, #FFFFFF);
+    font-family: PingFang SC;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.video-title{
     padding-top: 52px;
     padding-bottom: 8px;
     padding-left: 12px;
@@ -876,11 +888,11 @@ export default {
         // transform: scale(0.83); // 10px
     }
 }
-.video-title{
+.video-tag{
     display: flex;
     flex-wrap: wrap;
     .padding-8-12;
-    .title{
+    .tag{
         color: var(--text-color2,  rgba(255, 255, 255, 0.70));
         text-align: center;
         font-family: PingFang SC;
