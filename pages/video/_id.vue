@@ -784,7 +784,7 @@ export default {
 }
 .video-space{
     width: 375px;
-    height: 257px;
+    height: 264px;
 }
 .video-description{
     padding-bottom: 8px;
@@ -798,7 +798,6 @@ export default {
     line-height: normal;
 }
 .video-title{
-    padding-top: 52px;
     padding-bottom: 8px;
     padding-left: 12px;
     padding-right: 12px;
