@@ -87,7 +87,7 @@ export default {
   color: var(--bg-primary, #FF5502);
 }
 .logo-black{
-  width: 86px;
+  width: 108px;
   height: 28px;
   background-image: url('~~/static/images/logo-black.svg');
   background-repeat: no-repeat;
