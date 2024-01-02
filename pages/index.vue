@@ -30,12 +30,12 @@
           <div class="home-footer-icon">
             <div><img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta"></div>
             <div>
-              <img class="common" :src="themeChecked? require('~/static/images/facebook_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
-              <img class="common" :src="themeChecked? require('~/static/images/instagram_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
-              <img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
-              <img class="common" :src="themeChecked? require('~/static/images/twitter_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
-              <img class="common" :src="themeChecked? require('~/static/images/tiktok_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
-              <img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta">
+              <a href="https://www.facebook.com/nottyhub "><img class="common" :src="themeChecked? require('~/static/images/facebook_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+              <a href="https://www.instagram.com/nottyhub.club/"><img class="common" :src="themeChecked? require('~/static/images/instagram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+              <a href="https://www.youtube.com/@NottyHubX.com "><img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+              <a href="https://twitter.com/nottyhub"><img class="common" :src="themeChecked? require('~/static/images/twitter_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+              <a href="https://www.tiktok.com/@nottyhub"><img class="common" :src="themeChecked? require('~/static/images/tiktok_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+              <a href="https://t.me/+UClKi43iLeFkYzA1"><img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
             </div>
           </div>
         </div>
@@ -61,12 +61,12 @@ export default{
         size: 20
       },
       footerList: [
-        { name: 'CSAM Policy', id: 'policy-csam'},
-        { name: 'Content Removal', id: 'policy-content'},
-        { name: 'DMCA', id: 'policy-terms'},
-        { name: 'NCC Policy', id: 'policy-ncc'},
-        { name: '2257', id: 'policy-2257'},
-        { name: 'EU DSA', id: 'policy-eu'},
+        { name: this.$t('str_footer_nav1'), id: 'policy-csam'},
+        { name: this.$t('str_footer_nav2'), id: 'policy-content'},
+        { name: this.$t('str_footer_nav6'), id: 'policy-terms'},
+        { name: this.$t('str_footer_nav7'), id: 'policy-ncc'},
+        { name: this.$t('str_footer_nav8'), id: 'policy-2257'},
+        { name: this.$t('str_footer_nav9'), id: 'policy-eu'},
       ],
       hostname: ''
     }

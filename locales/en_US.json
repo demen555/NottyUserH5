@@ -277,5 +277,16 @@
 "str_get_back_pwd": "Please use this page to reset your password!",
 "str_get_back_pwd_sub": "Please enter your email which you first registered with.",
 "str_email": "Email",
-"str_email_code": "Verification code from Email"
+"str_email_code": "Verification code from Email",
+
+"str_footer_nav1": "CSAM Policy",
+"str_footer_nav2": "Terms & Conditions",
+"str_footer_nav3": "Privacy & Policy",
+"str_footer_nav4": "Content Removal",
+"str_footer_nav5": "NCC Policy",
+"str_footer_nav6": "DMCA",
+"str_footer_nav7": "NCC Policy",
+"str_footer_nav8": "2257",
+"str_footer_nav9": "FAQ",
+"str_footer_nav10": "EU DSA"
 }

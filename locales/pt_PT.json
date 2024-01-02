@@ -281,5 +281,15 @@
 
 "str_get_back_pwd": "Please use this page to reset your password!",
 "str_get_back_pwd_sub": "Please enter your email which you first registered with.",
-"str_email": "Email"
+"str_email": "Email",
+
+"str_footer_nav1": "Política da CSAM",
+"str_footer_nav2": "Termos de Serviço",
+"str_footer_nav3": "Política de Privacidade",
+"str_footer_nav4": "Remoção de conteúdo",
+"str_footer_nav5": "DMCA",
+"str_footer_nav6": "Política NCC",
+"str_footer_nav7": "2257",
+"str_footer_nav8": "FAQ",
+"str_footer_nav9": "EU DSA"
 }
