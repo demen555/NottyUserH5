@@ -54,7 +54,7 @@
             <!-- <div class="video-title" v-if="videoInfo.tags">
                 <h1 class="title" @click="handleClickType(row)" v-for="row in videoInfo.tags" :key="row.id">{{ row.name }}</h1>
             </div> -->
-            <div class="video-tag" v-if="videoInfo.tags && videoInfo.tags.length">
+            <div class="video-tags" v-if="videoInfo.tags && videoInfo.tags.length">
                 <div 
                     class="tag" 
                     @click="handleClickType(row)" 
@@ -887,7 +887,7 @@ export default {
         // transform: scale(0.83); // 10px
     }
 }
-.video-tag{
+.video-tags{
     display: flex;
     flex-wrap: wrap;
     .padding-8-12;
