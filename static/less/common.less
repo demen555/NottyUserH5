@@ -13,9 +13,21 @@
 
 /* PC 端样式 */
 @media (min-width: 1200px) {
+  img{
+   width: 24px;
+   height: 24px; 
+  }
+  .dplayer .dplayer-icon-content{
+    width: 24px ;
+    height: 24px ; 
+  }
+  div{
+    font-size: 14px;
+  }
+
   #__nuxt {
     max-width: 650px;
-    zoom: 0.43;
+    zoom: 0.33;
     .van-pull-refresh{
       width: 375px;
       margin: 0 auto;
@@ -33,9 +45,17 @@
         transform: translateX(-50%);
       }
     }
-    // transform: scale(0.5, 0.5);
-    // transform-origin: 50% 0;
-    // overflow: hidden; /* 确保容器不会溢出 */
+    .subNav{
+      width: 375px;
+      margin: 0 auto;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .tag-box{
+      width: 375px;
+      margin: 0 auto;
+    }
+    
   }
 }
 
