@@ -70,15 +70,20 @@ created(){
 },
 // 重新进入点赞，更新当前未登录点赞视频
 activated(){
-  if(this.isLogin){
-    this.pageInfo = {
-      page: 1,
-      size: 20
-    }
-    this.getList('first')
-  }else{
-    this.dataList = this.noLoginUpVod || []
+  this.pageInfo = {
+    page: 1,
+    size: 20
   }
+  this.getList('first')
+  // if(this.isLogin){
+  //   this.pageInfo = {
+  //     page: 1,
+  //     size: 20
+  //   }
+  //   this.getList('first')
+  // }else{
+  //   this.dataList = this.noLoginUpVod || []
+  // }
 },
 
 components: {
@@ -122,26 +127,26 @@ methods: {
             ids: this.getIds(this.dataList, this.result )
           }
           console.log(params, 'params')
-          if( !this.isLogin ){
-            // 未登录
-            if(this.result.length === this.dataList.length){
-              //清除全部
-              this.clear_upvod()
-              this.result = []
-            }else{
-              //部分删除
-              const newArr = []
-              this.dataList.forEach(item => {
-                this.result.forEach(ite => {
-                  if(item.vodId !== ite){
-                    newArr.push(item)
-                  }
-                })
-              })
-              this.update_upvod(newArr)
-            }
-            this.dataList = this.noLoginUpVod || []
-          } else {
+          // if( !this.isLogin ){
+          //   // 未登录
+          //   if(this.result.length === this.dataList.length){
+          //     //清除全部
+          //     this.clear_upvod()
+          //     this.result = []
+          //   }else{
+          //     //部分删除
+          //     const newArr = []
+          //     this.dataList.forEach(item => {
+          //       this.result.forEach(ite => {
+          //         if(item.vodId !== ite){
+          //           newArr.push(item)
+          //         }
+          //       })
+          //     })
+          //     this.update_upvod(newArr)
+          //   }
+          //   this.dataList = this.noLoginUpVod || []
+          // } else {
             try {
               console.log(params, '8888999')
               const res = await this.$upApi.postUpDelete(params)
@@ -152,7 +157,7 @@ methods: {
             } catch (error) {
               console.error(error)
             }
-          }
+          // }
         })
         .catch(() => {
           // on cancel
