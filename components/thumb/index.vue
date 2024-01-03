@@ -17,7 +17,7 @@
         <!-- <div class="main-view"></div> -->
         <!-- com_shipinshu_1 -->
         <div :class="themeChecked?'main-video-num': 'main-video-num-white'"></div>
-        <div class="thumb-num">{{ tag.quantity }}</div>
+        <div class="thumb-num">{{ tag.quantity || 0 }}</div>
       </div>
     </div>
   </div>

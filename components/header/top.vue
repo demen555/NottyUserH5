@@ -24,7 +24,31 @@
          <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
          <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
         </div>
-
+        <div class="nav-list-tags type">
+          <div class="nav-menu-list-tag" @click="handleShowExpand('type')">
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_leixing_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
+              <div>{{ $t('str_tags') }}</div>
+            </div>
+            <div :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+          </div>
+          <template v-if="!showTypeExpand">
+            <nuxt-link :to="localePath({
+              name: 'type-name',
+              params: { id: item.typeId, name: item.typeName }
+            })" class="nav-menu-list-tag-sub" v-for="(item) in typeList" :key="item.typeId">
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                <div class="typeName">{{ item.typeName }}</div>
+              </div>
+              <div class="nav-menu-right" v-if="item.typeId === typeId && routeName == 'type-id-name' ">
+                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+              </div>
+            </nuxt-link>
+            <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('type')"> {{ $t('str_menu_type_all') }}</nuxt-link>
+            <div class="nav-menu-list-tag-empty"></div>
+          </template>
+        </div>
         <div v-if="!showTypeExpand" class="type-div"></div> 
         <div class="nav-list-tags">
           <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
@@ -43,7 +67,7 @@
                 <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                 <div>{{ tag.name }}</div>
               </div>
-              <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type-id-name'">
+              <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'tag-id-name'">
                 <img src="~/static/images/com_select_on.svg" alt="com_select_on">
               </div>
             </nuxt-link>
@@ -325,7 +349,7 @@ export default {
 
       this.set_tagid(item.id)
       this.$router.push(this.localePath({
-        name: 'type-id-name',
+        name: 'tag-id-name',
         params:{
           id: item.id,
           name: item.name,
