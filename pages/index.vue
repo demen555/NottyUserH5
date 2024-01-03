@@ -62,8 +62,9 @@ export default{
       },
       footerList: [
         { name: this.$t('str_footer_nav1'), id: 'policy-csam'},
-        { name: this.$t('str_footer_nav2'), id: 'policy-content'},
-        { name: this.$t('str_footer_nav6'), id: 'policy-terms'},
+        { name: this.$t('str_footer_nav2'), id: 'policy-terms'},
+        { name: this.$t('str_footer_nav3'), id: 'policy-privacy'},
+        { name: this.$t('str_footer_nav4'), id: 'policy-content'},
         { name: this.$t('str_footer_nav7'), id: 'policy-ncc'},
         { name: this.$t('str_footer_nav8'), id: 'policy-2257'},
         { name: this.$t('str_footer_nav9'), id: 'policy-eu'},
@@ -95,9 +96,9 @@ export default{
   },
   methods: {
     handleClickPage(name){
-      this.$router.push({
+      this.$router.push(this.localePath({
         name
-      })
+      }))
     },
     onLoad(){
       this.pageInfo.page += 1

@@ -1,22 +1,24 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="$t('str_footer_nav4')" text></Nav>
+    <Nav :title="$t('str_footer_nav3')" text></Nav>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_content1') }}</div>
-      <div class="police-title-title">{{ $t('str_footer_content2') }}</div>
-      <div class="police-text-content-prev">
-        {{ $t('str_footer_content3') }}
-      </div>
-      <div class="police-text-content-next">{{ $t('str_footer_content4') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_content5') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_content6') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_content7') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_content8') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_content9') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_content10') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_content11') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_content12') }}</div>
+      <div class="police-title">{{ $t('str_footer_privacy1') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_privacy2') }}</div>
+      <div class="police-title">{{ $t('str_footer_privacy3') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_privacy4') }}</div>
+      <div class="police-title">{{ $t('str_footer_privacy5') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_privacy6') }}</div>
+      <div class="police-title">{{ $t('str_footer_privacy7') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_privacy8') }}</div>
+      <div class="police-title">{{ $t('str_footer_privacy9') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_privacy10') }}</div>
+      <div class="police-title">{{ $t('str_footer_privacy11') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_privacy12') }}</div>
+      <div class="police-title">{{ $t('str_footer_privacy13') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_privacy14') }}</div>
+      <div class="police-title">{{ $t('str_footer_privacy15') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_privacy16') }}</div>
     </div>
   </div>
 </template>
@@ -31,7 +33,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'policy-content',
+  name: 'policy-privacy',
   mixins: [commonMinxin],
   data() {
     return {
