@@ -11,6 +11,30 @@
   // word-break: break-word; 
 }
 
+/* PC 端样式 */
+@media (min-width: 1200px) {
+  #__nuxt {
+    max-width: 650px;
+    zoom: 0.5;
+    .van-pull-refresh{
+      width: 375px;
+      margin: 0 auto;
+    }
+    .main-video{
+      width: 375px;
+      margin: 0 auto;
+      position: relative;
+      .video-container{
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    // transform: scale(0.5, 0.5);
+    // transform-origin: 50% 0;
+    // overflow: hidden; /* 确保容器不会溢出 */
+  }
+}
+
 html,body{
 width: 100%;
 background: var(--bg-color1, #0E0E0F);
