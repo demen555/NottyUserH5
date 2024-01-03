@@ -62,15 +62,11 @@ computed: {
   }
 },
 created(){
-  if(this.isLogin){
-    this.pageInfo = {
-      page: 1,
-      size: 20
-    }
-    this.getList('first')
-  }else{
-    this.dataList = this.noLoginUpVod || []
+  this.pageInfo = {
+    page: 1,
+    size: 20
   }
+  this.getList('first')
 },
 // 重新进入点赞，更新当前未登录点赞视频
 activated(){

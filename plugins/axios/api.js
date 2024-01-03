@@ -42,7 +42,7 @@ let Api = {
     voddown: "/api/v1/comment/dislike", // 踩
     voddowncancel: "/api/v1/comment/dislike", // 取踩
     vodup: "/api/v1/comment/like", // 赞
-    vodupcancel: "/api/v1/vod/up/cancel", // 取消赞
+    vodupcancel: "/api/v1/comment/like", // 取消赞
     vodcollectcancel:"/api/v1/collect/post", // 取消收藏
     vodcollect:"/api/v1/collect/post", // 取消收藏
     sharelink:"/api/v1/user/share/link", // 分享链接获取
