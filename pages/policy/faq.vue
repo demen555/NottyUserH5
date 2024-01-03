@@ -1,18 +1,15 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav title="2257" text></Nav>
+    <Nav :title="$t('str_footer_nav9')" text></Nav>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_22571') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_22572') }}
-      </div>
-      <div class="police-text-content">{{ $t('str_footer_22573') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_22574') }} </div>
-      <div class="police-title">{{ $t('str_footer_22575') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_22576') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_22577') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_22578') }}</div>
+      <div class="police-title">{{ $t('str_footer_faq1') }}</div>
+      <div class="police-title">{{ $t('str_footer_faq2') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_faq3') }}</div>
+      <div class="police-title">{{ $t('str_footer_faq4') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_faq5') }}</div>
+      <div class="police-title">{{ $t('str_footer_csam6') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_faq7') }}</div>
     </div>
   </div>
 </template>
@@ -27,7 +24,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'policy-2257',
+  name: 'policy-faq',
   mixins: [commonMinxin],
   data() {
     return {

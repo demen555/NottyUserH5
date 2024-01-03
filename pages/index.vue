@@ -67,7 +67,8 @@ export default{
         { name: this.$t('str_footer_nav4'), id: 'policy-content'},
         { name: this.$t('str_footer_nav7'), id: 'policy-ncc'},
         { name: this.$t('str_footer_nav8'), id: 'policy-2257'},
-        { name: this.$t('str_footer_nav9'), id: 'policy-eu'},
+        { name: this.$t('str_footer_nav9'), id: 'policy-faq'},
+        { name: this.$t('str_footer_nav10'), id: 'policy-eu'},
       ],
       hostname: ''
     }
