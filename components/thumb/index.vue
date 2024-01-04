@@ -46,7 +46,7 @@ export default{
         name: 'type-id-name',
         params:{
           id: item.id,
-          name: item.name,
+          name: item.title,
           refresh: true,
         }
       }))
