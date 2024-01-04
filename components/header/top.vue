@@ -36,15 +36,15 @@
             <nuxt-link :to="localePath({
               name: 'type-id-name',
               params: { id: item.id, name: item.title }
-            })" @click="handleClick(item.id)" class="nav-menu-list-tag-sub" v-for="(item) in typeList" :key="item.id">
-              <div class="nav-menu-left">
-                <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
-                <div class="typeName">{{ item.title }}</div>
-              </div>
-              <!-- {{ typeId }} {{ routeName }} -->
-              {{ typeId }}
-              <div class="nav-menu-right" v-if="item.id === typeId &&  ['type-id-name___en', 'type-id-name___pt'].includes(routeName) ">
-                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+            })" v-for="(item) in typeList" :key="item.id">
+              <div @click="handleClick(item.id)" class="nav-menu-list-tag-sub">
+                <div class="nav-menu-left">
+                  <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                  <div class="typeName">{{ item.title }}</div>
+                </div>
+                <div class="nav-menu-right" v-if="item.id === typeId &&  ['type-id-name___en', 'type-id-name___pt'].includes(routeName) ">
+                  <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                </div>
               </div>
             </nuxt-link>
             <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('type')"> {{ $t('str_menu_type_all') }}</nuxt-link>
@@ -64,13 +64,15 @@
             <nuxt-link :to="localePath({
               name: 'tag-id-name',
               params: { id: tag.id, name: tag.name }
-            })" @click="set_tagid(item.id)"  class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" >
-              <div class="nav-menu-left">
-                <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
-                <div>{{ tag.name }}</div>
-              </div>
-              <div class="nav-menu-right" v-if="tag.id === tagId && ['tag-id-name___en', 'tag-id-name___pt'].includes(routeName)">
-                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+            })"  v-for="tag in tagList" :key="tag.id" >
+              <div class="nav-menu-list-tag-sub"  @click="set_tagid(item.id)">
+                <div class="nav-menu-left">
+                  <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
+                  <div>{{ tag.name }}</div>
+                </div>
+                <div class="nav-menu-right" v-if="tag.id === tagId && ['tag-id-name___en', 'tag-id-name___pt'].includes(routeName)">
+                  <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                </div>
               </div>
             </nuxt-link>
             <!-- 所有标签 -->
@@ -312,6 +314,7 @@ export default {
   methods: {
     ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken']),
     handleClick(id){
+      this.set_typeid(id)
       console.log(id, 'typeid')
     },
     handleClickNotty(){
