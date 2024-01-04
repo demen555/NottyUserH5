@@ -14,7 +14,7 @@
     <div class="thumb-text">
       <div class="thumb-left">{{ tag.title }}</div>
       <div class="thumb-right">
-        <div class="main-view"></div>
+        <!-- <div class="main-view"></div> -->
         <!-- com_shipinshu_1 -->
         <div :class="themeChecked?'main-video-num': 'main-video-num-white'"></div>
         <div class="thumb-num">{{ tag.vodCount || 0 }}</div>
