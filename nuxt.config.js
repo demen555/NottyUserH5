@@ -95,7 +95,8 @@ export default {
   css: [
     'vant/lib/index.css',
     '~/static/less/common.less',
-    '~/static/less/theme.less'
+    '~/static/less/theme.less',
+    '~/static/less/pc.less'
   ],
   plugins: [
     '~/plugins/utils.js',
