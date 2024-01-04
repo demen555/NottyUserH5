@@ -191,7 +191,7 @@ export default {
             loadingChange: false,
             finishedChange: false,
             vodChangePage:{
-                size: 20,
+                size: 50,
                 page: 1
             },
             showVote: false
