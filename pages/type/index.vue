@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="$t('str_nav_title')" text></Nav>
+    <Nav :title="$t('str_menu_type_all')" text></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <tagLoad></tagLoad>
     </div>

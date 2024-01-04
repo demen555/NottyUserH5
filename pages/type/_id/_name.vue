@@ -47,7 +47,7 @@ data() {
 mixins: [commonMinxin],
 computed: {
   txtTitle(){
-    return  '#'+this.detail.name
+    return  this.detail.name
   }
 },
 activated(){

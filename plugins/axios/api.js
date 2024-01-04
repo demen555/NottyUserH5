@@ -28,7 +28,7 @@ let Api = {
     login: '/api/v1/access/login',
     emailLogin: '/api/v1/access/login',
     code: '/api/v1/user/code',
-    type: '/api/v1/type/list',
+    type: '/api/v1/category/lists',
     register: '/api/v1/user/register',
     emailRegister: '/api/v1/user/register',
     loginOut: '/api/v1/access/logout',

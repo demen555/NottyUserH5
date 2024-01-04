@@ -34,14 +34,15 @@
           </div>
           <template v-if="!showTypeExpand">
             <nuxt-link :to="localePath({
-              name: 'type-name',
-              params: { id: item.typeId, name: item.typeName }
-            })" class="nav-menu-list-tag-sub" v-for="(item) in typeList" :key="item.typeId">
+              name: 'type-id-name',
+              params: { id: item.id, name: language === 'en' ? item.titleEn : item.titlePt }
+            })" @click="set_typeid(item.id)" class="nav-menu-list-tag-sub" v-for="(item) in typeList" :key="item.id">
               <div class="nav-menu-left">
                 <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
-                <div class="typeName">{{ item.typeName }}</div>
+                <div class="typeName">{{ language === 'en' ? item.titleEn : item.titlePt }}</div>
               </div>
-              <div class="nav-menu-right" v-if="item.typeId === typeId && routeName == 'type-id-name' ">
+              {{ typeId }} {{ routeName }}
+              <div class="nav-menu-right" v-if="item.id === typeId &&  ['type-id-name___en', 'type-id-name___pt'].includes(routeName) ">
                 <img src="~/static/images/com_select_on.svg" alt="com_select_on">
               </div>
             </nuxt-link>
@@ -60,14 +61,14 @@
           </div>
           <div v-show="!showExpand">
             <nuxt-link :to="localePath({
-              name: 'tag-name',
+              name: 'tag-id-name',
               params: { id: tag.id, name: tag.name }
-            })"  class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" >
+            })" @click="set_tagid(item.id)"  class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" >
               <div class="nav-menu-left">
                 <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                 <div>{{ tag.name }}</div>
               </div>
-              <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'tag-id-name'">
+              <div class="nav-menu-right" v-if="tag.id === tagId && ['tag-id-name___en', 'tag-id-name___pt'].includes(routeName)">
                 <img src="~/static/images/com_select_on.svg" alt="com_select_on">
               </div>
             </nuxt-link>
@@ -268,6 +269,9 @@ export default {
     Overlay
   },
   created(){
+    console.log( 'this.$route.name', this.$route.name )
+    this.initTypeList()
+    // this.initTagList()
     this.themeChecked = this.theme === 'dark'
     if(process.client){
       document.documentElement.setAttribute('data-theme', this.theme)
@@ -357,7 +361,19 @@ export default {
         },
       }));
     },
-
+    async initTypeList(){
+      try {
+        const res = await this.$homeApi.postTypeList(this.pageInfo)
+        console.log(res, 'typeList334')
+        if(res.code === CODES.SUCCESS){
+          console.log(res.data, 'initTagList')
+          this.typeList = res.data.data || []
+        }
+        console.log(this.typeList, res, 'tag')
+      } catch (error) {
+        console.error(error)
+      }
+    },
     async initTagList(){
       try {
         const res = await this.$homeApi.postTagListPage(this.pageInfo)
