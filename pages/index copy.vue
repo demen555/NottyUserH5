@@ -96,7 +96,7 @@ export default{
   overflow: visible;
 }
 .color{
-    color: var(--text-color3);
+    color: var(--text-color3, rgba(96, 105, 128, 0.40));
     font-size: 15px;
 }
 </style>
