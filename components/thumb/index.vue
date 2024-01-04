@@ -17,7 +17,7 @@
         <!-- <div class="main-view"></div> -->
         <!-- com_shipinshu_1 -->
         <div :class="themeChecked?'main-video-num': 'main-video-num-white'"></div>
-        <div class="thumb-num">{{ tag.vodCount || 0 }}</div>
+        <div class="thumb-num">{{ tag.vodCount || 0 }} <span class="thumb-videos">Videos</span></div>
       </div>
     </div>
   </div>
@@ -57,6 +57,7 @@ export default{
 <style lang="less" scoped>
 .thumb-list{
   margin-top: 8px;
+  position: relative;
   /deep/ .van-image{
       width:185px;
       height:105px;
@@ -67,10 +68,13 @@ export default{
     }
 }
 .thumb-text{
+  position: absolute;
+  left: 0;
+  bottom: 0;
   width: 185px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
   margin-top: 4px;
   margin-bottom: 8px;
   padding: 0 8px;
@@ -92,6 +96,7 @@ export default{
     align-items: center;
     line-height: 16.8px;
     margin: auto 0;
+    margin-top: 5px;
   }
   .thumb-num{
     margin-top: 2px;
@@ -99,6 +104,9 @@ export default{
   .main-view{
     width: 12px;
     height: 12px;
+  }
+  .thumb-videos{
+    margin-left: 5px;
   }
 }
 </style>
