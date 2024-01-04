@@ -50,6 +50,13 @@ export default function ({ app, $axios, store }, inject) {
     } else {
       config.headers["Request-Country"] = "US";
     }
+    // 中国--返回中国分类数据    Request-Country: CN
+    // 日本的 返回日本分类数据  Request-Country: JP
+    // 其他的选择都是欧美的分类数据   Request-Country: FR
+    if( config.headers["Request-Country"] != 'CN' && config.headers["Request-Country"] != 'JP' ){
+      config.headers["Request-Country"] = 'FR'
+    }
+
 
     config.headers["Request-Lang"] = lanMap[app.i18n.locale] || "pt_PT";
     
