@@ -35,13 +35,14 @@
           <template v-if="!showTypeExpand">
             <nuxt-link :to="localePath({
               name: 'type-id-name',
-              params: { id: item.id, name: language === 'en' ? item.titleEn : item.titlePt }
-            })" @click="set_typeid(item.id)" class="nav-menu-list-tag-sub" v-for="(item) in typeList" :key="item.id">
+              params: { id: item.id, name: item.title }
+            })" @click="handleClick(item.id)" class="nav-menu-list-tag-sub" v-for="(item) in typeList" :key="item.id">
               <div class="nav-menu-left">
                 <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
-                <div class="typeName">{{ language === 'en' ? item.titleEn : item.titlePt }}</div>
+                <div class="typeName">{{ item.title }}</div>
               </div>
-              {{ typeId }} {{ routeName }}
+              <!-- {{ typeId }} {{ routeName }} -->
+              {{ typeId }}
               <div class="nav-menu-right" v-if="item.id === typeId &&  ['type-id-name___en', 'type-id-name___pt'].includes(routeName) ">
                 <img src="~/static/images/com_select_on.svg" alt="com_select_on">
               </div>
@@ -280,17 +281,17 @@ export default {
         !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
       })
     }
+    if(['home___en', 'home___pt'].includes(this.$route.name)){
+      this.set_tagid('')
+      this.set_typeid('')
+    }
   },
 
   activated(){
     console.log( 'this.$route.name', this.$route.name )
     this.showPop = false
     this.showRightPop = false
-    if(this.$route.name === 'index'){
-      console.log('mounted')
-      this.set_tagid('')
-      this.set_typeid('')
-    }
+    
   },
   computed: {
     ...mapGetters(['userinfo', 'theme', 'isLogin', 'tagId', 'typeId','accessToken']),
@@ -310,6 +311,9 @@ export default {
   },
   methods: {
     ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken']),
+    handleClick(id){
+      console.log(id, 'typeid')
+    },
     handleClickNotty(){
       if(this.$route.name === 'index'){
         this.$emit('refresh')

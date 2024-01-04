@@ -2,7 +2,7 @@
   <div class="thumb-list" @click="handleClickTag(tag)">
     <van-image
       lazy-load
-      :src="tag.thumb"
+      :src="tag.img"
     >
       <template slot="loading">
         <img class="loading-img" :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_white">
@@ -12,12 +12,12 @@
       </template>
     </van-image>
     <div class="thumb-text">
-      <div class="thumb-left">{{ tag.name }}</div>
+      <div class="thumb-left">{{ tag.title }}</div>
       <div class="thumb-right">
-        <!-- <div class="main-view"></div> -->
+        <div class="main-view"></div>
         <!-- com_shipinshu_1 -->
         <div :class="themeChecked?'main-video-num': 'main-video-num-white'"></div>
-        <div class="thumb-num">{{ tag.quantity || 0 }}</div>
+        <div class="thumb-num">{{ tag.vodCount || 0 }}</div>
       </div>
     </div>
   </div>

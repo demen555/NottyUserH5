@@ -5,7 +5,7 @@
     <div class="loading-box" v-if="spainnerLoading">
       <tagLoad></tagLoad>
     </div>
-    <template v-if="tagList.length">
+    <template v-if="typeList.length">
       <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -16,7 +16,7 @@
           :offset="10"
         >
           <div class="thumb">
-            <Thumb :tag="tag" v-for="tag in tagList" :key="tag.id"></Thumb>
+            <Thumb :tag="tag" v-for="tag in typeList" :key="tag.id"></Thumb>
           </div>
           <!-- <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover> -->
         </van-list>
@@ -42,7 +42,7 @@ data() {
     loading: false, // 是否处于加载状态
     finished: false, // 是否加载完成
     refreshing: true, // 当前是否刷新重置信息
-    tagList: [],
+    typeList: [],
     pageInfo: {
       page: 1,
       size: 20
@@ -88,17 +88,17 @@ methods: {
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
     
       // params.tagId = this.detail.id //标签
-      params.tagName = this.detail.name //标签
+      // params.tagName = this.detail.name //标签
 
 
-      const { code, data } = await this.$homeApi.postTagListPage(params)
+      const { code, data } = await this.$homeApi.postTypeList(params)
       console.log(code, CODES.SUCCESS, data, 'postTagListPage')
       if(code === CODES.SUCCESS){
         if(isRefresh){
-          this.tagList = data.data
+          this.typeList = data.data
           this.refreshing = false
         } else {
-          this.tagList = [ ...this.tagList, ...data.data]
+          this.typeList = [ ...this.typeList, ...data.data]
           this.loading = false
         }
         if(data.data.length === 0){
