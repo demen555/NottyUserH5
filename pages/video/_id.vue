@@ -284,17 +284,7 @@ export default {
             }
             this.showVote = !this.showVote
         },
-         // 标签调转
-         handleClickType(item){
-            this.$router.push(this.localePath({
-                name: 'type-id-name',
-                params:{
-                    id: item.id,
-                    name: item.name,
-                    refresh: true,
-                }
-            }))
-        },
+        
         initVideo(){
             const vodId = this.$route.params.id;
             this.getVideo(vodId);
