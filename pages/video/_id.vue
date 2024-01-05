@@ -468,6 +468,7 @@ export default {
                             // const num = Number(this.videoStatus.vodUp) - 1;
                             // this.$set(this.videoStatus, "vodUp", num)
                             this.getVodState(vodId)
+                            this.getVideo(vodId);
                         } else{
                             this.$set(this.videoStatus, "up", true)
                         }
@@ -496,6 +497,7 @@ export default {
                         // const num = Number(this.videoStatus.vodUp) + 1;
                         // this.$set(this.videoStatus, "vodUp", num);
                         this.getVodState(vodId)
+                        this.getVideo(vodId);
                     }else{
                         this.$set(this.videoStatus, "up", false);
                     }
@@ -573,6 +575,7 @@ export default {
                             // const num = Number(this.videoStatus.vodDown) - 1;
                             // this.$set(this.videoStatus, "vodDown", num)
                             this.getVodState(vodId)
+                            this.getVideo(vodId);
                         } else {
                             this.$set(this.videoStatus, "down", true)
                         }
@@ -596,6 +599,7 @@ export default {
                             // const num = Number(this.videoStatus.vodDown) + 1;
                             // this.$set(this.videoStatus, "vodDown", num)
                             this.getVodState(vodId)
+                            this.getVideo(vodId);
                         } else{
                             this.$set(this.videoStatus, "down", false)
                         }
