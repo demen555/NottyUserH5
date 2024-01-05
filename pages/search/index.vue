@@ -389,7 +389,7 @@ input::placeholder{
   margin-bottom: -6px;
 }
 .search-result span{
-  color: var(--bg-primary, #FF5502);
+  color: var(--bg-primary, #FFE500);
 }
 .search-page {
   z-index: 10;

@@ -96,7 +96,7 @@ export default {
     { src: '~/plugins/store-cache', ssr: false },
   ],
   loading: {
-    color: '#FF5502',
+    color: '#FFE500',
     height: '2px'
   },
   components: true,

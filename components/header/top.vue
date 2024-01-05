@@ -421,9 +421,9 @@ export default {
       if( val == "collect" && !this.isLogin ){
         return this.$refs.dialogLoginRef.onShow()
       }
-      // if( val == "up" && !this.isLogin ){
-      //   return this.$refs.dialogLoginRef.onShow()
-      // }
+      if( val == "up" && !this.isLogin ){
+        return this.$refs.dialogLoginRef.onShow()
+      }
       if( val == "pwdset" && !this.isLogin ){
         return this.$refs.dialogLoginRef.onShow()
       }

@@ -1,13 +1,15 @@
 <template>
   <nav>
     <ul class="pagination">
-      <div :class="{ 'disabled': current == 1 }"><a class="pagination__prev" href="javascript:;" @click="setCurrent(current - 1)"> < </a></div>
-      <div :class="{ 'disabled': current == 1 }"><a href="javascript:;" @click="setCurrent(1)"> « </a></div>
+      <div :class="{ 'disabled': current == 1 }"><a href="javascript:;" @click="setCurrent(1)"> <img :src="require('~/static/images/com_zuo_fysy.svg')"> </a></div>
+      <div :class="{ 'disabled': current == 1 }">
+        <a class="pagination__prev" href="javascript:;" @click="setCurrent(current - 1)"><img :src="require('~/static/images/com_jt_sx_zuo_fy.svg')"></a>
+      </div>
       <div v-for="p in grouplist" :class="{ 'active': current == p.val }">
         <a @click="setCurrent(p.val)">{{ p.text }}</a>
       </div>
-      <div :class="{ 'disabled': current == page }"><a href="javascript:;" @click="setCurrent(page)"> » </a></div>
-      <div :class="{ 'disabled': current == page }"><a class="pagination__next" href="javascript:;" @click="setCurrent(current + 1)"> > </a></div>
+      <div :class="{ 'disabled': current == page }"><a class="pagination__next" href="javascript:;" @click="setCurrent(current + 1)"><img :src="require('~/static/images/com_jt_sx_you_fy.svg')" alt=""> </a></div>
+      <div :class="{ 'disabled': current == page }"><a href="javascript:;" @click="setCurrent(page)">   <img :src="require('~/static/images/com_you_fywy.svg')"> </a></div>
     </ul>
   </nav>
 </template>
@@ -134,7 +136,7 @@ export default {
   }
 
   .active {
-    border: 1px solid var(--bg-primary, #FF5502);
+    border: 1px solid var(--bg-primary, #FFE500);
     background-color: var(--bg-color1, #0E0E0F);
 
     a {
@@ -144,7 +146,7 @@ export default {
   }
 }
 .pagination__next, .pagination__prev{
-  background-color: var(--bg-primary, #FF5502);
+  background-color: var(--bg-primary, #FFE500);
   color: #181e2a !important;
 }
 .disabled{
