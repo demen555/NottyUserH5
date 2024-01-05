@@ -446,7 +446,8 @@ export default {
      if(process.client){
       this.location = item.code;
       localStorage.setItem("location", item.code)
-      location.reload(); // 重启载入
+      this.$nuxt.$router.go(); // 刷新当前路由
+      window.scrollTo(0, 0); // 滚动到顶部
      }
     },
     handleChangeTheme(val){
