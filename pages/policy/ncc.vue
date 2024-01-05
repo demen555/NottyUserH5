@@ -1,7 +1,7 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="str_footer_nav5" text></Nav>
+    <Nav :title="$t('str_footer_nav5')" text></Nav>
     <div class="police">
       <div class="police-title">{{ $t('str_footer_ncc1') }}</div>
       <div class="police-title-text">{{ $t('str_footer_ncc5') }}</div>
