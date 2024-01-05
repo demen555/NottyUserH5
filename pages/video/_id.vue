@@ -309,7 +309,7 @@ export default {
             }
             this.showVote = !this.showVote
         },
-
+        
         initVideo(){
             const vodId = this.$route.params.id;
             // this.getVideo(vodId);
@@ -695,7 +695,7 @@ export default {
         handleClickType(item){
             console.log(  item )
             this.$router.push(this.localePath({
-                name: 'tag-id-name',
+                name: 'tag-name',
                 params:{
                     id: item.id,
                     name: item.name,

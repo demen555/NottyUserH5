@@ -62,7 +62,7 @@
           </div>
           <div v-show="!showExpand">
             <nuxt-link :to="localePath({
-              name: 'tag-id-name',
+              name: 'tag-name',
               params: { id: tag.id, name: tag.name }
             })"  v-for="tag in tagList" :key="tag.id" >
               <div class="nav-menu-list-tag-sub"  @click="set_tagid(item.id)">
@@ -360,7 +360,7 @@ export default {
 
       this.set_tagid(item.id)
       this.$router.push(this.localePath({
-        name: 'tag-id-name',
+        name: 'tag-name',
         params:{
           id: item.id,
           name: item.name,
