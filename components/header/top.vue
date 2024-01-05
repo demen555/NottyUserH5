@@ -398,7 +398,10 @@ export default {
       // this.$i18n.setLocale(item.code)
       // this.$nuxtI18nSetLanguage(item.code)
       localStorage.setItem("location", item.code)
-      location.reload(); // 重启载入
+      this.$nuxt.$router.go(); // 刷新当前路由
+      if( process.client ){
+        window.scrollTo(0, 0); // 滚动到顶部
+      }
     },
     handleChangeTheme(val){
       if(val){
