@@ -140,6 +140,6 @@ input::placeholder{
   margin-bottom: 12px
 }
 .search-result span{
-  color: var(--bg-primary, #FF5502);
+  color: var(--bg-primary, #FFE500);
 }
 </style>

@@ -159,7 +159,7 @@ export default{
     text-underline-offset: 3px;
   }
   .tag-color{
-    color: var(--bg-primary, #FF5502);
+    color: var(--bg-primary, #FFE500);
   }
   .tag-line{
     text-decoration: none;
