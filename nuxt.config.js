@@ -50,10 +50,8 @@ export default {
         charset: 'UTF-8',
         id: 'LA_COLLECT',
         src: '//sdk.51.la/js-sdk-pro.min.js',
-        async: true,
       },
       {
-        async: true,
         innerHTML: 'LA.init({id:"KJ6udZDKXOfgil91",ck:"KJ6udZDKXOfgil91"})',
       },
       {
