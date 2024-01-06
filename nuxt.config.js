@@ -25,17 +25,14 @@ export default {
     script: [
       {
         src: "https://cdn.dasao88.com/cdn/hls.min.js",
-        async: true,
         mode: 'client'
       },
       {
         src: "https://cdn.dasao88.com/cdn/DPlayer.min.js",
-        async: true,
         mode: 'client'
       },
       {
         src: "https://www.googletagmanager.com/gtag/js",
-        async: true,
         mode: 'client'
       },
       {
@@ -43,7 +40,6 @@ export default {
         'data-goal': "1748fdaba3d5f04bb0082c086621ebc9",
         'data-value': "{conversion_value}",
         type: "application/javascript",
-        async: true,
         mode: 'client'
       },
       {
@@ -508,7 +504,6 @@ export default {
 
       { 
         src: "/js/analitics.js", 
-        async: true,
         mode: 'client' 
       },
     ],
