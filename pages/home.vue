@@ -26,11 +26,13 @@
         </van-pagination> -->
         <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
 
-        <div class="home-footer-list" v-for="(item, index) in footerList" :key="index" @click="handleClickPage(item.id)">
-          <div class="home-footer-tag">{{ item.name }}</div>
-          <div class="home-footer-right">
-            <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
-          </div>
+        <div class="home-footer-list1" v-for="(item, index) in footerList" :key="index">
+          <nuxt-link :to="localePath(item.id)" class="home-footer-list">
+            <div class="home-footer-tag">{{ item.name }}</div>
+            <div class="home-footer-right">
+              <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
+            </div>
+          </nuxt-link>
         </div>
         <div class="home-footer-com">  © {{ hostname }}, 2023 </div>
         <div class="home-footer-icon">
@@ -130,6 +132,9 @@ watch: {
 //   return { dataList: data.data }
 // },
 methods: {
+  handleGoPage(val){
+    this.$router.push(this.localePath(val))
+  },
   handlePage(val){
     this.pageInfo.page = val
     this.getList();
@@ -197,12 +202,15 @@ overflow: visible;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   background-color: var(--bg-color1, #0E0E0F);
   padding-bottom: 24px;
+  a {
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  }
   .home-footer-list{
     height: 40px;
     line-height: 40px;
     display: flex;
     justify-content: space-between;
-    border-top: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));;
+    border-top: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));
     // border-bottom: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));;
   }
   .home-footer-com{
