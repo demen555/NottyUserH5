@@ -30,4 +30,7 @@ export default{
 }
 </script>
 <style lang="less" scoped>
+:deep(.van-nav-bar__left){
+  font-size: 18px;
+}
 </style>

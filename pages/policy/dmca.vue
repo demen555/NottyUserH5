@@ -5,7 +5,7 @@
     <div class="police">
       <div class="police-title">{{ $t('str_footer_nav6') }}</div>
       <div class="police-title-text">{{ $t('str_footer_dmca1') }}</div>
-      <div class="police-title">{{ $t('str_footer_dmca2') }}</div>
+      <div class="police-title" style="margin-top: 10px;">{{ $t('str_footer_dmca2') }}</div>
       <div class="police-text-content">{{ $t('str_footer_dmca3') }}</div>
       <div class="police-title">{{ $t('str_footer_dmca4') }}</div>
       <div class="police-text-content">{{ $t('str_footer_dmca5') }}<span class="footer-red">{{ $t('str_footer_dmca6') }}</span></div>
@@ -43,4 +43,7 @@ export default{
 }
 </script>
 <style lang="less" scoped>
+:deep(.van-nav-bar__left){
+  font-size: 18px;
+}
 </style>
