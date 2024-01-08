@@ -66,7 +66,9 @@
             </van-list>
           </van-pull-refresh>
         </template>
-        <Empty v-else></Empty>
+        <template v-else>
+          <Empty></Empty>
+        </template>
       </div>
     </main>
   </div>
