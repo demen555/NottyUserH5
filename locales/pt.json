@@ -295,16 +295,15 @@
 "str_suggest_suc": "Envio com sucesso ",
 "tag_suggest_success_tip": "Obrigado pela contribuição. Os nomes das tags são adicionados quando um número suficiente de usuários diferentes envia o mesmo nome de tag ",
 
-
 "str_footer_nav1": "Política da CSAM",
 "str_footer_nav2": "Termos de Serviço",
 "str_footer_nav3": "Política de Privacidade",
 "str_footer_nav4": "Remoção de conteúdo",
-"str_footer_nav5": "DMCA",
-"str_footer_nav6": "Política NCC",
-"str_footer_nav7": "2257",
-"str_footer_nav8": "FAQ",
-"str_footer_nav9": "EU DSA",
+"str_footer_nav5": "Política NCC",
+"str_footer_nav6": "DMCA",
+"str_footer_nav8": "2257",
+"str_footer_nav9": "FAQ",
+"str_footer_nav10": "EU DSA",
 
 "str_footer_csam1": "Política de material de abuso sexual infantil",
 "str_footer_csam2": "Agosto de 2022",
