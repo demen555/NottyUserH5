@@ -163,4 +163,7 @@ export default{
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   text-align: center;
 }
+:deep(.van-nav-bar__left){
+  font-size: 18px;
+}
 </style>
