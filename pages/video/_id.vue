@@ -166,7 +166,7 @@ export default {
         return {
             activeNav: 'about',
             videoInfo: {
-                tags: []
+                tags: [],
             },
 
             videoStatus:{},
@@ -223,21 +223,17 @@ export default {
       }
     },
     async asyncData({ $videoApi, params }) {
-        // const vodChangePage = {
-        //     size: 20,
-        //     page: 1
-        // }
         const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
-        // const res = await $videoApi.requestVodChange({ 
-        //     ...vodChangePage,
-        //     typeId: res1.data.typeId,
-        //     excludes: params.id,
-        // })
-        console.log(res1.data, 'requestVodChange')
+        const seo = res1.data.seo ? res1.data.seo : {
+                        description: "",
+                        keywords: "",
+                        title: "",
+                    }
         return { 
-            videoInfo: res1.data,
-            // vodChange: res.data.data,
-            // vodChangePage: vodChangePage
+            videoInfo: {
+                ...res1.data,
+                seo: seo,
+            },
         }
     },
 
