@@ -180,7 +180,7 @@ export default {
     height: 40px;
     border-radius: 20px;
     background-color: var(--bg-primary, #FFE500);
-    color: var(--dialog-text-color, #FFFFFF);
+    color: var(--text-color1, #181E2A);
     text-align: center;
     line-height: 40px;
     font-size: 16px;
@@ -193,6 +193,7 @@ export default {
   background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
   margin-top: 12px;
   margin-bottom: 24px;
+  color: var(--text-color2, rgba(255, 255, 255, 0.7));
 }
 .dialog-control{
   margin-bottom: 24px;
