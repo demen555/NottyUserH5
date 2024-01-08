@@ -89,11 +89,7 @@ export default {
             this.dp = new DPlayer({
                 element: this.$refs.player,
                 lang: 'en',
-                // 自定义播放按钮
-                icon: {
-                    play: require("~/static/images/bfq_bf_r1.png"), 
-                    pause: '',
-                },
+                playbackSpeed: [0.5, 0.75, 1, 1.25, 1.5, 2], // 设置可选的倍速数组
                 video: {
                     pic: videoInfo.vodPicThumb, 
                     url: vodPlayUrl(videoInfo.vodPlayUrl),
@@ -302,15 +298,43 @@ export default {
 }
 
 
-/deep/ .dplayer-mobile-play{
-    // background: url("~~/static/images/bfq_bf_r1.png");
-    // background-size: 100% 100%;
-    // svg{
-    //     opacity: 0;
-    // }
-} 
-// /deep/ .dplayer-controller .dplayer-bar-wrap .dplayer-bar .dplayer-loaded, .dplayer-controller .dplayer-bar-wrap .dplayer-bar .dplayer-played{
-//     height: auto;
-// }
+/deep/ .dplayer-mobile{
+    .dplayer-mobile-play{
+        background: url("~~/static/images/bfq_play.png");
+        background-size: 100% 100%;
+        svg{
+            opacity: 0;
+        }
+    } 
+    &.dplayer-playing{
+        .dplayer-mobile-play{
+            background: url("~~/static/images/bfq_pause.png");
+            background-size: 100% 100%;
+            svg{
+                opacity: 0;
+            }
+        } 
+    }
+    &.dplayer-paused{
+        .dplayer-mobile-play{
+            background: url("~~/static/images/bfq_play.png");
+            background-size: 100% 100%;
+            svg{
+                opacity: 0;
+            }
+        }
+    }
+    &.dplayer-hide-controller{
+        .dplayer-mobile-play{
+            display: none;
+        }
+    }
+    .dplayer-controller{
+        padding: 0;
+    }
+}
+
+
+
 </style>
 
