@@ -44,7 +44,7 @@
                 <div>{{ tag.name }}</div>
               </div>
               <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type-id-name'">
-                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
               </div>
             </nuxt-link>
             <!-- 所有标签 -->
@@ -140,7 +140,7 @@
                 <div>{{ item.title }}</div>
               </div>
               <div class="nav-menu-right" v-if="item.language === language">
-                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
               </div>
             </nuxt-link>
           </template>
@@ -165,7 +165,7 @@
                   <div>{{ $t(item.country) }}</div>
                 </div>
                 <div class="nav-menu-right" v-if="item.code === location">
-                  <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                  <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
                 </div>
               </div>
             </div>
