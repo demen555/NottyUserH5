@@ -36,12 +36,12 @@
         <div class="home-footer-icon">
           <div><img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta"></div>
           <div>
-            <a href="https://www.facebook.com/nottyhub "><img class="common" :src="themeChecked? require('~/static/images/facebook_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://www.instagram.com/nottyhub.club/"><img class="common" :src="themeChecked? require('~/static/images/instagram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://www.youtube.com/@NottyHub "><img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://twitter.com/nottyhub"><img class="common" :src="themeChecked? require('~/static/images/twitter_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://www.tiktok.com/@nottyhub"><img class="common" :src="themeChecked? require('~/static/images/tiktok_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://t.me/+UClKi43iLeFkYzA1"><img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.facebook.com/nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/facebook_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.instagram.com/nottyhub.club/" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/instagram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.youtube.com/@NottyHub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://twitter.com/nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/twitter_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.tiktok.com/@nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/tiktok_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://t.me/+UClKi43iLeFkYzA1" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
           </div>
         </div>
 
