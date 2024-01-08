@@ -26,22 +26,24 @@
         </van-pagination> -->
         <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
 
-        <div class="home-footer-list" v-for="(item, index) in footerList" :key="index" @click="handleClickPage(item.id)">
-          <div class="home-footer-tag">{{ item.name }}</div>
-          <div class="home-footer-right">
-            <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
-          </div>
+        <div class="home-footer-list1" v-for="(item, index) in footerList" :key="index">
+          <nuxt-link :to="localePath(item.id)" class="home-footer-list">
+            <div class="home-footer-tag">{{ item.name }}</div>
+            <div class="home-footer-right">
+              <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
+            </div>
+          </nuxt-link>
         </div>
         <div class="home-footer-com">  © {{ hostname }}, 2023 </div>
         <div class="home-footer-icon">
           <div><img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta"></div>
           <div>
-            <a href="https://www.facebook.com/nottyhub "><img class="common" :src="themeChecked? require('~/static/images/facebook_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://www.instagram.com/nottyhub.club/"><img class="common" :src="themeChecked? require('~/static/images/instagram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://www.youtube.com/@NottyHub "><img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://twitter.com/nottyhub"><img class="common" :src="themeChecked? require('~/static/images/twitter_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://www.tiktok.com/@nottyhub"><img class="common" :src="themeChecked? require('~/static/images/tiktok_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://t.me/+UClKi43iLeFkYzA1"><img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.facebook.com/nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/facebook_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.instagram.com/nottyhub.club/" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/instagram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.youtube.com/@NottyHub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://twitter.com/nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/twitter_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.tiktok.com/@nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/tiktok_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://t.me/+UClKi43iLeFkYzA1" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
           </div>
         </div>
 
@@ -130,6 +132,9 @@ watch: {
 //   return { dataList: data.data }
 // },
 methods: {
+  handleGoPage(val){
+    this.$router.push(this.localePath(val))
+  },
   handlePage(val){
     this.pageInfo.page = val
     this.getList();
@@ -197,12 +202,15 @@ overflow: visible;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   background-color: var(--bg-color1, #0E0E0F);
   padding-bottom: 24px;
+  a {
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  }
   .home-footer-list{
     height: 40px;
     line-height: 40px;
     display: flex;
     justify-content: space-between;
-    border-top: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));;
+    border-top: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));
     // border-bottom: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));;
   }
   .home-footer-com{
