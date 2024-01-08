@@ -6,8 +6,19 @@
       </div>
       <div class="video-list paddingTop52" >
         <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
-        <v-pagination class="pagination" :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+      </div>
+
+      <div class="video-list paddingTop52" >
+        <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         <div class="home-footer">
+          <!-- <van-pagination class="pagination" @change="handleChanege" v-model="pageInfo.page" :total-items="pageInfo.total" pages="[1,2,3,4,5]" :page-count="pageInfo.total" :show-page-size="4" force-ellipses >
+            <template #prev-text>
+              Prev
+            </template>
+            <template #page="{ number,text, active }">{{ handlePage(number, text, active) }}</template>
+          </van-pagination> -->
+          <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+
           <div class="home-footer-list" v-for="(item, index) in footerList" :key="index" @click="handleClickPage(item.id)">
             <div class="home-footer-tag">{{ item.name }}</div>
             <div class="home-footer-right">
@@ -20,15 +31,16 @@
             <div>
               <a href="https://www.facebook.com/nottyhub "><img class="common" :src="themeChecked? require('~/static/images/facebook_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
               <a href="https://www.instagram.com/nottyhub.club/"><img class="common" :src="themeChecked? require('~/static/images/instagram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-              <a href="https://www.youtube.com/@NottyHub"><img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+              <a href="https://www.youtube.com/@NottyHubX.com "><img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
               <a href="https://twitter.com/nottyhub"><img class="common" :src="themeChecked? require('~/static/images/twitter_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
               <a href="https://www.tiktok.com/@nottyhub"><img class="common" :src="themeChecked? require('~/static/images/tiktok_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
               <a href="https://t.me/+UClKi43iLeFkYzA1"><img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
             </div>
           </div>
+
         </div>
       </div>
-    </div>
+    </div>  
 </template>
 <script>
 import { mapGetters } from "vuex"
@@ -122,10 +134,8 @@ methods: {
     // window.scrollTo(0, target.offsetTop - navHeight - 10)
   },
   handleClickPage(name){
-      this.$router.push(this.localePath({
-        name
-      }))
-    },
+    this.$router.push(this.localePath({name: name }))
+  },
   onLoad(){
       this.pageInfo.page += 1
       this.getList();
