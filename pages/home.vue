@@ -25,15 +25,12 @@
           <template #page="{ number,text, active }">{{ handlePage(number, text, active) }}</template>
         </van-pagination> -->
         <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
-
-        <div class="home-footer-list1" v-for="(item, index) in footerList" :key="index">
-          <nuxt-link :to="localePath(item.id)" class="home-footer-list">
-            <div class="home-footer-tag">{{ item.name }}</div>
-            <div class="home-footer-right">
-              <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
-            </div>
-          </nuxt-link>
-        </div>
+        <nuxt-link :to="localePath(item.id)" class="home-footer-list" v-for="(item, index) in footerList" :key="index">
+          <div class="home-footer-tag">{{ item.name }}</div>
+          <div class="home-footer-right">
+            <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
+          </div>
+        </nuxt-link>
         <div class="home-footer-com">  © {{ hostname }}, 2023 </div>
         <div class="home-footer-icon">
           <div><img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta"></div>
