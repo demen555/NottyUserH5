@@ -89,6 +89,11 @@ export default {
             this.dp = new DPlayer({
                 element: this.$refs.player,
                 lang: 'en',
+                // 自定义播放按钮
+                icon: {
+                    play: require("~/static/images/bfq_bf_r1.png"), 
+                    pause: '',
+                },
                 video: {
                     pic: videoInfo.vodPicThumb, 
                     url: vodPlayUrl(videoInfo.vodPlayUrl),
@@ -97,15 +102,7 @@ export default {
                     hotkey:true,
                     customType: {
                         customHls: function (video, player) {
-     
-                            const hls = new Hls({
-                                // xhrSetup: function(xhr) {
-                                //     xhr.withCredentials = true;
-                                //     xhr.setRequestHeader('Cache-Control', 'no-cache');
-                                //     xhr.setRequestHeader('Pragma', 'no-cache');
-                                //     xhr.setRequestHeader('Expires', '0');
-                                // }
-                            })
+                            const hls = new Hls()
                   			hls.loadSource(video.src)
                             hls.attachMedia(video)
                         }
@@ -125,8 +122,6 @@ export default {
                 // 计算播放时长并发送事件追踪代码
                 const currentTime = new Date() - this.startTime;
                 videoWatchTimeInSeconds += Math.floor(currentTime / 1000); // 转换为秒
-
-                console.log("video_watch_end", videoWatchTimeInSeconds)
                 // 发送 Google Analytics 事件
                 gtag('event', 'video_watch', {
                     'event_category': 'Video',
@@ -138,7 +133,6 @@ export default {
         },
 
         handleClickDebounce: debounce(function () {
-            console.log( this.seekTime )
             this.dp.seek(this.dp.video.currentTime + this.seekTime); // 快进 10 秒
             this.fastRewind = false
             this.fastWforward = false
@@ -186,10 +180,15 @@ export default {
         width: 40px;
         height: 40px;
         display: inline-block;
-        background: url("~~/static/images/bfq_bf_r.png");
-        background-size: 100% 100%;
         animation: fastForward 0.4s ease infinite;
-        
+        &:nth-child(1){
+            background: url("~~/static/images/bfq_bf_r1.png");
+            background-size: 100% 100%;
+        }
+        &:nth-child(2){
+            background: url("~~/static/images/bfq_bf_r2.png");
+            background-size: 100% 100%;
+        }       
     }
     b{
         position: absolute;
@@ -224,9 +223,15 @@ export default {
         width: 40px;
         height: 40px;
         display: inline-block;
-        background: url("~~/static/images/bfq_bf_l.png");
-        background-size: 100% 100%;
         animation: fastForward 1s ease infinite;
+        &:nth-child(1){
+            background: url("~~/static/images/bfq_bf_l2.png");
+            background-size: 100% 100%;
+        }
+        &:nth-child(2){
+            background: url("~~/static/images/bfq_bf_l1.png");
+            background-size: 100% 100%;
+        }
     }
     b{
         position: absolute;
@@ -295,6 +300,15 @@ export default {
 /deep/ .dplayer-notice-list{
     display: none;
 }
+
+
+/deep/ .dplayer-mobile-play{
+    // background: url("~~/static/images/bfq_bf_r1.png");
+    // background-size: 100% 100%;
+    // svg{
+    //     opacity: 0;
+    // }
+} 
 // /deep/ .dplayer-controller .dplayer-bar-wrap .dplayer-bar .dplayer-loaded, .dplayer-controller .dplayer-bar-wrap .dplayer-bar .dplayer-played{
 //     height: auto;
 // }
