@@ -299,15 +299,15 @@ methods: {
 }
 .search-input{
   width: 294px;
-  background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
+  background-color: var(--bg-color3, rgba(246, 214, 88, 0.1));
   border-radius: 16px;
   text-indent: 2.5em;
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  color: var(--bg-secondry,  #FD46F6);
   height: 32px;
-  border: none;
+  border: 1PX solid var(--bg-primary, #FFE500);
 }
 input::placeholder{
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  color: var(--bg-secondry,  #FD46F6);
 }
 .com-sousuo{
   position: absolute;

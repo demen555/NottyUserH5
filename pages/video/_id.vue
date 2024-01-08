@@ -964,7 +964,7 @@ export default {
         text-align: center;
         line-height: 32px;
         background-color: var(--bg-primary, #FFE500);
-        color: var(--text-color1, #FFFFFF);
+        color: var(--text-color1, #181E2A);
         font-size: 14px;
         cursor: pointer;
         border-radius: 32px;
