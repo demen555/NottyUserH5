@@ -111,6 +111,9 @@ export default{
 }
 </script>
 <style lang="less" scoped>/*main*/
+.cover{
+  position: relative;
+}
 .main-list{
   width: 100%;
   margin: 0 auto;
