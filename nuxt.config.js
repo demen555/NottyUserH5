@@ -28,11 +28,11 @@ export default {
         mode: 'client'
       },
       {
-        src: "https://cdn.dasao88.com/cdn/DPlayer.min.js",
+        src: "/js/DPlayer.min.js",
         mode: 'client'
       },
       {
-        src: "https://www.googletagmanager.com/gtag/js",
+        src: "/js/hls.min.js",
         mode: 'client'
       },
       {
@@ -46,9 +46,6 @@ export default {
         charset: 'UTF-8',
         id: 'LA_COLLECT',
         src: '//sdk.51.la/js-sdk-pro.min.js',
-      },
-      {
-        innerHTML: 'LA.init({id:"KJ6udZDKXOfgil91",ck:"KJ6udZDKXOfgil91"})',
       },
       {
         type: 'application/ld+json',
@@ -507,7 +504,6 @@ export default {
         mode: 'client' 
       },
     ],
-    __dangerouslyDisableSanitizers: ['script'],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui' },
