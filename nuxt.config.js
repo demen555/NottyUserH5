@@ -24,7 +24,7 @@ export default {
 
     script: [
       {
-        src: "https://cdn.dasao88.com/cdn/hls.min.js",
+        src: "https://www.googletagmanager.com/gtag/js",
         mode: 'client'
       },
       {
