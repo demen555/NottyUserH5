@@ -10,12 +10,16 @@
         <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
           <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_email_1.svg'): require('~/static/images/login_email.svg')"></div>
-          <input @blur="validatorEmail" v-model="form.email" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_email')" type="text">
+          <label for="email">
+            <input id="email" @blur="validatorEmail" v-model="form.email" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_email')" type="text">
+          </label>
         </div>
         <div class="error-msg" v-show="password.showError">{{ password.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
           <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
-          <input @blur="validatorPassword" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd') +'(' +  $t('str_validator_username') +')'">
+          <label for="password">
+            <input @blur="validatorPassword" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd') +'(' +  $t('str_validator_username') +')'">
+          </label>
         </div>
         <div class="user-center-info-input dialog-checkbox">
           <van-checkbox v-model="isLocale"></van-checkbox>
