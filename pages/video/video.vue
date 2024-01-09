@@ -279,9 +279,9 @@ export default {
         .dplayer-played{
             height: 4px !important;
             border-radius: 2px;
-            background:  #FF5502 !important;
+            background:  #FFE500 !important;
             .dplayer-thumb{
-                background:  #FF5502 !important;
+                background:  #FFE500 !important;
             }
         }
     }

@@ -43,17 +43,22 @@ export default function ({ app, $axios, store }, inject) {
     if (process.client) {
       let location = localStorage.getItem('location') 
       if( !location ){
-        location = 'US'
-        localStorage.setItem('location', 'US')
+        location = 'US1'
+        localStorage.setItem('location', 'US1')
       }
       config.headers["Request-Country"] = location;
     } else {
-      config.headers["Request-Country"] = "US";
+      config.headers["Request-Country"] = "US1";
     }
     // 中国--返回中国分类数据    Request-Country: CN
     // 日本的 返回日本分类数据  Request-Country: JP
+    // 全球：   Request-Country: US1
     // 其他的选择都是欧美的分类数据   Request-Country: FR
-    if( config.headers["Request-Country"] != 'CN' && config.headers["Request-Country"] != 'JP' ){
+    if( 
+      config.headers["Request-Country"] != 'CN' 
+      && config.headers["Request-Country"] != 'JP'
+      && config.headers["Request-Country"] != 'US1'
+    ){
       config.headers["Request-Country"] = 'FR'
     }
 

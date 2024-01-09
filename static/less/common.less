@@ -11,6 +11,7 @@
   // word-break: break-word; 
 }
 
+
 html,body{
 width: 100%;
 background: var(--bg-color1, #0E0E0F);
@@ -37,7 +38,7 @@ text-transform: none;
 }
 
 .van-popup__close-icon{
-color: var(--bg-primary, #FF5502);
+color: var(--bg-primary, #FFE500);
 font-size: 1.5rem;
 font-weight: bold;
 }
@@ -83,8 +84,8 @@ display: flex;
 justify-content: center;
 }
 .van-checkbox__icon--checked .van-icon{
-background-color: var(--bg-primary, #FF5502);
-border-color: var(--bg-primary, #FF5502);
+background-color: var(--bg-primary, #FFE500);
+border-color: var(--bg-primary, #FFE500);
 }
 .van-dialog{
 background-color: var(--dialog-bg-color, #18181C);
@@ -100,7 +101,7 @@ margin-left: 24px;
 .van-dialog__confirm{
 width: 143px;
 height: 40px;
-background-color: var(--bg-primary, #FF5502);
+background-color: var(--bg-primary, #FFE500);
 border-radius: 20px;
 color: var(--dialog-text-color, #FFFFFF);
 margin-bottom: 16px;
@@ -285,15 +286,63 @@ text-transform: capitalize;
   background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
 }
 .van-pagination__item--active{
-  border: 1px solid var(--bg-primary, #FF5502);
+  border: 1px solid var(--bg-primary, #FFE500);
   background-color: var(--bg-color1, #0E0E0F);
 }
 .van-pagination__next, .van-pagination__prev{
-  background-color: var(--bg-primary, #FF5502);
+  background-color: var(--bg-primary, #FFE500);
   color: #181e2a;
   width: 51px;
   height: 24px;
 }
 #talkhub-click-to-call-browser-extension{
   display: none;
+}  
+/*footer-police*/
+.police{
+  padding-top: 98px;
+  margin: 0 12px;
+  .police-title{
+    color: var(--bg-secondry, #FD46F6);
+    font-size: 16px;
+  }
+  .police-title-title{
+    font-size: 16px;
+    color: var(--text-color1, #FFFFFF);;
+    margin-top: 16px;
+    margin-bottom: -8px;
+  }
+  .police-title-text{
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  .police-text-content{
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-color1, #FFFFFF);;
+    margin-top: 16px;
+    margin-bottom: 12px;
+  }
+  .police-text-content-prev{
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-color1, #FFFFFF);;
+    margin-top: 16px;
+  }
+  .police-text-content-next{
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-color1, #FFFFFF);;
+  }
+  .police-text-content-next-next{
+    margin-left: 20px;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-color1, #FFFFFF);;
+  }
+  .footer-red{
+    color: red;
+  }
 }

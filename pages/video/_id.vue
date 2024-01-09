@@ -8,8 +8,8 @@
             </client-only>
             
             <van-loading 
-                color="var(--bg-primary, #FF5502)" 
-                text-color="var(--bg-primary, #FF5502)" 
+                color="var(--bg-primary, #FFE500)" 
+                text-color="var(--bg-primary, #FFE500)" 
                 v-else 
                 type="spinner" 
                 vertical>
@@ -166,7 +166,7 @@ export default {
         return {
             activeNav: 'about',
             videoInfo: {
-                tags: []
+                tags: [],
             },
 
             videoStatus:{},
@@ -223,21 +223,17 @@ export default {
       }
     },
     async asyncData({ $videoApi, params }) {
-        // const vodChangePage = {
-        //     size: 20,
-        //     page: 1
-        // }
         const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
-        // const res = await $videoApi.requestVodChange({ 
-        //     ...vodChangePage,
-        //     typeId: res1.data.typeId,
-        //     excludes: params.id,
-        // })
-        console.log(res1.data, 'requestVodChange')
+        const seo = res1.data.seo ? res1.data.seo : {
+                        description: "",
+                        keywords: "",
+                        title: "",
+                    }
         return { 
-            videoInfo: res1.data,
-            // vodChange: res.data.data,
-            // vodChangePage: vodChangePage
+            videoInfo: {
+                ...res1.data,
+                seo: seo,
+            },
         }
     },
 
@@ -468,6 +464,7 @@ export default {
                             // const num = Number(this.videoStatus.vodUp) - 1;
                             // this.$set(this.videoStatus, "vodUp", num)
                             this.getVodState(vodId)
+                            this.getVideo(vodId);
                         } else{
                             this.$set(this.videoStatus, "up", true)
                         }
@@ -496,6 +493,7 @@ export default {
                         // const num = Number(this.videoStatus.vodUp) + 1;
                         // this.$set(this.videoStatus, "vodUp", num);
                         this.getVodState(vodId)
+                        this.getVideo(vodId);
                     }else{
                         this.$set(this.videoStatus, "up", false);
                     }
@@ -573,6 +571,7 @@ export default {
                             // const num = Number(this.videoStatus.vodDown) - 1;
                             // this.$set(this.videoStatus, "vodDown", num)
                             this.getVodState(vodId)
+                            this.getVideo(vodId);
                         } else {
                             this.$set(this.videoStatus, "down", true)
                         }
@@ -596,6 +595,7 @@ export default {
                             // const num = Number(this.videoStatus.vodDown) + 1;
                             // this.$set(this.videoStatus, "vodDown", num)
                             this.getVodState(vodId)
+                            this.getVideo(vodId);
                         } else{
                             this.$set(this.videoStatus, "down", false)
                         }
@@ -755,7 +755,7 @@ export default {
         }
         .van-tabs__line{
             transform: translateX(40px);
-            background-color: #FF5502;
+            background-color: #FFE500;
             width: 20px;
             height: 2px;
         }
@@ -959,7 +959,7 @@ export default {
         height: 32px;
         text-align: center;
         line-height: 32px;
-        background-color: var(--bg-primary, #FF5502);
+        background-color: var(--bg-primary, #FFE500);
         color: var(--text-color1, #FFFFFF);
         font-size: 14px;
         cursor: pointer;
