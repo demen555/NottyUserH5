@@ -44,9 +44,9 @@ if( w3counterSrc ){
   document.head.appendChild(script);
 }
 
-if(process.client){
-  LA.init({id:"KJ6udZDKXOfgil91",ck:"KJ6udZDKXOfgil91"})
-}
+
+LA.init({id:"KJ6udZDKXOfgil91",ck:"KJ6udZDKXOfgil91"})
+
 
 
 
