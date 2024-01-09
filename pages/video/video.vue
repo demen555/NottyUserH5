@@ -89,7 +89,6 @@ export default {
             this.dp = new DPlayer({
                 element: this.$refs.player,
                 lang: 'en',
-                playbackSpeed: [0.5, 0.75, 1, 1.25, 1.5, 2], // 设置可选的倍速数组
                 video: {
                     pic: videoInfo.vodPicThumb, 
                     url: vodPlayUrl(videoInfo.vodPlayUrl),
@@ -331,6 +330,43 @@ export default {
     }
     .dplayer-controller{
         padding: 0;
+        .dplayer-icons-right{
+           position: absolute;
+           top: 0;
+           right: 0;
+        }
+        .dplayer-icons-left{
+            position: absolute;
+            left: 50%;
+            bottom: 28px;
+            transform: translateX(-50%);
+            .dplayer-time{
+                color: #FFF;
+                text-align: center;
+                text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.20);
+                font-family: PingFang SC;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 16px; /* 114.286% */
+            }
+        }
+        .dplayer-bar-wrap{
+            width: 100%;
+            border-radius: 0;
+            height: 2px !important;
+            bottom: 0;
+            .dplayer-bar{
+                height: 2px !important;
+            }
+            .dplayer-loaded{
+                height: 2px !important;
+            }
+            .dplayer-played{
+                height: 4px !important;
+                border-radius: 2px;
+            }
+        }
     }
 }
 
