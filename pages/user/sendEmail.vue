@@ -7,12 +7,15 @@
         
         <div class="user-lable">
             <img :src="themeChecked ? require('~/static/images/login_email_1.svg'): require('~/static/images/login_email.svg')">
+            <label for="email">
             <input 
                 @blur="validatorEmail"
                 v-model="form.email" 
-                class="input" 
+                class="input"
+                id="email"
                 :placeholder="$t('str_email')" 
                 type="text">
+            </label>
         </div>
         <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
 

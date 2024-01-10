@@ -6,23 +6,29 @@
 
         <div class="user-lable">
             <img class="img" :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')">
+            <label for="password">
             <input 
                 @blur="validatorPassword"
                 v-model="form.password" 
-                class="input" 
+                class="input"
+                id="password"
                 :placeholder="$t('str_input_new_pwd')" 
                 type="text">
+            </label>
         </div>
         <div class="error-msg" v-show="password.showError">{{ password.errorMsg }}</div>
 
         <div class="user-lable">
             <img class="img" :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')">
+            <label for="password1">
             <input 
                 @blur="validatorPassword1"
                 v-model="form.password1"
-                class="input" 
+                class="input"
+                id="password1"
                 :placeholder="$t('str_input_new_pwd_again')" 
                 type="text">
+            </label>
         </div>
         <div class="error-msg" v-show="password1.showError">{{ password1.errorMsg }}</div>
 
