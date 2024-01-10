@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="controller-notice" v-show="showNotice">
-            2X{{ $t('str_playing') }}
+            2X
         </div>
     </div>
 </template>
@@ -154,6 +154,10 @@ export default {
                     'value': videoWatchTimeInSeconds
                 });
             });
+
+            this.dp.on('thumbnails_hide', (e) => {
+                console.log( e )
+            }) 
 
             // 目标元素
             const targetElement = document.getElementById('dplayer');
@@ -439,13 +443,13 @@ export default {
         .dplayer-bar-wrap{
             width: 100%;
             border-radius: 0;
-            height: 2px !important;
+            height: 4px !important;
             bottom: 0;
             .dplayer-bar{
-                height: 2px !important;
+                height: 4px !important;
             }
             .dplayer-loaded{
-                height: 2px !important;
+                height: 4px !important;
             }
             .dplayer-played{
                 height: 4px !important;
