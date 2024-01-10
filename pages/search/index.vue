@@ -14,7 +14,7 @@
       <div class="search-cancel" @click="handleGoHome">{{ $t('str_cancel') }}</div>
     </div>
     <main v-show="searchShow">
-      <template v-if="!noResultShow">
+      <template>
         <div class="search-card">
           <div class="search-card-top">
             <div class="search-title">{{ $t('str_search_his_title') }}</div>
@@ -48,7 +48,7 @@
         </div>
       </template>
       <!-- 无搜索结果 -->
-      <template v-else>
+      <!-- <template v-else>
         <div class="no-match">{{ $t('str_related_no') }}</div>
         <div class="no-match-link">
           <div class="no-match-title">{{ $t('str_related_videos') }}</div>
@@ -59,7 +59,7 @@
             <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
           </div>
         </div>
-      </template>
+      </template> -->
     </main>
     <main v-show="!searchShow">
       <!-- 有搜索结果 -->
@@ -76,13 +76,26 @@
               :finished-text="$t('str_no_more')"
               @load="onLoad"
               :immediate-check="false"
-              :offset="10"
+              :offset="30"
             >
               <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
             </van-list>
           </van-pull-refresh>
         </template>
-        <Empty v-else></Empty>
+        <template v-else>
+          <div class="no-match-empty"><img src="~/static/images/com_qsy_nothing.svg" alt="com_qsy_nothing"></div>
+          <div class="no-match">{{ $t('str_related_no') }}</div>
+          <div class="no-match-link">
+            <div class="no-match-title">{{ $t('str_related_videos') }}</div>
+            <div class="loading-box" style="margin-top: -45px;" v-if="relatedLoading">
+              <cardLoad></cardLoad>
+            </div>
+            <div class="no-match-list">
+              <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
+            </div>
+          </div>
+        </template>
+        <!-- <Empty v-else></Empty> -->
       </div>
     </main>
   </div>
@@ -112,7 +125,8 @@ data() {
       page: 1,
       size: 20,
       total: 0
-    }
+    },
+    relatedLoading: false
   }
 },
 mixins: [commonMinxin],
@@ -123,6 +137,10 @@ computed: {
   },
 },
 created(){
+  this.set_show(true)
+  // if(process.client) {
+  //   this.search = localStorage.getItem('search') || '-'
+  // }
   this.getHistoryList()
   this.initKyesList()
   console.log(1111)
@@ -131,14 +149,14 @@ components: {
   Cover,
   Empty
 },
-activated(){
-  const isRefresh = this.$route.params.refresh;
-  if( isRefresh ){
-    this.search = ''
-    this.set_show(true)
-    this.handleFocus();
-  }
-},
+// activated(){
+//   const isRefresh = this.$route.params.refresh;
+//   if( isRefresh ){
+//     this.search = ''
+//     this.set_show(true)
+//     this.handleFocus();
+//   }
+// },
 
 watch: {
   searchShow(val){
@@ -204,6 +222,7 @@ methods: {
             const index = Math.floor(Math.random() * arr.length); // 生成随机索引值
             randomArr.push(arr[index]); // 将随机选取的对象添加到新数组中
         }
+        console.log(randomArr, 'randomArr')
         this.relatedList = randomArr
       }
     } catch (error) {
@@ -233,12 +252,12 @@ methods: {
         if (!data) return this.loading = false
         this.pageInfo.total = data.meta.pagination.total
         if(data.meta.pagination.total == 0) {
-          this.noResultShow = true
-          this.set_show(true)
+          // this.noResultShow = true
+          // this.set_show(true)
           this.getRelatedList()
         } else {
-          this.noResultShow = false
-          this.set_show(false)
+          // this.noResultShow = false
+          // this.set_show(false)
         }
         if(isRefresh){
           // this.dataList = [ ...body.records, ...this.dataList ]
@@ -276,9 +295,12 @@ methods: {
     if(this.search){
       this.historyList.unshift(this.search)
       this.historyList = Array.from(new Set(this.historyList))
-      localStorage.setItem('historyList', JSON.stringify(this.historyList))
+      if(process.client){
+        localStorage.setItem('historyList', JSON.stringify(this.historyList))
+        // localStorage.setItem('search', this.search)
+      }
       // this.handleReset()
-      // this.set_show(false)
+      this.set_show(false)
       this.handleGoToResult(this.search)
       this.$refs.searchRef.blur();//关闭手机软键盘
       // this.handleReset()
@@ -310,8 +332,11 @@ methods: {
     this.search = search
     this.historyList.unshift(this.search)
     this.historyList = Array.from(new Set(this.historyList))
-    localStorage.setItem('historyList', JSON.stringify(this.historyList))
-    // this.set_show(false)
+    if(process.client){
+      localStorage.setItem('historyList', JSON.stringify(this.historyList))
+      // localStorage.setItem('search', this.search)
+    }
+    this.set_show(false)
     this.initSearchVideoList('first')
   },
   handleGoHome(){
@@ -339,7 +364,12 @@ methods: {
 }
 .no-match{
   text-align: center;
-  padding-top: 16px;
+  // padding-top: 16px;
+}
+.no-match-empty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .no-match-link{
   margin-top: 40px;

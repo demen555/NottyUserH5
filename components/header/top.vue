@@ -418,6 +418,7 @@ export default {
       this.showRightPop = false
     },
     handleGoPage(val){
+      console.log(this.$route.name, 'route')
       if( val == "collect" && !this.isLogin ){
         return this.$refs.dialogLoginRef.onShow()
       }
@@ -431,13 +432,9 @@ export default {
         this.$refs.dialogLineRef.onLineShow()
       } else if (val === 'search') {
         this.set_show(true)
-        if(this.$route.name === 'search') {
+        if(['search___en', 'search___pt'].includes(this.$route.name)) {
           this.set_show(true)
           // this.handleScroll()
-        }else{
-          this.$router.push(this.localePath({name: val,  params:{
-            refresh: true,
-          }}))
         }
       } else {
         this.$router.push(this.localePath(val))
