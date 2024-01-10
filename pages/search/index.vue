@@ -87,9 +87,9 @@
           <div class="no-match">{{ $t('str_related_no') }}</div>
           <div class="no-match-link">
             <div class="no-match-title">{{ $t('str_related_videos') }}</div>
-            <div class="loading-box" style="margin-top: -45px;" v-if="relatedLoading">
+            <!-- <div class="loading-box" style="margin-top: -45px;" v-if="relatedLoading">
               <cardLoad></cardLoad>
-            </div>
+            </div> -->
             <div class="no-match-list">
               <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
             </div>
@@ -228,6 +228,7 @@ methods: {
     } catch (error) {
       console.error(error)
     } finally {
+      this.spainnerLoading = false
       this.relatedLoading = false
     }
   },
@@ -248,14 +249,15 @@ methods: {
       const { code, data = {} } = res
       console.log(code, data, 111)
       if(code === 100){
-        
         if (!data) return this.loading = false
         this.pageInfo.total = data.meta.pagination.total
         if(data.meta.pagination.total == 0) {
           // this.noResultShow = true
           // this.set_show(true)
           this.getRelatedList()
+          this.spainnerLoading = true
         } else {
+          this.spainnerLoading = false
           // this.noResultShow = false
           // this.set_show(false)
         }
@@ -281,7 +283,6 @@ methods: {
     } catch (error) {
       console.error(error)
     } finally {
-      this.spainnerLoading = false
       this.refreshing = false
       this.loading = false
     }
