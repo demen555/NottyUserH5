@@ -293,6 +293,8 @@
 "str_add": "Adicionar",
 "str_suggest": "Sugerir",
 "str_suggest_suc": "Envio com sucesso ",
-"tag_suggest_success_tip": "Obrigado pela contribuição. Os nomes das tags são adicionados quando um número suficiente de usuários diferentes envia o mesmo nome de tag "
+"tag_suggest_success_tip": "Obrigado pela contribuição. Os nomes das tags são adicionados quando um número suficiente de usuários diferentes envia o mesmo nome de tag ",
+
+"str_playing": "Reproduzindo"
 
 }

@@ -288,5 +288,8 @@
 "str_add": "Add",
 "str_suggest": "Suggest",
 "str_suggest_suc": "Submission successfully",
-"tag_suggest_success_tip": "Thank you for contribution. Tag names are added once enough different users submit the same tag name"
+"tag_suggest_success_tip": "Thank you for contribution. Tag names are added once enough different users submit the same tag name",
+
+
+"str_playing": "Playing"
 }
