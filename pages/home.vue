@@ -47,6 +47,12 @@
 
       </div>
     </div>
+    <div class="sticky-upload" v-show="showSticky">
+      <div class="sticky-close" @click="handleClose"></div>
+      <a href="https://t.me/+UClKi43iLeFkYzA1" target="_blank">
+        <img :src="require('~/static/images/upload.svg')" alt="upload">
+      </a>
+    </div>
   </div>
 </template>
 <script>
@@ -79,7 +85,8 @@ data() {
       { name: this.$t('str_footer_nav9'), id: 'policy-faq'},
       { name: this.$t('str_footer_nav10'), id: 'policy-eu'},
     ],
-    hostname: ''
+    hostname: '',
+    showSticky: true
   }
 },
 computed: {
@@ -130,6 +137,9 @@ watch: {
 //   return { dataList: data.data }
 // },
 methods: {
+  handleClose(){
+    this.showSticky = false
+  },
   handlePage(val){
     this.pageInfo.page = val
     this.getList();
@@ -232,5 +242,19 @@ overflow: visible;
 .pagination{
   margin-top: 12px !important;
   margin-bottom: 12px !important;
+}
+.sticky-upload{
+  position: fixed;
+  right: 12px;
+  bottom: 35px;
+  z-index: 999;
+  .sticky-close{
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }
 </style>
