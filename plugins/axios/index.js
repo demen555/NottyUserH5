@@ -71,7 +71,7 @@ export default function ({ app, $axios, store }, inject) {
   });
 
   $axios.onResponse((response) => {
-    console.log(response, 'onResponse')
+    // console.log(response, 'onResponse')
     codeToast(response.data.code, app, store)
     if ([200000, 200101, 200102, 200].includes(response.data.code)) {
       response.data.code = 100

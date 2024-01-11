@@ -167,7 +167,7 @@ methods: {
       if(code == CODES.SUCCESS && data){
         this.pageInfo.total = data.meta.pagination.total
         this.dataList = data.data
-        console.log( code, data, this.dataList, 'data' )
+        // console.log( code, data, this.dataList, 'data' )
       }
     } catch (error) {
       console.error(error)

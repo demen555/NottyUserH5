@@ -149,7 +149,7 @@
             this.code = res.data.img
             this.form.key = res.data.key
           }
-          console.log(res, '666')
+          // console.log(res, '666')
         } catch (error) {
           console.error(error)
         }

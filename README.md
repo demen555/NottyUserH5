@@ -16,4 +16,7 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
-
+"dev": "nuxt --hostname 0.0.0.0 --port 3000",
+"build": "nuxt build",
+"start": "nuxt start --hostname 0.0.0.0 --port 3000",
+"generate": "nuxt generate"

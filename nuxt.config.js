@@ -1,6 +1,8 @@
 const CompressionPlugin = require('compression-webpack-plugin');
 
-export default {
+module.exports = {
+  telemetry: false,
+  dev: process.env.NODE_ENV === "development",
   vue: {
     config: {
       productionTip: true,
@@ -708,4 +710,15 @@ export default {
     },
 
   },
+
+  serverMiddleware: [
+    {
+      path: '/en/home',
+      handler: '~/middleware/cache.js'
+    },
+    {
+      path: '/pt/home',
+      handler: '~/middleware/cache.js'
+    }
+  ],
 }
