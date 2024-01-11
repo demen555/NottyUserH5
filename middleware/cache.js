@@ -1,13 +1,8 @@
-const LRU = require('lru-cache');
-
-export const cachePage = new LRU({
-  max: 100, 
-  maxAge: 1000 * 60 * 15, 
-});
+const cachePage = require('../lruCache.js');
 export default function(req, res, next) {
   const url = req._parsedOriginalUrl;
   const pathname = url.pathname;
-  console.log( url.pathname, "缓存的页面", cachePage.get('indexPage'), pathname.indexOf('/home') )
+  // console.log( url.pathname, "缓存的页面", cachePage.get('indexPage'), pathname.indexOf('/home') )
   // if (process.env.NODE_ENV !== 'development') {
     if (pathname.indexOf('/home') > -1) {
       const existsHtml = cachePage.get('indexPage');

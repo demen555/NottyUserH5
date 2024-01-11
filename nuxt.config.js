@@ -719,6 +719,6 @@ module.exports = {
     {
       path: '/pt/home',
       handler: '~/middleware/cache.js'
-    }
+    },
   ],
 }

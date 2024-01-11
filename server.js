@@ -3,6 +3,8 @@ const app = require('express')();
 const dotenv = require('dotenv');
 dotenv.config();
 
+const cachePage = require('./lruCache.js')
+
 // 传入配置初始化 Nuxt.js 实例
 const config = require('./nuxt.config.js')
 
@@ -10,10 +12,10 @@ async function start(){
   const nuxt = new Nuxt(config);
 
   // 刷新缓存接口
-  // app.get('/refreshCache', (req, res, next) => {
-  //   cachePage.set('index', null)
-  //   res.sendStatus(200)
-  // })
+  app.get('/refreshCache', (req, res, next) => {
+    cachePage.reset()
+    res.sendStatus(200)
+  })
 
   await nuxt.ready();
 
