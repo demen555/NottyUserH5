@@ -49,6 +49,7 @@
     </div>
     <div class="sticky-upload" v-show="showSticky">
       <div class="sticky-close" @click="handleClose"></div>
+      <div class="sticky-text">{{ $t('str_page_text4') }}</div>
       <a href="https://t.me/+UClKi43iLeFkYzA1" target="_blank">
         <img :src="require('~/static/images/upload.svg')" alt="upload">
       </a>
@@ -255,6 +256,14 @@ overflow: visible;
     position: absolute;
     right: 0;
     top: 0;
+  }
+  .sticky-text{
+    position: absolute;
+    left: 5px;
+    bottom: 15px;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--text-color1, #181E2A);
   }
 }
 </style>
