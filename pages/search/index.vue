@@ -217,13 +217,15 @@ methods: {
         // var arr = [obj1, obj2, ...]; // 这里的 obj1、obj2 等表示要存放在数组中的对象
         // 创建一个空数组用于保存随机选取的对象
         const arr = data.data
-        const randomArr = [];  
-        for (let i = 0; i < 10; i++) {
-            const index = Math.floor(Math.random() * arr.length); // 生成随机索引值
-            randomArr.push(arr[index]); // 将随机选取的对象添加到新数组中
+        var resultArr = [];
+        while (resultArr.length < 10) {
+            var randomIndex = Math.floor(Math.random() * arr.length);           
+            if (!resultArr.some((item) => item === arr[randomIndex])) {
+                resultArr.push(arr[randomIndex]);
+            }
         }
-        console.log(randomArr, 'randomArr')
-        this.relatedList = randomArr
+        console.log(resultArr, 'resultArr')
+        this.relatedList = resultArr
       }
     } catch (error) {
       console.error(error)
@@ -328,7 +330,12 @@ methods: {
     }
   },
   handleGoToResult(search){
-    console.log(search)
+    console.log(search, 'search')
+    gtag('event', 'view_search_results', {
+        keyword: search,
+    });
+    
+
     this.dataList = []
     this.search = search
     this.historyList.unshift(this.search)
@@ -395,15 +402,15 @@ methods: {
 }
 .search-input{
   width: 294px;
-  background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
+  background-color: var(--bg-color3, rgba(246, 214, 88, 0.1));
   border-radius: 16px;
   text-indent: 2.5em;
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  color: var(--bg-secondry,  #FD46F6);
   height: 32px;
-  border: none;
+  border: 1PX solid var(--bg-primary, #FFE500);
 }
 input::placeholder{
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  color: var(--bg-secondry,  #FD46F6);
 }
 .com-sousuo{
   position: absolute;
