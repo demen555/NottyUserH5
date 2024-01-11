@@ -45,8 +45,6 @@ if( w3counterSrc ){
 }
 
 
-LA.init({id:"KJ6udZDKXOfgil91",ck:"KJ6udZDKXOfgil91"})
-
 
 
 
