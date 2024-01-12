@@ -34,15 +34,20 @@
         <div class="controller-notice" v-show="showNotice">
             2X
         </div>
-        <div class="video-next">
+        <div class="video-next" v-if="showNext">
             <div class="next-mask">
-                <div class="next-refresh">
+                <div class="next-refresh" @click.stop="initStart()">
                     <div class="refresh-icon"></div>
                     <div class="refresh-btn">Replay</div>
                 </div>
-                <div class="next-av">
-
-                </div>
+                <nuxt-link class="next-av" v-if="nextAv()" :to="localePath({
+                    name: 'video-id',
+                    params: { id: nextAv().vodId }
+                })">
+                    <img class="vodPic" :src="nextAv().vodPic" alt="vodPic">
+                    <div class="vodName">{{ nextAv().vodName }} </div>
+                    <div class="next"></div>
+                </nuxt-link>
             </div>
         </div>
     </div>
@@ -84,7 +89,9 @@ export default {
             nowSpeed: 1,
             speedStatus: false,
 
-            showNotice: false
+            showNotice: false,
+
+            showNext: false,
         }
     },
     props:{
@@ -92,6 +99,10 @@ export default {
             type: Object,
             default: () => {}
         },
+        vodChange:{
+            type: Array,
+            default: () => []
+        }
     },
     mounted(){
         this.loadVideo();
@@ -170,6 +181,11 @@ export default {
                 console.log( e )
             }) 
 
+
+            this.dp.on('ended', (e) => {
+                this.showNext = true;
+            })
+
             // 目标元素
             const targetElement = document.getElementById('dplayer');
 
@@ -203,6 +219,12 @@ export default {
             this.dp.speed(item)
         },
 
+        initStart(){
+            this.dp.seek(0)
+            this.showNext = false;
+            this.dp.play();
+        },
+
         handleTouchStart() {
             this.pressTimer = setTimeout(() => {
                 this.dp.speed(2)
@@ -217,6 +239,10 @@ export default {
             this.showNotice = false
         },
 
+        nextAv(){
+            let randomIndex = Math.floor(Math.random() * this.vodChange.length);
+            return this.vodChange[randomIndex]
+        },  
 
         handleClickDebounce: debounce(function () {
             this.dp.seek(this.dp.video.currentTime + this.seekTime); // 快进 10 秒
@@ -618,6 +644,37 @@ export default {
         height: 130px;
         background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
         border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+        .vodPic{
+            display: block;
+            width: 180px;
+            height: 102px;
+        }
+        .vodName{
+            width: 180px;
+            height: 28px;
+            padding: 0 8px;
+            line-height: 28px;
+            color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+            font-family: PingFang SC;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            overflow:hidden; //超出的文本隐藏
+            text-overflow:ellipsis; //溢出用省略号显示
+            white-space:nowrap; //溢出不换行
+        }
+        .next{
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 32px;
+            background: url("~~/static/images/bfq_next.png");
+            background-size: 100% 100%;
+        }
     }
 }
 
