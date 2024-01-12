@@ -2,7 +2,7 @@ const cachePage = require('../lruCache.js');
 export default function(req, res, next) {
   const url = req._parsedOriginalUrl;
   const pathname = url.pathname;
-  // console.log( url.pathname, "缓存的页面", cachePage.get('indexPage'), pathname.indexOf('/home') )
+  console.log( url.pathname, "缓存的页面", Boolean(cachePage.get('indexPage')))
   // if (process.env.NODE_ENV !== 'development') {
     if (pathname.indexOf('/home') > -1) {
       const existsHtml = cachePage.get('indexPage');
