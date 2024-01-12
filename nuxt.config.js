@@ -535,7 +535,8 @@ export default {
   css: [
     'vant/lib/index.css',
     '~/static/less/common.less',
-    '~/static/less/theme.less'
+    '~/static/less/theme.less',
+    // '~/static/less/pc.less'
   ],
   plugins: [
     '~/plugins/utils.js',
@@ -622,11 +623,13 @@ export default {
             minPixelValue: 1, // 小于1px不转换
             mediaQuery: false, // 允许在媒体查询中转换px
           },
-          // 'postcss-mobile-forever': {
-          //   "viewportWidth": 750,
-          //   "appSelector": "#__nuxt",
-          //   "maxDisplayWidth": 600
-          // },
+          'postcss-mobile-forever': {
+            // "disableMobile": true, // 设置为 false 表示只在非移动端生效
+            "viewportWidth": 750,
+            "appSelector": "#__nuxt",
+            // "maxDisplayWidth": 600,
+            "enableMediaQuery": true,
+          },
           'postcss-css-variables': {},
           'postcss-import': {},
           'postcss-preset-env': {
