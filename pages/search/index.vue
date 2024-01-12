@@ -14,39 +14,55 @@
       <div class="search-cancel" @click="handleGoHome">{{ $t('str_cancel') }}</div>
     </div>
     <main v-show="searchShow">
-      <div class="search-card">
-        <div class="search-card-top">
-          <div class="search-title">{{ $t('str_search_his_title') }}</div>
-          <div class="search-clear" @click="handleClearCurrentHistory">{{ $t('str_search_clear') }}</div>
-        </div>
-        <div class="search-list-new">
-          <div  class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
-            <div @click="handleGoToResult(item)" >{{ item }}</div>
-            <img @click="handleClearHistory(index)" class="header-common svg-icon" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+      <template>
+        <div class="search-card">
+          <div class="search-card-top">
+            <div class="search-title">{{ $t('str_search_his_title') }}</div>
+            <div class="search-clear" @click="handleClearCurrentHistory">{{ $t('str_search_clear') }}</div>
           </div>
+          <div class="search-list-new">
+            <div  class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
+              <div @click="handleGoToResult(item)" >{{ item }}</div>
+              <img @click="handleClearHistory(index)" class="header-common svg-icon" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+            </div>
+          </div>
+          <!-- 第一版 -->
+          <!-- <div class="search-list">
+            <a @click="handleGoToResult(item)" v-for="item in historyList" :key="item">{{ item }}</a>
+          </div> -->
         </div>
-        <!-- 第一版 -->
-        <!-- <div class="search-list">
-          <a @click="handleGoToResult(item)" v-for="item in historyList" :key="item">{{ item }}</a>
-        </div> -->
-      </div>
-      <div class="search-card">
-        <!-- <div class="search-card-top">
+        <div class="search-card">
+          <!-- <div class="search-card-top">
+            <div class="search-title">{{ $t('str_rec_title') }}</div>
+          </div>
+          <div class="search-list-new">
+            <div  class="search-list-li" v-for="item in keysList" :key="item.searchKey">
+              <div @click="handleGoToResult(item.searchWord)" >{{ item.searchWord }}</div>
+            </div>
+          </div> -->
+          <!-- 第一版 -->
           <div class="search-title">{{ $t('str_rec_title') }}</div>
-        </div>
-        <div class="search-list-new">
-          <div  class="search-list-li" v-for="item in keysList" :key="item.searchKey">
-            <div @click="handleGoToResult(item.searchWord)" >{{ item.searchWord }}</div>
+          <div class="search-list">
+            <a @click="handleGoToResult(item)" v-for="(item, index) in keysList" :key="index">{{ item }}</a>
           </div>
-        </div> -->
-        <!-- 第一版 -->
-        <div class="search-title">{{ $t('str_rec_title') }}</div>
-        <div class="search-list">
-          <a @click="handleGoToResult(item)" v-for="(item, index) in keysList" :key="index">{{ item }}</a>
         </div>
-      </div>
+      </template>
+      <!-- 无搜索结果 -->
+      <!-- <template v-else>
+        <div class="no-match">{{ $t('str_related_no') }}</div>
+        <div class="no-match-link">
+          <div class="no-match-title">{{ $t('str_related_videos') }}</div>
+          <div class="loading-box" style="margin-top: -45px;" v-if="relatedLoading">
+            <cardLoad></cardLoad>
+          </div>
+          <div class="no-match-list">
+            <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
+          </div>
+        </div>
+      </template> -->
     </main>
     <main v-show="!searchShow">
+      <!-- 有搜索结果 -->
       <div class="search-result" id="searchName">{{ search }}</div>
       <div class="loading-box" style="margin-top: 40px;" v-if="spainnerLoading">
         <cardLoad></cardLoad>
@@ -60,13 +76,26 @@
               :finished-text="$t('str_no_more')"
               @load="onLoad"
               :immediate-check="false"
-              :offset="10"
+              :offset="30"
             >
               <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
             </van-list>
           </van-pull-refresh>
         </template>
-        <Empty v-else></Empty>
+        <template v-else>
+          <div class="no-match-empty"><img src="~/static/images/com_qsy_nothing.svg" alt="com_qsy_nothing"></div>
+          <div class="no-match">{{ $t('str_related_no') }}</div>
+          <div class="no-match-link">
+            <div class="no-match-title">{{ $t('str_related_videos') }}</div>
+            <!-- <div class="loading-box" style="margin-top: -45px;" v-if="relatedLoading">
+              <cardLoad></cardLoad>
+            </div> -->
+            <div class="no-match-list">
+              <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
+            </div>
+          </div>
+        </template>
+        <!-- <Empty v-else></Empty> -->
       </div>
     </main>
   </div>
@@ -76,6 +105,7 @@ import { mapGetters, mapActions } from 'vuex'
 import commonMinxin from '~/plugins/mixins/common'
 import Cover from '@/components/cover'
 import Empty from '@/components/empty'
+import CODES from "~/plugins/enums/codes"
 import { uniArray } from '@/utils/format.js'
 export default{
 data() {
@@ -84,16 +114,19 @@ data() {
     keysList: [],
     historyList: [],
     historyList1: [],
+    noResultShow: false, //没有搜索结果阀值
     loading: true, // 是否处于加载状态
     finished: false, // 是否加载完成
     refreshing: false, // 当前是否刷新重置信息
     spainnerLoading: false, //骨架屏
     dataList: [],
+    relatedList: [], //相关推荐数据
     pageInfo: {
       page: 1,
       size: 20,
       total: 0
-    }
+    },
+    relatedLoading: false
   }
 },
 mixins: [commonMinxin],
@@ -104,6 +137,10 @@ computed: {
   },
 },
 created(){
+  this.set_show(true)
+  // if(process.client) {
+  //   this.search = localStorage.getItem('search') || '-'
+  // }
   this.getHistoryList()
   this.initKyesList()
   console.log(1111)
@@ -112,14 +149,14 @@ components: {
   Cover,
   Empty
 },
-activated(){
-  const isRefresh = this.$route.params.refresh;
-  if( isRefresh ){
-    this.search = ''
-    this.set_show(true)
-    this.handleFocus();
-  }
-},
+// activated(){
+//   const isRefresh = this.$route.params.refresh;
+//   if( isRefresh ){
+//     this.search = ''
+//     this.set_show(true)
+//     this.handleFocus();
+//   }
+// },
 
 watch: {
   searchShow(val){
@@ -168,6 +205,35 @@ methods: {
     }
     console.log(index, 'index')
   },
+  async getRelatedList(){
+    try {
+      this.relatedLoading = true
+      // this.loading = true
+      const res = await this.$homeApi.requestvodpageHome({ page: this.pageInfo.page, size: 60})
+      const { code, data } = res
+      if(code == CODES.SUCCESS && data){
+        // this.relatedList = data.data
+        // 定义一个包含多个对象的数组
+        // var arr = [obj1, obj2, ...]; // 这里的 obj1、obj2 等表示要存放在数组中的对象
+        // 创建一个空数组用于保存随机选取的对象
+        const arr = data.data
+        var resultArr = [];
+        while (resultArr.length < 10) {
+            var randomIndex = Math.floor(Math.random() * arr.length);           
+            if (!resultArr.some((item) => item === arr[randomIndex])) {
+                resultArr.push(arr[randomIndex]);
+            }
+        }
+        console.log(resultArr, 'resultArr')
+        this.relatedList = resultArr
+      }
+    } catch (error) {
+      console.error(error)
+    } finally {
+      this.spainnerLoading = false
+      this.relatedLoading = false
+    }
+  },
   async initSearchVideoList(isRefresh){
     try {
       isRefresh === 'first' && (this.spainnerLoading = true)
@@ -185,9 +251,18 @@ methods: {
       const { code, data = {} } = res
       console.log(code, data, 111)
       if(code === 100){
-        
         if (!data) return this.loading = false
         this.pageInfo.total = data.meta.pagination.total
+        if(data.meta.pagination.total == 0) {
+          // this.noResultShow = true
+          // this.set_show(true)
+          this.getRelatedList()
+          this.spainnerLoading = true
+        } else {
+          this.spainnerLoading = false
+          // this.noResultShow = false
+          // this.set_show(false)
+        }
         if(isRefresh){
           // this.dataList = [ ...body.records, ...this.dataList ]
           this.dataList = data.data || []
@@ -210,7 +285,6 @@ methods: {
     } catch (error) {
       console.error(error)
     } finally {
-      this.spainnerLoading = false
       this.refreshing = false
       this.loading = false
     }
@@ -224,7 +298,10 @@ methods: {
     if(this.search){
       this.historyList.unshift(this.search)
       this.historyList = Array.from(new Set(this.historyList))
-      localStorage.setItem('historyList', JSON.stringify(this.historyList))
+      if(process.client){
+        localStorage.setItem('historyList', JSON.stringify(this.historyList))
+        // localStorage.setItem('search', this.search)
+      }
       // this.handleReset()
       this.set_show(false)
       this.handleGoToResult(this.search)
@@ -253,12 +330,20 @@ methods: {
     }
   },
   handleGoToResult(search){
-    console.log(search)
+    console.log(search, 'search')
+    gtag('event', 'view_search_results', {
+        keyword: search,
+    });
+    
+
     this.dataList = []
     this.search = search
     this.historyList.unshift(this.search)
     this.historyList = Array.from(new Set(this.historyList))
-    localStorage.setItem('historyList', JSON.stringify(this.historyList))
+    if(process.client){
+      localStorage.setItem('historyList', JSON.stringify(this.historyList))
+      // localStorage.setItem('search', this.search)
+    }
     this.set_show(false)
     this.initSearchVideoList('first')
   },
@@ -285,6 +370,24 @@ methods: {
     z-index: -1;
   }
 }
+.no-match{
+  text-align: center;
+  // padding-top: 16px;
+}
+.no-match-empty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.no-match-link{
+  margin-top: 40px;
+  .no-match-title{
+    padding-left: 16px;
+  }
+  .no-match-list{
+    margin-bottom: 14px;
+  }
+}
 .search-img{
   width: 16px;
   height: 16px;
@@ -299,15 +402,15 @@ methods: {
 }
 .search-input{
   width: 294px;
-  background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
+  background-color: var(--bg-color3, rgba(246, 214, 88, 0.1));
   border-radius: 16px;
   text-indent: 2.5em;
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  color: var(--bg-secondry,  #FD46F6);
   height: 32px;
-  border: none;
+  border: 1PX solid var(--bg-primary, #FFE500);
 }
 input::placeholder{
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  color: var(--bg-secondry,  #FD46F6);
 }
 .com-sousuo{
   position: absolute;
