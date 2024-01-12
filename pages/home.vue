@@ -25,6 +25,25 @@
           <template #page="{ number,text, active }">{{ handlePage(number, text, active) }}</template>
         </van-pagination> -->
         <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+        <nuxt-link :to="localePath(item.id)" class="home-footer-list" v-for="(item, index) in footerList" :key="index">
+          <div class="home-footer-tag">{{ item.name }}</div>
+          <div class="home-footer-right">
+            <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
+          </div>
+        </nuxt-link>
+        <div class="home-footer-com">  © {{ hostname }}, 2023 </div>
+        <div class="home-footer-icon">
+          <div><img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta"></div>
+          <div>
+            <a href="https://www.facebook.com/nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/facebook_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.instagram.com/nottyhub.club/" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/instagram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.youtube.com/@NottyHub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://twitter.com/nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/twitter_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://www.tiktok.com/@nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/tiktok_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://t.me/+UClKi43iLeFkYzA1" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -49,12 +68,15 @@ data() {
       size: 60
     },
     footerList: [
-      { name: 'CSAM Policy', id: 'policy-csam'},
-      { name: 'Content Removal', id: 'policy-content'},
-      { name: 'DMCA', id: 'policy-terms'},
-      { name: 'NCC Policy', id: 'policy-ncc'},
-      { name: '2257', id: 'policy-2257'},
-      { name: 'EU DSA', id: 'policy-eu'},
+      { name: this.$t('str_footer_nav1'), id: 'policy-csam'},
+      { name: this.$t('str_footer_nav2'), id: 'policy-terms'},
+      { name: this.$t('str_footer_nav3'), id: 'policy-privacy'},
+      { name: this.$t('str_footer_nav4'), id: 'policy-content'},
+      { name: this.$t('str_footer_nav6'), id: 'policy-dmca'},
+      { name: this.$t('str_footer_nav5'), id: 'policy-ncc'},
+      { name: this.$t('str_footer_nav8'), id: 'policy-2257'},
+      { name: this.$t('str_footer_nav9'), id: 'policy-faq'},
+      { name: this.$t('str_footer_nav10'), id: 'policy-eu'},
     ],
     hostname: ''
   }
@@ -107,6 +129,9 @@ watch: {
 //   return { dataList: data.data }
 // },
 methods: {
+  handleGoPage(val){
+    this.$router.push(this.localePath(val))
+  },
   handlePage(val){
     this.pageInfo.page = val
     this.getList();
@@ -126,9 +151,7 @@ methods: {
     // window.scrollTo(0, target.offsetTop - navHeight - 10)
   },
   handleClickPage(name){
-    this.$router.push({
-      name
-    })
+    this.$router.push(this.localePath({name: name }))
   },
   onLoad(){
     this.pageInfo.page += 1
@@ -170,17 +193,47 @@ overflow: visible;
 .video-list{
   // touch-action: none
 }
+
 .home-footer{
-  padding: 0 12px;
+  margin: 0 12px;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
-  // position: fixed;
-  // bottom: 0;
-  // left: 0;
-  // right: 0;
-  // z-index: 9999;
   background-color: var(--bg-color1, #0E0E0F);
-  // padding-bottom: 24px;
+  padding-bottom: 24px;
+  a {
+    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  }
+  .home-footer-list{
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));
+    // border-bottom: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));;
+  }
+  .home-footer-com{
+    font-size: 14px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .home-footer-icon{
+    display: flex;
+    justify-content: space-between;
+    .rta{
+      width: 42px;
+      height: 16px;
+    }
+    .common{
+      width: 16px;
+      height: 16px;
+      margin-left: 12px;
+    }
+  }
 }
+.home-footer-list:nth-last-child(3) {
+  // color: red;
+  border-bottom: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));;
+}
+
 .pagination{
   margin-top: 12px !important;
   margin-bottom: 12px !important;

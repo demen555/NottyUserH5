@@ -24,15 +24,15 @@ export default {
 
     script: [
       {
-        src: "https://cdn.dasao88.com/cdn/hls.min.js",
-        mode: 'client'
-      },
-      {
-        src: "https://cdn.dasao88.com/cdn/DPlayer.min.js",
-        mode: 'client'
-      },
-      {
         src: "https://www.googletagmanager.com/gtag/js",
+        mode: 'client'
+      },
+      {
+        src: "/js/DPlayer.min.js",
+        mode: 'client'
+      },
+      {
+        src: "/js/hls.min.js",
         mode: 'client'
       },
       {
@@ -46,9 +46,6 @@ export default {
         charset: 'UTF-8',
         id: 'LA_COLLECT',
         src: '//sdk.51.la/js-sdk-pro.min.js',
-      },
-      {
-        innerHTML: 'LA.init({id:"KJ6udZDKXOfgil91",ck:"KJ6udZDKXOfgil91"})',
       },
       {
         type: 'application/ld+json',
@@ -507,7 +504,6 @@ export default {
         mode: 'client' 
       },
     ],
-    __dangerouslyDisableSanitizers: ['script'],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui' },
@@ -544,7 +540,8 @@ export default {
   css: [
     'vant/lib/index.css',
     '~/static/less/common.less',
-    '~/static/less/theme.less'
+    '~/static/less/theme.less',
+    // '~/static/less/pc.less'
   ],
   plugins: [
     '~/plugins/utils.js',
@@ -631,11 +628,13 @@ export default {
             minPixelValue: 1, // 小于1px不转换
             mediaQuery: false, // 允许在媒体查询中转换px
           },
-          // 'postcss-mobile-forever': {
-          //   "viewportWidth": 750,
-          //   "appSelector": "#__nuxt",
-          //   "maxDisplayWidth": 600
-          // },
+          'postcss-mobile-forever': {
+            // "disableMobile": true, // 设置为 false 表示只在非移动端生效
+            "viewportWidth": 750,
+            "appSelector": "#__nuxt",
+            // "maxDisplayWidth": 600,
+            "enableMediaQuery": true,
+          },
           'postcss-css-variables': {},
           'postcss-import': {},
           'postcss-preset-env': {

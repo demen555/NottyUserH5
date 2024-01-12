@@ -11,17 +11,23 @@
         <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
           <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_email_1.svg'): require('~/static/images/login_email.svg')" alt="login_email"></div>
-          <input @blur="validatorEmail" v-model="form.email" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_email')" type="text">
+          <label for="email">
+            <input id="email" @blur="validatorEmail" v-model="form.email" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_email')" type="text">
+          </label>
         </div>
         <div class="error-msg" v-show="user.showError">{{ user.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
           <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_zhanghao_1.svg'): require('~/static/images/login_zhanghao.svg')" alt=""></div>
-          <input @blur="validatorUser" v-model="form.username" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_num') +'(' +  $t('str_validator_username') +')'" type="text">
+          <label for="username">
+            <input id="username" @blur="validatorUser" v-model="form.username" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_num') +'(' +  $t('str_validator_username') +')'" type="text">
+          </label>
         </div>
         <div class="error-msg" v-show="pwd.showError">{{ pwd.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
           <div class="dialog-img img-mima"><img  :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
-          <input @blur="validatorPwd" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd') +'(' +  $t('str_validator_username') +')'">
+          <label for="password">
+            <input @blur="validatorPwd" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd') +'(' +  $t('str_validator_username') +')'">
+          </label>  
         </div>
         <!-- <div class="user-center-info-input dialog-input">
           <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
@@ -29,7 +35,9 @@
         </div> -->
         <div class="user-center-info-input input-code">
           <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_yanzhengma_1.svg'): require('~/static/images/login_yanzhengma.svg')"></div>
-          <input  v-model="form.code" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_code')" type="text">
+          <label for="code">
+            <input id="code"  v-model="form.code" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_code')" type="text">
+          </label>
           <div class="user-center-input-code">
             <!-- <img src="~/static/images/code.png" alt=""> -->
             <div class="input-code" @click="initCode">

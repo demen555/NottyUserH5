@@ -120,7 +120,7 @@ export default {
                 element: this.$refs.player,
                 lang: 'en',
                 video: {
-                    pic: videoInfo.vodPicThumb, 
+                    pic: videoInfo.vodPic, 
                     url: vodPlayUrl(videoInfo.vodPlayUrl),
                     autoplay: true,
                     type: 'customHls',
