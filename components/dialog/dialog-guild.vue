@@ -277,4 +277,13 @@ export default {
     font-weight: 400;
   }
 }
+@media screen and (min-width: 420px) {
+  .dialog-text{
+    margin-top: 12px !important;
+    margin-bottom: 8px !important;
+  }
+  .dialog-subtitle{
+    margin-bottom: 35PX !important;
+  }
+}
 </style>
