@@ -124,7 +124,7 @@ methods: {
         .then(async () => {
           // on confirm
           const params = {
-            ids: this.getIds(this.dataList, this.result )
+            ids: this.getIds(this.dataList, this.result ).join(",")
           }
           console.log(params, 'params')
           // if( !this.isLogin ){

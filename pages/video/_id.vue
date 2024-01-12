@@ -431,9 +431,9 @@ export default {
 
         // 点赞 取消点赞 
         setVodUp(){
-            if( !this.isLogin ){
-                return this.goLogin()
-            }
+            // if( !this.isLogin ){
+            //     return this.goLogin()
+            // }
             const vodId = this.$route.params.id;
             const isUpVod = this.isUpVod(this.videoStatus);
             if( this.onClick ){
@@ -541,9 +541,9 @@ export default {
 
         // 点踩
         setVodDown(){
-            if( !this.isLogin ){
-                return this.goLogin()
-            }
+            // if( !this.isLogin ){
+            //     return this.goLogin()
+            // }
             const vodId = this.$route.params.id;
             const isdownVod = this.isdownVod(this.videoStatus);
             if( this.onClick ){

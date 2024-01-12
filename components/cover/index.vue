@@ -1,14 +1,15 @@
 <template>
   <div class="cover" >
-    <nuxt-link class="main-list" :to="localePath({
+    <div class="main-like-radio" v-if="showCheck" @click.stop>
+      <van-checkbox :name="item.vodId" @click.native.stop="()=>{}"></van-checkbox>
+    </div>
+    <nuxt-link class="main-list" @click.prevent :to="localePath({
         name: 'video-id',
         params: { id: item.vodId }
     })">
       <div class="main-list-group" @touchmove="longpressVideo(item)">
         <div class="main-video">
-          <div class="main-like-radio" v-if="showCheck" @click.stop>
-            <van-checkbox :name="item.vodId"></van-checkbox>
-          </div>
+
           <div :class="['main-img', { 'main-img-opacity' : vodId == item.vodId && item.vodPreviewUrl }]" >
            <van-image
               lazy-load
@@ -110,6 +111,9 @@ export default{
 }
 </script>
 <style lang="less" scoped>/*main*/
+.cover{
+  position: relative;
+}
 .main-list{
   width: 100%;
   margin: 0 auto;
