@@ -6,33 +6,42 @@
         <div class="user-line"></div>
         <div class="user-lable">
             <span class="lable">{{ $t('str_original_pwd') }} </span>
+            <label for="oldPassword">
             <input 
                 @blur="validatorPassword1"
                 v-model="form.oldPassword" 
-                class="input" 
+                class="input"
+                id="oldPassword"
                 :placeholder="$t('str_input_original_pwd')" 
                 type="text">
+            </label>
         </div>
         <div class="error-msg" v-show="oldPassword.showError">{{ oldPassword.errorMsg }}</div>
 
         <div class="user-lable">
             <span class="lable">{{ $t('str_new_pwd') }}</span>
+            <label for="newPassword">
             <input
                 @blur="validatorPassword"
                 v-model="form.newPassword" 
-                class="input" 
+                class="input"
+                id="newPassword"
                 :placeholder="$t('str_new_pwd')" 
                 type="text">
+            </label>
         </div>
         <div class="error-msg" v-show="newPassword.showError">{{ newPassword.errorMsg }}</div>
         <div class="user-lable">
             <span class="lable">{{ $t('str_confirm_pwd') }}</span>
+            <label for="newPassword1">
             <input 
                 @blur="validatorPassword2"
                 v-model="form.newPassword1" 
-                class="input" 
+                class="input"
+                id="newPassword1"
                 :placeholder="$t('str_input_new_pwd_again1')" 
                 type="text">
+            </label>
         </div>
         <div class="error-msg" v-show="newPassword1.showError">{{ newPassword1.errorMsg }}</div>
         <div class="user-btn-submit" @click="onClickRight">

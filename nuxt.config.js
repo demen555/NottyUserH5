@@ -53,11 +53,6 @@ module.exports = {
         mode: 'client'
       },
       {
-        charset: 'UTF-8',
-        id: 'LA_COLLECT',
-        src: '//sdk.51.la/js-sdk-pro.min.js',
-      },
-      {
         type: 'application/ld+json',
         innerHTML: JSON.stringify(
           {

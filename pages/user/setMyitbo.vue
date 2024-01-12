@@ -6,19 +6,25 @@
         <div class="user-line"></div>
         <div class="user-lable">
             <span class="lable"> {{ $t('str_mibao_wenti') }}</span>
+            <label for="question">
             <input 
                 v-model="form.question" 
-                class="input" 
+                class="input"
+                id="question"
                 :placeholder="$t('str_set_mibao_input')" 
                 type="text">
+            </label>
         </div>
         <div class="user-lable">
             <span class="lable">{{ $t('str_answer') }}</span>
+            <label for="answer">
             <input 
                 v-model="form.answer" 
-                class="input" 
+                class="input"
+                id="answer"
                 :placeholder="$t('str_answer_mibao_input')" 
                 type="text">
+            </label>
         </div>
         <div class="user-btn-submit" @click="onClickRight">
             {{ $t('str_save') }} 

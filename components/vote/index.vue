@@ -31,13 +31,16 @@
           <span class="item" v-for="item in addSug" :key="item"> {{ item }} </span>
       </div>
       <div class="suggest-input" @focusout="changeBlur" @focusin="changeFocus">
+          <label for="content">
           <input
               enterkeyhint="send"
               v-model="content"
               @input="Suggest()"
               class="input"
-              ref="inputRef" 
+              ref="inputRef"
+              id="content"
               type="text">
+          </label>
           <span class="btn" @click="addSuggest">{{ $t('str_add') }}</span>
           <div class="sugList-list" v-show="sugList.length">
               <span 
