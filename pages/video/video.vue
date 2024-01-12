@@ -34,6 +34,17 @@
         <div class="controller-notice" v-show="showNotice">
             2X
         </div>
+        <div class="video-next">
+            <div class="next-mask">
+                <div class="next-refresh">
+                    <div class="refresh-icon"></div>
+                    <div class="refresh-btn">Replay</div>
+                </div>
+                <div class="next-av">
+
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -350,6 +361,7 @@ export default {
 }
 /deep/ .dplayer-controller{
     padding: 0 12px;
+    transition: all 0s;
     .dplayer-bar-wrap{
         width: calc(100% - 24px);
         height: 4px !important;
@@ -442,15 +454,15 @@ export default {
             width: 100%;
             border-radius: 0;
             height: 4px !important;
-            bottom: 0;
+            bottom: 0px;
             .dplayer-bar{
-                height: 2px !important;
+                height: 4px !important;
             }
             .dplayer-loaded{
-                height: 2px !important;
+                height: 4px !important;
             }
             .dplayer-played{
-                height: 2px !important;
+                height: 4px !important;
                 border-radius: 2px;
             }
             .dplayer-thumb{
@@ -558,6 +570,55 @@ export default {
     font-weight: 400;
     line-height: normal;
 
+}
+
+.video-next{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #000;
+    .next-mask{
+        width: 100%;
+        height: 100%;
+        background-color:  rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .next-refresh{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0 22px;
+        .refresh-icon{
+            width: 64px;
+            height: 64px;
+            background: url("~~/static/images/com_bfq_replay.png");
+            background-size: 100% 100%;
+        }
+        .refresh-btn{
+            width: 76px;
+            height: 32px;
+            margin-top: 24px;
+            background-color: var(--bg-primary, #F6D658);
+            color: var(--text-color1-new, #181E2A) ;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 32px;
+            font-size: 14px;
+        }
+    }
+    .next-av{
+        margin: 0 22px;
+        width: 180px;
+        height: 130px;
+        background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
+        border-radius: 8px;
+    }
 }
 
 </style>
