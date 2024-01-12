@@ -25,6 +25,14 @@ module.exports = {
     },
 
     script: [
+      // {
+      //   src: "https://cdn.dasao88.com/cdn/hls.min.js",
+      //   mode: 'client'
+      // },
+      // {
+      //   src: "https://cdn.dasao88.com/cdn/DPlayer.min.js",
+      //   mode: 'client'
+      // },
       {
         src: "https://www.googletagmanager.com/gtag/js",
         mode: 'client'

@@ -64,6 +64,7 @@
             <nuxt-link :to="localePath({
               name: 'tag-name',
               params: { id: tag.id, name: tag.name }
+<<<<<<< HEAD
             })"  v-for="tag in tagList" :key="tag.id" >
               <div class="nav-menu-list-tag-sub"  @click="set_tagid(item.id)">
                 <div class="nav-menu-left">
@@ -73,6 +74,15 @@
                 <div class="nav-menu-right" v-if="tag.id === tagId && ['tag-id-name___en', 'tag-id-name___pt'].includes(routeName)">
                   <img src="~/static/images/com_select_on.svg" alt="com_select_on">
                 </div>
+=======
+            })"  class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" >
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
+                <div>{{ tag.name }}</div>
+              </div>
+              <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type-id-name'">
+                <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
+>>>>>>> P77-190
               </div>
             </nuxt-link>
             <!-- 所有标签 -->
@@ -168,7 +178,7 @@
                 <div>{{ item.title }}</div>
               </div>
               <div class="nav-menu-right" v-if="item.language === language">
-                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
               </div>
             </nuxt-link>
           </template>
@@ -193,7 +203,7 @@
                   <div>{{ $t(item.country) }}</div>
                 </div>
                 <div class="nav-menu-right" v-if="item.code === location">
-                  <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                  <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
                 </div>
               </div>
             </div>

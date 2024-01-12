@@ -69,7 +69,7 @@ export default{
   },
   data() {
     return {
-      activeIcon: require('~/static/images/com_select_on.svg'),
+      activeIcon: require('~/static/images/com_select_on1.svg'),
       inactiveIcon: require('~/static/images/com_select_1.svg'),
     }
   },

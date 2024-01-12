@@ -316,7 +316,7 @@ export default {
     height: 40px;
     border-radius: 20px;
     background-color: var(--bg-primary, #FFE500);
-    color: var(--dialog-text-color, #FFFFFF);
+    color: var(--text-color1, #181E2A);
     text-align: center;
     line-height: 40px;
     font-size: 16px;
