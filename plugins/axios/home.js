@@ -116,7 +116,17 @@ export default ($axios) => ({
             method: "POST",
         })
     },
-
+    /***
+     * @ 分类列表
+     * 
+     */ 
+    postTypeList(data){
+      return $axios({
+          url: Api.home.type,
+          method: "POST",
+          data: data
+      })
+    },
     /***
      * @ 标签页列表
      * 

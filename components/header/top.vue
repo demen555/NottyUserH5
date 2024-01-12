@@ -24,7 +24,33 @@
          <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
          <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
         </div>
-
+        <div class="nav-list-tags type">
+          <div class="nav-menu-list-tag" @click="handleShowExpand('type')">
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_leixing_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
+              <div>{{ $t('str_tags') }}</div>
+            </div>
+            <div :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+          </div>
+          <template v-if="!showTypeExpand">
+            <nuxt-link :to="localePath({
+              name: 'type-id-name',
+              params: { id: item.id, name: item.title }
+            })" v-for="(item) in typeList" :key="item.id">
+              <div @click="handleClick(item.id)" class="nav-menu-list-tag-sub">
+                <div class="nav-menu-left">
+                  <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                  <div class="typeName">{{ item.title }}</div>
+                </div>
+                <div class="nav-menu-right" v-if="item.id === typeId &&  ['type-id-name___en', 'type-id-name___pt'].includes(routeName) ">
+                  <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                </div>
+              </div>
+            </nuxt-link>
+            <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('type')"> {{ $t('str_menu_type_all') }}</nuxt-link>
+            <div class="nav-menu-list-tag-empty"></div>
+          </template>
+        </div>
         <div v-if="!showTypeExpand" class="type-div"></div> 
         <div class="nav-list-tags">
           <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
@@ -38,13 +64,15 @@
             <nuxt-link :to="localePath({
               name: 'tag-name',
               params: { id: tag.id, name: tag.name }
-            })"  class="nav-menu-list-tag-sub" v-for="tag in tagList" :key="tag.id" >
-              <div class="nav-menu-left">
-                <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
-                <div>{{ tag.name }}</div>
-              </div>
-              <div class="nav-menu-right" v-if="tag.id === tagId && routeName == 'type-id-name'">
-                <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+            })"  v-for="tag in tagList" :key="tag.id" >
+              <div class="nav-menu-list-tag-sub"  @click="set_tagid(item.id)">
+                <div class="nav-menu-left">
+                  <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
+                  <div>{{ tag.name }}</div>
+                </div>
+                <div class="nav-menu-right" v-if="tag.id === tagId && ['tag-id-name___en', 'tag-id-name___pt'].includes(routeName)">
+                  <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                </div>
               </div>
             </nuxt-link>
             <!-- 所有标签 -->
@@ -244,6 +272,9 @@ export default {
     Overlay
   },
   created(){
+    console.log( 'this.$route.name', this.$route.name )
+    this.initTypeList()
+    // this.initTagList()
     this.themeChecked = this.theme === 'dark'
     if(process.client){
       document.documentElement.setAttribute('data-theme', this.theme)
@@ -252,17 +283,17 @@ export default {
         !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
       })
     }
+    if(['home___en', 'home___pt'].includes(this.$route.name)){
+      this.set_tagid('')
+      this.set_typeid('')
+    }
   },
 
   activated(){
     console.log( 'this.$route.name', this.$route.name )
     this.showPop = false
     this.showRightPop = false
-    if(this.$route.name === 'index'){
-      console.log('mounted')
-      this.set_tagid('')
-      this.set_typeid('')
-    }
+    
   },
   computed: {
     ...mapGetters(['userinfo', 'theme', 'isLogin', 'tagId', 'typeId','accessToken']),
@@ -282,6 +313,10 @@ export default {
   },
   methods: {
     ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken']),
+    handleClick(id){
+      this.set_typeid(id)
+      console.log(id, 'typeid')
+    },
     handleClickNotty(){
       if(this.$route.name === 'index'){
         this.$emit('refresh')
@@ -325,7 +360,7 @@ export default {
 
       this.set_tagid(item.id)
       this.$router.push(this.localePath({
-        name: 'type-id-name',
+        name: 'tag-name',
         params:{
           id: item.id,
           name: item.name,
@@ -333,7 +368,19 @@ export default {
         },
       }));
     },
-
+    async initTypeList(){
+      try {
+        const res = await this.$homeApi.postTypeList(this.pageInfo)
+        console.log(res, 'typeList334')
+        if(res.code === CODES.SUCCESS){
+          console.log(res.data, 'initTagList')
+          this.typeList = res.data.data || []
+        }
+        console.log(this.typeList, res, 'tag')
+      } catch (error) {
+        console.error(error)
+      }
+    },
     async initTagList(){
       try {
         const res = await this.$homeApi.postTagListPage(this.pageInfo)

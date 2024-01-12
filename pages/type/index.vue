@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="txtTitle" text></Nav>
+    <Nav :title="$t('str_menu_type_all')" text></Nav>
     <div class="loading-box" v-if="spainnerLoading">
-      <cardLoad></cardLoad>
+      <tagLoad></tagLoad>
     </div>
-    <template v-if="dataList.length">
+    <template v-if="typeList.length">
       <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -15,7 +15,10 @@
           :immediate-check="false"
           :offset="10"
         >
-          <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+          <div class="thumb">
+            <Thumb :tag="tag" v-for="tag in typeList" :key="tag.id"></Thumb>
+          </div>
+          <!-- <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover> -->
         </van-list>
       </van-pull-refresh>
     </template>
@@ -26,6 +29,8 @@
 import Nav from '~/components/nav'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
+import Thumb from '~/components/thumb'
+import tagLoad from "~/components/skeleton/tagLoad.vue"
 import commonMinxin from '~/plugins/mixins/common'
 import CODES from "~/plugins/enums/codes"
 
@@ -37,7 +42,7 @@ data() {
     loading: false, // 是否处于加载状态
     finished: false, // 是否加载完成
     refreshing: true, // 当前是否刷新重置信息
-    dataList: [],
+    typeList: [],
     pageInfo: {
       page: 1,
       size: 20
@@ -47,7 +52,7 @@ data() {
 mixins: [commonMinxin],
 computed: {
   txtTitle(){
-    return  this.detail.name
+    return  '#'+this.detail.name
   }
 },
 activated(){
@@ -67,7 +72,9 @@ created(){
 components: {
   Nav,
   Cover,
-  Empty
+  Empty,
+  Thumb,
+  tagLoad
 },
 methods: {
   onLoad(){
@@ -80,16 +87,18 @@ methods: {
       this.loading = true
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
     
-      params.typeId = this.detail.id //标签
+      // params.tagId = this.detail.id //标签
+      // params.tagName = this.detail.name //标签
 
-      const { code, data } = await this.$homeApi.requestvodpage(params)
+
+      const { code, data } = await this.$homeApi.postTypeList(params)
+      console.log(code, CODES.SUCCESS, data, 'postTagListPage')
       if(code === CODES.SUCCESS){
         if(isRefresh){
-          // this.dataList = [ ...body.records, ...this.dataList ]
-          this.dataList = data.data
+          this.typeList = data.data
           this.refreshing = false
         } else {
-          this.dataList = [ ...this.dataList, ...data.data]
+          this.typeList = [ ...this.typeList, ...data.data]
           this.loading = false
         }
         if(data.data.length === 0){
@@ -112,7 +121,12 @@ methods: {
 }
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
+.thumb{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 .van-pull-refresh{
 overflow: visible;
 }
