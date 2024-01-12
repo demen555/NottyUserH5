@@ -266,4 +266,15 @@ overflow: visible;
     color: var(--text-color1, #181E2A);
   }
 }
+@media screen and (min-width: 420px) {
+  .sticky-text{
+    width: 150px;
+    position: absolute;
+    left: 5px;
+    bottom: 18PX !important;
+    font-size: 10PX !important;
+    font-weight: bold;
+    color: var(--text-color1, #181E2A);
+  }
+}
 </style>
