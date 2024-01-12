@@ -4,7 +4,7 @@
     <div class="main-video">
         <div class="video-container"> 
             <client-only v-if="videoInfo.vodPlayUrl">
-                <videoContainer  :videoInfo="videoInfo"></videoContainer>
+                <videoContainer  :videoInfo="videoInfo" :vodChange="vodChange"></videoContainer>
             </client-only>
             
             <van-loading 
