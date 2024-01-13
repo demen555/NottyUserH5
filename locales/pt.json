@@ -281,7 +281,7 @@
   "str_response_code6": "Usuário já registrado.",
   "str_response_code2": "Email/senha inválido.",
   "str_response_code7": "Email/senha inválido.",
-  "str_response_code11": "Erro de parâmetro.",
+  "str_response_code11": "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.",
   
   
   "str_get_back_pwd": "Please use this page to reset your password!",

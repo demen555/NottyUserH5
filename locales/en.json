@@ -279,7 +279,7 @@
   "str_response_code6": "User already registered.",
   "str_response_code2": "Invalid email/ password.",
   "str_response_code7": "Invalid email/ password.",
-  "str_response_code11": "Parameter error",
+  "str_response_code11": "An unexpected error has occurred. Please retry your request later.",
   
   "str_get_back_pwd": "Please use this page to reset your password!",
   "str_get_back_pwd_sub": "Please enter your email which you first registered with.",
