@@ -63,7 +63,7 @@
     </main>
     <main v-show="!searchShow">
       <!-- 有搜索结果 -->
-      <div class="search-result" id="searchName">{{ search }}</div>
+      <div class="search-result" id="searchName">{{ search }} {{ searchShow }}</div>
       <div class="loading-box" style="margin-top: 40px;" v-if="spainnerLoading">
         <cardLoad></cardLoad>
       </div>
@@ -126,7 +126,8 @@ data() {
       size: 20,
       total: 0
     },
-    relatedLoading: false
+    relatedLoading: false,
+    searchBool: false
   }
 },
 mixins: [commonMinxin],
@@ -137,10 +138,16 @@ computed: {
   },
 },
 created(){
-  this.set_show(true)
-  // if(process.client) {
-  //   this.search = localStorage.getItem('search') || '-'
-  // }
+  
+  // this.set_show(true)
+  if(process.client) {
+    this.search = localStorage.getItem('search') || '-'
+    if(localStorage.getItem('searchBool')){
+      this.initSearchVideoList()
+    }
+    this.searchBool = localStorage.getItem('searchBool')
+    this.set_show(!localStorage.getItem('searchBool'))
+  }
   this.getHistoryList()
   this.initKyesList()
   console.log(1111)
@@ -300,7 +307,8 @@ methods: {
       this.historyList = Array.from(new Set(this.historyList))
       if(process.client){
         localStorage.setItem('historyList', JSON.stringify(this.historyList))
-        // localStorage.setItem('search', this.search)
+        localStorage.setItem('search', this.search)
+        localStorage.setItem('searchBool', true)
       }
       // this.handleReset()
       this.set_show(false)
