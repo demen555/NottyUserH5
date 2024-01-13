@@ -30,7 +30,7 @@ export default{
   name: 'policy-2257',
   mixins: [commonMinxin],
   head(){
-    const hostName = process.server ? this.$nuxt.context.req.headers.host : window.location.host;
+    const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
     return {
       
       link: [

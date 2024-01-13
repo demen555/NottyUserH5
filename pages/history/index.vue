@@ -63,7 +63,7 @@ mounted(){
   console.log(this.detail)
 },
 head(){
-  const hostName = process.server ? this.$nuxt.context.req.headers.host : window.location.host;
+  const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   return {
     
     link: [
