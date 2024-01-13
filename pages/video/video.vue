@@ -388,6 +388,7 @@ export default {
 /deep/ .dplayer-controller{
     padding: 0 12px;
     transition: all 0s;
+
     .dplayer-bar-wrap{
         width: calc(100% - 24px);
         height: 4px !important;
@@ -419,6 +420,11 @@ export default {
 
 
 /deep/ .dplayer-mobile{
+    &.dplayer-hide-controller{
+        .dplayer-time{
+            display: none !important;
+        }
+    }
     .dplayer-menu{
         display: none !important;
     }
@@ -454,6 +460,8 @@ export default {
     }
     .dplayer-controller{
         padding: 0;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
         .dplayer-icons-right{
             display: none;
         //    position: absolute;
@@ -493,6 +501,7 @@ export default {
             }
             .dplayer-thumb{
                 background:  #FFF !important;
+                transform: scale(1) !important;
             }
         }
     }
