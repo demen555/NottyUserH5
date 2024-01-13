@@ -170,7 +170,7 @@ export default {
           }
           this.$toast(this.$t('toast4'))
           this.show = false
-          this.$router.push(this.localePath('home'))
+          this.$router.push(this.localePath('/'+  this.$i18n.locale ))
         }
       } catch (error) {
         this.$toast(error.message)

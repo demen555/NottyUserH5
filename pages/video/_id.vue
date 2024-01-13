@@ -240,8 +240,10 @@ export default {
             videoInfo: {
                 ...res1.data,
                 seo: seo,
+                code: res1.code
             },
         }
+     
     },
 
     computed:{
@@ -295,6 +297,12 @@ export default {
     },
 
     created(){
+        // 在页面创建时检查是否有跳转信息
+        console.log( this.videoInfo.code,  this.$i18n.locale, "this.videoInfo.code" )
+        if (this.videoInfo.code != 100 ) {
+            // 跳转路由
+            this.$router.push(this.localePath('/'+  this.$i18n.locale ))
+        }
         this.initVideo();
     },
 

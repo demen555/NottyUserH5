@@ -210,7 +210,7 @@
             const user = res.data
             this.set_userinfo({...user, ...userinfo})
             // this.show = false
-            this.$router.push({ name: 'index' })
+            this.$router.push(this.localePath('/'+  this.$i18n.locale ))
           }
         } catch (error) {
           console.error(error)

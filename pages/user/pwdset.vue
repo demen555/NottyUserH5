@@ -46,7 +46,7 @@ export default {
                     this.$toast(this.$t('toast7'))
                     this.set_userinfo({})
                     this.clearAccessToken()
-                    this.$router.push(this.localePath('home'))
+                    this.$router.push(this.localePath('/'+  this.$i18n.locale ))
                 }
             } catch (error) {
                 console.error(error)

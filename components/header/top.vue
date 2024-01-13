@@ -322,7 +322,7 @@ export default {
         this.$emit('refresh')
         this.handleScroll()
       } else {
-        this.$router.push(this.localePath('home'))
+        this.$router.push(this.localePath('/'+  this.$i18n.locale ))
         this.$emit('refresh')
       }
     },
@@ -331,7 +331,7 @@ export default {
       if(this.$route.name === 'search') {
         this.handleScroll()
       }else{
-        this.$router.push(this.localePath('home'))
+        this.$router.push(this.localePath('/'+  this.$i18n.locale ))
       }
     },
     handleScroll() {
