@@ -131,6 +131,18 @@ export default{
       tags: [this.$t('str_menu_tag_all'), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     }
   },
+  head(){
+    const hostName = process.server ? this.$nuxt.context.req.headers.host : window.location.host;
+    return {
+      
+      link: [
+        {
+          rel: 'canonical',
+          href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        },
+      ],
+    }
+  },
   components: {
     Nav,
     Thumb,

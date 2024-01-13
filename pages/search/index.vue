@@ -149,6 +149,18 @@ components: {
   Cover,
   Empty
 },
+head(){
+  const hostName = process.server ? this.$nuxt.context.req.headers.host : window.location.host;
+  return {
+    
+    link: [
+      {
+        rel: 'canonical',
+        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+      },
+    ],
+  }
+},
 // activated(){
 //   const isRefresh = this.$route.params.refresh;
 //   if( isRefresh ){

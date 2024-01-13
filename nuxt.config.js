@@ -538,7 +538,7 @@ module.exports = {
       { rel: "apple-touch-icon", sizes: "152x152", href: "/linklogo/icon-76@2x.png"},
       { rel: "manifest", href: "/site.webmanifest" },
 
-      { rel: "canonical", href: "https://nottyhub.com/" },
+      // { rel: "canonical", href: "https://nottyhub.com/" },
 
     ]
   },

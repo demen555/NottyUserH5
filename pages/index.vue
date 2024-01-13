@@ -96,6 +96,7 @@ computed: {
   }
 },
 head(){
+  const hostName = process.server ? this.$nuxt.context.req.headers.host : window.location.host;
 
   return {
     title: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com",
@@ -107,7 +108,13 @@ head(){
       { property: 'og:title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
       { property: 'og:description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
       { property: 'og:keywords', content: "XXX / Video de sexo / porno gratis / filme porno gratis / assistir filme porno gratis" },
-    ]
+    ],
+    link: [
+      {
+        rel: 'canonical',
+        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+      },
+    ],
   }
 },
 created(){

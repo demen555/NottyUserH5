@@ -29,6 +29,18 @@ import CODES from "~/plugins/enums/codes"
 export default{
   name: 'policy-2257',
   mixins: [commonMinxin],
+  head(){
+    const hostName = process.server ? this.$nuxt.context.req.headers.host : window.location.host;
+    return {
+      
+      link: [
+        {
+          rel: 'canonical',
+          href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        },
+      ],
+    }
+  },
   data() {
     return {
       tagList: [],

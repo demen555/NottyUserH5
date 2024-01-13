@@ -198,29 +198,36 @@ export default {
         }
     },
     head(){
-      return {
-        title: this.videoInfo.seo && this.videoInfo.seo.title,
-        meta: [
-            {
-                hid: 'description',
-                name: 'description',
-                content: this.videoInfo.seo.description
-            },
-            {
-                hid: 'keyswords',
-                name: 'keyswords',
-                content: this.videoInfo.seo.keywords
-            },
-            {
-                hid: 'title',
-                name: 'title',
-                content: this.videoInfo.seo.title
-            },
-            { hid: 'og:title', property: 'og:title', content: this.videoInfo.seo.title },
-            { hid: 'og:description', property: 'og:description', content:  this.videoInfo.seo.description},
-            { hid: 'og:keywords', property: 'og:keywords', content: this.videoInfo.seo.keywords },
-        ]
-      }
+        const hostName = process.server ? this.$nuxt.context.req.headers.host : window.location.host;
+        return {
+            title: this.videoInfo.seo && this.videoInfo.seo.title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.videoInfo.seo.description
+                },
+                {
+                    hid: 'keyswords',
+                    name: 'keyswords',
+                    content: this.videoInfo.seo.keywords
+                },
+                {
+                    hid: 'title',
+                    name: 'title',
+                    content: this.videoInfo.seo.title
+                },
+                { hid: 'og:title', property: 'og:title', content: this.videoInfo.seo.title },
+                { hid: 'og:description', property: 'og:description', content:  this.videoInfo.seo.description},
+                { hid: 'og:keywords', property: 'og:keywords', content: this.videoInfo.seo.keywords },
+            ],
+            link: [
+                {
+                    rel: 'canonical',
+                    href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+                },
+            ],
+        }
     },
     async asyncData({ $videoApi, params }) {
         const res1 =  await $videoApi.requestVodComment({ vodId: params.id });

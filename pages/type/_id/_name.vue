@@ -64,6 +64,18 @@ created(){
   }
   this.getList('first')
 },
+head(){
+  const hostName = process.server ? this.$nuxt.context.req.headers.host : window.location.host;
+  return {
+    
+    link: [
+      {
+        rel: 'canonical',
+        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+      },
+    ],
+  }
+},
 components: {
   Nav,
   Cover,
