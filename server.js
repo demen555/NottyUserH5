@@ -14,8 +14,20 @@ async function start(){
   // 刷新缓存接口
   app.get('/refreshCache', (req, res, next) => {
     cachePage.reset()
-    res.sendStatus(200)
+    res.status(200).json({
+      status: 100, 
+      message: 'Cache refreshed successfully',
+    })
   })
+
+  app.get('/getCache', (req, res, next) => {
+    const data = cachePage.get('indexPage')
+    res.status(200).json({
+      status: 100, 
+      data: data ? data : null,
+    })
+  })
+
 
   await nuxt.ready();
 

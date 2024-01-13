@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server.js --watch server",
     "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production node server.js"
+    "start": "cross-env NODE_ENV=production node server.js",
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",

@@ -1,4 +1,5 @@
 const CompressionPlugin = require('compression-webpack-plugin');
+const cachePage = require('./lruCache.js');
 
 module.exports = {
   telemetry: false,
@@ -595,7 +596,7 @@ module.exports = {
         name: 'Português',
       },
     ],
-    strategy: 'prefix',
+    strategy: 'prefix_except_default',
     defaultLocale: 'en',
     vueI18n: {
       fallbackLocale: 'en',
@@ -715,13 +716,7 @@ module.exports = {
   },
 
   serverMiddleware: [
-    {
-      path: '/en/home',
-      handler: '~/middleware/cache.js'
-    },
-    {
-      path: '/pt/home',
-      handler: '~/middleware/cache.js'
-    },
+    '~/middleware/cache.js',
   ],
 }
+
