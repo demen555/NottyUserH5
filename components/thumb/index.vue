@@ -58,6 +58,15 @@ export default{
 .thumb-list{
   margin-top: 8px;
   position: relative;
+  &::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.00) 50%, rgba(0, 0, 0, 0.20) 75%, rgba(0, 0, 0, 0.60) 100%); 
+  }
   /deep/ .van-image{
       width:185px;
       height:105px;
@@ -66,18 +75,20 @@ export default{
         height: 100%;
       }
     }
+   
 }
 .thumb-text{
   position: absolute;
   left: 0;
   bottom: 0;
   width: 185px;
+  z-index: 1;
   // display: flex;
   // justify-content: space-between;
   // align-items: center;
-  margin-top: 4px;
-  margin-bottom: 8px;
-  padding: 0 8px;
+
+  padding: 4px 8px 8px;
+   
   .thumb-left{
     font-size: 14px;
     color: var(--text-color1, #FFFFFF);
