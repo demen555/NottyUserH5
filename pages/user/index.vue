@@ -15,7 +15,7 @@
         </van-nav-bar> -->
         <div class="user-content avatar">
             <span class="title">{{ $t('str_header') }}</span>
-            <img class="img" src="~/static/images/avatar.png" alt="avatar">
+            <img class="img" src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
         </div>
         <!-- <div class="user-content name" @click="goPages('setName')" >
             <span class="title">{{ $t('str_nick_name') }}</span>
@@ -125,8 +125,7 @@ export default {
         line-height: normal;
     }
     .placeholder{
-        font-size: 14px;
-        margin-right: 20px;
+        font-size: 14px;;
     }
     .words{
         color: var(--text-color1, #FFFFFF);
@@ -136,12 +135,12 @@ export default {
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-        margin-right: 20px;
+
     }
     .img{
         width: 32px;
         height: 32px;
-        margin-right: 20px;
+
     }
     .icon{
         width: 12px;
@@ -162,5 +161,8 @@ export default {
         transform: translateY(-50%);
         background: url("~~/static/images/com_jt_sx_you_rj.svg");
     }
+}
+:deep(.van-nav-bar__left){
+  font-size: 18px;
 }
 </style>

@@ -260,8 +260,8 @@ padding-bottom: 10px;
 .paddingTop78{
 padding-top: 78px;
 }
-.paddingTop52{
-  padding-top: 52px;
+.paddingTop45{
+  padding-top: 45px;
 }
 .van-toast__text{
 word-break: break-word;
@@ -348,4 +348,32 @@ text-transform: capitalize;
 }
 .van-checkbox__icon .van-icon{
   color: #666666;
+}
+
+.cover-mask .main-video{
+  &::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.van-checkbox-group{
+  .cover:nth-child(1){
+    .main-list-group{
+      margin-top: 0;
+    }
+  }
+}
+
+.video-list{
+  .cover:nth-child(1){
+    .main-list-group{
+      margin-top: 0;
+    }
+  }
 }

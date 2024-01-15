@@ -190,13 +190,14 @@ export default {
   height: auto;
   // padding: 16px;
   border-radius: 16px;
-  overflow: hidden;
+  overflow: auto;
   // position: relative;
 }
 
 .error-msg{
   color: #EA3D32;
   font-size: 12px;
+  margin-bottom: 4px;
 }
 .dialog-top-img{
   // position: absolute;
@@ -288,6 +289,10 @@ export default {
   .dialog-img {
     width: 24px;
     height: 24px;
+    img{
+      width: 24px;
+      height: 24px;
+    }
   }
 
   .dialog-input {
@@ -372,6 +377,7 @@ export default {
   margin-left: 22px;
   margin-top: -20px;
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
+  font-size: 12px;
 }
 .dialog-submit-text{
   width: 80%;
@@ -380,6 +386,7 @@ export default {
   text-align: center;
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
   line-height: 24px;
+  font-size: 14px;
   .tip{
     color: var(--bg-primary, #FFE500);
   }

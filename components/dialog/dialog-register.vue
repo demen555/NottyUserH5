@@ -286,6 +286,7 @@
 .error-msg{
   color: #EA3D32;
   font-size: 12px;
+  margin-bottom: 4px;
 }
 .go-login{
   color: var(--bg-primary, #FFE500);
@@ -432,6 +433,7 @@
   text-align: center;
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
   line-height: 24px;
+  font-size: 14px;
   .tip{
     color: var(--bg-primary, #FFE500);
   }
