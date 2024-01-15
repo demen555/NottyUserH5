@@ -199,7 +199,7 @@ export default{
   align-items: center;
   margin-right: 24px;
   height: 17px;
-  // line-height: 17px;
+
 }
 .main-like{
   width: 16px;
@@ -221,7 +221,6 @@ export default{
   font-size: 12px;
   display: flex;
   align-items: center;
-  margin-top: 3px;
 }
 .mian-like{
 	transform: translateY(0px);

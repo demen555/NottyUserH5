@@ -80,7 +80,7 @@ export default {
   height: auto;
   padding: 16px;
   border-radius: 16px;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .dialog {
@@ -128,6 +128,10 @@ export default {
   .dialog-img {
     width: 24px;
     height: 24px;
+    img{
+      width: 24px;
+      height: 24px;
+    }
   }
 
   .dialog-input {
@@ -154,7 +158,7 @@ export default {
     margin: 0 auto;
     height: 40px;
     border-radius: 20px;
-    background-color: var(--bg-primary, #FFE500);
+    background-color: var(--bg-primary, #F6D658);
     color: var(--dialog-text-color, #FFFFFF);
     text-align: center;
     line-height: 40px;

@@ -190,13 +190,14 @@ export default {
   height: auto;
   // padding: 16px;
   border-radius: 16px;
-  overflow: hidden;
+  overflow: auto;
   // position: relative;
 }
 
 .error-msg{
   color: #EA3D32;
   font-size: 12px;
+  margin-bottom: 4px;
 }
 .dialog-top-img{
   // position: absolute;
@@ -288,6 +289,10 @@ export default {
   .dialog-img {
     width: 24px;
     height: 24px;
+    img{
+      width: 24px;
+      height: 24px;
+    }
   }
 
   .dialog-input {
@@ -315,7 +320,7 @@ export default {
     margin: 0 auto;
     height: 40px;
     border-radius: 20px;
-    background-color: var(--bg-primary, #FFE500);
+    background-color: var(--bg-primary, #F6D658);
     color: var(--text-color1, #181E2A);
     text-align: center;
     line-height: 40px;
@@ -372,6 +377,7 @@ export default {
   margin-left: 22px;
   margin-top: -20px;
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
+  font-size: 12px;
 }
 .dialog-submit-text{
   width: 80%;
@@ -380,8 +386,9 @@ export default {
   text-align: center;
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
   line-height: 24px;
+  font-size: 14px;
   .tip{
-    color: var(--bg-primary, #FFE500);
+    color: var(--bg-primary, #F6D658);
   }
   div{
     display: inline-block;
@@ -407,7 +414,7 @@ export default {
     margin-top: 8px;
   }
   /deep/ b{
-    color: var(--bg-primary, #FFE500);
+    color: var(--bg-primary, #F6D658);
     font-weight: 400;
   }
 }

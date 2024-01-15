@@ -556,7 +556,7 @@ module.exports = {
     { src: '~/plugins/store-cache', ssr: false },
   ],
   loading: {
-    color: '#FFE500',
+    color: '#F6D658',
     height: '2px'
   },
   components: true,

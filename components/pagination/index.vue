@@ -109,34 +109,20 @@ export default {
     margin: 3px;
     color: #666;
     background: var(--bg-color3, rgba(255, 255, 255, 0.10));
-    // border: 1px solid rgba(255, 255, 255, 0.10);
-
-    // & :hover {
-    //   border: 1px solid var(--bg-primary);
-    //   background-color: var(--bg-color1);
-
-    //   a {
-    //     color: #fff;
-    //   }
-
-    // }
-
     a {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 27px;
       height: 24px;
-      text-align: center;
       color: #fff;
-      line-height: 24px;
       font-size: 12px;
       border-radius: 4px;
-      text-decoration: none
     }
-
   }
 
   .active {
-    border: 1px solid var(--bg-primary, #FFE500);
+    border: 1px solid var(--bg-primary, #F6D658);
     background-color: var(--bg-color1, #0E0E0F);
 
     a {
@@ -146,7 +132,7 @@ export default {
   }
 }
 .pagination__next, .pagination__prev{
-  background-color: var(--bg-primary, #FFE500);
+  background-color: var(--bg-primary, #F6D658);
   color: #181e2a !important;
 }
 .disabled{

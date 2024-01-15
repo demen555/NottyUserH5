@@ -38,7 +38,7 @@ text-transform: none;
 }
 
 .van-popup__close-icon{
-color: var(--bg-primary, #FFE500);
+color: var(--bg-primary, #F6D658);
 font-size: 1.5rem;
 font-weight: bold;
 }
@@ -84,8 +84,8 @@ display: flex;
 justify-content: center;
 }
 .van-checkbox__icon--checked .van-icon{
-background-color: var(--bg-primary, #FFE500);
-border-color: var(--bg-primary, #FFE500);
+background-color: var(--bg-primary, #F6D658);
+border-color: var(--bg-primary, #F6D658);
 }
 .van-dialog{
 background-color: var(--dialog-bg-color, #18181C);
@@ -101,7 +101,7 @@ margin-left: 24px;
 .van-dialog__confirm{
 width: 143px;
 height: 40px;
-background-color: var(--bg-primary, #FFE500);
+background-color: var(--bg-primary, #F6D658);
 border-radius: 20px;
 color: var(--dialog-text-color, #FFFFFF);
 margin-bottom: 16px;
@@ -260,8 +260,8 @@ padding-bottom: 10px;
 .paddingTop78{
 padding-top: 78px;
 }
-.paddingTop52{
-  padding-top: 52px;
+.paddingTop45{
+  padding-top: 45px;
 }
 .van-toast__text{
 word-break: break-word;
@@ -286,11 +286,11 @@ text-transform: capitalize;
   background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
 }
 .van-pagination__item--active{
-  border: 1px solid var(--bg-primary, #FFE500);
+  border: 1px solid var(--bg-primary, #F6D658);
   background-color: var(--bg-color1, #0E0E0F);
 }
 .van-pagination__next, .van-pagination__prev{
-  background-color: var(--bg-primary, #FFE500);
+  background-color: var(--bg-primary, #F6D658);
   color: #181e2a;
   width: 51px;
   height: 24px;
@@ -348,4 +348,32 @@ text-transform: capitalize;
 }
 .van-checkbox__icon .van-icon{
   color: #666666;
+}
+
+.cover-mask .main-video{
+  &::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.van-checkbox-group{
+  .cover:nth-child(1){
+    .main-list-group{
+      margin-top: 0;
+    }
+  }
+}
+
+.video-list{
+  .cover:nth-child(1){
+    .main-list-group{
+      margin-top: 0;
+    }
+  }
 }
