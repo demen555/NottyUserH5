@@ -85,8 +85,8 @@ const mutations = {
     console.log(data, Array.isArray(data))
     if(!Array.isArray(data)){
       state.historyVod = [
-        ...state.historyVod,
         data,
+        ...state.historyVod
       ];
     }else{
       state.historyVod = data
