@@ -64,7 +64,7 @@
   margin: 0 auto;
 }
 .footer-del{
-  color: var(--bg-primary, #FFE500);
+  color: var(--bg-primary, #F6D658);
 }
 .footer-line{
   width: 1px;

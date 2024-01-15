@@ -8,8 +8,8 @@
             </client-only>
             
             <van-loading 
-                color="var(--bg-primary, #FFE500)" 
-                text-color="var(--bg-primary, #FFE500)" 
+                color="var(--bg-primary, #F6D658)" 
+                text-color="var(--bg-primary, #F6D658)" 
                 v-else 
                 type="spinner" 
                 vertical>
@@ -762,7 +762,7 @@ export default {
         }
         .van-tabs__line{
             transform: translateX(40px);
-            background-color: #FFE500;
+            background-color: #F6D658;
             width: 20px;
             height: 2px;
             bottom: 20px;
@@ -970,7 +970,7 @@ export default {
         height: 32px;
         text-align: center;
         line-height: 32px;
-        background-color: var(--bg-primary, #FFE500);
+        background-color: var(--bg-primary, #F6D658);
         color: var(--text-color1, #181E2A);
         font-size: 14px;
         cursor: pointer;

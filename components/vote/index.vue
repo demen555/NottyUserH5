@@ -316,10 +316,10 @@ export default {
 
       flex-shrink: 0;
       border-radius: 4px;
-      border: 1px solid var(--bg-primary, #FFE500);
+      border: 1px solid var(--bg-primary, #F6D658);
   
       background: rgba(255, 85, 2, 0.10);
-      color: var(--ff-5502, #FFE500);
+      color: var(--ff-5502, #F6D658);
       text-align: center;
 
       font-size: 12px;
@@ -351,7 +351,7 @@ export default {
   margin: 16px auto;
   text-align: center;
   line-height: 40px;
-  background-color: var(--bg-primary, #FFE500);
+  background-color: var(--bg-primary, #F6D658);
   color: #FFF;
   font-size: 16px;
 
@@ -366,7 +366,7 @@ export default {
   }
 }
 .vote-err{
-  color: var(--bg-primary, #FFE500);
+  color: var(--bg-primary, #F6D658);
   margin-top: 8px;
   font-family: PingFang SC;
   font-size: 14px;
