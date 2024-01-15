@@ -516,7 +516,7 @@ header{
   align-items: center;
   padding: 0 12px;
   background-color: var(--bg-color1, #0E0E0F);
-  border-bottom: 1px solid var(--bg-color2, rgba(255, 255, 255, 0.06));
+  border-bottom: 1px solid var(--bg-color2, rgba(245, 245, 247, 0.06));
   z-index: 999;
   position: fixed;
   top: 0;
@@ -533,10 +533,18 @@ header{
 .header-common{
   width: 24px;
   height: 24px;
+  img{
+    width: 24px;
+    height: 24px;
+  }
 }
 .header-common1{
   width: 24px;
   height: 24px;
+  img{
+    width: 24px;
+    height: 24px;
+  }
 }
 .header-logo{
   width: 108px;
@@ -590,6 +598,10 @@ header{
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
+  img{
+    width: 24px;
+    height: 24px;
+  }
 }
 .nav-menu{
   width: 100%;

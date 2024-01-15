@@ -121,7 +121,7 @@
             
                             <div class="review-list" v-for="item in vodReviewList" :key="item.commentId">
                                 <div class="list-top">
-                                    <img class="top-img" src="~/static/images/avatar.png" alt="avatar">
+                                    <img class="top-img" src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
                                     <div class="top-name">{{ item.commentName || item.userName ||   $t('str_tourist') }}</div>
                                     <div class="top-time">{{ $t(dateFormat(item.commentTime)) }}</div> 
                                 </div>
@@ -235,7 +235,7 @@ export default {
                         description: "",
                         keywords: "",
                         title: "",
-                    }
+                    }            
         return { 
             videoInfo: {
                 ...res1.data,
@@ -304,6 +304,7 @@ export default {
             this.$router.push(this.localePath('/'+  this.$i18n.locale ))
         }
         this.initVideo();
+        this.addHisVod(this.videoInfo);
     },
 
 
@@ -676,6 +677,7 @@ export default {
 
         // 添加历史记录
         addHisVod(item){
+            console.log("添加历史")
             const idAdd = this.historyVod.some(  ele => ele.vodId === item.vodId);
             if( !idAdd ){
                 this.$store.commit("UPDATE_HISTORYVOD", item)
@@ -763,6 +765,7 @@ export default {
             background-color: #FFE500;
             width: 20px;
             height: 2px;
+            bottom: 20px;
         }
     }
     /deep/ .van-nav-bar{
@@ -844,6 +847,9 @@ export default {
         .flex-align-center;
         flex-direction: column;
         justify-content: center;
+        .words{
+            margin-top: 4px;
+        }
         &:nth-child(1){
             .icon{
                 background: url("~~/static/images/com_dianzan_1.svg");

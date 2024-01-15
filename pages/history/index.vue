@@ -16,7 +16,7 @@
           :offset="10"
         >
           <van-checkbox-group v-model="result" ref="checkboxGroup">
-            <Cover v-for="item in dataList" :item="item" :key="item.vodId" :showCheck="showFooter"></Cover>
+            <Cover :class="{ 'cover-mask': result.includes(item.vodId) }" v-for="item in dataList" :item="item" :key="item.vodId" :showCheck="showFooter"></Cover>
           </van-checkbox-group>
         </van-list>
       </van-pull-refresh>
@@ -220,4 +220,8 @@ methods: {
     height: 100vh;
     overflow-y: auto;
 }
+:deep(.van-nav-bar__left){
+  font-size: 18px;
+}
+
 </style>

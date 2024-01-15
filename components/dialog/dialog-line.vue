@@ -80,7 +80,7 @@ export default {
   height: auto;
   padding: 16px;
   border-radius: 16px;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .dialog {
@@ -128,6 +128,10 @@ export default {
   .dialog-img {
     width: 24px;
     height: 24px;
+    img{
+      width: 24px;
+      height: 24px;
+    }
   }
 
   .dialog-input {

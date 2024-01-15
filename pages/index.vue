@@ -15,7 +15,7 @@
         <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
       </van-list>
     </van-pull-refresh> -->
-    <div class="video-list paddingTop52" >
+    <div class="video-list paddingTop45" >
       <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
       <div class="home-footer">
         <!-- <van-pagination class="pagination" @change="handleChanege" v-model="pageInfo.page" :total-items="pageInfo.total" pages="[1,2,3,4,5]" :page-count="pageInfo.total" :show-page-size="4" force-ellipses >
@@ -205,9 +205,7 @@ overflow: visible;
   color: var(--text-color3, rgba(96, 105, 128, 0.40));
   font-size: 15px;
 }
-.video-list{
-  // touch-action: none
-}
+
 
 .home-footer{
   margin: 0 12px;
@@ -222,8 +220,8 @@ overflow: visible;
     line-height: 40px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-top: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));
-    // border-bottom: 1PX solid var(--border-line, rgba(245, 245, 247, 0.06));;
   }
   .home-footer-com{
     font-size: 14px;

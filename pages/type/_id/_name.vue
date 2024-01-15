@@ -135,4 +135,7 @@ overflow: visible;
 .main-bottom{
   margin-bottom: 50px;
 }
+:deep(.van-nav-bar__left){
+  font-size: 18px;
+}
 </style>
