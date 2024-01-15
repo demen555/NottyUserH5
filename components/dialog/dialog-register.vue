@@ -236,7 +236,7 @@
   height: auto;
   // padding: 16px;
   border-radius: 16px;
-  overflow: hidden;
+  overflow: auto;
 }
 .dialog-top-img{
   // position: absolute;
