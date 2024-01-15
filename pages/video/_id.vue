@@ -304,10 +304,14 @@ export default {
             this.$router.push(this.localePath('/'+  this.$i18n.locale ))
         }
         this.initVideo();
-        this.addHisVod(this.videoInfo);
+         
     },
 
-
+    mounted(){
+        if( !this.isLogin ){
+            this.addHisVod(this.videoInfo);
+        }
+    },
     
     methods:{
         dateFormat,
@@ -378,8 +382,6 @@ export default {
                     res.data['tags'] = res.data.tags || [];
                     res.data.tags = res.data.tags.filter( ele => ele );
                     this.videoInfo = res.data;
-                    
-                    this.addHisVod(res.data);
                 }
             }).finally( () => {
                 this.videoInfoLoding = true
