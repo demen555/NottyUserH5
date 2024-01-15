@@ -419,7 +419,7 @@ methods: {
   text-indent: 2.5em;
   color: var(--bg-secondry,  #FD46F6);
   height: 32px;
-  border: 1PX solid var(--bg-primary, #FFE500);
+  border: 1PX solid var(--bg-primary, #F6D658);
 }
 input::placeholder{
   color: var(--bg-secondry,  #FD46F6);
@@ -504,7 +504,7 @@ input::placeholder{
   margin-bottom: -6px;
 }
 .search-result span{
-  color: var(--bg-primary, #FFE500);
+  color: var(--bg-primary, #F6D658);
 }
 .search-page {
   z-index: 10;

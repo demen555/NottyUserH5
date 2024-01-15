@@ -403,7 +403,7 @@ export default {
         .dplayer-played{
             height: 4px !important;
             border-radius: 2px;
-            background:  #FFE500 !important;
+            background:  #F6D658 !important;
         }
     }
 }

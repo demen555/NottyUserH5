@@ -320,7 +320,7 @@ export default {
     margin: 0 auto;
     height: 40px;
     border-radius: 20px;
-    background-color: var(--bg-primary, #FFE500);
+    background-color: var(--bg-primary, #F6D658);
     color: var(--text-color1, #181E2A);
     text-align: center;
     line-height: 40px;
@@ -388,7 +388,7 @@ export default {
   line-height: 24px;
   font-size: 14px;
   .tip{
-    color: var(--bg-primary, #FFE500);
+    color: var(--bg-primary, #F6D658);
   }
   div{
     display: inline-block;
@@ -414,7 +414,7 @@ export default {
     margin-top: 8px;
   }
   /deep/ b{
-    color: var(--bg-primary, #FFE500);
+    color: var(--bg-primary, #F6D658);
     font-weight: 400;
   }
 }

@@ -122,7 +122,7 @@ export default {
   }
 
   .active {
-    border: 1px solid var(--bg-primary, #FFE500);
+    border: 1px solid var(--bg-primary, #F6D658);
     background-color: var(--bg-color1, #0E0E0F);
 
     a {
@@ -132,7 +132,7 @@ export default {
   }
 }
 .pagination__next, .pagination__prev{
-  background-color: var(--bg-primary, #FFE500);
+  background-color: var(--bg-primary, #F6D658);
   color: #181e2a !important;
 }
 .disabled{

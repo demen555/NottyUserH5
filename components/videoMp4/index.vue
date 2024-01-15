@@ -156,7 +156,7 @@ export default {
     width: 100%;
     z-index: 3;
     .van-progress__portion{
-        background-color: var(--bg-primary, #FFE500);
+        background-color: var(--bg-primary, #F6D658);
     }
     .van-progress__pivot{
         display: none;
