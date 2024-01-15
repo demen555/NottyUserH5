@@ -63,7 +63,7 @@
     </main>
     <main v-show="!searchShow">
       <!-- 有搜索结果 -->
-      <div class="search-result" id="searchName">{{ search }} {{ searchShow }}</div>
+      <div class="search-result" id="searchName">{{ search }}</div>
       <div class="loading-box" style="margin-top: 40px;" v-if="spainnerLoading">
         <cardLoad></cardLoad>
       </div>
