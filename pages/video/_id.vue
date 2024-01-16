@@ -679,11 +679,11 @@ export default {
 
         // 添加历史记录
         addHisVod(item){
-            console.log("添加历史")
-            const idAdd = this.historyVod.some(  ele => ele.vodId === item.vodId);
-            if( !idAdd ){
+            console.log(item,"添加历史")
+            // const idAdd = this.historyVod.some(  ele => ele.vodId === item.vodId);
+            // if( !idAdd ){
                 this.$store.commit("UPDATE_HISTORYVOD", item)
-            }
+            // }
         },
 
         // 判断是否点赞
