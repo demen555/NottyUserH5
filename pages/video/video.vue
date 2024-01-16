@@ -2,7 +2,7 @@
     <div
         @touchstart="handleTouchStart"
         @touchend="handleTouchEnd" 
-        class="myVideo" 
+        :class="['myVideo', { 'video-not-full': !isfull }]"
         id="HubmyVideo">
         <div id="dplayer" ref="player" class="dplayer video-box"></div>
         <div class="fast-forward-animation" v-show="fastWforward">
@@ -92,6 +92,8 @@ export default {
             showNotice: false,
 
             showNext: false,
+
+            isfull: false,
         }
     },
     props:{
@@ -185,6 +187,17 @@ export default {
             this.dp.on('ended', (e) => {
                 this.showNext = true;
             })
+
+            this.dp.on('fullscreen', (e) => {
+                console.log("进入全屏")
+                this.isfull = true
+            })
+
+            this.dp.on('fullscreen_cancel', (e) => {
+               console.log("取消全屏")
+               this.isfull = false
+            })
+      
 
             // 目标元素
             const targetElement = document.getElementById('dplayer');
@@ -418,94 +431,96 @@ export default {
     display: none;
 }
 
-
-/deep/ .dplayer-mobile{
-    &.dplayer-hide-controller{
-        .dplayer-time{
+.video-not-full{
+    /deep/ .dplayer-mobile{
+        &.dplayer-hide-controller{
+            .dplayer-time{
+                display: none !important;
+            }
+        }
+        .dplayer-menu{
             display: none !important;
         }
-    }
-    .dplayer-menu{
-        display: none !important;
-    }
-    .dplayer-mobile-play{
-        background: url("~~/static/images/bfq_play.png");
-        background-size: 100% 100%;
-        svg{
-            opacity: 0;
-        }
-    } 
-    &.dplayer-playing{
-        .dplayer-mobile-play{
-            background: url("~~/static/images/bfq_pause.png");
-            background-size: 100% 100%;
-            svg{
-                opacity: 0;
-            }
-        } 
-    }
-    &.dplayer-paused{
         .dplayer-mobile-play{
             background: url("~~/static/images/bfq_play.png");
             background-size: 100% 100%;
             svg{
                 opacity: 0;
             }
+        } 
+        &.dplayer-playing{
+            .dplayer-mobile-play{
+                background: url("~~/static/images/bfq_pause.png");
+                background-size: 100% 100%;
+                svg{
+                    opacity: 0;
+                }
+            } 
         }
-    }
-    &.dplayer-hide-controller{
-        .dplayer-mobile-play{
-            display: none;
-        }
-    }
-    .dplayer-controller{
-        padding: 0;
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-        .dplayer-icons-right{
-            display: none;
-        //    position: absolute;
-        //    top: 0;
-        //    right: 0;
-        }
-        .dplayer-icons-left{
-            position: absolute;
-            left: 50%;
-            bottom: 28px;
-            transform: translateX(-50%);
-            .dplayer-time{
-                color: #FFF;
-                text-align: center;
-                text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.20);
-                font-family: PingFang SC;
-                font-size: 14px;
-                font-style: normal;
-                font-weight: 500;
-                line-height: 16px; /* 114.286% */
+        &.dplayer-paused{
+            .dplayer-mobile-play{
+                background: url("~~/static/images/bfq_play.png");
+                background-size: 100% 100%;
+                svg{
+                    opacity: 0;
+                }
             }
         }
-        .dplayer-bar-wrap{
-            width: 100%;
-            border-radius: 0;
-            height: 4px !important;
-            bottom: 0px;
-            .dplayer-bar{
+        &.dplayer-hide-controller{
+            .dplayer-mobile-play{
+                display: none;
+            }
+        }
+        .dplayer-controller{
+            padding: 0;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            .dplayer-icons-right{
+                display: none;
+            //    position: absolute;
+            //    top: 0;
+            //    right: 0;
+            }
+            .dplayer-icons-left{
+                position: absolute;
+                left: 50%;
+                bottom: 28px;
+                transform: translateX(-50%);
+                .dplayer-time{
+                    color: #FFF;
+                    text-align: center;
+                    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.20);
+                    font-family: PingFang SC;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 16px; /* 114.286% */
+                }
+            }
+            .dplayer-bar-wrap{
+                width: 100%;
+                border-radius: 0;
                 height: 4px !important;
-            }
-            .dplayer-loaded{
-                height: 4px !important;
-            }
-            .dplayer-played{
-                height: 4px !important;
-                border-radius: 2px;
-            }
-            .dplayer-thumb{
-                background:  #FFF !important;
-                transform: scale(1) !important;
+                bottom: 0px;
+                .dplayer-bar{
+                    height: 4px !important;
+                }
+                .dplayer-loaded{
+                    height: 4px !important;
+                }
+                .dplayer-played{
+                    height: 4px !important;
+                    border-radius: 2px;
+                }
+                .dplayer-thumb{
+                    background:  #FFF !important;
+                    transform: scale(1) !important;
+                }
             }
         }
     }
 }
+
 
 .dplayer-top-controller{
     position: absolute;
