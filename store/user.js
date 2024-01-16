@@ -1,3 +1,4 @@
+import _ from 'lodash';
 const state = {
   encryption: "", //  Aes 加密密钥
   register: {}, //注册/登录弹窗用的信息
@@ -82,17 +83,20 @@ const mutations = {
   },
   // 添加 更新历史记录
   UPDATE_HISTORYVOD(state, data){
-    console.log(data, Array.isArray(data))
+    console.log(data, Array.isArray(data), 'UPDATE_HISTORYVOD')
     if(!Array.isArray(data)){
-      state.historyVod = [
-        data,
-        ...state.historyVod
-      ];
+      // state.historyVod = [
+      //   data,
+      //   ...state.historyVod
+      // ];
+      state.historyVod.unshift(data)
+      state.historyVod = _.uniqBy(state.historyVod, 'vodId')
+      console.log(state.historyVod, 'update')
     }else{
       state.historyVod = data
     }
     
-    console.log(...state.historyVod, data, 'UPDATE_HISTORYVOD')
+    console.log(state.historyVod, data, 'UPDATE_HISTORYVOD')
   },
   // 删除历史记录
   CLEAR_HISTORYVOD (state, data){
