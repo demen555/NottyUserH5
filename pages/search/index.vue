@@ -82,7 +82,7 @@
             </van-list>
           </van-pull-refresh>
         </template>
-        <template v-else>
+        <template v-if="relatedList.length">
           <div class="no-match-empty"><img src="~/static/images/com_qsy_nothing.svg" alt="com_qsy_nothing"></div>
           <div class="no-match">{{ $t('str_related_no') }}</div>
           <div class="no-match-link">
@@ -141,7 +141,7 @@ created(){
   
   // this.set_show(true)
   if(process.client) {
-    this.search = localStorage.getItem('search') || '-'
+    this.search = localStorage.getItem('search') || ''
     if(localStorage.getItem('searchBool')){
       this.initSearchVideoList()
     }
@@ -317,13 +317,7 @@ methods: {
     if(this.search){
       this.historyList.unshift(this.search)
       this.historyList = Array.from(new Set(this.historyList))
-      if(process.client){
-        localStorage.setItem('historyList', JSON.stringify(this.historyList))
-        localStorage.setItem('search', this.search)
-        localStorage.setItem('searchBool', true)
-      }
       // this.handleReset()
-      this.set_show(false)
       this.handleGoToResult(this.search)
       this.$refs.searchRef.blur();//关闭手机软键盘
       // this.handleReset()
@@ -362,7 +356,8 @@ methods: {
     this.historyList = Array.from(new Set(this.historyList))
     if(process.client){
       localStorage.setItem('historyList', JSON.stringify(this.historyList))
-      // localStorage.setItem('search', this.search)
+      localStorage.setItem('search', this.search)
+      localStorage.setItem('searchBool', true)
     }
     this.set_show(false)
     this.initSearchVideoList('first')
