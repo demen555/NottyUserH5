@@ -677,9 +677,9 @@ export default {
             this.content = ""
         },
 
-        // 添加历史记录
+        // 添加历史记录 在vuex里面去重，同样的视频点击也需要排序
         addHisVod(item){
-            console.log(item,"添加历史")
+            console.log("添加历史")
             // const idAdd = this.historyVod.some(  ele => ele.vodId === item.vodId);
             // if( !idAdd ){
                 this.$store.commit("UPDATE_HISTORYVOD", item)

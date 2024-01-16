@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from 'lodash';
 const state = {
   encryption: "", //  Aes 加密密钥
   register: {}, //注册/登录弹窗用的信息
