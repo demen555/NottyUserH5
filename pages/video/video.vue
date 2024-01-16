@@ -40,12 +40,12 @@
                     <div class="refresh-icon"></div>
                     <div class="refresh-btn">Replay</div>
                 </div>
-                <nuxt-link class="next-av" v-if="nextAv()" :to="localePath({
+                <nuxt-link class="next-av" v-if="nextAv" :to="localePath({
                     name: 'video-id',
-                    params: { id: nextAv().vodId }
+                    params: { id: nextAv.vodId }
                 })">
-                    <img class="vodPic" :src="nextAv().vodPic" alt="vodPic">
-                    <div class="vodName">{{ nextAv().vodName }} </div>
+                    <img class="vodPic" :src="nextAv.vodPic" alt="vodPic">
+                    <div class="vodName">{{ nextAv.vodName }} </div>
                     <div class="next"></div>
                 </nuxt-link>
             </div>
@@ -105,6 +105,12 @@ export default {
             type: Array,
             default: () => []
         }
+    },
+    computed:{
+        nextAv({ vodChange }){
+            let randomIndex = Math.floor(Math.random() * vodChange.length);
+            return vodChange[randomIndex]
+        },  
     },
     mounted(){
         this.loadVideo();
@@ -252,10 +258,7 @@ export default {
             this.showNotice = false
         },
 
-        nextAv(){
-            let randomIndex = Math.floor(Math.random() * this.vodChange.length);
-            return this.vodChange[randomIndex]
-        },  
+
 
         handleClickDebounce: debounce(function () {
             this.dp.seek(this.dp.video.currentTime + this.seekTime); // 快进 10 秒
