@@ -308,11 +308,8 @@ export default {
     },
 
     mounted(){
-        if( !this.isLogin ){
-            this.addHisVod(this.videoInfo);
-        }
+      this.addHisVod(this.videoInfo);
     },
-    
     methods:{
         dateFormat,
         handleRefesh(){
