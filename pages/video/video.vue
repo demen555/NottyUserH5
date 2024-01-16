@@ -215,6 +215,9 @@ export default {
                         const hasYourClass = targetElement.classList.contains('dplayer-hide-controller');
                         console.log(`元素是否有 dplayer-hide-controller 类：${hasYourClass}`);
                         this.controller = !hasYourClass
+                        if( hasYourClass ){
+                            this.speedStatus = false
+                        }
                     }
                 }
             };
@@ -444,6 +447,10 @@ export default {
         .dplayer-menu{
             display: none !important;
         }
+        .diplayer-loading-icon{
+            display: none !important;
+        }
+        // .diplayer-loading
         .dplayer-mobile-play{
             background: url("~~/static/images/bfq_play.png");
             background-size: 100% 100%;
