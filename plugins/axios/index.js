@@ -6,7 +6,6 @@ import upApi from "./up.js";
 import videoApi from "./video.js";
 import { Toast } from 'vant'
 function codeToast(code, app, store){
-  console.log('code', code,  app.i18n.t("str_response_code3"))
   switch(code){
       case 400000:
           Toast(app.i18n.t("str_response_code3"));
