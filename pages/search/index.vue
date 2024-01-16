@@ -64,7 +64,7 @@
     <main v-show="!searchShow">
       <!-- 有搜索结果 -->
       <div class="search-result" id="searchName">{{ search }}</div>
-      <div class="loading-box" style="margin-top: 40px;" v-if="spainnerLoading">
+      <div class="loading-box" style="margin-top: 42px;" v-if="spainnerLoading">
         <cardLoad></cardLoad>
       </div>
       <div class="content">
@@ -304,6 +304,7 @@ methods: {
     } catch (error) {
       console.error(error)
     } finally {
+      // this.spainnerLoading = true
       this.refreshing = false
       this.loading = false
     }
@@ -504,7 +505,7 @@ input::placeholder{
   width: 90%;
   margin: 0 auto;
   padding-top: 55px; //遮盖元素的高度，即导航栏高度
-  margin-bottom: -6px;
+  // margin-bottom: -6px;
 }
 .search-result span{
   color: var(--bg-primary, #F6D658);
