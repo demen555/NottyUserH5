@@ -163,7 +163,7 @@
           </div>
           <template v-if="!showLanguageExpand">
             <nuxt-link class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.language" :to="switchLocalePath(item.language)">
-              <div class="nav-menu-left">
+              <div class="nav-menu-left" @click.stop="window.reload()">
                 <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                 <div>{{ item.title }}</div>
               </div>
@@ -482,10 +482,6 @@ export default {
         this.$refs.dialogLineRef.onLineShow()
       } else if (val === 'search') {
         this.set_show(true)
-        if(['search___en', 'search___pt'].includes(this.$route.name)) {
-          this.set_show(true)
-          // this.handleScroll()
-        }
       } else {
         this.$router.push(this.localePath(val))
       }

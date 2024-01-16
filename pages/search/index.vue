@@ -176,10 +176,20 @@ head(){
 //     this.handleFocus();
 //   }
 // },
-
+beforeDestroy(){
+  console.log('beforeDestroy')
+  if(process.client) {
+    if(!['search___en', 'search___pt'].includes(this.$route.name)) {
+      localStorage.removeItem('search')
+      localStorage.removeItem('searchBool')
+    }
+  }
+}, 
 watch: {
   searchShow(val){
     if(val){
+      console.log(val, 'watch searchShow')
+      this.search = ''
       this.$nextTick(() => {
         this.handleFocus()
       })
