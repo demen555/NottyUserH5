@@ -13,12 +13,10 @@
     </van-image>
     <div class="thumb-text">
       <div class="thumb-left">{{ tag.title }}</div>
-      <div class="thumb-right">
-        <!-- <div class="main-view"></div> -->
-        <!-- com_shipinshu_1 -->
+      <!-- <div class="thumb-right">
         <div :class="themeChecked?'main-video-num': 'main-video-num-white'"></div>
         <div class="thumb-num">{{ tag.vodCount || 0 }} <span class="thumb-videos">Videos</span></div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -43,7 +41,7 @@ export default{
     handleClickTag(item){
       this.set_tagid(item.id)
       this.$router.push(this.localePath({
-        name: 'type-id-name',
+        name: 'category-id-name',
         params:{
           id: item.id,
           name: item.title,
