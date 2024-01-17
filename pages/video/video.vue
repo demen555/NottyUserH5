@@ -140,6 +140,15 @@ export default {
                 this.handleClickDebounce();
             }
         });
+
+        // 点击其他元素，卸载视频
+        document.addEventListener(
+            "click",
+            (e) => {
+                this.contains(e)
+            },
+            true
+        );
     },
     methods: {
         loadVideo () {
@@ -261,7 +270,15 @@ export default {
             this.showNotice = false
         },
 
-
+        contains(e){
+            let $video = document.querySelector(`.speed-check`);
+            if( !$video ){
+                return;
+            }
+            if (!$video.contains(e.target)) {
+                this.speedStatus = false;
+            }
+        },
 
         handleClickDebounce: debounce(function () {
             this.dp.seek(this.dp.video.currentTime + this.seekTime); // 快进 10 秒
@@ -447,10 +464,14 @@ export default {
         .dplayer-menu{
             display: none !important;
         }
-        .diplayer-loading-icon{
-            display: none !important;
+        // .diplayer-loading-icon{
+        //     display: none !important;
+        // }
+        &.dplayer-loading{
+            .dplayer-mobile-play{
+                opacity: 0 !important;
+            }
         }
-        // .diplayer-loading
         .dplayer-mobile-play{
             background: url("~~/static/images/bfq_play.png");
             background-size: 100% 100%;
