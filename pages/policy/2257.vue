@@ -77,7 +77,7 @@ export default{
       console.log(item)
       this.set_tagid(item.id)
       this.$router.push({
-        name: 'type-id-name',
+        name: 'category-id-name',
         params:{
           id: item.id,
           name: item.name,
