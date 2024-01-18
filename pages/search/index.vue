@@ -63,11 +63,12 @@
     </main>
     <main v-show="!searchShow">
       <!-- 有搜索结果 -->
-      <div class="search-result" id="searchName">{{ search }}</div>
+      <Nav :title="search" text></Nav>
+      <!-- <div class="search-result" id="searchName">{{ search }}</div> -->
       <div class="loading-box" style="margin-top: 42px;" v-if="spainnerLoading">
         <cardLoad></cardLoad>
       </div>
-      <div class="content">
+      <div class="content paddingTop88">
         <template v-if="dataList.length">
           <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
             <van-list
@@ -105,6 +106,7 @@ import { mapGetters, mapActions } from 'vuex'
 import commonMinxin from '~/plugins/mixins/common'
 import Cover from '@/components/cover'
 import Empty from '@/components/empty'
+import Nav from '~/components/nav'
 import CODES from "~/plugins/enums/codes"
 import { uniArray } from '@/utils/format.js'
 export default{
@@ -154,7 +156,8 @@ created(){
 },
 components: {
   Cover,
-  Empty
+  Empty,
+  Nav
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -514,7 +517,7 @@ input::placeholder{
   color: var(--text-color1, #FFFFFF);
   width: 90%;
   margin: 0 auto;
-  padding-top: 55px; //遮盖元素的高度，即导航栏高度
+  margin-top: 55px; //遮盖元素的高度，即导航栏高度
   // margin-bottom: -6px;
 }
 .search-result span{
