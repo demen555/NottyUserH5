@@ -83,14 +83,11 @@
             </van-list>
           </van-pull-refresh>
         </template>
-        <template v-if="relatedList.length">
+        <template v-if="!dataList.length">
           <div class="no-match-empty"><img src="~/static/images/com_qsy_nothing.svg" alt="com_qsy_nothing"></div>
           <div class="no-match">{{ $t('str_related_no') }}</div>
           <div class="no-match-link">
             <div class="no-match-title">{{ $t('str_related_videos') }}</div>
-            <!-- <div class="loading-box" style="margin-top: -45px;" v-if="relatedLoading">
-              <cardLoad></cardLoad>
-            </div> -->
             <div class="no-match-list">
               <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
             </div>
@@ -290,6 +287,7 @@ methods: {
           // this.set_show(true)
           this.getRelatedList()
           this.spainnerLoading = true
+          return 
         } else {
           this.spainnerLoading = false
           // this.noResultShow = false
