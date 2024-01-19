@@ -40,7 +40,7 @@
             <a href="https://www.youtube.com/@NottyHub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/youtube_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
             <a href="https://twitter.com/nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/twitter_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
             <a href="https://www.tiktok.com/@nottyhub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/tiktok_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
-            <a href="https://t.me/+UClKi43iLeFkYzA1" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
+            <a href="https://t.me/NottyHubClub" target="_blank"><img class="common" :src="themeChecked? require('~/static/images/telegram_1.svg'): require('~/static/images/rat-1.png')" alt="rta"></a>
           </div>
         </div>
 
