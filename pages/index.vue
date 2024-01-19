@@ -49,7 +49,7 @@
     <div class="sticky-upload" v-show="showSticky">
       <div class="sticky-close" @click="handleClose"></div>
       <div class="sticky-text">{{ $t('str_page_text4') }}</div>
-      <a href="https://t.me/+UClKi43iLeFkYzA1" target="_blank">
+      <a href="https://t.me/NottyHubClub" target="_blank">
         <img :src="require('~/static/images/upload.svg')" alt="upload">
       </a>
     </div>
