@@ -461,6 +461,9 @@ export default {
                 display: none !important;
             }
         }
+        .dplayer-controller-mask{
+            transition: none !important;
+        }
         .dplayer-menu{
             display: none !important;
         }
@@ -531,21 +534,24 @@ export default {
             .dplayer-bar-wrap{
                 width: 100%;
                 border-radius: 0;
-                height: 4px !important;
+                height: 6px !important;
                 bottom: 0px;
                 .dplayer-bar{
-                    height: 4px !important;
+                    height: 6px !important;
                 }
                 .dplayer-loaded{
-                    height: 4px !important;
+                    height: 6px !important;
                 }
                 .dplayer-played{
-                    height: 4px !important;
+                    height: 6px !important;
                     border-radius: 2px;
                 }
                 .dplayer-thumb{
                     background:  #FFF !important;
                     transform: scale(1) !important;
+                    width: 12px;
+                    height: 12px;
+                    margin-top: -3px;
                 }
             }
         }
