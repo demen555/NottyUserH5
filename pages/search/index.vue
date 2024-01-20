@@ -1,7 +1,7 @@
 <template>
   <div class="search-page"  id="search">
     <HeaderTop ref="header" v-show="!searchShow"></HeaderTop>
-    <div class="search" ref="search" v-if="searchShow">
+    <div class="search" ref="search" v-show="searchShow">
       <!-- <div class="search-img" @click="handleGoHome"><img class="svg-icon" :src="themeChecked? require('~/static/images/com_jt_sx_zuo.svg'): require('~/static/images/com_jt_sx_zuo_rj.svg')" alt=""></div> -->
       <div class="search-btn">
         <!-- <input ref="searchRef" v-model="search" placeholder="搜索什么" class="search-input" type="text" @keyup.enter="handleSearch"> -->
