@@ -463,6 +463,8 @@ export default {
         }
         .dplayer-controller-mask{
             transition: none !important;
+            background: url("~~/static/images/video-mask.png");
+            background-size: 100% 100%;
         }
         .dplayer-menu{
             display: none !important;
