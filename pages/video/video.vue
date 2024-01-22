@@ -538,8 +538,19 @@ export default {
                 border-radius: 0;
                 height: 6px !important;
                 bottom: 0px;
+ 
                 .dplayer-bar{
                     height: 6px !important;
+                    position: relative;
+                    &::after{
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        height: 40px;
+                        bottom: -20px;
+                        left: 0;
+                        opacity: 0;
+                    }
                 }
                 .dplayer-loaded{
                     height: 6px !important;
