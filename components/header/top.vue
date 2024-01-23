@@ -157,17 +157,17 @@
               <div>{{ $t('str_change_lang') }}</div>
             </div>
             <div class="nav-menu-right">
-              <div class="nav-menu-lang">{{ languageText }}</div>
+              <div class="nav-menu-lang">{{ $i18n.localeProperties.name }}</div>
               <div  :class="showLanguageExpand? (themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
             </div>
           </div>
           <template v-if="!showLanguageExpand">
-            <nuxt-link class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.language" :to="switchLocalePath(item.language)">
+            <nuxt-link class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.code" :to="switchLocalePath(item.code)">
               <div class="nav-menu-left" @click.stop="window.reload()">
                 <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
-                <div>{{ item.title }}</div>
+                <div>{{ item.name }} </div>
               </div>
-              <div class="nav-menu-right" v-if="item.language === language">
+              <div class="nav-menu-right" v-if="item.code === language">
                 <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
               </div>
             </nuxt-link>
@@ -228,7 +228,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import Overlay from '@/components/overlay'
 import dialogGuild from '@/components/dialog/dialog-guild.vue'
-import { langMap, areaList } from "~/locales/lang.js"
+import { areaList } from "~/locales/lang.js"
 import CODES from "~/plugins/enums/codes"
 
 
@@ -248,7 +248,7 @@ export default {
       showLocationExpand: true, //国家
       showExpand: true, // 标签
       
-      languageList: langMap, // 语言数据
+      languageList: this.$i18n.locales, // 语言数据
       language: this.$i18n.locale, //语言
       location: 'US1', //国家
       locationList: areaList, // 国家数据
@@ -272,7 +272,7 @@ export default {
     Overlay
   },
   created(){
-    console.log( 'this.$route.name', this.$route.name )
+    console.log( 'this.$route.name', this)
     this.initTypeList()
     // this.initTagList()
     this.themeChecked = this.theme === 'dark'
@@ -297,11 +297,7 @@ export default {
   },
   computed: {
     ...mapGetters(['userinfo', 'theme', 'isLogin', 'tagId', 'typeId','accessToken']),
-    languageText({ language,  languageList}) {
-      console.log( 'languageList', languageList, language )
-      const obj = languageList[language];
-      return obj.title
-    },
+
     locationText() {
       const obj = this.locationList.find(item => this.location === item.code) || {}
       return this.$t(obj.country)

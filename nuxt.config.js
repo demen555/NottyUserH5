@@ -587,14 +587,34 @@ module.exports = {
     locales: [
       {
         code: 'en',
-        iso: 'en-US',
+        iso: 'en_US',
         name: 'English',
       },
       {
         code: 'pt',
-        iso: 'pt-PT',
+        iso: 'pt_PT',
         name: 'Português',
       },
+      {
+        code: 'vn',
+        iso:'vn_VN',
+        name: 'Tiếng Việt'
+      },
+      {
+        code: 'jp',
+        iso:'jp_JP',
+        name: '日本語'
+      },
+      {
+        code: 'es',
+        iso:'es_ES',
+        name: 'Español'
+      },
+      {
+        code: 'cn',
+        iso:'zh_CN',
+        name: '中文'
+      }
     ],
     strategy: 'prefix_except_default',
     defaultLocale: 'en',
@@ -604,6 +624,10 @@ module.exports = {
       messages: {
         en: require('./locales/en.json'),
         pt: require('./locales/pt.json'),
+        vi: require('./locales/vn.json'),
+        jp: require('./locales/jp.json'),
+        es: require('./locales/es.json'),
+        cn: require('./locales/cn.json'),
       },
     },
     detectBrowserLanguage: false,
