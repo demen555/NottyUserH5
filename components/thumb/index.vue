@@ -1,5 +1,5 @@
 <template>
-  <div class="thumb-list" @click="handleClickTag(tag)">
+  <div class="thumb-list" @click="handleClickType(tag)">
     <van-image
       lazy-load
       :src="tag.img"
@@ -37,9 +37,9 @@ export default{
     }
   },
   methods: {
-    ...mapActions(['set_detail', 'set_tagid']),
-    handleClickTag(item){
-      this.set_tagid(item.id)
+    ...mapActions(['set_detail', 'set_typeid']),
+    handleClickType(item){
+      this.set_typeid(item.id)
       this.$router.push(this.localePath({
         name: 'category-name',
         params:{
