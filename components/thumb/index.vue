@@ -41,7 +41,7 @@ export default{
     handleClickTag(item){
       this.set_tagid(item.id)
       this.$router.push(this.localePath({
-        name: 'category-id-name',
+        name: 'category-name',
         params:{
           id: item.id,
           name: item.title,
