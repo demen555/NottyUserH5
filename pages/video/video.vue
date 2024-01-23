@@ -455,8 +455,10 @@ export default {
         border-radius: 2px;
         background: rgba(255, 255, 255, 0.40);
         padding: 0;
+       
         .dplayer-bar{
             height: 4px !important;
+            // opacity: 0;
         }
         .dplayer-loaded{
             height: 4px !important;
@@ -558,14 +560,16 @@ export default {
                 }
             }
             .dplayer-bar-wrap{
-                width: 100%;
+                width: 95%;
                 border-radius: 0;
                 height: 6px !important;
                 bottom: 0px;
- 
+                background: transparent !important;
+                margin-left: 2.5%;
                 .dplayer-bar{
                     height: 6px !important;
                     position: relative;
+                    background: transparent !important;
                     &::after{
                         content: "";
                         position: absolute;
@@ -578,17 +582,20 @@ export default {
                 }
                 .dplayer-loaded{
                     height: 6px !important;
+                    opacity: 0;
+                    background: transparent !important;
                 }
                 .dplayer-played{
                     height: 6px !important;
                     border-radius: 2px;
+                    background: transparent !important;
                 }
                 .dplayer-thumb{
                     background:  #FFF !important;
                     transform: scale(1) !important;
                     width: 12px;
                     height: 12px;
-                    margin-top: -3px;
+                    margin-top: 0px;
                 }
             }
         }
