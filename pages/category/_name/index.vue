@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="$t('str_menu_type_all')" text></Nav>
+    <Nav :title="txtTitle" text></Nav>
     <div class="loading-box" v-if="spainnerLoading">
-      <tagLoad></tagLoad>
+      <cardLoad></cardLoad>
     </div>
-    <template v-if="typeList.length">
+    <template v-if="dataList.length">
       <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -15,10 +15,7 @@
           :immediate-check="false"
           :offset="10"
         >
-          <div class="thumb">
-            <Thumb :tag="tag" v-for="tag in typeList" :key="tag.id"></Thumb>
-          </div>
-          <!-- <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover> -->
+          <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         </van-list>
       </van-pull-refresh>
     </template>
@@ -29,8 +26,6 @@
 import Nav from '~/components/nav'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
-import Thumb from '~/components/thumb'
-import tagLoad from "~/components/skeleton/tagLoad.vue"
 import commonMinxin from '~/plugins/mixins/common'
 import CODES from "~/plugins/enums/codes"
 
@@ -42,29 +37,17 @@ data() {
     loading: false, // 是否处于加载状态
     finished: false, // 是否加载完成
     refreshing: true, // 当前是否刷新重置信息
-    typeList: [],
+    dataList: [],
     pageInfo: {
       page: 1,
       size: 20
     }
   }
 },
-head(){
-  const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
-  return {
-    
-    link: [
-      {
-        rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
-      },
-    ],
-  }
-},
 mixins: [commonMinxin],
 computed: {
   txtTitle(){
-    return  '#'+this.detail.name
+    return  this.detail.name
   }
 },
 activated(){
@@ -81,12 +64,22 @@ created(){
   }
   this.getList('first')
 },
+head(){
+  const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
+  return {
+    
+    link: [
+      {
+        rel: 'canonical',
+        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+      },
+    ],
+  }
+},
 components: {
   Nav,
   Cover,
-  Empty,
-  Thumb,
-  tagLoad
+  Empty
 },
 methods: {
   onLoad(){
@@ -98,14 +91,17 @@ methods: {
       isRefresh  === 'first' && (this.spainnerLoading = true)
       this.loading = true
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
-      const { code, data } = await this.$homeApi.postTypeList(params)
-      console.log(code, CODES.SUCCESS, data, 'postTagListPage')
+    
+      params.categoryName = this.detail.name //分类名称
+
+      const { code, data } = await this.$homeApi.requestvodpage(params)
       if(code === CODES.SUCCESS){
         if(isRefresh){
-          this.typeList = data.data
+          // this.dataList = [ ...body.records, ...this.dataList ]
+          this.dataList = data.data
           this.refreshing = false
         } else {
-          this.typeList = [ ...this.typeList, ...data.data]
+          this.dataList = [ ...this.dataList, ...data.data]
           this.loading = false
         }
         if(data.data.length === 0){
@@ -128,12 +124,7 @@ methods: {
 }
 }
 </script>
-<style lang="less" scoped>
-.thumb{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+<style lang="less">
 .van-pull-refresh{
 overflow: visible;
 }
@@ -143,5 +134,8 @@ overflow: visible;
 }
 .main-bottom{
   margin-bottom: 50px;
+}
+:deep(.van-nav-bar__left){
+  font-size: 18px;
 }
 </style>
