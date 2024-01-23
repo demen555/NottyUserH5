@@ -72,6 +72,21 @@ function vodPlayUrl (url){
     return str || ""
 }
 
+// 监听元素无操作
+function setupInactivityDetection(element, inactivityTime, onInactivity) {
+    let inactivityTimeout;
+
+    function resetInactivityTimeout() {
+        clearTimeout(inactivityTimeout);
+        inactivityTimeout = setTimeout(onInactivity, inactivityTime);
+    }
+
+    element.addEventListener('mousemove', resetInactivityTimeout);
+    element.addEventListener('click', resetInactivityTimeout);
+
+    resetInactivityTimeout();
+}
+
 export default {
     name: 'videoContainer',
     data () {
@@ -149,6 +164,15 @@ export default {
             },
             true
         );
+
+        const targetElement = document.querySelector('#HubmyVideo');
+
+        setupInactivityDetection(targetElement, 5000, function() {
+            // 在5秒内无操作后执行的操作
+            console.log("5秒内无操作");
+            document.getElementById('dplayer').classList.add('dplayer-hide-controller');
+        });
+
     },
     methods: {
         loadVideo () {
