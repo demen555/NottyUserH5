@@ -167,10 +167,13 @@ export default {
 
         const targetElement = document.querySelector('#HubmyVideo');
 
-        setupInactivityDetection(targetElement, 5000, function() {
+        setupInactivityDetection(targetElement, 3000, () => {
             // 在5秒内无操作后执行的操作
-            console.log("5秒内无操作");
-            document.getElementById('dplayer').classList.add('dplayer-hide-controller');
+            console.log("3秒内无操作");
+            if( this.dp && !this.dp.video.paused ){
+                console.log("播放中")
+                document.getElementById('dplayer').classList.add('dplayer-hide-controller');
+            };
         });
 
     },
@@ -200,6 +203,7 @@ export default {
             
             // 监听 DPlayer 播放事件
             this.dp.on('play', () => {
+                document.getElementById('dplayer').classList.add('dplayer-hide-controller');
                 console.log("video_watch_start", new Date())
                 // 记录视频开始播放的时间
                 this.startTime = new Date();
@@ -272,6 +276,7 @@ export default {
             this.speedStatus = false;
             this.nowSpeed = item;
             this.dp.speed(item)
+            document.getElementById('dplayer').classList.add('dplayer-hide-controller');
         },
 
         initStart(){
