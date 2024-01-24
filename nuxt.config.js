@@ -584,28 +584,48 @@ module.exports = {
   },
 
   i18n: {
+    lazy: true,
+    langDir: "locales/",
     locales: [
       {
         code: 'en',
-        iso: 'en-US',
+        iso: 'en_US',
         name: 'English',
+        file: "en.json"
       },
       {
         code: 'pt',
-        iso: 'pt-PT',
+        iso: 'pt_PT',
         name: 'Português',
+        file: "pt.json"
       },
+      {
+        code: 'vn',
+        iso:'vi_VN',
+        name: 'Tiếng Việt',
+        file: "vn.json"
+      },
+      {
+        code: 'jp',
+        iso:'ja_JP',
+        name: '日本語',
+        file: "jp.json"
+      },
+      {
+        code: 'es',
+        iso:'es_ES',
+        name: 'Español',
+        file: "es.json"
+      },
+      {
+        code: 'cn',
+        iso:'zh_CN',
+        name: '中文',
+        file: "cn.json"
+      }
     ],
     strategy: 'prefix_except_default',
     defaultLocale: 'en',
-    vueI18n: {
-      fallbackLocale: 'en',
-      lazy: true,
-      messages: {
-        en: require('./locales/en.json'),
-        pt: require('./locales/pt.json'),
-      },
-    },
     detectBrowserLanguage: false,
 
   },
