@@ -601,13 +601,13 @@ module.exports = {
       },
       {
         code: 'vn',
-        iso:'vn_VN',
+        iso:'vi_VN',
         name: 'Tiếng Việt',
         file: "vn.json"
       },
       {
         code: 'jp',
-        iso:'jp_JP',
+        iso:'ja_JP',
         name: '日本語',
         file: "jp.json"
       },
