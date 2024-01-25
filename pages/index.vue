@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HeaderTop @refresh="onRefresh"  id="home-top"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"  id="home-top"></HeaderTop>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -59,10 +59,11 @@
 import { mapGetters } from "vuex"
 import HeaderTop from '~/components/header/top.vue'
 import Cover from '~/components/cover'
-import cardLoad from "~/components/skeleton/cardLoad.vue"
 import CODES from "~/plugins/enums/codes"
 import vPagination from '~/components/pagination/index.vue'
+import commonMinxin from '~/plugins/mixins/common'
 export default{
+mixins: [commonMinxin],
 data() {
   return {
     spainnerLoading: true,// 全局loading层
@@ -86,7 +87,7 @@ data() {
       { name: this.$t('str_footer_nav10'), id: 'policy-eu'},
     ],
     hostname: '',
-    showSticky: true
+    showSticky: true,
   }
 },
 computed: {
@@ -126,7 +127,6 @@ created(){
 components: {
   HeaderTop,
   Cover,
-  cardLoad,
   vPagination
 },
 watch: {
