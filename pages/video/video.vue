@@ -288,14 +288,12 @@ export default {
         handleTouchStart() {
             this.pressTimer = setTimeout(() => {
                 this.dp.speed(2)
-                this.nowSpeed = 2
                 this.showNotice = true
-            }, 500); // Adjust the duration for your needs
+            }, 500);
         },
         handleTouchEnd() {
             clearTimeout(this.pressTimer);
-            this.dp.speed(1);
-            this.nowSpeed = 1
+            this.dp.speed(this.nowSpeed);
             this.showNotice = false
         },
 
