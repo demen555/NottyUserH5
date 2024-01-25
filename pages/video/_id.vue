@@ -328,7 +328,7 @@ export default {
         },
         
         initVideo(){
-            const vodId = this.$route.params.id;
+            const vodId = this.vodId;
             // this.getVideo(vodId);
             this.getVodState(vodId)
         },
@@ -424,11 +424,11 @@ export default {
         onLoadReview(){
             this.vodReviewPage.page++;
             console.log("加载评论列表", {
-                vodId: this.$route.params.id,
+                vodId: this.vodId,
                 ...this.vodReviewPage
             })
             this.$videoApi.requestVodReviewe({
-              vodId: this.$route.params.id,
+              vodId: this.vodId,
               ...this.vodReviewPage
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
@@ -453,7 +453,7 @@ export default {
             // if( !this.isLogin ){
             //     return this.goLogin()
             // }
-            const vodId = this.$route.params.id;
+            const vodId = this.vodId;
             const isUpVod = this.isUpVod(this.videoStatus);
             if( this.onClick ){
                 return 
@@ -496,7 +496,7 @@ export default {
                 //     this.$store.commit("UPDATE_UPVOD", this.videoInfo )
                 // }
                 this.$videoApi.requestVodup({
-                  vodId: this.$route.params.id,
+                  vodId: this.vodId,
                 }).then(res => {
                     if( res.code === CODES.SUCCESS ){
                         // const num = Number(this.videoStatus.vodUp) + 1;
@@ -527,7 +527,7 @@ export default {
                 this.$set(this.videoStatus, "collectNumber", num)
                 this.$set(this.videoStatus, "collect", false)
                 this.$videoApi.requestVodcollectcancel({
-                  vodId: this.$route.params.id,
+                  vodId: this.vodId,
                 }).then(res => {
                     if( res.code !== CODES.SUCCESS ){
                         const num = Number(this.videoStatus.collectNumber) + 1;
@@ -545,7 +545,7 @@ export default {
                 this.$set(this.videoStatus, "collectNumber", num)
                 this.$set(this.videoStatus, "collect", true)
                 this.$videoApi.requestVodcollect({
-                  vodId: this.$route.params.id,
+                  vodId: this.vodId,
                 }).then(res => {
                     if( res.code !== CODES.SUCCESS ){
                         const num = Number(this.videoStatus.collectNumber) - 1;
@@ -563,7 +563,7 @@ export default {
             // if( !this.isLogin ){
             //     return this.goLogin()
             // }
-            const vodId = this.$route.params.id;
+            const vodId = this.vodId;
             const isdownVod = this.isdownVod(this.videoStatus);
             if( this.onClick ){
                 return 
@@ -598,7 +598,7 @@ export default {
                     this.$set(this.videoStatus, "up", false);
                     this.$set(this.videoStatus, "down", true);
                     this.$videoApi.requestVoddown({
-                      vodId: this.$route.params.id,
+                      vodId: this.vodId,
                     }).then(res => {
                         if( res.code === CODES.SUCCESS ){
                             // const num = Number(this.videoStatus.vodDown) + 1;
@@ -623,7 +623,7 @@ export default {
 
         getShareLink(){
             this.$videoApi.requestSharelink({
-              vodId: this.$route.params.id,
+              vodId: this.vodId,
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
                     console.log(res)
@@ -646,7 +646,7 @@ export default {
             // 需要审核，不能直接显示
             this.showInput = false;
             this.$videoApi.requestVodReviewInput({
-              vodId: this.$route.params.id,
+              vodId: this.vodId,
               content: this.content
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
