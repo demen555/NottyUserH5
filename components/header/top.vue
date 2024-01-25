@@ -370,7 +370,11 @@ export default {
     },
     async initTypeList(){
       try {
-        const res = await this.$homeApi.postTypeList(this.pageInfo)
+        const params = {
+          isSorted: true,
+          ...this.pageInfo
+        }
+        const res = await this.$homeApi.postTypeList(params)
         console.log(res, 'typeList334')
         if(res.code === CODES.SUCCESS){
           console.log(res.data, 'initTagList')
