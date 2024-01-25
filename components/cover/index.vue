@@ -5,7 +5,7 @@
     </div>
     <nuxt-link class="main-list" @click.prevent :to="localePath({
         name: 'video-id',
-        params: { id: item.vodId }
+        params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
     })">
       <div class="main-list-group" @touchmove="longpressVideo(item)">
         <div class="main-video">

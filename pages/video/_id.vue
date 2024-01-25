@@ -194,7 +194,9 @@ export default {
                 size: 50,
                 page: 1
             },
-            showVote: false
+            showVote: false,
+
+            vodId: "",
         }
     },
     head(){
@@ -230,7 +232,9 @@ export default {
         }
     },
     async asyncData({ $videoApi, params }) {
-        const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
+        const str = params.id.split('-');
+        const vodId = str[str.length - 1];
+        const res1 =  await $videoApi.requestVodComment({ vodId: vodId });
         const seo = res1.data.seo ? res1.data.seo : {
                         description: "",
                         keywords: "",
@@ -242,6 +246,7 @@ export default {
                 seo: seo,
                 code: res1.code
             },
+            vodId: vodId
         }
      
     },
@@ -298,7 +303,6 @@ export default {
 
     created(){
         // 在页面创建时检查是否有跳转信息
-        console.log( this.videoInfo.code,  this.$i18n.locale, "this.videoInfo.code" )
         if (this.videoInfo.code != 100 ) {
             // 跳转路由
             this.$router.push(this.localePath('/'+  this.$i18n.locale ))
