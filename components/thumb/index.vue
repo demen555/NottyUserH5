@@ -44,7 +44,7 @@ export default{
         name: 'category-name',
         params:{
           id: item.id,
-          name: item.title,
+          name: item.title.toLowerCase().replace(/ /g, '-'),
           refresh: true,
         }
       }))
