@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderTop @refresh="onRefresh"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
     <div class="main-video">
         <div class="video-container"> 
             <client-only v-if="videoInfo.vodPlayUrl">
