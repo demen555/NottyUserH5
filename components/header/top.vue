@@ -35,7 +35,7 @@
           <template v-if="!showTypeExpand">
             <nuxt-link :to="localePath({
               name: 'category-name',
-              params: { id: item.id, name: item.title }
+              params: { id: item.id, name: item.title.toLowerCase().replace(/ /g, '-') }
             })" v-for="(item) in typeList" :key="item.id">
               <div @click="handleClick(item.id)" class="nav-menu-list-tag-sub">
                 <div class="nav-menu-left">

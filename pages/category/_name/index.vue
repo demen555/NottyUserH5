@@ -57,7 +57,9 @@ activated(){
   }
 },
 created(){
-  const { name, id } = this.$route.params
+  let { name, id } = this.$route.params;
+  // 首字母大写，- 转空格
+  name = name.replace(/\-/g, ' ').replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
   this.detail = {
     name: name,
     id: id
