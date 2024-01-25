@@ -1,6 +1,6 @@
 <template>
   <div class="collect">
-    <HeaderTop @refresh="onRefresh"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
     <Nav @handleControl="handleControl" :title="$t('str_his')" :text=" dataList.length > 0 ? true : historyVod.length === 0"></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>

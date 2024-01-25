@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HeaderTop @refresh="onRefresh"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
     <Nav :title="txtTitle" text></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
