@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"  id="home-top"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible" id="home-top"></HeaderTop>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -163,7 +163,7 @@ methods: {
     
     // scrollTo() 把内容滚动到指定的坐标。减去导航高度的目的：导航用定位固定在顶部，如果不减去，导航栏会遮挡一部分内容
     // console.log(target.offsetTop, navHeight, target.offsetTop - navHeight, 'height')
-    // window.scrollTo(0, target.offsetTop - navHeight - 10)
+    window.scrollTo(0, 0)
   },
   handleClickPage(name){
     this.$router.push(this.localePath({name: name }))
