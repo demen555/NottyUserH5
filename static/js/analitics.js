@@ -22,18 +22,10 @@ gtag('config', gtagKey);
   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "jxfplk946b");
 
-// (function(h,o,t,j,a,r){
-//   h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-//   h._hjSettings={hjid:3760671,hjsv:6};
-//   a=o.getElementsByTagName('head')[0];
-//   r=o.createElement('script');r.async=1;
-//   r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-//   a.appendChild(r);
-// })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 
 
 var w3counter = {
-  "nottyhub.com":"https://www.w3counter.com/tracker.js?id=150827", 
+  "nottyhub.com":"https://www.w3counter.com/tracker.js?id=151452", 
   "aijdn.dasao88.com": "https://www.w3counter.com/tracker.js?id=150829",
   "busa.dasao88.com": "https://www.w3counter.com/tracker.js?id=150828"
 }
