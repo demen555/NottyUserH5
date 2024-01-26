@@ -160,7 +160,7 @@ import vote from "~/components/vote/index.vue"
 import CODES from "~/plugins/enums/codes"
 
 export default {
-
+    middleware: "detailHits",
     mixins: [commonMinxin],
     data(){
         return {
