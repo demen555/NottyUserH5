@@ -408,7 +408,7 @@ export default {
                         ...this.vodChange,
                         ...res.data.data
                     ];
-                    if( this.vodChangePage.page >= res.data.meta.pagination.total ){
+                    if( this.vodChangePage.page >= res.data.meta.pagination.total_pages ){
                         this.finishedChange = true;
                         this.loadingChange = false;
                     }else{
