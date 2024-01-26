@@ -25,7 +25,6 @@ gtag('config', gtagKey);
 
 
 var w3counter = {
-  "nottyhub.com":"https://www.w3counter.com/tracker.js?id=151452", 
   "aijdn.dasao88.com": "https://www.w3counter.com/tracker.js?id=150829",
   "busa.dasao88.com": "https://www.w3counter.com/tracker.js?id=150828"
 }
