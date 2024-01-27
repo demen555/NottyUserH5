@@ -613,6 +613,7 @@ module.exports = {
   build: {
     extractCSS: true,
     publicPath: '/dist/',
+
     // 配置less
     loaders: {
       less: {
