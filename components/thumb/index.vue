@@ -1,5 +1,16 @@
 <template>
-  <div class="thumb-list" @click="handleClickType(tag)">
+  <nuxt-link 
+    class="thumb-list" 
+    :to="localePath({
+        name: 'category-name',
+        params: { 
+          id: tag.id,
+          name: tag.title.toLowerCase().replace(/ /g, '-'),
+          refresh: true, 
+        }
+      })" 
+    @click="handleClickType(tag)"   
+    >
     <van-image
       lazy-load
       :src="tag.img"
@@ -18,7 +29,7 @@
         <div class="thumb-num">{{ tag.vodCount || 0 }} <span class="thumb-videos">Videos</span></div>
       </div> -->
     </div>
-  </div>
+  </nuxt-link>
 </template>
 <script>
 import { mapActions } from 'vuex'
@@ -40,14 +51,6 @@ export default{
     ...mapActions(['set_detail', 'set_typeid']),
     handleClickType(item){
       this.set_typeid(item.id)
-      this.$router.push(this.localePath({
-        name: 'category-name',
-        params:{
-          id: item.id,
-          name: item.title.toLowerCase().replace(/ /g, '-'),
-          refresh: true,
-        }
-      }))
     }
   }
 }
