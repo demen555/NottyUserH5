@@ -36,6 +36,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
+name: 'category',
 data() {
   return {
     spainnerLoading: false,
