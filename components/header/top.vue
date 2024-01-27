@@ -65,7 +65,7 @@
               name: 'tag-name',
               params: { id: tag.id, name: tag.name }
             })"  v-for="tag in tagList" :key="tag.id" >
-              <div class="nav-menu-list-tag-sub"  @click="set_tagid(item.id)">
+              <div class="nav-menu-list-tag-sub"  @click="set_tagid(tag.id)">
                 <div class="nav-menu-left">
                   <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                   <div>{{ tag.name }}</div>
@@ -236,7 +236,9 @@ import CODES from "~/plugins/enums/codes"
 export default {
   async fetch() {
     const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
+    const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
     this.tagList = res1.data.data;
+    this.typeList = res2.data.data;
   },
   fetchOnServer: true,
   data() {
@@ -273,7 +275,7 @@ export default {
   },
   created(){
     console.log( 'this.$route.name', this.$route.name )
-    this.initTypeList()
+    // this.initTypeList()
     // this.initTagList()
     this.themeChecked = this.theme === 'dark'
     if(process.client){
