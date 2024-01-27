@@ -160,7 +160,6 @@ import vote from "~/components/vote/index.vue"
 import CODES from "~/plugins/enums/codes"
 
 export default {
-    middleware: "detailHits",
     mixins: [commonMinxin],
     data(){
         return {
@@ -312,7 +311,10 @@ export default {
     },
 
     mounted(){
-      this.addHisVod(this.videoInfo);
+        this.addHisVod(this.videoInfo);
+        if ( process.client ) {
+            this.getVideohits();
+        }
     },
     methods:{
         dateFormat,
@@ -729,6 +731,32 @@ export default {
             this.$refs.dialogLoginRef.onShow()
         },
 
+        getVideohits(){
+            const id = this.vodId;
+            const timerNum = 30 * 60 * 1000;
+            // const timerNum = 1000;
+            let lastRequestTime = JSON.parse( localStorage.getItem('lastRequestTime') || '{}')
+            // 清理过期的id
+            Object.keys(lastRequestTime).forEach((key) => {
+                if (Date.now() - lastRequestTime[key] >= timerNum) {
+                    delete lastRequestTime[key];
+                }
+            });
+
+            if (lastRequestTime[id] && Date.now() - lastRequestTime[id] < timerNum) {
+                lastRequestTime[id] = Date.now();
+                localStorage.setItem('lastRequestTime', JSON.stringify(lastRequestTime));
+                return;
+            } else {
+                this.$videoApi.requestVideoHits({ vodId: id }).then(res => {
+                    if( res.code === CODES.SUCCESS ){
+                        this.$set(this.videoInfo, 'vodHits', res.data.vodHits)
+                        lastRequestTime[id] = Date.now();
+                        localStorage.setItem('lastRequestTime', JSON.stringify(lastRequestTime));
+                    }
+                });
+            }
+        }
     },
     destroyed(){
         gtag('event', 'exit_video', {
