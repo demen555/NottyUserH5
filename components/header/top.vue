@@ -32,7 +32,7 @@
             </div>
             <div :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
-          <template v-if="!showTypeExpand">
+          <div v-show="!showTypeExpand">
             <nuxt-link :to="localePath({
               name: 'category-id-name',
               params: { id: item.id, name: item.title }
@@ -49,7 +49,7 @@
             </nuxt-link>
             <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('category')"> {{ $t('str_menu_type_all') }}</nuxt-link>
             <div class="nav-menu-list-tag-empty"></div>
-          </template>
+          </div>
         </div>
         <div v-if="!showTypeExpand" class="type-div"></div> 
         <div class="nav-list-tags">
