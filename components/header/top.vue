@@ -34,15 +34,15 @@
           </div>
           <div v-show="!showTypeExpand">
             <nuxt-link :to="localePath({
-              name: 'category-id-name',
-              params: { id: item.id, name: item.title }
+              name: 'category-name',
+              params: { id: item.id, name: item.title ? item.title.toLowerCase().replace(/ /g, '-') : '' }
             })" v-for="(item) in typeList" :key="item.id">
               <div @click="handleClick(item.id)" class="nav-menu-list-tag-sub">
                 <div class="nav-menu-left">
                   <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
                   <div class="typeName">{{ item.title }}</div>
                 </div>
-                <div class="nav-menu-right" v-if="item.id === typeId &&  ['category-id-name___en', 'category-id-name___pt'].includes(routeName) ">
+                <div class="nav-menu-right" v-if="item.id === typeId &&  ['category-name___en', 'category-name___pt'].includes(routeName) ">
                   <img src="~/static/images/com_select_on.svg" alt="com_select_on">
                 </div>
               </div>
@@ -51,7 +51,7 @@
             <div class="nav-menu-list-tag-empty"></div>
           </div>
         </div>
-        <div v-if="!showTypeExpand" class="type-div"></div> 
+        <div v-show="!showTypeExpand" class="type-div"></div> 
         <div class="nav-list-tags">
           <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
             <div class="nav-menu-left">
