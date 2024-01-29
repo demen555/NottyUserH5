@@ -16,7 +16,7 @@
                 Loading... 
             </van-loading>
         </div>
-        <div class="video-space"></div>
+        <!-- <div class="video-space"></div> -->
         <template v-if="videoInfoLoding">
             
             <h1 class="video-title"> {{ videoInfo.seo.title }} </h1>
@@ -809,10 +809,8 @@ export default {
 .video-container{
     width: 375px;
     height: 212px;
-    position: fixed;
-    top: 44px;
-    left: 0;
-    z-index: 889;
+    margin-top: 44px;
+
     .flex-align-center;
     justify-content: center;
     .left-arrow{
