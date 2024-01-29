@@ -234,10 +234,11 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default {
-  async fetch() {
-    const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
-    this.tagList = res1.data.data;
-  },
+  // async fetch() {
+  //   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
+  //   this.tagList = res1.data.data;
+  //   this.set_tagList(res.data.data || [])
+  // },
   fetchOnServer: true,
   data() {
     return {
@@ -274,7 +275,7 @@ export default {
   created(){
     console.log( 'this.$route.name', this.$route.name )
     this.initTypeList()
-    // this.initTagList()
+    this.initTagList()
     this.themeChecked = this.theme === 'dark'
     if(process.client){
       document.documentElement.setAttribute('data-theme', this.theme)
@@ -312,7 +313,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken']),
+    ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken', 'set_tagList']),
     handleClick(id){
       this.set_typeid(id)
       console.log(id, 'typeid')
@@ -388,6 +389,7 @@ export default {
         if(res.code === CODES.SUCCESS){
           console.log(res.data, 'initTagList')
           this.tagList = res.data.data || []
+          this.set_tagList(res.data.data || [])
         }
         console.log(this.tagList, res, 'tag')
       } catch (error) {

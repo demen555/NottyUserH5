@@ -2,7 +2,8 @@ const state =  {
   detail: {}, // 分类列表中的某一类数据
   searchShow: true, //搜索页面导航是否显示
   tagId: 655, // 导航栏选中标签
-  typeId: '' // 分类选中
+  typeId: '', // 分类选中
+  tagList: []
 }
 
 const actions = {
@@ -18,6 +19,9 @@ const actions = {
   set_typeid(context, data){
     context.commit('SET_TYPEID', data)
   },
+  set_tagList(context, data){
+    context.commit('SET_TAGLIST', data)
+  }
 }
 
 const getters = {
@@ -25,6 +29,7 @@ const getters = {
   searchShow: (state) => state.searchShow,
   tagId: (state) => state.tagId,
   typeId: (state) => state.typeId,
+  tagList: (state) => state.tagList
 }
 
 const mutations = {
@@ -40,7 +45,9 @@ const mutations = {
   SET_TYPEID(state, data){
     state.typeId = data
   },
-  
+  SET_TAGLIST(state, data){
+    state.tagList = data
+  } 
 }
 
 export default {
