@@ -160,7 +160,6 @@ import vote from "~/components/vote/index.vue"
 import CODES from "~/plugins/enums/codes"
 
 export default {
-
     mixins: [commonMinxin],
     data(){
         return {
@@ -194,7 +193,9 @@ export default {
                 size: 50,
                 page: 1
             },
-            showVote: false
+            showVote: false,
+
+            vodId: "",
         }
     },
     head(){
@@ -231,7 +232,9 @@ export default {
         }
     },
     async asyncData({ $videoApi, params }) {
-        const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
+        const str = params.id.split('-');
+        const vodId = str[str.length - 1];
+        const res1 =  await $videoApi.requestVodComment({ vodId: vodId });
         const seo = res1.data.seo ? res1.data.seo : {
                         description: "",
                         keywords: "",
@@ -243,6 +246,7 @@ export default {
                 seo: seo,
                 code: res1.code
             },
+            vodId: vodId
         }
      
     },
@@ -299,7 +303,6 @@ export default {
 
     created(){
         // 在页面创建时检查是否有跳转信息
-        console.log( this.videoInfo.code,  this.$i18n.locale, "this.videoInfo.code" )
         if (this.videoInfo.code != 100 ) {
             // 跳转路由
             this.$router.push(this.localePath('/'+  this.$i18n.locale ))
@@ -309,7 +312,10 @@ export default {
     },
 
     mounted(){
-      this.addHisVod(this.videoInfo);
+        this.addHisVod(this.videoInfo);
+        if ( process.client ) {
+            this.getVideohits();
+        }
     },
     methods:{
         dateFormat,
@@ -325,7 +331,7 @@ export default {
         },
         
         initVideo(){
-            const vodId = this.$route.params.id;
+            const vodId = this.vodId;
             // this.getVideo(vodId);
             this.getVodState(vodId)
         },
@@ -421,11 +427,11 @@ export default {
         onLoadReview(){
             this.vodReviewPage.page++;
             console.log("加载评论列表", {
-                vodId: this.$route.params.id,
+                vodId: this.vodId,
                 ...this.vodReviewPage
             })
             this.$videoApi.requestVodReviewe({
-              vodId: this.$route.params.id,
+              vodId: this.vodId,
               ...this.vodReviewPage
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
@@ -450,7 +456,7 @@ export default {
             // if( !this.isLogin ){
             //     return this.goLogin()
             // }
-            const vodId = this.$route.params.id;
+            const vodId = this.vodId;
             const isUpVod = this.isUpVod(this.videoStatus);
             if( this.onClick ){
                 return 
@@ -493,7 +499,7 @@ export default {
                 //     this.$store.commit("UPDATE_UPVOD", this.videoInfo )
                 // }
                 this.$videoApi.requestVodup({
-                  vodId: this.$route.params.id,
+                  vodId: this.vodId,
                 }).then(res => {
                     if( res.code === CODES.SUCCESS ){
                         // const num = Number(this.videoStatus.vodUp) + 1;
@@ -524,7 +530,7 @@ export default {
                 this.$set(this.videoStatus, "collectNumber", num)
                 this.$set(this.videoStatus, "collect", false)
                 this.$videoApi.requestVodcollectcancel({
-                  vodId: this.$route.params.id,
+                  vodId: this.vodId,
                 }).then(res => {
                     if( res.code !== CODES.SUCCESS ){
                         const num = Number(this.videoStatus.collectNumber) + 1;
@@ -542,7 +548,7 @@ export default {
                 this.$set(this.videoStatus, "collectNumber", num)
                 this.$set(this.videoStatus, "collect", true)
                 this.$videoApi.requestVodcollect({
-                  vodId: this.$route.params.id,
+                  vodId: this.vodId,
                 }).then(res => {
                     if( res.code !== CODES.SUCCESS ){
                         const num = Number(this.videoStatus.collectNumber) - 1;
@@ -560,7 +566,7 @@ export default {
             // if( !this.isLogin ){
             //     return this.goLogin()
             // }
-            const vodId = this.$route.params.id;
+            const vodId = this.vodId;
             const isdownVod = this.isdownVod(this.videoStatus);
             if( this.onClick ){
                 return 
@@ -595,7 +601,7 @@ export default {
                     this.$set(this.videoStatus, "up", false);
                     this.$set(this.videoStatus, "down", true);
                     this.$videoApi.requestVoddown({
-                      vodId: this.$route.params.id,
+                      vodId: this.vodId,
                     }).then(res => {
                         if( res.code === CODES.SUCCESS ){
                             // const num = Number(this.videoStatus.vodDown) + 1;
@@ -620,7 +626,7 @@ export default {
 
         getShareLink(){
             this.$videoApi.requestSharelink({
-              vodId: this.$route.params.id,
+              vodId: this.vodId,
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
                     console.log(res)
@@ -643,7 +649,7 @@ export default {
             // 需要审核，不能直接显示
             this.showInput = false;
             this.$videoApi.requestVodReviewInput({
-              vodId: this.$route.params.id,
+              vodId: this.vodId,
               content: this.content
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
@@ -726,6 +732,32 @@ export default {
             this.$refs.dialogLoginRef.onShow()
         },
 
+        getVideohits(){
+            const id = this.vodId;
+            const timerNum = 30 * 60 * 1000;
+            // const timerNum = 1000;
+            let lastRequestTime = JSON.parse( localStorage.getItem('lastRequestTime') || '{}')
+            // 清理过期的id
+            Object.keys(lastRequestTime).forEach((key) => {
+                if (Date.now() - lastRequestTime[key] >= timerNum) {
+                    delete lastRequestTime[key];
+                }
+            });
+
+            if (lastRequestTime[id] && Date.now() - lastRequestTime[id] < timerNum) {
+                lastRequestTime[id] = Date.now();
+                localStorage.setItem('lastRequestTime', JSON.stringify(lastRequestTime));
+                return;
+            } else {
+                this.$videoApi.requestVideoHits({ vodId: id }).then(res => {
+                    if( res.code === CODES.SUCCESS ){
+                        this.$set(this.videoInfo, 'vodHits', res.data.vodHits)
+                        lastRequestTime[id] = Date.now();
+                        localStorage.setItem('lastRequestTime', JSON.stringify(lastRequestTime));
+                    }
+                });
+            }
+        }
     },
     destroyed(){
         gtag('event', 'exit_video', {
