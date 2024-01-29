@@ -1,7 +1,7 @@
 <template>
   <div class="collect">
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
-    <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_dz_1.svg')" :title="$t('str_like')" :text="dataList.length > 0 ? true : false"></Nav>    
+    <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_dz_1.svg')" :title="$t('str_like')" :text="dataList.length > 0 ? true : false" text></Nav>    
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>

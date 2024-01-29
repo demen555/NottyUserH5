@@ -1,7 +1,7 @@
 <template>
   <div class="collect">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_wdsc_1.svg')" :title="$t('str_collect')" :text="dataList.length ? true : false"></Nav>
+    <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_wdsc_1.svg')" :title="$t('str_collect')" :text="dataList.length ? true : false" text></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
