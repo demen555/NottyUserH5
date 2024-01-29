@@ -42,10 +42,13 @@
                   <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
                   <div class="typeName">{{ item.title }}</div>
                 </div>
-                <div class="nav-menu-right" v-if="item.id === typeId &&  ['category-name___en', 'category-name___pt'].includes(routeName) ">
-                  <img src="~/static/images/com_select_on.svg" alt="com_select_on">
-                </div>
-              </div>
+                <client-only>
+                  <div class="nav-menu-right" v-if="item.id === typeId &&  routeName.indexOf('category-name') != -1 ">
+                    <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                  </div>
+                </client-only>
+              </div> 
+          
             </nuxt-link>
             <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('category')"> {{ $t('str_menu_type_all') }}</nuxt-link>
             <div class="nav-menu-list-tag-empty"></div>
@@ -70,9 +73,12 @@
                   <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                   <div>{{ tag.name }}</div>
                 </div>
-                <div class="nav-menu-right" v-if="tag.id === tagId && ['tag-id-name___en', 'tag-id-name___pt'].includes(routeName)">
-                  <img src="~/static/images/com_select_on.svg" alt="com_select_on">
-                </div>
+                <client-only>
+                  <div class="nav-menu-right" v-if="tag.id === tagId &&  routeName.indexOf('tag-name') != -1">
+                    <img src="~/static/images/com_select_on.svg" alt="com_select_on">
+                  </div>
+                </client-only>
+
               </div>
             </nuxt-link>
             <!-- 所有标签 -->
