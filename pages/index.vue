@@ -28,14 +28,14 @@
           <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
         </client-only>
       </div>
-      <template v-for="(item,index) in dataList" >
-        <Cover :item="item" :key="item.vodId"></Cover>
+      <div v-for="(item,index) in dataList" :key="item.vodId">
+        <Cover style="margin-top: 12px;" :item="item"></Cover>
         <div class="top-category" v-if="index === 1">
           <div class="top-category-title">
-            <div>Top Category</div>
+            <div>{{ $t('str_page_text5') }}</div>
             <client-only>
               <nuxt-link :to="localePath('category')" class="top-category-more">
-                More <img :src="require('~/static/images/com_jt_sx_you.svg')" alt="com_jt_sx_you">
+                {{ $t('str_page_text6') }} <img :src="require('~/static/images/com_jt_sx_you.svg')" alt="com_jt_sx_you">
               </nuxt-link>
             </client-only>
           </div>
@@ -49,7 +49,7 @@
             </client-only> 
           </div>
         </div>
-      </template>
+      </div>
       <div class="home-footer">
         <!-- <van-pagination class="pagination" @change="handleChanege" v-model="pageInfo.page" :total-items="pageInfo.total" pages="[1,2,3,4,5]" :page-count="pageInfo.total" :show-page-size="4" force-ellipses >
           <template #prev-text>
