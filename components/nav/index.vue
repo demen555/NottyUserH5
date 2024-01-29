@@ -72,5 +72,7 @@
 .h1{
   font-weight: normal;
   font-size: 18px;
+  line-height: 18px;
+  text-align: left;
 }
 </style>
