@@ -1,8 +1,7 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <!-- <Nav :title="$t('str_menu_tag_all') + ' ' + '('+ total + ' results' + ')'" text></Nav> -->
-    <Nav :title="tags[tagIndex] + ' ' + '('+ total + ' results' + ')'" text></Nav>
+    <NavBar :title="tags[tagIndex] + ' ' + '('+ total + ' results' + ')'" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></NavBar>
     <div class="paddingTop88"></div>
     <div class="tag-box" >
       <div v-for="(item, index) in tags" :key="index"><span class="tag-name" :class="tagIndex === index? 'tag-color': ''" @click="handleClickTagName(item, index)">{{ item }}</span><span v-if="tags.length -1 !== index" class="tag-line">-</span></div>
@@ -30,7 +29,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import Nav from '@/components/nav'
+import NavBar from '@/components/nav/bar'
 import Thumb from '@/components/thumb'
 import empty from '@/components/empty'
 import tagLoad from "@/components/skeleton/tagLoad.vue"
@@ -58,7 +57,7 @@ export default{
     }
   },
   components: {
-    Nav,
+    NavBar,
     Thumb,
     empty,
     tagLoad
@@ -189,5 +188,8 @@ export default{
   font-size: 12px;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   text-align: center;
+}
+.paddingTop88{
+  padding-top: 80px;
 }
 </style>

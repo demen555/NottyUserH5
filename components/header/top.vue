@@ -25,12 +25,12 @@
          <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
         </div>
         <div class="nav-list-tags type">
-          <div class="nav-menu-list-tag" @click="handleShowExpand('type')">
-            <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_leixing_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
+          <div class="nav-menu-list-tag">
+            <div class="nav-menu-left" @click="handleShowExpand('type')">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_fenlei_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
               <div>{{ $t('str_tags') }}</div>
             </div>
-            <div :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+            <div @click="handleGoPage('category')" :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
           <template v-if="!showTypeExpand">
             <nuxt-link :to="localePath({
@@ -53,12 +53,12 @@
         </div>
         <div v-if="!showTypeExpand" class="type-div"></div> 
         <div class="nav-list-tags">
-          <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
-            <div class="nav-menu-left">
+          <div class="nav-menu-list-tag">
+            <div class="nav-menu-left" @click="handleShowExpand('tag')">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_biaoqian_1.svg'): require('~/static/images/my_gn_biaoqian.svg')" alt="my_gn_biaoqian"></div>
               <div>{{ $t('str_menu_tag') }}</div>
             </div>
-            <div :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+            <div @click="handleGoPage('tag')" :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
           <div v-show="!showExpand">
             <nuxt-link :to="localePath({
