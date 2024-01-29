@@ -33,7 +33,11 @@
         <div class="top-category" v-if="index === 1">
           <div class="top-category-title">
             <div>Top Category</div>
-            <div class="top-category-more">More <img :src="require('~/static/images/com_jt_sx_you.svg')" alt="com_jt_sx_you"></div>
+            <client-only>
+              <nuxt-link :to="localePath('category')" class="top-category-more">
+                More <img :src="require('~/static/images/com_jt_sx_you.svg')" alt="com_jt_sx_you">
+              </nuxt-link>
+            </client-only>
           </div>
           <div class="top-category-thumb">
             <Thumb class="top-category-thumb-tag" :tag="tag" v-for="tag in categoryList" :key="tag.id"></Thumb>

@@ -79,7 +79,9 @@
 }
 .nav-title{
   font-size: 18px;
-  line-height: 18px;
-  text-align: left;
+  font-weight: normal;
+  line-height: 44px;
+  display: flex;
+  align-items: center;
 }
 </style>
