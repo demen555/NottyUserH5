@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <NavBar :title="txtTitle"></NavBar>
+    <nav-new :title="txtTitle"></nav-new>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import NavBar from '~/components/nav/bar'
+import NavNew from '~/components/nav/new'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
 import commonMinxin from '~/plugins/mixins/common'
@@ -77,7 +77,7 @@ head(){
   }
 },
 components: {
-  NavBar,
+  NavNew,
   Cover,
   Empty
 },

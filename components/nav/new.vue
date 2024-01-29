@@ -6,6 +6,7 @@
 </template>
 <script>
 export default{
+  name: 'nav-new',
   props: {
     title: {
       type: String,
