@@ -18,7 +18,7 @@
           <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         </van-list>
       </van-pull-refresh>
-      <h2 class="footer-title"> {{ categoryMetaData.h2}} </h2>
+      <h2 class="footer-title paddingTop88"> {{ categoryMetaData.h2}} </h2>
       <p class="footer-description"> {{ categoryMetaData.footer_desc }} </p>
     </template>
     <Empty v-else></Empty>   
@@ -53,6 +53,18 @@ computed: {
     return  this.detail.name
   }
 },
+async asyncData({ $homeApi, params }) {
+    const categoryName = params.name.replace(/\-/g, ' ').replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    const res = await $homeApi.requestvodpage({
+      categoryName: categoryName,
+      page: 1,
+      size: 20
+    })
+    return {
+      dataList: res.data.data,
+      categoryMetaData: res.data.categoryMetaData
+    }  
+},
 activated(){
   const isRefresh = this.$route.params.refresh;
   if( isRefresh ){
@@ -67,7 +79,7 @@ created(){
     name: name,
     id: id
   }
-  this.getList('first')
+  // this.getList('first')
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -145,11 +157,14 @@ overflow: visible;
   font-size: 18px;
 }
 .footer-title{
-  font-size: 18px;
+  font-size: 16px;
   color: var(--bg-primary, #F6D658);
+  padding: 0 16px;
+  font-weight: normal;
 }
 .footer-description{
   font-size: 12px;
   color: var(--bg-color4, rgba(0,0,0,0.6));
+  padding: 0 16px;
 }
 </style>
