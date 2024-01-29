@@ -28,11 +28,11 @@
                 refresh: true,
               },
             })" 
-            @click="handleClickTag(tag)" 
+           
             class="tag-item" 
             v-for="(tag, index) in tagList" 
             :key="index">
-              <span>{{ tag.name }}</span>
+              <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.name }}</span>
             </nuxt-link>
           </div>
         </van-list>
@@ -184,6 +184,7 @@ export default{
   }
 }
 .tag-item{
+  display: block;
   width: 172px;
   height: 32px;
   border-radius: 4px;
@@ -195,5 +196,12 @@ export default{
   font-size: 12px;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   text-align: center;
+}
+.item-name{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
