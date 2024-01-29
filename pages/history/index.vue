@@ -5,7 +5,7 @@
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
-    <div :class="['paddingTop78', showFooter ? 'paddingBottom50': 'paddingBottom10' ]"  v-if="dataList.length">
+    <div :class="['paddingTop88', showFooter ? 'paddingBottom50': 'paddingBottom10' ]"  v-if="dataList.length">
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -223,5 +223,7 @@ methods: {
 :deep(.van-nav-bar__left){
   font-size: 18px;
 }
-
+.van-nav-bar__right{
+  right: -8px;
+}
 </style>

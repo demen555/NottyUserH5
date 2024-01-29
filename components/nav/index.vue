@@ -11,10 +11,10 @@
         <img class="header-common" :src="themeChecked? require('~/static/images/com_jt_sx_zuo.svg'): require('~/static/images/com_jt_sx_zuo_rj.svg')" alt="com_jt_sx_zuo">
       </template> -->
       <template #left>
-        <span>{{ title }}</span>
+        <span class="nav-title"><img style="margin-right: 8px;" :src="imgUrl" alt="my_gn_lsjl">{{ title }}</span>
       </template>
       <template #right>
-        <van-icon name="search" size="18" />
+        <img class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete">
       </template>
     </van-nav-bar>
   </div>
@@ -27,6 +27,10 @@
       title: {
         type: String,
         default: () => this.$t('str_his')
+      },
+      imgUrl: {
+        type: String,
+        default: () => require('~/static/images/my_gn_lsjl_1.svg')
       },
       text: {
         type: Boolean,
@@ -50,6 +54,7 @@
       onClickRight() {
         if(!this.text) return
         // this.$toast('按钮');
+        console.log(this.rightText, 'onClickRight')
         if (this.rightText === this.$t('str_manage')) {
           this.$emit('handleControl', 1)
           this.rightText = this.$t('str_cancel')
@@ -71,5 +76,8 @@
 .header-common{
   width: 20px;
   height: 20px;
+}
+.nav-title{
+  font-size: 18px;
 }
 </style>
