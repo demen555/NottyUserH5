@@ -96,6 +96,13 @@ import cardLoad from "~/components/skeleton/cardLoad.vue"
 import CODES from "~/plugins/enums/codes"
 import vPagination from '~/components/pagination/index.vue'
 export default{
+async fetch() {
+  const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
+  const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
+  this.tagList = res1.data.data;
+  this.categoryList = res2.data.data;
+},
+fetchOnServer: true,
 data() {
   return {
     spainnerLoading: true,// 全局loading层
@@ -119,11 +126,13 @@ data() {
       { name: this.$t('str_footer_nav10'), id: 'policy-eu'},
     ],
     hostname: '',
-    showSticky: true
+    showSticky: true,
+    tagList: [],
+    categoryList: []
   }
 },
 computed: {
-  ...mapGetters(['theme', 'tagList', 'categoryList']),
+  ...mapGetters(['theme']),
   themeChecked(){
     return this.theme === 'dark'
   }
