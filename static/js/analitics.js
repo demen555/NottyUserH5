@@ -24,18 +24,6 @@ gtag('config', gtagKey);
 
 
 
-var w3counter = {
-  "aijdn.dasao88.com": "https://www.w3counter.com/tracker.js?id=150829",
-  "busa.dasao88.com": "https://www.w3counter.com/tracker.js?id=150828"
-}
-var w3counterSrc = w3counter[window.location.hostname];
-if( w3counterSrc ){
-  var script = document.createElement('script');
-  script.src = w3counterSrc;
-  document.head.appendChild(script);
-}
-
-
 
 
 

@@ -11,7 +11,7 @@
         <img class="header-common" :src="themeChecked? require('~/static/images/com_jt_sx_zuo.svg'): require('~/static/images/com_jt_sx_zuo_rj.svg')" alt="com_jt_sx_zuo">
       </template> -->
       <template #left>
-        <span>{{ title }}</span>
+        <span>{{ title || $t('str_his') }}</span>
       </template>
     </van-nav-bar>
   </div>
@@ -23,7 +23,7 @@
     props: {
       title: {
         type: String,
-        default: () => this.$t('str_his')
+        default: () => ""
       },
       text: {
         type: Boolean,
