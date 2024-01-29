@@ -28,7 +28,24 @@
           <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
         </client-only>
       </div>
-      <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+      <template v-for="(item,index) in dataList" >
+        <Cover :item="item" :key="item.vodId"></Cover>
+        <div class="top-category" v-if="index === 1">
+          <div class="top-category-title">
+            <div>Top Category</div>
+            <div class="top-category-more">More <img :src="require('~/static/images/com_jt_sx_you.svg')" alt="com_jt_sx_you"></div>
+          </div>
+          <div class="top-category-thumb">
+            <Thumb class="top-category-thumb-tag" :tag="tag" v-for="tag in categoryList" :key="tag.id"></Thumb>
+            <client-only>
+              <nuxt-link :to="localePath('category')" class="top-category-thumb-all">
+                <img :src="require('~/static/images/my_gn_fenlei_1.svg')" alt="my_gn_fenlei_1">
+                <div class="top-category-thumb-text">All</div>
+              </nuxt-link>
+            </client-only> 
+          </div>
+        </div>
+      </template>
       <div class="home-footer">
         <!-- <van-pagination class="pagination" @change="handleChanege" v-model="pageInfo.page" :total-items="pageInfo.total" pages="[1,2,3,4,5]" :page-count="pageInfo.total" :show-page-size="4" force-ellipses >
           <template #prev-text>
@@ -102,7 +119,7 @@ data() {
   }
 },
 computed: {
-  ...mapGetters(['theme', 'tagList']),
+  ...mapGetters(['theme', 'tagList', 'categoryList']),
   themeChecked(){
     return this.theme === 'dark'
   }
@@ -309,9 +326,50 @@ overflow: visible;
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
     margin-right: 10px;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
-linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06));
-
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06));
+  }
+}
+.top-category{
+  // display: flex;
+  .top-category-title{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 12px;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  .top-category-more{
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-right: 4px;
+  }
+  .top-category-thumb{
+    display: flex;
+    overflow-x: auto;
+    margin-left: 12px;
+  }
+  .top-category-thumb-tag{
+    margin-right: 10px;
+  }
+  a{
+    color: #fff;
+  }
+  .top-category-thumb-all{
+    // width: 108px;
+    // height: 148px;
+    // height:105px;
+    margin-top: 10px;
+    padding: 0 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .top-category-thumb-text{
+      font-size: 14px;
+      margin-top: 8px;
+    }
   }
 }
 @media screen and (min-width: 420px) {

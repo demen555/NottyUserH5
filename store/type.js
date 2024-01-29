@@ -3,7 +3,8 @@ const state =  {
   searchShow: true, //搜索页面导航是否显示
   tagId: 655, // 导航栏选中标签
   typeId: '', // 分类选中
-  tagList: []
+  tagList: [], // tag数据
+  categoryList: [], // category数据
 }
 
 const actions = {
@@ -21,6 +22,9 @@ const actions = {
   },
   set_tagList(context, data){
     context.commit('SET_TAGLIST', data)
+  },
+  set_categoryList(context, data){
+    context.commit('SET_CATEGORYLIST', data)
   }
 }
 
@@ -29,7 +33,8 @@ const getters = {
   searchShow: (state) => state.searchShow,
   tagId: (state) => state.tagId,
   typeId: (state) => state.typeId,
-  tagList: (state) => state.tagList
+  tagList: (state) => state.tagList,
+  categoryList: (state) => state.categoryList,
 }
 
 const mutations = {
@@ -47,7 +52,10 @@ const mutations = {
   },
   SET_TAGLIST(state, data){
     state.tagList = data
-  } 
+  },
+  SET_CATEGORYLIST(state, data){
+    state.categoryList = data
+  },
 }
 
 export default {

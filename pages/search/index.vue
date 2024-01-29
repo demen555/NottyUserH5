@@ -63,7 +63,7 @@
     </main>
     <main v-show="!searchShow">
       <!-- 有搜索结果 -->
-      <Nav :title="search" text></Nav>
+      <NavNew :title="search + ' ' + '('+ total + ' results' + ')'" imgUrl=""></NavNew>
       <!-- <div class="search-result" id="searchName">{{ search }}</div> -->
       <div class="loading-box" style="margin-top: 42px;" v-if="spainnerLoading">
         <cardLoad></cardLoad>
@@ -103,7 +103,7 @@ import { mapGetters, mapActions } from 'vuex'
 import commonMinxin from '~/plugins/mixins/common'
 import Cover from '@/components/cover'
 import Empty from '@/components/empty'
-import Nav from '~/components/nav'
+import NavNew from '~/components/nav/new'
 import CODES from "~/plugins/enums/codes"
 import { uniArray } from '@/utils/format.js'
 export default{
@@ -122,9 +122,9 @@ data() {
     relatedList: [], //相关推荐数据
     pageInfo: {
       page: 1,
-      size: 20,
-      total: 0
+      size: 20
     },
+    total: 0,
     relatedLoading: false,
     searchBool: false
   }
@@ -154,7 +154,7 @@ created(){
 components: {
   Cover,
   Empty,
-  Nav
+  NavNew
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -281,7 +281,7 @@ methods: {
       console.log(code, data, 111)
       if(code === 100){
         if (!data) return this.loading = false
-        this.pageInfo.total = data.meta.pagination.total
+        this.total = data.meta.pagination.total
         if(data.meta.pagination.total == 0) {
           // this.noResultShow = true
           // this.set_show(true)

@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="$t('str_setting')" text></Nav>
+    <NavNew :title="$t('str_setting')" text></NavNew>
     <div class="pwd-set">
         <div class="user-item" @click="goPages('user-pwdChange')">
             <span class="words"> {{ $t('str_change_pwd') }} </span>

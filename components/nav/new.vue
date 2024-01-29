@@ -14,7 +14,7 @@ export default{
     },
     imgUrl: {
       type: String,
-      default: () => require('~/static/images/my_gn_fenlei_1.svg')
+      default: () => ''
     }
   }
 }
@@ -34,6 +34,7 @@ export default{
   height: 44px;
   background-color: #0E0E0F;
   font-size: 18px;
+  font-weight: normal;
   color: #FFFFFF;
   .fenlei{
     margin-right: 8px;

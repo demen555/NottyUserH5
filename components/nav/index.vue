@@ -13,8 +13,8 @@
       <template #left>
         <span class="nav-title"><img style="margin-right: 8px;" :src="imgUrl" alt="my_gn_lsjl">{{ title }}</span>
       </template>
-      <template #right>
-        <img class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete">
+      <template #right >
+        <img v-if="text" class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete">
       </template>
     </van-nav-bar>
   </div>
@@ -79,5 +79,8 @@
 }
 .nav-title{
   font-size: 18px;
+  font-weight: normal;
+  line-height: 44px;
+  display: block;
 }
 </style>
