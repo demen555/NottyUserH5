@@ -81,6 +81,7 @@
   font-size: 18px;
   font-weight: normal;
   line-height: 44px;
-  display: block;
+  display: flex;
+  align-items: center;
 }
 </style>
