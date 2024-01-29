@@ -1,7 +1,7 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <NavBar :title="tags[tagIndex] + ' ' + '('+ total + ' results' + ')'" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></NavBar>
+    <nav-new :title="tags[tagIndex] + ' ' + '('+ total + ' results' + ')'" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></nav-new>
     <div class="paddingTop88"></div>
     <div class="tag-box" >
       <div v-for="(item, index) in tags" :key="index"><span class="tag-name" :class="tagIndex === index? 'tag-color': ''" @click="handleClickTagName(item, index)">{{ item }}</span><span v-if="tags.length -1 !== index" class="tag-line">-</span></div>
@@ -41,7 +41,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import NavBar from '@/components/nav/bar'
+import NavNew from '@/components/nav/new'
 import Thumb from '@/components/thumb'
 import empty from '@/components/empty'
 import tagLoad from "@/components/skeleton/tagLoad.vue"
@@ -69,7 +69,7 @@ export default{
     }
   },
   components: {
-    NavBar,
+    NavNew,
     Thumb,
     empty,
     tagLoad

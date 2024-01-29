@@ -2,7 +2,7 @@
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <!-- <Nav :title="$t('str_menu_type_all')" text></Nav> -->
-    <NavBar :title="$t('str_menu_type_all')" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></NavBar>
+    <nav-new :title="$t('str_menu_type_all')" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></nav-new>
     <div class="loading-box" v-if="spainnerLoading">
       <tagLoad></tagLoad>
     </div>
@@ -28,7 +28,7 @@
 </template>
 <script>
 import Nav from '~/components/nav'
-import NavBar from '~/components/nav/bar'
+import NavNew from '~/components/nav/new'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
 import Thumb from '~/components/thumb'
@@ -111,7 +111,7 @@ created(){
   this.getList('first')
 },
 components: {
-  NavBar,
+  NavNew,
   Cover,
   Empty,
   Thumb,

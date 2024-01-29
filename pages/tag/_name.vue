@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import NavBar from '~/components/nav/bar'
+import NavNew from '~/components/nav/new'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
 import commonMinxin from '~/plugins/mixins/common'
@@ -78,7 +78,7 @@ created(){
   this.getList('first')
 },
 components: {
-  NavBar,
+  NavNew,
   Cover,
   Empty
 },
