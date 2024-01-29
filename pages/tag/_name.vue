@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
-    <NavBar :title="txtTitle" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></NavBar>
+    <NavNew :title="txtTitle" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></NavNew>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
