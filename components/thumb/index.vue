@@ -71,6 +71,7 @@ export default{
   /deep/ .van-image{
       width:185px;
       height:105px;
+      border-radius: 4px;
       .loading-img, .error-img{
         width: 100%;
         height: 100%;

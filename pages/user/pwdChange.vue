@@ -1,7 +1,7 @@
 <template>
   <div class="pwdChange">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="$t('str_change_pwd')" text></Nav>
+    <NavNew :title="$t('str_change_pwd')" text></NavNew>
     <div class="set-name">
         <div class="user-line"></div>
         <div class="user-lable">

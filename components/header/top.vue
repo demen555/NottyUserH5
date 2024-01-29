@@ -321,7 +321,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken', 'set_tagList']),
+    ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken', 'set_tagList', 'set_categoryList']),
     handleClick(id){
       this.set_typeid(id)
       console.log(id, 'typeid')
@@ -382,6 +382,7 @@ export default {
         if(res.code === CODES.SUCCESS){
           console.log(res.data, 'initTagList')
           this.typeList = res.data.data || []
+          this.set_categoryList(res.data.data || [])
         }
         console.log(this.typeList, res, 'tag')
       } catch (error) {
@@ -716,6 +717,9 @@ header{
   align-items: flex-start;
   padding-left: 14px;
   padding-top: 9px;
+}
+.nav-menu-left{
+  width: 100%;
 }
 .nav-menu-left,.nav-menu-right{
   display: flex;

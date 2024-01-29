@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <nav-new :title="txtTitle"></nav-new>
+    <NavNew :title="txtTitle"></NavNew>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>

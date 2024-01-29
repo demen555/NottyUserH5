@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="$t('str_user_center')" text></Nav>
+    <NavNew :title="$t('str_user_center')"></NavNew>
     <div class="user-info">
         <!-- <van-nav-bar
             left-arrow

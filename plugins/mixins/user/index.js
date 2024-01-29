@@ -1,6 +1,6 @@
-import Nav from '@/components/nav'
+import NavNew from '@/components/nav/new'
 export default {
   components: {
-    Nav
+    NavNew
   }
 }
