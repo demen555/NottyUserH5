@@ -1,12 +1,12 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="categoryMetaData.h1" text></Nav>
+    <NavBar :title="txtTitle"></NavBar>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
     <template v-if="dataList.length">
-      <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
+      <van-pull-refresh class="paddingTop77" v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
           :finished="finished"
@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import Nav from '~/components/nav'
+import NavBar from '~/components/nav/bar'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
 import commonMinxin from '~/plugins/mixins/common'
@@ -82,7 +82,7 @@ head(){
   }
 },
 components: {
-  Nav,
+  NavBar,
   Cover,
   Empty
 },
@@ -151,5 +151,8 @@ overflow: visible;
 .footer-description{
   font-size: 12px;
   color: var(--bg-color4, rgba(0,0,0,0.6));
+}
+.paddingTop88{
+  padding-top: 77px;
 }
 </style>

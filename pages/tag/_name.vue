@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
-    <Nav :title="txtTitle" text></Nav>
+    <NavBar :title="txtTitle" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></NavBar>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import Nav from '~/components/nav'
+import NavBar from '~/components/nav/bar'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
 import commonMinxin from '~/plugins/mixins/common'
@@ -78,7 +78,7 @@ created(){
   this.getList('first')
 },
 components: {
-  Nav,
+  NavBar,
   Cover,
   Empty
 },
@@ -140,5 +140,8 @@ overflow: visible;
 }
 :deep(.van-nav-bar__left){
   font-size: 18px;
+}
+.paddingTop88{
+  padding-top: 77px;
 }
 </style>

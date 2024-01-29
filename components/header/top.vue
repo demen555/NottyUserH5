@@ -25,12 +25,12 @@
          <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
         </div>
         <div class="nav-list-tags type">
-          <div class="nav-menu-list-tag" @click="handleShowExpand('type')">
-            <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_leixing_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
+          <div class="nav-menu-list-tag">
+            <div class="nav-menu-left" @click="handleShowExpand('type')">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_fenlei_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
               <div>{{ $t('str_tags') }}</div>
             </div>
-            <div :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+            <div @click="handleGoPage('category')" :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
           <div v-show="!showTypeExpand">
             <nuxt-link :to="localePath({
@@ -56,12 +56,12 @@
         </div>
         <div v-show="!showTypeExpand" class="type-div"></div> 
         <div class="nav-list-tags">
-          <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
-            <div class="nav-menu-left">
+          <div class="nav-menu-list-tag">
+            <div class="nav-menu-left" @click="handleShowExpand('tag')">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_biaoqian_1.svg'): require('~/static/images/my_gn_biaoqian.svg')" alt="my_gn_biaoqian"></div>
               <div>{{ $t('str_menu_tag') }}</div>
             </div>
-            <div :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+            <div @click="handleGoPage('tag')" :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
           <div v-show="!showExpand">
             <nuxt-link :to="localePath({
@@ -240,12 +240,17 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default {
-  async fetch() {
-    const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
-    const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
-    this.tagList = res1.data.data;
-    this.typeList = res2.data.data;
-  },
+  // async fetch() {
+  //   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
+  //   const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
+  //   this.tagList = res1.data.data;
+  //   this.typeList = res2.data.data;
+  // },
+  // async fetch() {
+  //   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
+  //   this.tagList = res1.data.data;
+  //   this.set_tagList(res.data.data || [])
+  // },
   fetchOnServer: true,
   data() {
     return {
@@ -281,8 +286,8 @@ export default {
   },
   created(){
     console.log( 'this.$route.name', this.$route.name )
-    // this.initTypeList()
-    // this.initTagList()
+    this.initTypeList()
+    this.initTagList()
     this.themeChecked = this.theme === 'dark'
     if(process.client){
       document.documentElement.setAttribute('data-theme', this.theme)
@@ -316,7 +321,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken']),
+    ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken', 'set_tagList']),
     handleClick(id){
       this.set_typeid(id)
       console.log(id, 'typeid')
@@ -390,6 +395,7 @@ export default {
         if(res.code === CODES.SUCCESS){
           console.log(res.data, 'initTagList')
           this.tagList = res.data.data || []
+          this.set_tagList(res.data.data || [])
         }
         console.log(this.tagList, res, 'tag')
       } catch (error) {

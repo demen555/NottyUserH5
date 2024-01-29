@@ -16,6 +16,16 @@
       </van-list>
     </van-pull-refresh> -->
     <div class="video-list paddingTop45" >
+      <div class="video-tag-list">
+        <nuxt-link :to="localePath({
+            name: 'tag-name',
+            params: { id: tag.id, name: tag.name }
+        })" class="tag-name" v-for="tag in tagList" :key="tag.id">
+          <div @click.stop="set_tagid(item.id)">{{ tag.name }}</div>
+        </nuxt-link>
+        <!-- 所有标签 -->
+        <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
+      </div>
       <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
       <div class="home-footer">
         <!-- <van-pagination class="pagination" @change="handleChanege" v-model="pageInfo.page" :total-items="pageInfo.total" pages="[1,2,3,4,5]" :page-count="pageInfo.total" :show-page-size="4" force-ellipses >
@@ -56,7 +66,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 import HeaderTop from '~/components/header/top.vue'
 import Cover from '~/components/cover'
 import CODES from "~/plugins/enums/codes"
@@ -91,7 +101,7 @@ data() {
   }
 },
 computed: {
-  ...mapGetters(['theme']),
+  ...mapGetters(['theme', 'tagList']),
   themeChecked(){
     return this.theme === 'dark'
   }
@@ -145,6 +155,7 @@ watch: {
 //   return { dataList: data.data }
 // },
 methods: {
+  ...mapActions(['set_tagid']),
   handleClose(){
     this.showSticky = false
   },
@@ -272,6 +283,34 @@ overflow: visible;
     font-size: 10px;
     font-weight: bold;
     color: var(--text-color1, #181E2A);
+  }
+}
+.video-tag-list{
+  display: flex;
+  // min-width: 375px;
+  overflow-x: auto;
+  flex-grow: 1;
+  margin-left: 12px;
+  // margin-right: 12px;
+  margin-top: 8px;
+  a{
+    color: #fff;
+    display: block;
+    display: flex;
+    flex-grow: 1;
+  }
+  .tag-name{
+    flex-shrink: 0;
+    padding: 5px 8px;
+    // width: 98px;
+    // height: 28px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    margin-right: 10px;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06));
+
   }
 }
 @media screen and (min-width: 420px) {
