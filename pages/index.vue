@@ -16,16 +16,18 @@
       </van-list>
     </van-pull-refresh> -->
     <div class="video-list paddingTop45" >
-      <div class="video-tag-list">
-        <nuxt-link :to="localePath({
-            name: 'tag-name',
-            params: { id: tag.id, name: tag.name }
-        })" class="tag-name" v-for="tag in tagList" :key="tag.id">
-          <div @click.stop="set_tagid(item.id)">{{ tag.name }}</div>
-        </nuxt-link>
-        <!-- 所有标签 -->
-        <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
-      </div>
+      <client-only>
+        <div class="video-tag-list">
+          <nuxt-link :to="localePath({
+              name: 'tag-name',
+              params: { id: tag.id, name: tag.name }
+          })" class="tag-name" v-for="tag in tagList" :key="tag.id">
+            <div @click.stop="set_tagid(item.id)">{{ tag.name }}</div>
+          </nuxt-link>
+          <!-- 所有标签 -->
+          <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
+        </div>
+      </client-only>
       <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
       <div class="home-footer">
         <!-- <van-pagination class="pagination" @change="handleChanege" v-model="pageInfo.page" :total-items="pageInfo.total" pages="[1,2,3,4,5]" :page-count="pageInfo.total" :show-page-size="4" force-ellipses >
