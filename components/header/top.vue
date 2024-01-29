@@ -240,12 +240,12 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default {
-  // async fetch() {
-  //   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
-  //   const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
-  //   this.tagList = res1.data.data;
-  //   this.typeList = res2.data.data;
-  // },
+  async fetch() {
+    const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
+    const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
+    this.tagList = res1.data.data;
+    this.typeList = res2.data.data;
+  },
   // async fetch() {
   //   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
   //   this.tagList = res1.data.data;
@@ -286,8 +286,8 @@ export default {
   },
   created(){
     console.log( 'this.$route.name', this.$route.name )
-    this.initTypeList()
-    this.initTagList()
+    // this.initTypeList()
+    // this.initTagList()
     this.themeChecked = this.theme === 'dark'
     if(process.client){
       document.documentElement.setAttribute('data-theme', this.theme)
