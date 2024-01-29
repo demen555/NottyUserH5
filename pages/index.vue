@@ -16,17 +16,14 @@
       </van-list>
     </van-pull-refresh> -->
     <div class="video-list paddingTop45" >
-      <div class="video-tag-list">
-        <client-only>
+      <div class="video-tag-list" >
           <nuxt-link :to="localePath({
               name: 'tag-name',
               params: { id: tag.id, name: tag.name }
           })" class="tag-name" v-for="tag in tagList" :key="tag.id">
             <div @click.stop="set_tagid(item.id)">{{ tag.name }}</div>
           </nuxt-link>
-          <!-- 所有标签 -->
           <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
-        </client-only>
       </div>
       <div v-for="(item,index) in dataList" :key="item.vodId">
         <Cover style="margin-top: 12px;" :item="item"></Cover>
@@ -121,10 +118,11 @@ data() {
     ],
     hostname: '',
     showSticky: true,
+    tagList: [],
   }
 },
 computed: {
-  ...mapGetters(['theme', 'tagList', 'categoryList']),
+  ...mapGetters(['theme', 'categoryList']),
   themeChecked(){
     return this.theme === 'dark'
   }
@@ -172,11 +170,16 @@ watch: {
     // this.onLoad()
   }
 },
-// async asyncData({ $homeApi }) {
-//   const res = await $homeApi.requestvodpageHome({ page: 1, size: 20})
-//   const { data } = res
-//   return { dataList: data.data }
-// },
+async asyncData({ $homeApi }) {
+  // const res = await $homeApi.requestvodpageHome({ page: 1, size: 20})
+  // const { data } = res
+  // return { dataList: data.data }
+  const res = await $homeApi.postTagListPage({
+    page: 1,
+    size: 10
+  });
+  return { tagList: res.data.data }
+},
 methods: {
   ...mapActions(['set_tagid']),
   handleClose(){
