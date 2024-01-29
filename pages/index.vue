@@ -44,7 +44,7 @@
             <client-only>
               <nuxt-link :to="localePath('category')" class="top-category-thumb-all">
                 <img :src="require('~/static/images/my_gn_fenlei_1.svg')" alt="my_gn_fenlei_1">
-                <div class="top-category-thumb-text">All</div>
+                <div class="top-category-thumb-text">{{ $t('str_page_text7') }}</div>
               </nuxt-link>
             </client-only> 
           </div>
