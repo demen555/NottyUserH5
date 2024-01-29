@@ -11,7 +11,7 @@
         <img class="header-common" :src="themeChecked? require('~/static/images/com_jt_sx_zuo.svg'): require('~/static/images/com_jt_sx_zuo_rj.svg')" alt="com_jt_sx_zuo">
       </template> -->
       <template #left>
-        <span>{{ title || $t('str_his') }}</span>
+        <h1 class="h1">{{ title || $t('str_his') }}</h1>
       </template>
     </van-nav-bar>
   </div>
@@ -68,5 +68,9 @@
 .header-common{
   width: 20px;
   height: 20px;
+}
+.h1{
+  font-weight: normal;
+  font-size: 18px;
 }
 </style>
