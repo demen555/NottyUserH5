@@ -20,8 +20,20 @@
           @load="onLoad"
         >
           <div class="thumb">
-            <div @click="handleClickTag(tag)" class="tag-item" v-for="(tag, index) in tagList" :key="index"><span>{{ tag.name }}</span></div>
-            <!-- <Thumb :tag="tag" v-for="tag in tagList" :key="tag.id"></Thumb> -->
+            <nuxt-link :to="localePath({
+              name: 'tag-name',
+              params:{
+                id: tag.id,
+                name: tag.name,
+                refresh: true,
+              },
+            })" 
+            @click="handleClickTag(tag)" 
+            class="tag-item" 
+            v-for="(tag, index) in tagList" 
+            :key="index">
+              <span>{{ tag.name }}</span>
+            </nuxt-link>
           </div>
         </van-list>
     </van-pull-refresh>
@@ -89,14 +101,7 @@ export default{
       console.log(item)
       this.set_tagid(item.id)
 
-      this.$router.push(this.localePath({
-        name: 'tag-name',
-        params:{
-          id: item.id,
-          name: item.name,
-          refresh: true,
-        },
-      }));
+      this.$router.push(this);
     },
     handleClickTagName(item, index){
       this.tagIndex = index

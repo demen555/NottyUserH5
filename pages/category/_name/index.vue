@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="txtTitle" text></Nav>
+    <Nav :title="categoryMetaData.h1" text></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -18,6 +18,8 @@
           <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         </van-list>
       </van-pull-refresh>
+      <h2 class="footer-title"> {{ categoryMetaData.h2}} </h2>
+      <p class="footer-description"> {{ categoryMetaData.footer_desc }} </p>
     </template>
     <Empty v-else></Empty>   
   </div>
@@ -41,7 +43,8 @@ data() {
     pageInfo: {
       page: 1,
       size: 20
-    }
+    },
+    categoryMetaData:{}
   }
 },
 mixins: [commonMinxin],
@@ -100,12 +103,13 @@ methods: {
       if(code === CODES.SUCCESS){
         if(isRefresh){
           // this.dataList = [ ...body.records, ...this.dataList ]
-          this.dataList = data.data
+          this.dataList = data.data;
           this.refreshing = false
         } else {
           this.dataList = [ ...this.dataList, ...data.data]
           this.loading = false
         }
+        this.categoryMetaData = data.categoryMetaData;
         if(data.data.length === 0){
           this.finished = true
         }
@@ -139,5 +143,13 @@ overflow: visible;
 }
 :deep(.van-nav-bar__left){
   font-size: 18px;
+}
+.footer-title{
+  font-size: 18px;
+  color: var(--bg-primary, #F6D658);
+}
+.footer-description{
+  font-size: 12px;
+  color: var(--bg-color4, rgba(0,0,0,0.6));
 }
 </style>
