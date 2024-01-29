@@ -316,7 +316,9 @@ export default {
       console.log(id, 'typeid')
     },
     handleClickNotty(){
-      if(this.$route.name === 'index'){
+      console.log(this.$route.name)
+      if(['index___en', 'index___pt'].includes(this.$route.name)){
+        console.log('789')
         this.$emit('refresh')
         this.handleScroll()
       } else {
@@ -324,22 +326,14 @@ export default {
         this.$emit('refresh')
       }
     },
-    handleClickLogo(){
-      console.log(this.$route.name === 'search', 'handleClickLogo')
-      if(this.$route.name === 'search') {
-        this.handleScroll()
-      }else{
-        this.$router.push(this.localePath('/'+  this.$i18n.locale ))
-      }
-    },
     handleScroll() {
       console.log(document.querySelector('#home-top'))
       const navHeight = document.querySelector('.home-header').offsetHeight
-      
+      console.log('top')
       // scrollIntoView() js原生方法，实现锚点滚动过渡
       const target = document.querySelector('#home-top')
       target.scrollIntoView({ behavior: 'smooth',  block: "start" })
-      
+      // window.scrollTo(0, 0)
       // scrollTo() 把内容滚动到指定的坐标。减去导航高度的目的：导航用定位固定在顶部，如果不减去，导航栏会遮挡一部分内容
       // console.log(target.offsetTop, navHeight, target.offsetTop - navHeight, 'height')
       // window.scrollTo(0, target.offsetTop - navHeight - 10)
