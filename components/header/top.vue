@@ -240,11 +240,13 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default {
-  async fetch() {
+  async fetch({ store }) {
     const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
     const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
     this.tagList = res1.data.data;
+    store.dispatch('set_categoryList', res1.data.data)
     this.typeList = res2.data.data;
+    store.dispatch('set_tagList', res2.data.data)
   },
   // async fetch() {
   //   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})

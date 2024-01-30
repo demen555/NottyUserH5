@@ -93,12 +93,12 @@ import CODES from "~/plugins/enums/codes"
 import vPagination from '~/components/pagination/index.vue'
 import commonMinxin from '~/plugins/mixins/common'
 export default{
-async fetch() {
-  const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
-  const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
-  this.tagList = res1.data.data;
-  this.categoryList = res2.data.data;
-},
+// async fetch() {
+//   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
+//   const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
+//   this.tagList = res1.data.data;
+//   this.categoryList = res2.data.data;
+// },
 fetchOnServer: true,
 mixins: [commonMinxin],
 data() {
@@ -125,12 +125,12 @@ data() {
     ],
     hostname: '',
     showSticky: true,
-    tagList: [],
-    categoryList: []
+    // tagList: [],
+    // categoryList: []
   }
 },
 computed: {
-  ...mapGetters(['theme']),
+  ...mapGetters(['theme','tagList', 'categoryList']),
   themeChecked(){
     return this.theme === 'dark'
   }
