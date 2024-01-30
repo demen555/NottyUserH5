@@ -311,11 +311,13 @@ overflow: visible;
     top: 0;
   }
   .sticky-text{
+    width: 100%;
     position: absolute;
-    left: 5px;
+    left: 0px;
     bottom: 15px;
     font-size: 10px;
     font-weight: bold;
+    text-align: center;
     color: var(--text-color1, #181E2A);
   }
 }
