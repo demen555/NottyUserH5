@@ -292,10 +292,10 @@ export default {
   },
 
   mounted(){
-    this.$store.dispatch('set_categoryList', this.typeList)
-    this.$store.dispatch('set_tagList', this.tagList)
+    this.set_categoryList( this.typeList)
+    this.set_tagList( this.tagList)
+    console.log( this.tagList, this.typeList, "typeList&tagList" )
   },
-
   activated(){
     console.log( 'this.$route.name', this.$route.name )
     this.showPop = false
