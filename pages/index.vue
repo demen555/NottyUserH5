@@ -125,12 +125,12 @@ data() {
     ],
     hostname: '',
     showSticky: true,
-    // tagList: [],
+    tagList: [],
     // categoryList: []
   }
 },
 computed: {
-  ...mapGetters(['theme','tagList', 'categoryList']),
+  ...mapGetters(['theme', 'categoryList']),
   themeChecked(){
     return this.theme === 'dark'
   }
