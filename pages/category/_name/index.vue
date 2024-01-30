@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <NavNew :title="categoryMetaData.h1" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></NavNew>
+    <NavNew :title="categoryMetaData.h1 || categoryName" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></NavNew>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -44,7 +44,8 @@ data() {
       page: 1,
       size: 20
     },
-    categoryMetaData:{}
+    categoryMetaData:{},
+    categoryName: "",
   }
 },
 mixins: [commonMinxin],
@@ -70,7 +71,8 @@ async asyncData({ $homeApi, params }) {
         "h1": null,
         "h2": null,
         "footer_desc": null
-      }
+      },
+      categoryName: categoryName
     }  
 },
 activated(){
@@ -92,12 +94,33 @@ created(){
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   return {
-    
+      title: this.categoryMetaData.title,
+      meta: [
+        {
+            hid: 'description',
+            name: 'description',
+            content: this.categoryMetaData.description
+        },
+        {
+            hid: 'keyswords',
+            name: 'keyswords',
+            content: this.categoryMetaData.keywords
+        },
+        {
+            hid: 'title',
+            name: 'title',
+            content: this.categoryMetaData.title
+        },
+        { hid: 'og:title', property: 'og:title', content: this.categoryMetaData.title },
+        { hid: 'og:description', property: 'og:description', content:  this.categoryMetaData.description},
+        { hid: 'og:keywords', property: 'og:keywords', content: this.categoryMetaData.keywords },
+    ],
     link: [
       {
         rel: 'canonical',
         href: `${hostName}${this.$nuxt.context.route.fullPath}`,
       },
+      
     ],
   }
 },
@@ -176,6 +199,7 @@ overflow: visible;
   padding: 8px 16px;
   a{
     color: #FFF;
+    text-decoration: underline;
   }
 }
 .paddingTop88{
