@@ -1,8 +1,3 @@
-export const langMap = {
-  en: { title: "English", language:'en' },
-  pt: { title: "Português", language:'pt' },
-}
-
 export const areaList = [
   {
     ep: 'en_US',

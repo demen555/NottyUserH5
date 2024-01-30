@@ -38,6 +38,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
+name: 'category',
 data() {
   return {
     spainnerLoading: false,
@@ -57,6 +58,7 @@ head(){
     
     link: [
       {
+        hid: "canonical",
         rel: 'canonical',
         href: `${hostName}${this.$nuxt.context.route.fullPath}`,
       },
@@ -100,11 +102,6 @@ methods: {
       isRefresh  === 'first' && (this.spainnerLoading = true)
       this.loading = true
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
-    
-      // params.tagId = this.detail.id //标签
-      // params.tagName = this.detail.name //标签
-
-
       const { code, data } = await this.$homeApi.postTypeList(params)
       console.log(code, CODES.SUCCESS, data, 'postTagListPage')
       if(code === CODES.SUCCESS){

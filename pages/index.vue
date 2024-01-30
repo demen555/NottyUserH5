@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HeaderTop @refresh="onRefresh"  id="home-top"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible" id="home-top"></HeaderTop>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -89,9 +89,9 @@
 import { mapGetters, mapActions } from "vuex"
 import HeaderTop from '~/components/header/top.vue'
 import Cover from '~/components/cover'
-import cardLoad from "~/components/skeleton/cardLoad.vue"
 import CODES from "~/plugins/enums/codes"
 import vPagination from '~/components/pagination/index.vue'
+import commonMinxin from '~/plugins/mixins/common'
 export default{
 async fetch() {
   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
@@ -100,6 +100,7 @@ async fetch() {
   this.categoryList = res2.data.data;
 },
 fetchOnServer: true,
+mixins: [commonMinxin],
 data() {
   return {
     spainnerLoading: true,// 全局loading层
@@ -140,9 +141,9 @@ head(){
   return {
     title: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com",
     meta: [
-      { name: 'title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
-      { name: 'description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
-      { name: 'keywords', content: "XXX / Video de sexo / porno gratis / filme porno gratis / assistir filme porno gratis" },
+      { hid: "title", name: 'title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
+      { hid: "description", name: 'description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
+      { hid: "keywords", name: 'keywords', content: "XXX / Video de sexo / porno gratis / filme porno gratis / assistir filme porno gratis" },
 
       { property: 'og:title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
       { property: 'og:description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
@@ -150,6 +151,7 @@ head(){
     ],
     link: [
       {
+        hid: "canonical",
         rel: 'canonical',
         href: `${hostName}${this.$nuxt.context.route.fullPath}`,
       },
@@ -165,7 +167,6 @@ created(){
 components: {
   HeaderTop,
   Cover,
-  cardLoad,
   vPagination
 },
 watch: {
@@ -208,7 +209,7 @@ methods: {
     
     // scrollTo() 把内容滚动到指定的坐标。减去导航高度的目的：导航用定位固定在顶部，如果不减去，导航栏会遮挡一部分内容
     // console.log(target.offsetTop, navHeight, target.offsetTop - navHeight, 'height')
-    // window.scrollTo(0, target.offsetTop - navHeight - 10)
+    window.scrollTo(0, 0)
   },
   handleClickPage(name){
     this.$router.push(this.localePath({name: name }))

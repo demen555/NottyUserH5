@@ -304,7 +304,7 @@
   "str_footer_nav8": "2257",
   "str_footer_nav9": "FAQ",
   "str_footer_nav10": "EU DSA",
-  
+
   "str_footer_csam1": "Child Sexual Abuse Material Policy",
   "str_footer_csam2": "August 2022",
   "str_footer_csam3": "Any content on our site that sexualizes, exploits, or puts minors in danger is strictly prohibited. We will report it if we locate it or are made aware of it.NottyHub is fiercely opposed to the transmission of child sexual abuse material (CSAM). This comprises text, illustrations, and computer-generated graphics. We consider it our obligation to guarantee that our platform is not used to share or consume CSAM, and to discourage users from searching for it.Any material that features or depicts a kid (actual, fictitious, or animated) or promotes child sexual exploitation is absolutely prohibited on our site and constitutes a serious violation of our Terms of Service. Written material (which includes, but is not limited to, comments, content titles, content descriptions, messages, usernames, and so on)Further, NottyHub supports and endorses the Voluntary Principles to Combat Online Child Sexual Exploitation and Abuse; a collaborative initiative launched by the Five Country Ministerial (5 Eyes) and backed by industry-leading tech companies to combat online child sexual exploitation and abuse. While some bad actors aim to exploit developments in technology and the digital world, we think that participation in and support for global cross-sector collaboration, as well as rigorous, efficient, and adaptable rules, can successfully eliminate the spread of online abuse.If you encounter child sexual abuse material on NottyHub, please report it to us via our Content Removal Request Form. For information on how to report Child Sexual Abuse Material please refer to the Additional Resources and Support section below.Anyone can report potential violations of this policy.For more information on how to report content, see the section titled “How Can you help us”.All NottyHub feedback and critiques are kept private and are evaluated by real moderators who work quickly to address the content responsibly. If you suspect a child is in danger of death, please notify the appropriate law enforcement authorities immediately.",
@@ -491,4 +491,5 @@
   "str_footer_ncc63": "A French government website explaining the legal rights an individual has to his or her image, as well as pathways to request the removal of an image.",
   "str_footer_ncc64": "GERMANY:",
   "str_footer_ncc65": "Association Concerning Sexual Violence Against Women"
-  }
+
+}

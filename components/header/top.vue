@@ -32,26 +32,26 @@
             </div>
             <div @click="handleGoPage('category')" :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
-          <template v-if="!showTypeExpand">
+          <div v-show="!showTypeExpand">
             <nuxt-link :to="localePath({
-              name: 'category-id-name',
-              params: { id: item.id, name: item.title }
+              name: 'category-name',
+              params: { id: item.id, name: item.title ? item.title.toLowerCase().replace(/ /g, '-') : '' }
             })" v-for="(item) in typeList" :key="item.id">
               <div @click="handleClick(item.id)" class="nav-menu-list-tag-sub">
                 <div class="nav-menu-left">
                   <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
                   <div class="typeName">{{ item.title }}</div>
                 </div>
-                <div class="nav-menu-right" v-if="item.id === typeId &&  ['category-id-name___en', 'category-id-name___pt'].includes(routeName) ">
+                <div class="nav-menu-right" v-if="item.id === typeId &&  ['category-name___en', 'category-name___pt'].includes(routeName) ">
                   <img src="~/static/images/com_select_on.svg" alt="com_select_on">
                 </div>
               </div>
             </nuxt-link>
             <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('category')"> {{ $t('str_menu_type_all') }}</nuxt-link>
             <div class="nav-menu-list-tag-empty"></div>
-          </template>
+          </div>
         </div>
-        <div v-if="!showTypeExpand" class="type-div"></div> 
+        <div v-show="!showTypeExpand" class="type-div"></div> 
         <div class="nav-list-tags">
           <div class="nav-menu-list-tag">
             <div class="nav-menu-left" @click="handleShowExpand('tag')">
@@ -65,7 +65,7 @@
               name: 'tag-name',
               params: { id: tag.id, name: tag.name }
             })"  v-for="tag in tagList" :key="tag.id" >
-              <div class="nav-menu-list-tag-sub"  @click="set_tagid(item.id)">
+              <div class="nav-menu-list-tag-sub"  @click="set_tagid(tag.id)">
                 <div class="nav-menu-left">
                   <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
                   <div>{{ tag.name }}</div>
@@ -157,17 +157,17 @@
               <div>{{ $t('str_change_lang') }}</div>
             </div>
             <div class="nav-menu-right">
-              <div class="nav-menu-lang">{{ languageText }}</div>
+              <div class="nav-menu-lang">{{ $i18n.localeProperties.name }}</div>
               <div  :class="showLanguageExpand? (themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
             </div>
           </div>
           <template v-if="!showLanguageExpand">
-            <nuxt-link class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.language" :to="switchLocalePath(item.language)">
+            <nuxt-link class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.code" :to="switchLocalePath(item.code)">
               <div class="nav-menu-left" @click.stop="window.reload()">
                 <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
-                <div>{{ item.title }}</div>
+                <div>{{ item.name }} </div>
               </div>
-              <div class="nav-menu-right" v-if="item.language === language">
+              <div class="nav-menu-right" v-if="item.code === language">
                 <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
               </div>
             </nuxt-link>
@@ -228,7 +228,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import Overlay from '@/components/overlay'
 import dialogGuild from '@/components/dialog/dialog-guild.vue'
-import { langMap, areaList } from "~/locales/lang.js"
+import { areaList } from "~/locales/lang.js"
 import CODES from "~/plugins/enums/codes"
 
 
@@ -250,7 +250,7 @@ export default {
       showLocationExpand: true, //国家
       showExpand: true, // 标签
       
-      languageList: langMap, // 语言数据
+      languageList: this.$i18n.locales, // 语言数据
       language: this.$i18n.locale, //语言
       location: 'US1', //国家
       locationList: areaList, // 国家数据
@@ -299,11 +299,7 @@ export default {
   },
   computed: {
     ...mapGetters(['userinfo', 'theme', 'isLogin', 'tagId', 'typeId','accessToken']),
-    languageText({ language,  languageList}) {
-      console.log( 'languageList', languageList, language )
-      const obj = languageList[language];
-      return obj.title
-    },
+
     locationText() {
       const obj = this.locationList.find(item => this.location === item.code) || {}
       return this.$t(obj.country)
@@ -320,7 +316,9 @@ export default {
       console.log(id, 'typeid')
     },
     handleClickNotty(){
-      if(this.$route.name === 'index'){
+      console.log(this.$route.name)
+      if(['index___en', 'index___pt'].includes(this.$route.name)){
+        console.log('789')
         this.$emit('refresh')
         this.handleScroll()
       } else {
@@ -328,22 +326,14 @@ export default {
         this.$emit('refresh')
       }
     },
-    handleClickLogo(){
-      console.log(this.$route.name === 'search', 'handleClickLogo')
-      if(this.$route.name === 'search') {
-        this.handleScroll()
-      }else{
-        this.$router.push(this.localePath('/'+  this.$i18n.locale ))
-      }
-    },
     handleScroll() {
       console.log(document.querySelector('#home-top'))
       const navHeight = document.querySelector('.home-header').offsetHeight
-      
+      console.log('top')
       // scrollIntoView() js原生方法，实现锚点滚动过渡
       const target = document.querySelector('#home-top')
       target.scrollIntoView({ behavior: 'smooth',  block: "start" })
-      
+      // window.scrollTo(0, 0)
       // scrollTo() 把内容滚动到指定的坐标。减去导航高度的目的：导航用定位固定在顶部，如果不减去，导航栏会遮挡一部分内容
       // console.log(target.offsetTop, navHeight, target.offsetTop - navHeight, 'height')
       // window.scrollTo(0, target.offsetTop - navHeight - 10)
@@ -372,7 +362,11 @@ export default {
     },
     async initTypeList(){
       try {
-        const res = await this.$homeApi.postTypeList(this.pageInfo)
+        const params = {
+          isSorted: true,
+          ...this.pageInfo
+        }
+        const res = await this.$homeApi.postTypeList(params)
         console.log(res, 'typeList334')
         if(res.code === CODES.SUCCESS){
           console.log(res.data, 'initTagList')
