@@ -167,12 +167,15 @@ overflow: visible;
 .footer-title{
   font-size: 16px;
   color: var(--bg-primary, #F6D658);
-  padding: 0 16px;
+  padding: 8px 16px;
   font-weight: normal;
 }
 .footer-description{
   font-size: 12px;
   color:white;
-  padding: 0 16px;
+  padding: 8px 16px;
+  a{
+    color: #FFF;
+  }
 }
 </style>
