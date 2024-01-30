@@ -19,7 +19,7 @@
         </van-list>
       </van-pull-refresh>
       <h2 class="footer-title paddingTop88"> {{ categoryMetaData.h2}} </h2>
-      <p class="footer-description"> {{ categoryMetaData.footer_desc }} </p>
+      <p class="footer-description" v-html="categoryMetaData.footer_desc"> </p>
     </template>
     <Empty v-else></Empty>   
   </div>
@@ -172,7 +172,7 @@ overflow: visible;
 }
 .footer-description{
   font-size: 12px;
-  color: var(--bg-color4, rgba(0,0,0,0.6));
+  color:white;
   padding: 0 16px;
 }
 .paddingTop88{
