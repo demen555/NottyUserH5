@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="txtTitle" text></Nav>
+    <Nav :title="categoryMetaData.h1" text></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -18,6 +18,8 @@
           <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         </van-list>
       </van-pull-refresh>
+      <h2 class="footer-title paddingTop88"> {{ categoryMetaData.h2}} </h2>
+      <p class="footer-description"> {{ categoryMetaData.footer_desc }} </p>
     </template>
     <Empty v-else></Empty>   
   </div>
@@ -41,7 +43,8 @@ data() {
     pageInfo: {
       page: 1,
       size: 20
-    }
+    },
+    categoryMetaData:{}
   }
 },
 mixins: [commonMinxin],
@@ -49,6 +52,26 @@ computed: {
   txtTitle(){
     return  this.detail.name
   }
+},
+async asyncData({ $homeApi, params }) {
+    const categoryName = params.name.replace(/\-/g, ' ').replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    const res = await $homeApi.requestvodpage({
+      categoryName: categoryName,
+      page: 1,
+      size: 20
+    })
+   
+    return {
+      dataList: res.data.data || [],
+      categoryMetaData: res.data.categoryMetaData || {
+        "title": null,
+        "description": null,
+        "keywords": null,
+        "h1": null,
+        "h2": null,
+        "footer_desc": null
+      }
+    }  
 },
 activated(){
   const isRefresh = this.$route.params.refresh;
@@ -64,7 +87,7 @@ created(){
     name: name,
     id: id
   }
-  this.getList('first')
+  // this.getList('first')
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -100,12 +123,13 @@ methods: {
       if(code === CODES.SUCCESS){
         if(isRefresh){
           // this.dataList = [ ...body.records, ...this.dataList ]
-          this.dataList = data.data
+          this.dataList = data.data;
           this.refreshing = false
         } else {
           this.dataList = [ ...this.dataList, ...data.data]
           this.loading = false
         }
+        this.categoryMetaData = data.categoryMetaData;
         if(data.data.length === 0){
           this.finished = true
         }
@@ -139,5 +163,16 @@ overflow: visible;
 }
 :deep(.van-nav-bar__left){
   font-size: 18px;
+}
+.footer-title{
+  font-size: 16px;
+  color: var(--bg-primary, #F6D658);
+  padding: 0 16px;
+  font-weight: normal;
+}
+.footer-description{
+  font-size: 12px;
+  color: var(--bg-color4, rgba(0,0,0,0.6));
+  padding: 0 16px;
 }
 </style>
