@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <NavNew :title="categoryMetaData.h1 "></NavNew>
+    <NavNew :title="categoryMetaData.h1" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></NavNew>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
