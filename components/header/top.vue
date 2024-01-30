@@ -719,7 +719,7 @@ header{
   padding-top: 9px;
 }
 .nav-menu-left{
-  width: 100%;
+  flex: 1;
 }
 .nav-menu-left,.nav-menu-right{
   display: flex;
