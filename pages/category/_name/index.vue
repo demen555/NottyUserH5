@@ -60,9 +60,17 @@ async asyncData({ $homeApi, params }) {
       page: 1,
       size: 20
     })
+   
     return {
-      dataList: res.data.data,
-      categoryMetaData: res.data.categoryMetaData
+      dataList: res.data.data || [],
+      categoryMetaData: res.data.categoryMetaData || {
+        "title": null,
+        "description": null,
+        "keywords": null,
+        "h1": null,
+        "h2": null,
+        "footer_desc": null
+      }
     }  
 },
 activated(){
