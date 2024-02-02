@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible" id="header-top"></HeaderTop>
     <div class="main-video">
         <div class="video-container"> 
             <client-only v-if="videoInfo.vodPlayUrl">
@@ -140,7 +140,10 @@
             <videoLoad />
             <cardLoad />
         </template>
-
+        <div class="sticky-top" @click="handleScroll" v-show="isDetailStickyVisible">
+          <div class="sticky-img"><img src="~/static/images/com_jt_sx_top.svg" alt="com_jt_sx_top"></div>
+          <div class="sticky-text">TOP</div>
+        </div>
 
         <dialogLogin ref="dialogLoginRef" @goRegister="goRegister"></dialogLogin>
         <dialogRegister ref="dialogRegisterRef" @goLogin="goLogin"></dialogRegister>
@@ -319,6 +322,9 @@ export default {
     },
     methods:{
         dateFormat,
+        handleScroll(){
+          window.scrollTo(0, 0)
+        },
         handleRefesh(){
           console.log('handleRefresh')
           this.initVideo()
@@ -1027,5 +1033,24 @@ export default {
         padding: 0 12px;
     }
 }
-
+.sticky-top{
+  position: fixed;
+  right: 10px;
+  bottom: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(246, 214, 88, 0.6);
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .sticky-text{
+    font-size: 12px;
+    color: #F6D658;
+    margin-top: 5px;
+  }
+}
 </style>

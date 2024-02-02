@@ -6,6 +6,7 @@ export default{
     return {
       lastScrollTop: 0,
       isStickyVisible: true,
+      isDetailStickyVisible: false
     }
   },
   mounted() {
@@ -30,14 +31,21 @@ export default{
       if(scroll < 0){
           console.log(scroll,this.lastScrollTop, scrollTop,'up')
           //添加你想要的事件
-          if (Math.abs(scroll) >= 20) {
+        if (Math.abs(scroll) >= 20) {
           this.isStickyVisible = true;
+          this.isDetailStickyVisible = false
+        }
+        if (Math.abs(scroll) >= 200) {
+          this.isDetailStickyVisible = false
         }
       }else{
         console.log(scroll, scrollTop, 'down')
         //添加你想要的事件
         if (scrollTop >= 150) {
           this.isStickyVisible = false;
+        }
+        if (scrollTop >= 800) {
+          this.isDetailStickyVisible = true;
         }
       }
       this.lastScrollTop = scrollTop;
