@@ -460,5 +460,7 @@
 	"str_footer_ncc62": "图像权（Droit à l’image）",
 	"str_footer_ncc63": "法国政府网站，解释个人对其图像拥有的合法权利，以及请求删除图像的途径。",
 	"str_footer_ncc64": "德国：",
-	"str_footer_ncc65": "针对妇女的性暴力协会"
+	"str_footer_ncc65": "针对妇女的性暴力协会",
+
+	"str_email_send_suc": "我们已向您发送了一封电子邮件，其中包含您的用户名和链接，以便重置您的密码"
 }
