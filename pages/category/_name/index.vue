@@ -55,7 +55,7 @@ computed: {
   }
 },
 async asyncData({ $homeApi, params }) {
-    const categoryName = params.name.replace(/\-/g, ' ').replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    const categoryName = '/category/' + params.name;
     const res = await $homeApi.requestvodpage({
       categoryName: categoryName,
       page: 1,
@@ -140,7 +140,7 @@ methods: {
       this.loading = true
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
     
-      params.categoryName = this.detail.name //分类名称
+      params.categoryName = this.categoryName //分类名称
 
       const { code, data } = await this.$homeApi.requestvodpage(params)
       if(code === CODES.SUCCESS){
