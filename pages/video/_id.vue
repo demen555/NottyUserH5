@@ -142,7 +142,7 @@
         </template>
         <div class="sticky-top" @click="handleScroll" v-show="isDetailStickyVisible">
           <div class="sticky-img"><img src="~/static/images/com_jt_sx_top.svg" alt="com_jt_sx_top"></div>
-          <div class="sticky-text">TOP</div>
+          <div class="sticky-top-text">TOP</div>
         </div>
 
         <dialogLogin ref="dialogLoginRef" @goRegister="goRegister"></dialogLogin>
@@ -1047,7 +1047,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .sticky-text{
+  .sticky-top-text{
     font-size: 12px;
     color: #F6D658;
     margin-top: 5px;
