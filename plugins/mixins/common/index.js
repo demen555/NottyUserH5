@@ -24,6 +24,7 @@ export default{
     handleScrollShow() {
       // 获取滚动条滚动的距离
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      console.log(scrollTop, '666')
       // console.log(scrollTop, 'scrollTop')
       var scroll = scrollTop - this.lastScrollTop;
       
@@ -44,7 +45,7 @@ export default{
         if (scrollTop >= 150) {
           this.isStickyVisible = false;
         }
-        if (scrollTop >= 800) {
+        if (scrollTop >= 1900) {
           this.isDetailStickyVisible = true;
         }
       }
