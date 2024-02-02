@@ -31,18 +31,26 @@
               <videoMp4 :vodPic="item.vodPic" :videoSrc="item.vodPreviewUrl" ></videoMp4>
             </div>
           </client-only>  
-
           <div class="main-time">{{ item.vodDuration }}</div>
         </div>
-        <div class="main-title">{{ item.vodName }}</div>
-        <div class="main-btn">
-          <div class="main-btn-view">
-            <div :class="themeChecked? 'main-view':'main-view-white'"></div>
-            <div class="main-text">{{ formatNumber(item.vodHits) }}</div>
-          </div>
-          <div class="mian-btn-like">
-            <div :class="themeChecked? 'main-like':'main-like-white'"></div>
-            <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div>
+        <div class="main-update-content">
+          <div class="main-update-img"><img src="~/static/images/person.svg" alt="person"></div>
+          <div>
+            <!-- <div class="main-title">{{ item.vodName }}</div> -->
+            <div class="main-title">IPX-879丝袜SPA店攻略！哪个是最好的足交餐？-ss时尚大的IPX-879丝袜SPA店攻略！哪...</div>
+            <div class="main-btn">
+              <div>仙主大大UP主</div>
+              <div class="main-btn-right">
+                <div class="main-btn-view">
+                  <div :class="themeChecked? 'main-view':'main-view-white'"></div>
+                  <div class="main-text">{{ formatNumber(item.vodHits) }}</div>
+                </div>
+                <div class="mian-btn-like">
+                  <div :class="themeChecked? 'main-like':'main-like-white'"></div>
+                  <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -187,12 +195,24 @@ export default{
   margin-bottom: 8px;
   padding: 0 12px;
 }
+.main-update-content{
+  display: flex;
+  .main-update-img{
+    margin-top: 8px;
+    margin-left: 12px;
+  }
+}
 .main-btn{
   display: flex;
   align-items: center;
+  justify-content: space-between;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   height: 17px;
   padding-left: 12px;
+  .main-btn-right{
+    display: flex;
+    align-items: center;
+  }
 }
 .main-btn-view,.mian-btn-like{
   display: flex;
