@@ -45,7 +45,7 @@ export default{
         if (scrollTop >= 150) {
           this.isStickyVisible = false;
         }
-        if (scrollTop >= 1900) {
+        if (scrollTop >= 2100) {
           this.isDetailStickyVisible = true;
         }
       }
