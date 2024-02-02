@@ -463,5 +463,7 @@
 	"str_footer_ncc62": "Derecho a la Imagen (Droit à l'image)",
 	"str_footer_ncc63": "Un sitio web del gobierno francés que explica los derechos legales que tiene una persona sobre su imagen, así como las vías para solicitar la eliminación de una imagen.",
 	"str_footer_ncc64": "ALEMANIA:",
-	"str_footer_ncc65": "Asociación contra la violencia sexual contra la mujer"
+	"str_footer_ncc65": "Asociación contra la violencia sexual contra la mujer",
+
+	"str_email_send_suc": "Le hemos enviado un correo electrónico con su nombre de usuario y un enlace para restablecer su contraseña."
 }

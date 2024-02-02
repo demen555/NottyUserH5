@@ -463,5 +463,7 @@
 	"str_footer_ncc62": "Quyền tới Hình ảnh (Droit à l'image)",
 	"str_footer_ncc63": "Một trang web của chính phủ Pháp giải thích các quyền hợp pháp mà một cá nhân có đối với hình ảnh của mình cũng như các cách thức yêu cầu xóa hình ảnh.",
 	"str_footer_ncc64": "NƯỚC ĐỨC:",
-	"str_footer_ncc65": "Hiệp hội liên quan đến bạo lực tình dục đối với phụ nữ"
+	"str_footer_ncc65": "Hiệp hội liên quan đến bạo lực tình dục đối với phụ nữ",
+
+	"str_email_send_suc": "Chúng tôi đã gửi cho bạn một email có tên người dùng và liên kết để đặt lại mật khẩu của bạn"
 }
