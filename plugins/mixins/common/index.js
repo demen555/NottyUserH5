@@ -36,7 +36,7 @@ export default{
           this.isStickyVisible = true;
           this.isDetailStickyVisible = false
         }
-        if (Math.abs(scroll) >= 200) {
+        if (Math.abs(scroll) >= 300) {
           this.isDetailStickyVisible = false
         }
       }else{
@@ -45,7 +45,7 @@ export default{
         if (scrollTop >= 150) {
           this.isStickyVisible = false;
         }
-        if (scrollTop >= 1900) {
+        if (scrollTop >= 2100) {
           this.isDetailStickyVisible = true;
         }
       }
