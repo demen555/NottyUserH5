@@ -126,11 +126,11 @@ data() {
     hostname: '',
     showSticky: true,
     tagList: [],
-    // categoryList: []
+    categoryList: []
   }
 },
 computed: {
-  ...mapGetters(['theme', 'categoryList']),
+  ...mapGetters(['theme']),
   themeChecked(){
     return this.theme === 'dark'
   }
@@ -178,15 +178,20 @@ watch: {
     // this.onLoad()
   }
 },
-async asyncData({ $homeApi }) {
-  // const res = await $homeApi.requestvodpageHome({ page: 1, size: 20})
-  // const { data } = res
-  // return { dataList: data.data }
+async asyncData({ $homeApi }) { 
+  const res2 = await $homeApi.postTypeList({ 
+    page: 1, 
+    size: 10, 
+    isSorted: true,
+  })
   const res = await $homeApi.postTagListPage({
     page: 1,
     size: 10
   });
-  return { tagList: res.data.data }
+  return { 
+    tagList: res.data.data || [],
+    categoryList:  res2.data.data || []
+  }
 },
 methods: {
   ...mapActions(['set_tagid']),
