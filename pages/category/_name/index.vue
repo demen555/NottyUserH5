@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="categoryMetaData.h1 || categoryName" text></Nav>
+    <Nav :title="categoryMetaData.h1 || paramsName" text></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -46,6 +46,7 @@ data() {
     },
     categoryMetaData:{},
     categoryName: "",
+    paramsName: "",
   }
 },
 mixins: [commonMinxin],
@@ -72,7 +73,8 @@ async asyncData({ $homeApi, params }) {
         "h2": null,
         "footer_desc": null
       },
-      categoryName: categoryName
+      categoryName: categoryName,
+      paramsName: params.name
     }  
 },
 activated(){
