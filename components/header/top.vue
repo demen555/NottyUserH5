@@ -24,37 +24,39 @@
          <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
          <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
         </div>
+
+        <!-- 分类 -->
         <div class="nav-list-tags type">
-          <div class="nav-menu-list-tag" @click="handleShowExpand('type')">
+          <div class="nav-menu-list-tag" >
             <div class="nav-menu-left">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_leixing_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
               <div>{{ $t('str_tags') }}</div>
             </div>
-            <div :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+            <div class="all-type">All</div>
           </div>
-          <div v-show="!showTypeExpand">
-            <nuxt-link :to="localePath({
-              name: 'category-name',
-              params: { id: item.id, name: item.title ? item.title.toLowerCase().replace(/ /g, '-') : '' }
-            })" v-for="(item) in typeList" :key="item.id">
-              <div @click="handleClick(item.id)" class="nav-menu-list-tag-sub">
-                <div class="nav-menu-left">
-                  <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
-                  <div class="typeName">{{ item.title }}</div>
+        
+          <nuxt-link :to="localePath({
+            name: 'category-name',
+            params: { id: item.id, name: item.title ? item.title.toLowerCase().replace(/ /g, '-') : '' }
+          })" v-for="(item) in typeList" :key="item.id">
+            <div @click="handleClick(item.id)" class="nav-menu-list-tag-sub">
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
+                <div class="typeName">{{ item.title }}</div>
+              </div>
+              <client-only>
+                <div class="nav-menu-right" v-if="item.id === typeId &&  routeName.indexOf('category-name') != -1 ">
+                  <img src="~/static/images/com_select_on.svg" alt="com_select_on">
                 </div>
-                <client-only>
-                  <div class="nav-menu-right" v-if="item.id === typeId &&  routeName.indexOf('category-name') != -1 ">
-                    <img src="~/static/images/com_select_on.svg" alt="com_select_on">
-                  </div>
-                </client-only>
-              </div> 
-          
-            </nuxt-link>
-            <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('category')"> {{ $t('str_menu_type_all') }}</nuxt-link>
-            <div class="nav-menu-list-tag-empty"></div>
-          </div>
+              </client-only>
+            </div> 
+          </nuxt-link>
+          <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('category')"> {{ $t('str_menu_type_all') }}</nuxt-link>
+          <div class="nav-menu-list-tag-empty"></div>
         </div>
+
         <div v-show="!showTypeExpand" class="type-div"></div> 
+        <!-- 标签 -->
         <div class="nav-list-tags">
           <div class="nav-menu-list-tag" @click="handleShowExpand('tag')">
             <div class="nav-menu-left">
@@ -84,36 +86,6 @@
             <!-- 所有标签 -->
             <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
             <div class="nav-menu-list-tag-empty"></div>
-          </div>
-        </div>
-        <nuxt-link class="nav-menu-list" :to="localePath('history')" >
-          <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt="my_gn_lsjl"></div>
-            <div>{{ $t('str_his') }}</div>
-          </div>
-        </nuxt-link>
-
-        <div class="nav-menu-list" @click="handleGoPage('collect')" >
-          <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
-            <div>{{ $t('str_collect') }}</div>
-          </div>
-        </div>
-        <div class="nav-menu-list" @click="handleGoPage('up')"  >
-          <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
-            <div>{{ $t('str_like') }}</div>
-          </div>
-        </div>
-
-        <div class="nav-menu-dl">
-          <div class="nav-menu-btn nav-ios" @click="handleAddMain">
-            <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
-            <div class="nav-text">{{ $t('str_tianjia_zhupin') }}</div>
-          </div>
-          <div v-if="false" class="nav-menu-btn nav-and" @click="downloadApp">
-            <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_android_1.svg'): require('~/static/images/my_gn_xz_android.svg')"></div>
-            <div class="nav-text">{{ $t('str_down_load') }} </div>
           </div>
         </div>
       </div>
@@ -156,6 +128,28 @@
             </div>
           </div>
         </div>
+        
+        <nuxt-link class="nav-menu-list" :to="localePath('history')" >
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt="my_gn_lsjl"></div>
+            <div>{{ $t('str_his') }}</div>
+          </div>
+        </nuxt-link>
+
+        <div class="nav-menu-list" @click="handleGoPage('collect')" >
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
+            <div>{{ $t('str_collect') }}</div>
+          </div>
+        </div>
+        <div class="nav-menu-list" @click="handleGoPage('up')"  >
+          <div class="nav-menu-left">
+            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
+            <div>{{ $t('str_like') }}</div>
+          </div>
+        </div>
+
+ 
         <div class="nav-list-tags">
           <div class="nav-menu-list-tag" @click="handleShowExpand('language')">
             <div class="nav-menu-left">
@@ -206,6 +200,18 @@
           </template>
         </div>
         <div v-if="!showLocationExpand" class="type-div"></div>
+
+        <div class="nav-menu-dl">
+          <div class="nav-menu-btn nav-ios" @click="handleAddMain">
+            <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
+            <div class="nav-text">{{ $t('str_tianjia_zhupin') }}</div>
+          </div>
+          <div v-if="false" class="nav-menu-btn nav-and" @click="downloadApp">
+            <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_android_1.svg'): require('~/static/images/my_gn_xz_android.svg')"></div>
+            <div class="nav-text">{{ $t('str_down_load') }} </div>
+          </div>
+        </div>
+
         <!-- <div class="nav-menu-list">
           <div class="nav-menu-left">
             <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_zhuti_1.svg'): require('~/static/images/my_gn_zhuti.svg')" alt="my_gn_zhuti"></div>
