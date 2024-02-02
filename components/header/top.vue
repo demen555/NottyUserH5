@@ -33,10 +33,7 @@
             <div @click="handleGoPage('category')" :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
           </div>
           <div v-show="!showTypeExpand">
-            <nuxt-link :to="localePath({
-              name: 'category-name',
-              params: { id: item.id, name: item.title ? item.title.toLowerCase().replace(/ /g, '-') : '' }
-            })" v-for="(item) in typeList" :key="item.id">
+            <nuxt-link :to="localePath(item.urlSlug)" v-for="(item) in typeList" :key="item.id">
               <div @click="handleClick(item.id)" class="nav-menu-list-tag-sub">
                 <div class="nav-menu-left">
                   <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
