@@ -2,55 +2,35 @@
   <div>
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
     <div class="main-video">
-        <div class="video-container"> 
-            <client-only v-if="videoInfo.vodPlayUrl">
-                <videoContainer  :videoInfo="videoInfo" :vodChange="vodChange"></videoContainer>
-            </client-only>
-            
-            <van-loading 
+        <div class="video-container">
+          <div class="main-update-img"><img src="~/static/images/person.svg" alt="person"></div>
+          <div class="main-title">仙主大大UP主</div>
+          <div class="main-btn">
+            <div class="main-btn-right">
+              <div class="main-btn-view">
+                <div :class="themeChecked? 'main-view':'main-view-white'"></div>
+                <!-- <div class="main-text">{{ formatNumber(item.vodHits) }}</div> -->
+                <div class="main-text">230K</div>
+              </div>
+              <div class="mian-btn-like">
+                <div :class="themeChecked? 'main-like':'main-like-white'"></div>
+                <!-- <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div> -->
+                <div class="main-text">95%</div>
+              </div>
+            </div>
+          </div>
+            <!-- <van-loading 
                 color="var(--bg-primary, #F6D658)" 
                 text-color="var(--bg-primary, #F6D658)" 
-                v-else 
                 type="spinner" 
                 vertical>
                 Loading... 
-            </van-loading>
+            </van-loading> -->
         </div>
         <!-- <div class="video-space"></div> -->
+        
         <template v-if="videoInfoLoding">
-            
-            <h1 class="video-title"> {{ videoInfo.seo.title }} </h1>
-            <p class="video-description" v-show="videoInfo.seo.description"> {{ videoInfo.seo.description }} </p>
-            <div class="video-data">
-                <div class="data-watch">
-                    <img class="icon" :src="themeChecked? require('~/static/images/com_bofangliang_big_1.svg'): require('~/static/images/com_bofangliang_big.svg')"  alt="com_dianzan">
-                    <span class="words">{{ videoInfo.vodHits }} {{$t('str_video_vodHits')}}</span>
-                </div> 
-                <div class="data-time">
-                    {{ $t(dateFormat(videoInfo.vodTimeAdd)) }}
-                </div>
-            </div>
-            <div class="video-controls">
-                <div class="controls" @click="setVodUp()">
-                    <img class="icon"  v-if="isUpVod(videoStatus)" src="~/static/images/com_dianzan_on.svg" alt="com_dianzan_on">
-                    <img class="icon"  v-else :src="themeChecked? require('~/static/images/com_dianzan_1.svg'): require('~/static/images/com_dianzan.svg')"  alt="com_dianzan">
-                    <span class="words">{{ vodPercent.vodUp }}%</span>
-                </div>
-                <div class="controls" @click="setVodDown()">
-                    <img class="icon" v-if="isdownVod(videoStatus)" src="~/static/images/com_caizan_on.svg" alt="com_caizan_on">
-                    <img class="icon" v-else :src="themeChecked? require('~/static/images/com_caizan_1.svg'): require('~/static/images/com_caizan.svg')"  alt="com_dianzan">
-                    <span class="words">{{ vodPercent.vodDown }}%</span>
-                </div>
-                <div class="controls" @click="setCollect()">
-                    <img class="icon" v-if="!videoStatus.collect" :src="themeChecked? require('~/static/images/com_shoucang_1.svg'): require('~/static/images/com_shoucang.svg')"  alt="com_dianzan">
-                    <img class="icon" v-else src="~/static/images/com_shoucang_on.svg" alt="com_shoucang_on">
-                    <span class="words">{{ videoStatus.collectNumber || 0 }}</span>
-                </div>
-                <div class="controls" @click="onShowdialogLink()">
-                    <img class="icon" :src="themeChecked? require('~/static/images/com_fenxiang_1.svg'): require('~/static/images/com_fenxiang.svg')"  alt="com_fenxiang_1">
-                    <span class="words">{{ $t('str_share') }}</span>
-                </div>
-            </div>
+            <div class="video-line"></div>
             <!-- <div class="video-title" v-if="videoInfo.tags">
                 <h1 class="title" @click="handleClickType(row)" v-for="row in videoInfo.tags" :key="row.id">{{ row.name }}</h1>
             </div> -->
@@ -67,42 +47,7 @@
                     <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
                 </h1> -->
             </div>
-            <!-- <div class="video-title" v-else>
-              <h1 class="title" @click="changeVoteShow">
-                    <img class="icon" v-if="showVote" src="~/static/images/com_bq_shouqi_1.svg" />
-                    <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
-                </h1>
-            </div> -->
-            <!-- <vote v-if="showVote" :tagsList="videoInfo.tags" :themeChecked="themeChecked" @refresh="handleRefesh"></vote> -->
-            <div class="video-line"></div>
-            {{ videoInfo }}
-            <nuxt-link :to="localePath({
-                name: 'avatar',
-                query: { id: videoInfo.vodId}
-            })">
-              <div class="main-update-content">
-                <div class="main-update-img"><img src="~/static/images/person.svg" alt="person"></div>
-                <div>
-                  <!-- <div class="main-title">{{ item.vodName }}</div> -->
-                  <div class="main-title">仙主大大UP主</div>
-                  <div class="main-btn">
-                    <div class="main-btn-right">
-                      <div class="main-btn-view">
-                        <div :class="themeChecked? 'main-view':'main-view-white'"></div>
-                        <!-- <div class="main-text">{{ formatNumber(item.vodHits) }}</div> -->
-                        <div class="main-text">230K</div>
-                      </div>
-                      <div class="mian-btn-like">
-                        <div :class="themeChecked? 'main-like':'main-like-white'"></div>
-                        <!-- <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div> -->
-                        <div class="main-text">95%</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </nuxt-link>
-            <div class="video-line"></div>
+            <div class="video-line" style="margin-bottom: 1px;"></div>
             <van-tabs v-model="activeNav" class="video-more" v-if="videoInfo.vodId">
                 <van-tab name="about" :title="$t('str_video_about')">
                     <van-list
@@ -259,9 +204,8 @@ export default {
             ],
         }
     },
-    async asyncData({ $videoApi, params }) {
-        const str = params.id.split('-');
-        const vodId = str[str.length - 1];
+    async asyncData({ $videoApi, query }) {
+        const vodId = query.id
         const res1 =  await $videoApi.requestVodComment({ vodId: vodId });
         const seo = res1.data.seo ? res1.data.seo : {
                         description: "",
@@ -838,9 +782,12 @@ export default {
     width: 375px;
     height: 212px;
     margin-top: 44px;
-
-    .flex-align-center;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .flex-align-center{
+      justify-content: center;
+    }
     .left-arrow{
         position: fixed;
         left: 16px;
@@ -1056,20 +1003,18 @@ export default {
     }
 }
 
-.main-update-content{
-  display: flex;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  .main-title{
-    font-size: 14px;
-    color: #FFFFFF;
-    padding-left: 12px;
-    margin-top: 5px;
+.main-update-img{
+  margin-top: 32px;
+  width: 80px;
+  height: 80px;
+  img{
+    width: 100%;
   }
-  .main-update-img{
-    margin-top: 8px;
-    margin-left: 12px;
-  }
+}
+.main-title{
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-top: 16px;
 }
 .main-btn{
   display: flex;
@@ -1078,7 +1023,7 @@ export default {
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   height: 17px;
   padding-left: 12px;
-  margin-top: 8px;
+  margin-top: 12px;
   .main-btn-right{
     display: flex;
     align-items: center;
