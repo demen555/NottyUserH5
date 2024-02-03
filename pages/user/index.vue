@@ -3,19 +3,13 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <Nav :title="$t('str_user_center')" text></Nav>
     <div class="user-info">
-        <!-- <van-nav-bar
-            left-arrow
-            fixed
-            placeholder
-            @click-left="onClickLeft"
-        >
-            <template #title>
-                <h1 class="user-title">  {{ $t('str_user_center') }} </h1>
-            </template>
-        </van-nav-bar> -->
+
         <div class="user-content avatar">
             <span class="title">{{ $t('str_header') }}</span>
-            <img class="img" src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
+            <div class="img-icon">
+                <img class="img" src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
+                <i :class="themeChecked?'icon': 'icon-white'"></i>
+            </div>
         </div>
         <!-- <div class="user-content name" @click="goPages('setName')" >
             <span class="title">{{ $t('str_nick_name') }}</span>
@@ -109,6 +103,9 @@ export default {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+.img-icon{
+    padding-right: 20px;
 }
 .user-content{
     width: 100%;

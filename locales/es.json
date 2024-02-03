@@ -462,5 +462,6 @@
 	"str_footer_ncc64": "ALEMANIA:",
 	"str_footer_ncc65": "Asociación contra la violencia sexual contra la mujer",
 
-	"str_email_send_suc": "Le hemos enviado un correo electrónico con su nombre de usuario y un enlace para restablecer su contraseña."
+	"str_email_send_suc": "Le hemos enviado un correo electrónico con su nombre de usuario y un enlace para restablecer su contraseña.",
+  "All": "Toda"
 }
