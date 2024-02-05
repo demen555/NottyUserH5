@@ -394,17 +394,12 @@ export default {
 
         // 相关视频
         onLoadAboutVod(){
-          console.log('this.videoInfo',this.videoInfo)
             this.vodChangePage.page++;
-          console.log("加载相关视频列表", {
-            typeId: this.videoInfo.typeId,
-            excludes: this.videoInfo.vodId,
-            ...this.vodChangePage
-          });
+            console.log("加载相关视频列表", this.videoInfo);
             this.$videoApi.requestVodChange({
-              typeId: this.videoInfo.typeId,
-              excludes: this.videoInfo.vodId,
-              ...this.vodChangePage
+                typeId: this.videoInfo.typeId,
+                tagId: this.videoInfo.tags && this.videoInfo.tags.length > 0 ? this.videoInfo.tags[0].id : "",
+                ...this.vodChangePage
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
                     this.vodChange = [
