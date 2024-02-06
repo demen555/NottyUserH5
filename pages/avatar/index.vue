@@ -11,7 +11,7 @@
               <div class="main-btn-view">
                 <div :class="themeChecked? 'main-view':'main-view-white'"></div>
                 <!-- <div class="main-text">{{ formatNumber(item.vodHits) }}</div> -->
-                <div class="main-text">{{ formatNumber(userinfo.vodCount) }}</div>
+                <div class="main-text">{{ formatNumber(userinfo.vodCount) || 0 }}</div>
               </div>
               <div class="mian-btn-like">
                 <div :class="themeChecked? 'main-like':'main-like-white'"></div>
@@ -35,18 +35,12 @@
             <!-- <div class="video-title" v-if="videoInfo.tags">
                 <h1 class="title" @click="handleClickType(row)" v-for="row in videoInfo.tags" :key="row.id">{{ row.name }}</h1>
             </div> -->
-            <div class="video-tags" v-if="videoInfo.tags && videoInfo.tags.length">
-                <div 
-                    class="tag" 
-                    @click="handleClickType(row)" 
-                    v-for="row in videoInfo.tags" 
-                    :key="row.id">
-                    {{ row.name }}
-                </div>
-                <!-- <h1 class="title" @click="changeVoteShow">
-                    <img class="icon" v-if="showVote" src="~/static/images/com_bq_shouqi_1.svg" />
-                    <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
-                </h1> -->
+            <div class="video-list">
+              <div class="video-tag-list" >
+                  <div class="tag-name" :class="activeTag === tag.id? 'active': ''" v-for="(tag,index) in tagList" :key="tag.id">
+                    <div @click="handleChangeTag(tag.id)">{{ tag.name }}</div>
+                  </div>
+              </div>
             </div>
             <div class="video-line" style="margin-bottom: 1px;"></div>
             <van-tabs v-model="activeNav" class="video-more" v-if="videoInfo.vodId">
@@ -165,11 +159,17 @@ export default {
             finishedChange: false,
             vodChangePage:{
                 size: 50,
-                page: 0
+                page: 1
             },
             showVote: false,
 
             vodId: "",
+            tagList: [
+              { id: 'vod_time_add', name: 'Most Relevant' }, 
+              { id: 'vod_hits', name: 'Most View' }, 
+              { id: 'vod_up', name: 'Top Rated' } 
+            ],
+            activeTag: 'vod_time_add'
         }
     },
     head(){
@@ -289,6 +289,10 @@ export default {
     methods:{
         dateFormat,
         formatNumber,
+        handleChangeTag(id){
+          this.activeTag = id
+          this.onLoadAboutVod()
+        },
         handleRefesh(){
           console.log('handleRefresh')
           this.initVideo()
@@ -375,7 +379,7 @@ export default {
         // 相关视频
         onLoadAboutVod(){
           console.log('this.videoInfo',this.videoInfo)
-            this.vodChangePage.page++;
+            // this.vodChangePage.page++;
           console.log("加载相关视频列表", {
             userId: this.userinfo.userId,
             typeId: this.videoInfo.typeId,
@@ -383,16 +387,18 @@ export default {
             ...this.vodChangePage
           });
             this.$videoApi.requestVodChange({
-              // userId: this.userinfo.userId,
+              orderBy: this.activeTag,
+              userId: this.userinfo.userId,
               typeId: this.videoInfo.typeId,
               excludes: this.videoInfo.vodId,
               ...this.vodChangePage
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
-                    this.vodChange = [
-                        ...this.vodChange,
-                        ...res.data.data
-                    ];
+                    // this.vodChange = [
+                    //     ...this.vodChange,
+                    //     ...res.data.data
+                    // ];
+                    this.vodChange = res.data.data;
                     if( this.vodChangePage.page >= res.data.meta.pagination.total_pages ){
                         this.finishedChange = true;
                         this.loadingChange = false;
@@ -856,5 +862,35 @@ export default {
   align-items: center;
   margin-right: 24px;
   height: 17px;
+}
+.video-tag-list{
+  display: flex;
+  // min-width: 375px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  flex-grow: 1;
+  margin-left: 12px;
+  // margin-right: 12px;
+  margin-top: 16px;
+  a{
+    color: #fff;
+    display: block;
+    display: flex;
+    flex-grow: 1;
+  }
+  .active{
+    border-color: #F6D658 !important;
+  }
+  .tag-name{
+    flex-shrink: 0;
+    padding: 5px 8px;
+    // width: 98px;
+    // height: 28px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    margin-right: 10px;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06));
+  }
 }
 </style>

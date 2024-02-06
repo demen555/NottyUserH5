@@ -35,6 +35,7 @@
         </div>
         <nuxt-link :to="localePath({
             name: 'avatar',
+            query: { id: item.vodId}
         })">
           <div class="main-update-content">
             <div class="main-update-img" v-if="item.user.userPortrait"><img :src="item.user.userPortrait" alt="person"></div>
