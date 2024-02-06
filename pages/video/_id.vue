@@ -75,27 +75,26 @@
             </div> -->
             <!-- <vote v-if="showVote" :tagsList="videoInfo.tags" :themeChecked="themeChecked" @refresh="handleRefesh"></vote> -->
             <div class="video-line"></div>
-            {{ videoInfo }}
             <nuxt-link :to="localePath({
                 name: 'avatar',
-                query: { id: videoInfo.vodId}
             })">
               <div class="main-update-content">
-                <div class="main-update-img"><img src="~/static/images/person.svg" alt="person"></div>
+                <div class="main-update-img" v-if="videoInfo.user?.userPortrait"><img :src="videoInfo.user.userPortrait" alt="person"></div>
+                <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
                 <div>
                   <!-- <div class="main-title">{{ item.vodName }}</div> -->
-                  <div class="main-title">仙主大大UP主</div>
+                  <div class="main-title">{{ videoInfo.user.userName }}</div>
                   <div class="main-btn">
                     <div class="main-btn-right">
                       <div class="main-btn-view">
                         <div :class="themeChecked? 'main-view':'main-view-white'"></div>
-                        <!-- <div class="main-text">{{ formatNumber(item.vodHits) }}</div> -->
-                        <div class="main-text">230K</div>
+                        <div class="main-text">{{ formatNumber(videoInfo.vodHits) }}</div>
+                        <!-- <div class="main-text">{{ videoInfo.user.vodCount }}</div> -->
                       </div>
                       <div class="mian-btn-like">
                         <div :class="themeChecked? 'main-like':'main-like-white'"></div>
-                        <!-- <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div> -->
-                        <div class="main-text">95%</div>
+                        <div class="main-text">{{ formatPer(videoInfo.vodUp, videoInfo.vodUp+videoInfo.vodDown)}}</div>
+                        <!-- <div class="main-text">{{ videoInfo.user.praiseCount }}</div> -->
                       </div>
                     </div>
                   </div>
@@ -180,7 +179,7 @@ import videoContainer from "./video.vue";
 import cover from "~/components/cover";
 import { mapGetters } from "vuex";
 import commonMinxin from '~/plugins/mixins/common'
-import { dateFormat, getQueryString } from '~/utils/format.js';
+import { dateFormat, formatNumber, formatPer, getQueryString } from '~/utils/format.js';
 import Empty from '~/components/empty'
 import cardLoad from "~/components/skeleton/cardLoad.vue"
 import videoLoad from "~/components/skeleton/videoLoad.vue"
@@ -347,6 +346,8 @@ export default {
     },
     methods:{
         dateFormat,
+        formatNumber,
+        formatPer,
         handleRefesh(){
           console.log('handleRefresh')
           this.initVideo()
@@ -1069,6 +1070,11 @@ export default {
   .main-update-img{
     margin-top: 8px;
     margin-left: 12px;
+    img{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
   }
 }
 .main-btn{
@@ -1113,5 +1119,6 @@ export default {
   align-items: center;
   margin-right: 24px;
   height: 17px;
+  line-height: 17px;
 }
 </style>

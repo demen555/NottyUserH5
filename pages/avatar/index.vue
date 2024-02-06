@@ -3,19 +3,20 @@
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
     <div class="main-video">
         <div class="video-container">
-          <div class="main-update-img"><img src="~/static/images/person.svg" alt="person"></div>
-          <div class="main-title">仙主大大UP主</div>
+          <div class="main-update-img" v-if="userinfo.userPortrait"><img src="~/static/images/person.svg" alt="person"></div>
+          <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
+          <div class="main-title">{{ userinfo.userName }}</div>
           <div class="main-btn">
             <div class="main-btn-right">
               <div class="main-btn-view">
                 <div :class="themeChecked? 'main-view':'main-view-white'"></div>
                 <!-- <div class="main-text">{{ formatNumber(item.vodHits) }}</div> -->
-                <div class="main-text">230K</div>
+                <div class="main-text">{{ formatNumber(userinfo.vodCount) }}</div>
               </div>
               <div class="mian-btn-like">
                 <div :class="themeChecked? 'main-like':'main-like-white'"></div>
                 <!-- <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div> -->
-                <div class="main-text">95%</div>
+                <div class="main-text">{{ userinfo.praiseCount }}</div>
               </div>
             </div>
           </div>
@@ -125,7 +126,7 @@ import videoContainer from "./video.vue";
 import cover from "~/components/cover";
 import { mapGetters } from "vuex";
 import commonMinxin from '~/plugins/mixins/common'
-import { dateFormat, getQueryString } from '~/utils/format.js';
+import { dateFormat, formatNumber, formatPer } from '~/utils/format.js';
 import Empty from '~/components/empty'
 import cardLoad from "~/components/skeleton/cardLoad.vue"
 import videoLoad from "~/components/skeleton/videoLoad.vue"
@@ -279,18 +280,15 @@ export default {
             // 跳转路由
             this.$router.push(this.localePath('/'+  this.$i18n.locale ))
         }
-        this.initVideo();
          
     },
 
     mounted(){
-        this.addHisVod(this.videoInfo);
-        if ( process.client ) {
-            this.getVideohits();
-        }
+        this.addHisVod(this.videoInfo)
     },
     methods:{
         dateFormat,
+        formatNumber,
         handleRefesh(){
           console.log('handleRefresh')
           this.initVideo()
@@ -301,7 +299,17 @@ export default {
             }
             this.showVote = !this.showVote
         },
-        
+        async getUserInfo(userinfo){
+          try {
+            const res = await this.$userApi.requestUserinfo()
+            if(res.code === 100){
+              this.$toast(this.$t('toast4'))
+              this.user = res.data
+            }
+          } catch (error) {
+            console.error(error)
+          }
+        },
         initVideo(){
             const vodId = this.vodId;
             // this.getVideo(vodId);
@@ -369,11 +377,13 @@ export default {
           console.log('this.videoInfo',this.videoInfo)
             this.vodChangePage.page++;
           console.log("加载相关视频列表", {
+            userId: this.userinfo.userId,
             typeId: this.videoInfo.typeId,
             excludes: this.videoInfo.vodId,
             ...this.vodChangePage
           });
             this.$videoApi.requestVodChange({
+              // userId: this.userinfo.userId,
               typeId: this.videoInfo.typeId,
               excludes: this.videoInfo.vodId,
               ...this.vodChangePage
@@ -422,193 +432,6 @@ export default {
                 } 
             })
         },
-
-        // 点赞 取消点赞 
-        setVodUp(){
-            // if( !this.isLogin ){
-            //     return this.goLogin()
-            // }
-            const vodId = this.vodId;
-            const isUpVod = this.isUpVod(this.videoStatus);
-            if( this.onClick ){
-                return 
-            }
-            this.onClick = true;
-            if( isUpVod ){
-                gtag('event', 'gt4_click_down', {
-                    down_name: this.videoInfo.vodName,
-                });
-                // if( this.isLogin ){
-                    this.$set(this.videoStatus, "up", false)
-                    this.$videoApi.requestVodupcancel({
-                      vodId: vodId,
-                    }).then(res => {
-                        console.log('res',res)
-                        if( res.code === CODES.SUCCESS ){
-                            // const num = Number(this.videoStatus.vodUp) - 1;
-                            // this.$set(this.videoStatus, "vodUp", num)
-                            this.getVodState(vodId)
-                            this.getVideo(vodId);
-                        } else{
-                            this.$set(this.videoStatus, "up", true)
-                        }
-                    }).finally( () => {
-                        this.onClick = false
-                    })
-                // }else{
-                //     this.$store.commit("DEL_UPVOD", vodId)
-                //     this.onClick = false
-                // }
-            }else{
-                gtag('event', 'gt4_click_up', {
-                    up_name: this.videoInfo.vodName,
-                });
-                // if( this.isLogin ){
-                    this.$set(this.videoStatus, "down", false);
-                    this.$set(this.videoStatus, "up", true);
-                // }else{
-                //     this.$store.commit("DEL_DOWNVOD", vodId)
-                //     this.$store.commit("UPDATE_UPVOD", this.videoInfo )
-                // }
-                this.$videoApi.requestVodup({
-                  vodId: this.vodId,
-                }).then(res => {
-                    if( res.code === CODES.SUCCESS ){
-                        // const num = Number(this.videoStatus.vodUp) + 1;
-                        // this.$set(this.videoStatus, "vodUp", num);
-                        this.getVodState(vodId)
-                        this.getVideo(vodId);
-                    }else{
-                        this.$set(this.videoStatus, "up", false);
-                    }
-                }).finally( () => {
-                    this.onClick = false
-                })
-            }
-        },
-
-        // 收藏 取消收藏
-        setCollect(){
-            if( !this.isLogin ){
-                return this.goLogin()
-            }
-            if( this.onClick ){
-                return 
-            }
-            this.onClick = true;
-
-            if( this.videoStatus.collect ){
-                const num = Number(this.videoStatus.collectNumber) - 1;
-                this.$set(this.videoStatus, "collectNumber", num)
-                this.$set(this.videoStatus, "collect", false)
-                this.$videoApi.requestVodcollectcancel({
-                  vodId: this.vodId,
-                }).then(res => {
-                    if( res.code !== CODES.SUCCESS ){
-                        const num = Number(this.videoStatus.collectNumber) + 1;
-                        this.$set(this.videoStatus, "collectNumber", num)
-                        this.$set(this.videoStatus, "collect", true)
-                    }
-                }).finally( () => {
-                    this.onClick = false
-                })
-            }else{
-                gtag('event', 'gt4_click_collect', {
-                    collect_name: this.videoInfo.vodName,
-                });
-                const num = Number(this.videoStatus.collectNumber) + 1;
-                this.$set(this.videoStatus, "collectNumber", num)
-                this.$set(this.videoStatus, "collect", true)
-                this.$videoApi.requestVodcollect({
-                  vodId: this.vodId,
-                }).then(res => {
-                    if( res.code !== CODES.SUCCESS ){
-                        const num = Number(this.videoStatus.collectNumber) - 1;
-                        this.$set(this.videoStatus, "collectNumber", num)
-                        this.$set(this.videoStatus, "collect", false)
-                    }
-                }).finally( () => {
-                    this.onClick = false
-                })
-            }
-        },
-
-        // 点踩
-        setVodDown(){
-            // if( !this.isLogin ){
-            //     return this.goLogin()
-            // }
-            const vodId = this.vodId;
-            const isdownVod = this.isdownVod(this.videoStatus);
-            if( this.onClick ){
-                return 
-            }
-            this.onClick = true;
-            console.log( isdownVod , this.isLogin )
-            if( isdownVod ){
-                // if( this.isLogin ){
-                    this.$set(this.videoStatus, "down", false)
-                    this.$videoApi.requestVoddowncancel({
-                      vodId: vodId,
-                    }).then(res => {
-                        if( res.code === CODES.SUCCESS ){
-                            // const num = Number(this.videoStatus.vodDown) - 1;
-                            // this.$set(this.videoStatus, "vodDown", num)
-                            this.getVodState(vodId)
-                            this.getVideo(vodId);
-                        } else {
-                            this.$set(this.videoStatus, "down", true)
-                        }
-                        this.$toast(res.message);
-                    }).finally( () => {
-                        this.onClick = false;
-                    })
-                // }else{
-                //     this.$store.commit("DEL_DOWNVOD", vodId)
-                //     this.onClick = false
-                // }
-            }else{
-                
-                // if( this.isLogin ){
-                    this.$set(this.videoStatus, "up", false);
-                    this.$set(this.videoStatus, "down", true);
-                    this.$videoApi.requestVoddown({
-                      vodId: this.vodId,
-                    }).then(res => {
-                        if( res.code === CODES.SUCCESS ){
-                            // const num = Number(this.videoStatus.vodDown) + 1;
-                            // this.$set(this.videoStatus, "vodDown", num)
-                            this.getVodState(vodId)
-                            this.getVideo(vodId);
-                        } else{
-                            this.$set(this.videoStatus, "down", false)
-                        }
-                    }).finally( () => {
-                        this.onClick = false
-                    })
-
-                // }else{
-                //     this.$store.commit("DEL_UPVOD", vodId)
-                //     this.$store.commit("UPDATE_DOWNVOD", this.videoInfo )
-                //     this.onClick = false
-                // }
-
-            }
-        },
-
-        getShareLink(){
-            this.$videoApi.requestSharelink({
-              vodId: this.vodId,
-            }).then(res => {
-                if( res.code === CODES.SUCCESS ){
-                    console.log(res)
-                } 
-                
-            }).finally( () => {
-                
-            })
-        },
-
         // 评论
         sendVodReview(){
             gtag('event', 'gt4_video_review', {
@@ -702,33 +525,6 @@ export default {
 
         goLogin(){
             this.$refs.dialogLoginRef.onShow()
-        },
-
-        getVideohits(){
-            const id = this.vodId;
-            const timerNum = 30 * 60 * 1000;
-            // const timerNum = 1000;
-            let lastRequestTime = JSON.parse( localStorage.getItem('lastRequestTime') || '{}')
-            // 清理过期的id
-            Object.keys(lastRequestTime).forEach((key) => {
-                if (Date.now() - lastRequestTime[key] >= timerNum) {
-                    delete lastRequestTime[key];
-                }
-            });
-
-            if (lastRequestTime[id] && Date.now() - lastRequestTime[id] < timerNum) {
-                lastRequestTime[id] = Date.now();
-                localStorage.setItem('lastRequestTime', JSON.stringify(lastRequestTime));
-                return;
-            } else {
-                this.$videoApi.requestVideoHits({ vodId: id }).then(res => {
-                    if( res.code === CODES.SUCCESS ){
-                        this.$set(this.videoInfo, 'vodHits', res.data.vodHits)
-                        lastRequestTime[id] = Date.now();
-                        localStorage.setItem('lastRequestTime', JSON.stringify(lastRequestTime));
-                    }
-                });
-            }
         }
     },
     destroyed(){
@@ -1008,7 +804,9 @@ export default {
   width: 80px;
   height: 80px;
   img{
-    width: 100%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
   }
 }
 .main-title{
