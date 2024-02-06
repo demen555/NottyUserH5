@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="categoryMetaData.h1 || categoryName" text></Nav>
+    <Nav :title="categoryMetaData.h1 || paramsName" text></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -46,6 +46,7 @@ data() {
     },
     categoryMetaData:{},
     categoryName: "",
+    paramsName: "",
   }
 },
 mixins: [commonMinxin],
@@ -55,7 +56,7 @@ computed: {
   }
 },
 async asyncData({ $homeApi, params }) {
-    const categoryName = params.name.replace(/\-/g, ' ').replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    const categoryName = '/category/' + params.name;
     const res = await $homeApi.requestvodpage({
       categoryName: categoryName,
       page: 1,
@@ -72,7 +73,8 @@ async asyncData({ $homeApi, params }) {
         "h2": null,
         "footer_desc": null
       },
-      categoryName: categoryName
+      categoryName: categoryName,
+      paramsName: params.name
     }  
 },
 activated(){
@@ -140,7 +142,7 @@ methods: {
       this.loading = true
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
     
-      params.categoryName = this.detail.name //分类名称
+      params.categoryName = this.categoryName //分类名称
 
       const { code, data } = await this.$homeApi.requestvodpage(params)
       if(code === CODES.SUCCESS){

@@ -19,7 +19,7 @@
         </div>
         <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
 
-        <div class="user-line" v-show="sucEmail">We have sent you an email with your username and a link in order to reset your password</div>
+        <div class="user-line" v-show="sucEmail">{{ $t('str_email_send_suc') }}</div>
 
         <div class="user-btn-submit" @click="onClickRight">
             {{ $t('str_get_back') }}

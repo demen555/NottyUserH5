@@ -142,30 +142,30 @@ module.exports = {
         name: 'Português',
         file: "pt.json"
       },
-      // {
-      //   code: 'vn',
-      //   iso:'vi_VN',
-      //   name: 'Tiếng Việt',
-      //   file: "vn.json"
-      // },
-      // {
-      //   code: 'jp',
-      //   iso:'ja_JP',
-      //   name: '日本語',
-      //   file: "jp.json"
-      // },
-      // {
-      //   code: 'es',
-      //   iso:'es_ES',
-      //   name: 'Español',
-      //   file: "es.json"
-      // },
-      // {
-      //   code: 'cn',
-      //   iso:'zh_CN',
-      //   name: '中文',
-      //   file: "cn.json"
-      // }
+      {
+        code: 'vn',
+        iso:'vi_VN',
+        name: 'Tiếng Việt',
+        file: "vn.json"
+      },
+      {
+        code: 'jp',
+        iso:'ja_JP',
+        name: '日本語',
+        file: "jp.json"
+      },
+      {
+        code: 'es',
+        iso:'es_ES',
+        name: 'Español',
+        file: "es.json"
+      },
+      {
+        code: 'cn',
+        iso:'zh_CN',
+        name: '中文',
+        file: "cn.json"
+      }
     ],
     strategy: 'prefix_except_default',
     defaultLocale: 'en',

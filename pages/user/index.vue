@@ -3,25 +3,18 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <Nav :title="$t('str_user_center')" text></Nav>
     <div class="user-info">
-        <!-- <van-nav-bar
-            left-arrow
-            fixed
-            placeholder
-            @click-left="onClickLeft"
-        >
-            <template #title>
-                <h1 class="user-title">  {{ $t('str_user_center') }} </h1>
-            </template>
-        </van-nav-bar> -->
+
         <div class="user-content avatar">
             <span class="title">{{ $t('str_header') }}</span>
-            <img class="img" src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
+            <van-uploader :before-read="beforeRead">
+                <div class="img-icon">
+                    <img class="img" v-if="userinfo.userPortrait" :src="userinfo.userPortrait" alt="avatar">
+                    <img class="img" v-else src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
+                    <i :class="themeChecked?'icon': 'icon-white'"></i>
+                </div>
+            </van-uploader>
         </div>
-        <!-- <div class="user-content name" @click="goPages('setName')" >
-            <span class="title">{{ $t('str_nick_name') }}</span>
-            <span class="words">{{ userinfo.userNickName }}</span>
-            <i :class="themeChecked?'icon': 'icon-white'"></i>
-        </div> -->
+
         <div class="user-content account"> 
             <span class="title">{{ $t('str_user_account') }}</span>
             <span class="words">{{ userinfo.userName }}</span>
@@ -42,7 +35,7 @@
 </template>
 <script>
 
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 import userMinxin from '~/plugins/mixins/user'
 import commonMinxin from '~/plugins/mixins/common'
 import { dateFormat, formatTime } from '@/utils/format.js'
@@ -56,12 +49,13 @@ export default {
     computed:{
         ...mapGetters([
             "userinfo"
-        ])
+        ]),
     },
     created(){
         this.getUserInfo();
     },
     methods:{
+        ...mapActions(['set_userinfo']),
         dateFormat,
         formatTime,
         onClickLeft(){
@@ -87,7 +81,23 @@ export default {
             }
             
             this.$router.push(this.localePath(page))
-        }
+        },
+
+        async beforeRead(file){
+            const formData = new FormData();
+            formData.append('file', file);
+            const res = await this.$userApi.requestuserUploadAvatar(formData);
+            if(res.code === CODES.SUCCESS){
+                await this.$userApi.requestuserSetAvatar(res.data); // 设置头像
+                const userData = await this.$userApi.requestUserinfo(); // 请求用户详情
+                if(userData.code === CODES.SUCCESS){
+                    const user = userData.data
+                    this.set_userinfo({...user, ...this.userinfo})
+                }
+            }
+        },
+
+
     },
     
 }
@@ -109,6 +119,9 @@ export default {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+.img-icon{
+    padding-right: 20px;
 }
 .user-content{
     width: 100%;
