@@ -8,8 +8,8 @@
           <nuxt-link :to="localePath('search')">
             <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search" alt="com_sousuo">
           </nuxt-link>
-          
-          <img @click="handleExpand('right')" class="header-common1" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
+          <img v-if="userinfo.userPortrait" @click="handleExpand('right')" class="header-common1"  :src="userinfo.userPortrait" alt="avatar">
+          <img v-else @click="handleExpand('right')" class="header-common1" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
         </div>
       </header>
     <!-- 左边抽屉 -->
@@ -92,7 +92,10 @@
           <div class="nav-list-tags nav-user-center" @click="handleGoPage('user')" v-show="isLogin">
             <div class="nav-menu-list-tag nav-menu-list-spec">
               <div class="nav-menu-left">
-                <div class="nav-menu-tag"><img src="~/static/images/home_top_gaoliang.svg" alt="home_top_gaoliang"></div>
+                <div class="nav-menu-tag">
+                  <img v-if="userinfo.userPortrait" :src="userinfo.userPortrait" alt="avatar">
+                  <img v-else src="~/static/images/home_top_gaoliang.svg" alt="home_top_gaoliang">
+                </div>
                 <div class="register-name">
                   <span class="user-nick-name"> {{  userinfo.userNickName || userinfo.userName }} </span>
                   <span class="user-register-time"> {{ formatTime1(userinfo.userRegTime) }} </span>

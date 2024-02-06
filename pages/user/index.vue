@@ -84,6 +84,11 @@ export default {
         },
 
         async beforeRead(file){
+            this.$toast.loading({
+                forbidClick: true,
+                duration: 0,
+                loadingType: "spinner"
+            });
             const formData = new FormData();
             formData.append('file', file);
             const res = await this.$userApi.requestuserUploadAvatar(formData);
@@ -91,9 +96,10 @@ export default {
                 await this.$userApi.requestuserSetAvatar(res.data); // 设置头像
                 const userData = await this.$userApi.requestUserinfo(); // 请求用户详情
                 if(userData.code === CODES.SUCCESS){
-                    const user = userData.data
-                    this.set_userinfo({...user, ...this.userinfo})
+                    const user = userData.data;
+                    this.set_userinfo({...user, ...this.userinfo});     
                 }
+                this.$toast.clear();
             }
         },
 
