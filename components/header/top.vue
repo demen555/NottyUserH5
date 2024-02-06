@@ -512,17 +512,21 @@ header{
 .header-common{
   width: 24px;
   height: 24px;
+  border-radius: 24px;
   img{
     width: 24px;
     height: 24px;
+    border-radius: 24px;
   }
 }
 .header-common1{
   width: 24px;
   height: 24px;
+  border-radius: 24px;
   img{
     width: 24px;
     height: 24px;
+    border-radius: 24px;
   }
 }
 .header-logo{
@@ -832,6 +836,7 @@ header{
     img{
       width: 56px;
       height: 56px;
+      border-radius: 56px;
     }
   } 
   .register-name{

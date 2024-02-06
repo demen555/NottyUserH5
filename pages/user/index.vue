@@ -3,7 +3,6 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <Nav :title="$t('str_user_center')" text></Nav>
     <div class="user-info">
-
         <div class="user-content avatar">
             <span class="title">{{ $t('str_header') }}</span>
             <van-uploader :before-read="beforeRead">
@@ -68,7 +67,8 @@ export default {
         getUserInfo(){
             this.$userApi.requestUserinfo().then( res => {
                 if( res.code === CODES.SUCCESS ){
-                   this.set_userinfo({...user, ...this.userinfo}); 
+                    console.log( {...this.userinfo, ...res.data}, "set_userinfo" )
+                   this.set_userinfo({...this.userinfo, ...res.data}); 
                 } 
             })
         },
@@ -96,7 +96,7 @@ export default {
                 const userData = await this.$userApi.requestUserinfo(); // 请求用户详情
                 if(userData.code === CODES.SUCCESS){
                     const user = userData.data;
-                    this.set_userinfo({...user, ...this.userinfo});     
+                    this.set_userinfo({...this.userinfo, ...user });     
                 }
                 this.$toast.clear();
             }
@@ -158,7 +158,7 @@ export default {
     .img{
         width: 32px;
         height: 32px;
-
+        border-radius: 32px;
     }
     .icon{
         width: 12px;
