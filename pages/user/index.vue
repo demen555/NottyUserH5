@@ -21,7 +21,7 @@
         </div>
         <div class="user-content time">
             <span class="title">{{ $t('str_register_time') }} </span>
-            <span class="words">{{ $t(formatTime(userinfo.userRegTime)) }}</span>
+            <span class="words">{{ formatTime(userinfo.userRegTime) }}</span>
             
         </div>
 
@@ -68,7 +68,7 @@ export default {
         getUserInfo(){
             this.$userApi.requestUserinfo().then( res => {
                 if( res.code === CODES.SUCCESS ){
-                    this.$store.commit('UPDATE_USERINFO', res.body)
+                   this.set_userinfo({...user, ...this.userinfo}); 
                 } 
             })
         },
@@ -91,9 +91,8 @@ export default {
             });
             const formData = new FormData();
             formData.append('file', file);
-            const res = await this.$userApi.requestuserUploadAvatar(formData);
+            const res = await this.$userApi.requestuserSetAvatar(formData);
             if(res.code === CODES.SUCCESS){
-                await this.$userApi.requestuserSetAvatar(res.data); // 设置头像
                 const userData = await this.$userApi.requestUserinfo(); // 请求用户详情
                 if(userData.code === CODES.SUCCESS){
                     const user = userData.data;

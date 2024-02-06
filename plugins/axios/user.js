@@ -100,28 +100,15 @@ export default ($axios) => ({
     },
 
     /***
-     * @修改密码发送邮箱验证码
+     * @设置头像
      * @参数
      * @file   文件
      * */ 
-    requestuserUploadAvatar(data){
+    requestuserSetAvatar(data){
         return $axios({
             headers: {
                 'Content-Type': 'multipart/form-data'
             },
-            url: Api.user.userUploadAvatar,
-            method: "POST",
-            data: data
-        })
-    },
-
-    /***
-     * @修改密码发送邮箱验证码
-     * @参数
-     * @requestuserUploadAvatar   所有参数
-     * */ 
-    requestuserSetAvatar(data){
-        return $axios({
             url: Api.user.userSetAvatar,
             method: "POST",
             data: data
