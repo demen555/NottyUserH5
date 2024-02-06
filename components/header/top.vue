@@ -8,8 +8,8 @@
           <nuxt-link :to="localePath('search')">
             <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search" alt="com_sousuo">
           </nuxt-link>
-          
-          <img @click="handleExpand('right')" class="header-common1" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
+          <img v-if="userinfo.userPortrait" @click="handleExpand('right')" class="header-common1"  :src="userinfo.userPortrait" alt="avatar">
+          <img v-else @click="handleExpand('right')" class="header-common1" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
         </div>
       </header>
     <!-- 左边抽屉 -->
@@ -24,94 +24,39 @@
          <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
          <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
         </div>
-        <div class="nav-list-tags type">
-          <div class="nav-menu-list-tag">
-            <div class="nav-menu-left" @click="handleShowExpand('type')">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_fenlei_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
+        <!-- 分类 -->
+        <div class="nav-list-tags type ">
+          <div class="nav-menu-list-tag" >
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_leixing_1.svg'): require('~/static/images/my_gn_leixing.svg')" alt=""></div>
               <div>{{ $t('str_tags') }}</div>
             </div>
-            <div @click="handleGoPage('category')" :class="showTypeExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+            <nuxt-link :to="localePath({ name: 'category'})"  class="all-type">{{ $t("All") }}</nuxt-link>
           </div>
-          <div v-show="!showTypeExpand">
-            <nuxt-link :to="localePath(item.urlSlug)" v-for="(item) in typeList" :key="item.id">
-              <div @click="handleClick(item.id)" class="nav-menu-list-tag-sub">
-                <div class="nav-menu-left">
-                  <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt=""></div>
-                  <div class="typeName">{{ item.title }}</div>
-                </div>
-                <client-only>
-                  <div class="nav-menu-right" v-if="item.id === typeId &&  routeName.indexOf('category-name') != -1 ">
-                    <img src="~/static/images/com_select_on.svg" alt="com_select_on">
-                  </div>
-                </client-only>
-              </div> 
-          
-            </nuxt-link>
-            <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('category')"> {{ $t('str_menu_type_all') }}</nuxt-link>
-            <div class="nav-menu-list-tag-empty"></div>
+          <div class="category-thumb">
+            <Thumb :tag="type" v-for="(type, i) in typeList" v-show="i < 6" :key="type.id"></Thumb>
           </div>
+          <div class="nav-menu-list-tag-empty"></div>
         </div>
         <div v-show="!showTypeExpand" class="type-div"></div> 
+        <!-- 标签 -->
         <div class="nav-list-tags">
-          <div class="nav-menu-list-tag">
-            <div class="nav-menu-left" @click="handleShowExpand('tag')">
+          <div class="nav-menu-list-tag" >
+            <div class="nav-menu-left">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_biaoqian_1.svg'): require('~/static/images/my_gn_biaoqian.svg')" alt="my_gn_biaoqian"></div>
               <div>{{ $t('str_menu_tag') }}</div>
             </div>
-            <div @click="handleGoPage('tag')" :class="showExpand?(themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+            <nuxt-link :to="localePath({ name: 'tag'})"  class="all-tag">{{ $t("All") }}</nuxt-link>
           </div>
-          <div v-show="!showExpand">
+          <div class="tags-link">
             <nuxt-link :to="localePath({
               name: 'tag-name',
               params: { id: tag.id, name: tag.name }
             })"  v-for="tag in tagList" :key="tag.id" >
-              <div class="nav-menu-list-tag-sub"  @click="set_tagid(tag.id)">
-                <div class="nav-menu-left">
-                  <div class="nav-menu-tag hide-opacity"><img  src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
-                  <div>{{ tag.name }}</div>
-                </div>
-                <client-only>
-                  <div class="nav-menu-right" v-if="tag.id === tagId &&  routeName.indexOf('tag-name') != -1">
-                    <img src="~/static/images/com_select_on.svg" alt="com_select_on">
-                  </div>
-                </client-only>
-
-              </div>
+              <span class="tags"> {{ tag.name }}</span>
             </nuxt-link>
-            <!-- 所有标签 -->
-            <nuxt-link class="nav-menu-list-tag-sub nav-menu-list-tag-all" :class="!themeChecked && 'tag-white'" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
-            <div class="nav-menu-list-tag-empty"></div>
           </div>
-        </div>
-        <nuxt-link class="nav-menu-list" :to="localePath('history')" >
-          <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt="my_gn_lsjl"></div>
-            <div>{{ $t('str_his') }}</div>
-          </div>
-        </nuxt-link>
-
-        <div class="nav-menu-list" @click="handleGoPage('collect')" >
-          <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
-            <div>{{ $t('str_collect') }}</div>
-          </div>
-        </div>
-        <div class="nav-menu-list" @click="handleGoPage('up')"  >
-          <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
-            <div>{{ $t('str_like') }}</div>
-          </div>
-        </div>
-
-        <div class="nav-menu-dl">
-          <div class="nav-menu-btn nav-ios" @click="handleAddMain">
-            <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
-            <div class="nav-text">{{ $t('str_tianjia_zhupin') }}</div>
-          </div>
-          <div v-if="false" class="nav-menu-btn nav-and" @click="downloadApp">
-            <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_android_1.svg'): require('~/static/images/my_gn_xz_android.svg')"></div>
-            <div class="nav-text">{{ $t('str_down_load') }} </div>
-          </div>
+          <div class="nav-menu-list-tag-empty"></div>
         </div>
       </div>
     </van-popup>
@@ -120,99 +65,136 @@
       v-model="showRightPop"
       position="right"
       class="vant-pop-320"
-      
     >
       <div id="drawer" class="nav-menu menu-left">
-        <div class="menu-header">
-         <img class="close-pop" @click="showRightPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
-         <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
-        </div>
-        <div class="nav-menu-btns" v-if="!isLogin">
+        <div class="menu-flex">
+          <div class="menu-header">
+          <img class="close-pop" @click="showRightPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
+          <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
+          </div>
+          <!-- 登录 -->
+          <div class="nav-menu-btns" v-if="!isLogin">
+            <div class="nav-menu-btns-left">
+              <div class="nav-menu-login" @click="handleLoginorRegister('login')">
+                <img :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_2">
+              </div>
+              <div>{{ $t('str_login') }}</div>
+          </div>
+          <!-- 注册 -->
           <div class="nav-menu-btns-left">
-            <div class="nav-menu-login" @click="handleLoginorRegister('login')">
-              <img :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_2">
+            <div class="nav-menu-res" @click="handleLoginorRegister('register')">
+              <img :src="themeChecked? require('~/static/images/home_top_zhuce_1.svg'): require('~/static/images/home_top_zhuce.svg')" alt="home_top_zhuce">
             </div>
-            <div>{{ $t('str_login') }}</div>
-        </div>
-        <div class="nav-menu-btns-left">
-          <div class="nav-menu-res" @click="handleLoginorRegister('register')">
-            <img :src="themeChecked? require('~/static/images/home_top_zhuce_1.svg'): require('~/static/images/home_top_zhuce.svg')" alt="home_top_zhuce">
+            <div>{{ $t('str_register') }}</div>
           </div>
-          <div>{{ $t('str_register') }}</div>
-        </div>
-        </div>
-        <div class="nav-list-tags" @click="handleGoPage('user')" v-show="isLogin">
-          <div class="nav-menu-list-tag nav-menu-list-spec">
-            <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img src="~/static/images/home_top_gaoliang.svg" alt="home_top_gaoliang"></div>
-              <!-- {{ $t('str_user_account') }}  -->
-              <div>{{  userinfo.userNickName || userinfo.userName }}</div>
-            </div>
-            <div @click="handleGoPage('user')">
-              <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="com_jt_sx_you_rj">
-            </div>
           </div>
-        </div>
-        <div class="nav-list-tags">
-          <div class="nav-menu-list-tag" @click="handleShowExpand('language')">
-            <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_yuyan_1.svg'): require('~/static/images/my_gn_yuyan.svg')" alt="my_gn_yuyan"></div>
-              <div>{{ $t('str_change_lang') }}</div>
-            </div>
-            <div class="nav-menu-right">
-              <div class="nav-menu-lang">{{ $i18n.localeProperties.name }}</div>
-              <div  :class="showLanguageExpand? (themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
-            </div>
-          </div>
-          <template v-if="!showLanguageExpand">
-            <nuxt-link class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.code" :to="switchLocalePath(item.code)">
-              <div class="nav-menu-left" @click.stop="window.reload()">
-                <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
-                <div>{{ item.name }} </div>
-              </div>
-              <div class="nav-menu-right" v-if="item.code === language">
-                <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
-              </div>
-            </nuxt-link>
-          </template>
-        </div>
-        <div v-if="!showLanguageExpand" class="type-div"></div>
-        <div class="nav-list-tags" ref="main">
-          <div class="nav-menu-list-tag" @click="handleShowExpand('location')">
-            <div class="nav-menu-left">
-              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_guojia_1.svg'): require('~/static/images/my_gn_guojia.svg')" alt="my_gn_guojia"></div>
-              <div> {{ $t('str_change_cuy') }} </div>
-            </div>
-            <div class="nav-menu-right">
-              <div class="nav-menu-lang">{{ locationText }}</div>
-              <div :class="showLocationExpand? themeChecked ? 'user-menu-list-right-type' : 'user-menu-list-right-type-white': themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white'"></div>
-            </div>
-          </div>
-          <template v-if="!showLocationExpand">
-            <div class="location-menu" ref="content">
-              <div class="nav-menu-list-tag-sub" v-for="item in locationList" :key="item.id" @click="handleChangLocation(item)">
-                <div class="nav-menu-left">
-                  <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
-                  <div>{{ $t(item.country) }}</div>
+          <!-- 用户中心 -->
+          <div class="nav-list-tags nav-user-center" @click="handleGoPage('user')" v-show="isLogin">
+            <div class="nav-menu-list-tag nav-menu-list-spec">
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag">
+                  <img v-if="userinfo.userPortrait" :src="userinfo.userPortrait" alt="avatar">
+                  <img v-else src="~/static/images/home_top_gaoliang.svg" alt="home_top_gaoliang">
                 </div>
-                <div class="nav-menu-right" v-if="item.code === location">
+                <div class="register-name">
+                  <span class="user-nick-name"> {{  userinfo.userNickName || userinfo.userName }} </span>
+                  <span class="user-register-time"> {{ formatTime1(userinfo.userRegTime) }} </span>
+                </div>
+              </div>
+              <div @click="handleGoPage('user')">
+                <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="com_jt_sx_you_rj">
+              </div>
+            </div>
+          </div>
+          <!-- 历史记录 -->
+          <nuxt-link class="nav-menu-list" :to="localePath('history')" >
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt="my_gn_lsjl"></div>
+              <div>{{ $t('str_his') }}</div>
+            </div>
+          </nuxt-link>
+          <!-- 收藏 -->
+          <div class="nav-menu-list" @click="handleGoPage('collect')" >
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
+              <div>{{ $t('str_collect') }}</div>
+            </div>
+          </div>
+          <!-- 点赞 -->
+          <div class="nav-menu-list" @click="handleGoPage('up')"  >
+            <div class="nav-menu-left">
+              <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
+              <div>{{ $t('str_like') }}</div>
+            </div>
+          </div>
+          <!-- 语言 -->
+          <div class="nav-list-tags">
+            <div class="nav-menu-list-tag" @click="handleShowExpand('language')">
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_yuyan_1.svg'): require('~/static/images/my_gn_yuyan.svg')" alt="my_gn_yuyan"></div>
+                <div>{{ $t('str_change_lang') }}</div>
+              </div>
+              <div class="nav-menu-right">
+                <div class="nav-menu-lang">{{ $i18n.localeProperties.name }}</div>
+                <div  :class="showLanguageExpand? (themeChecked? 'user-menu-list-right-type' : 'user-menu-list-right-type-white'): (themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white')"></div>
+              </div>
+            </div>
+            <template v-if="!showLanguageExpand">
+              <nuxt-link class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.code" :to="switchLocalePath(item.code)">
+                <!-- @click.stop="window.reload()" -->
+                <div class="nav-menu-left" >
+                  <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
+                  <div>{{ item.name }} </div>
+                </div>
+                <div class="nav-menu-right" v-if="item.code === language">
                   <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
                 </div>
+              </nuxt-link>
+            </template>
+          </div>
+          <!-- 地区 -->
+          <div v-if="!showLanguageExpand" class="type-div"></div>
+          <div class="nav-list-tags" ref="main">
+            <div class="nav-menu-list-tag" @click="handleShowExpand('location')">
+              <div class="nav-menu-left">
+                <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_guojia_1.svg'): require('~/static/images/my_gn_guojia.svg')" alt="my_gn_guojia"></div>
+                <div> {{ $t('str_change_cuy') }} </div>
+              </div>
+              <div class="nav-menu-right">
+                <div class="nav-menu-lang">{{ locationText }}</div>
+                <div :class="showLocationExpand? themeChecked ? 'user-menu-list-right-type' : 'user-menu-list-right-type-white': themeChecked? 'user-menu-list-right-type-actived' : 'user-menu-list-right-type-actived-white'"></div>
               </div>
             </div>
-          </template>
+            <template v-if="!showLocationExpand">
+              <div class="location-menu" ref="content">
+                <div class="nav-menu-list-tag-sub" v-for="item in locationList" :key="item.id" @click="handleChangLocation(item)">
+                  <div class="nav-menu-left">
+                    <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
+                    <div>{{ $t(item.country) }}</div>
+                  </div>
+                  <div class="nav-menu-right" v-if="item.code === location">
+                    <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div v-if="!showLocationExpand" class="type-div"></div>
+          <!-- 添加主屏 -->
+          <div class="nav-menu-dl">
+            <div class="nav-menu-btn nav-ios" @click="handleAddMain">
+              <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
+              <div class="nav-text">{{ $t('str_tianjia_zhupin') }}</div>
+            </div>
+            <div v-if="false" class="nav-menu-btn nav-and" @click="downloadApp">
+              <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_android_1.svg'): require('~/static/images/my_gn_xz_android.svg')"></div>
+              <div class="nav-text">{{ $t('str_down_load') }} </div>
+            </div>
+          </div>
         </div>
-        <div v-if="!showLocationExpand" class="type-div"></div>
-        <!-- <div class="nav-menu-list">
-          <div class="nav-menu-left">
-            <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_zhuti_1.svg'): require('~/static/images/my_gn_zhuti.svg')" alt="my_gn_zhuti"></div>
-            <div>{{ $t('str_change_bg') }} </div>
-          </div>
-          <div class="nav-menu-right">
-            <van-switch @change="handleChangeTheme" v-model="themeChecked" size="16px"/>
-          </div>
-        </div> -->
-        <div class="nav-menu-list" @click="handleLoginOut" v-show="isLogin">
+
+        <!-- 推出登录 -->
+        <div class="nav-menu-list login-out" @click="handleLoginOut" v-show="isLogin">
           <div class="nav-menu-left">
             <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_tuideng_1.svg'): require('~/static/images/my_gn_tuideng.svg')"></div>
             <div> {{ $t('str_logout') }}</div>
@@ -233,13 +215,13 @@ import Overlay from '@/components/overlay'
 import dialogGuild from '@/components/dialog/dialog-guild.vue'
 import { areaList } from "~/locales/lang.js"
 import CODES from "~/plugins/enums/codes"
-
-
+import Thumb from '~/components/thumb'
+import { formatTime1 } from '@/utils/format.js'
 
 export default {
   async fetch() {
-    const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
-    const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
+    const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 20})
+    const res2 = await this.$homeApi.postTypeList({ page: 1, size: 20, isSorted: true,})
     this.tagList = res1.data.data;
     this.typeList = res2.data.data;
   },
@@ -279,7 +261,8 @@ export default {
     dialogLine: () => import('@/components/dialog/dialog-line.vue'),
     // dialogGuild: () => import('@/components/dialog/dialog-guild.vue'),
     dialogGuild,
-    Overlay
+    Overlay,
+    Thumb
   },
   created(){
     console.log( 'this.$route.name', this.$route.name )
@@ -324,6 +307,7 @@ export default {
   },
   methods: {
     ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken', 'set_tagList', 'set_categoryList']),
+    formatTime1,
     handleClick(id){
       this.set_typeid(id)
       console.log(id, 'typeid')
@@ -540,17 +524,21 @@ header{
 .header-common{
   width: 24px;
   height: 24px;
+  border-radius: 24px;
   img{
     width: 24px;
     height: 24px;
+    border-radius: 24px;
   }
 }
 .header-common1{
   width: 24px;
   height: 24px;
+  border-radius: 24px;
   img{
     width: 24px;
     height: 24px;
+    border-radius: 24px;
   }
 }
 .header-logo{
@@ -812,6 +800,80 @@ header{
 }
 .menu-left .menu-header{
   margin-bottom: 0;
+}
+.category-thumb{
+  padding: 0 12px;
+  /deep/ .van-image{
+    width: 49%;
+    height: 78px;
+  }
+}
+.tags-link{
+  padding: 0 12px;
+  .tags{
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 12px;
+    padding: 3.5px 8px 3.5px 8px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+}
+.menu-left{
+  display: flex;
+  flex-direction: column;
+}
+.menu-flex{
+  flex: 1;
+}
+.login-out{
+  margin-top: 12px;
+  margin-bottom: 32px;
+}
+.nav-user-center{
+  background-color: transparent;
+  .nav-menu-list-spec{
+    margin-bottom: 35px;
+    margin-top: 24px;
+  }
+  .nav-menu-list-tag{
+    line-height: normal;
+  }
+  img{
+    width: 24px;
+    height: 24px;
+  }
+  .nav-menu-tag{
+    width: auto;
+    height: auto;
+    img{
+      width: 56px;
+      height: 56px;
+      border-radius: 56px;
+    }
+  } 
+  .register-name{
+
+    .user-nick-name{
+      font-size: 18px;
+      color: #FFFFFF;
+      display: block;
+    }
+    .user-register-time{
+      display: block;
+      color: var(--ffffff-70, rgba(255, 255, 255, 0.70));
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      margin-top: 12px;
+    }
+  }
+}
+
+.all-tag, .all-type{
+  color: #FFFFFF;
 }
 
 </style>

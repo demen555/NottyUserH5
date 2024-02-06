@@ -99,4 +99,20 @@ export default ($axios) => ({
         })
     },
 
+    /***
+     * @设置头像
+     * @参数
+     * @file   文件
+     * */ 
+    requestuserSetAvatar(data){
+        return $axios({
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            url: Api.user.userSetAvatar,
+            method: "POST",
+            data: data
+        })
+    },
+
 });

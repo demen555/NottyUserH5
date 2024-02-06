@@ -1,108 +1,48 @@
 <template>
   <div>
-    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible" id="header-top"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
     <div class="main-video">
-        <div class="video-container"> 
-            <client-only v-if="videoInfo.vodPlayUrl">
-                <videoContainer  :videoInfo="videoInfo" :vodChange="vodChange"></videoContainer>
-            </client-only>
-            
-            <van-loading 
+        <div class="video-container">
+          <div class="main-update-img" v-if="userinfo.userPortrait"><img src="~/static/images/person.svg" alt="person"></div>
+          <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
+          <div class="main-title">{{ userinfo.userName }}</div>
+          <div class="main-btn">
+            <div class="main-btn-right">
+              <div class="main-btn-view">
+                <div :class="themeChecked? 'main-view':'main-view-white'"></div>
+                <!-- <div class="main-text">{{ formatNumber(item.vodHits) }}</div> -->
+                <div class="main-text">{{ formatNumber(userinfo.vodCount) || 0 }}</div>
+              </div>
+              <div class="mian-btn-like">
+                <div :class="themeChecked? 'main-like':'main-like-white'"></div>
+                <!-- <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div> -->
+                <div class="main-text">{{ userinfo.praiseCount }}</div>
+              </div>
+            </div>
+          </div>
+            <!-- <van-loading 
                 color="var(--bg-primary, #F6D658)" 
                 text-color="var(--bg-primary, #F6D658)" 
-                v-else 
                 type="spinner" 
                 vertical>
                 Loading... 
-            </van-loading>
+            </van-loading> -->
         </div>
         <!-- <div class="video-space"></div> -->
+        
         <template v-if="videoInfoLoding">
-            
-            <h1 class="video-title"> {{ videoInfo.seo.title }} </h1>
-            <p class="video-description" v-show="videoInfo.seo.description"> {{ videoInfo.seo.description }} </p>
-            <div class="video-data">
-                <div class="data-watch">
-                    <img class="icon" :src="themeChecked? require('~/static/images/com_bofangliang_big_1.svg'): require('~/static/images/com_bofangliang_big.svg')"  alt="com_dianzan">
-                    <span class="words">{{ videoInfo.vodHits }} {{$t('str_video_vodHits')}}</span>
-                </div> 
-                <div class="data-time">
-                    {{ $t(dateFormat(videoInfo.vodTimeAdd)) }}
-                </div>
-            </div>
-            <div class="video-controls">
-                <div class="controls" @click="setVodUp()">
-                    <img class="icon"  v-if="isUpVod(videoStatus)" src="~/static/images/com_dianzan_on.svg" alt="com_dianzan_on">
-                    <img class="icon"  v-else :src="themeChecked? require('~/static/images/com_dianzan_1.svg'): require('~/static/images/com_dianzan.svg')"  alt="com_dianzan">
-                    <span class="words">{{ vodPercent.vodUp }}%</span>
-                </div>
-                <div class="controls" @click="setVodDown()">
-                    <img class="icon" v-if="isdownVod(videoStatus)" src="~/static/images/com_caizan_on.svg" alt="com_caizan_on">
-                    <img class="icon" v-else :src="themeChecked? require('~/static/images/com_caizan_1.svg'): require('~/static/images/com_caizan.svg')"  alt="com_dianzan">
-                    <span class="words">{{ vodPercent.vodDown }}%</span>
-                </div>
-                <div class="controls" @click="setCollect()">
-                    <img class="icon" v-if="!videoStatus.collect" :src="themeChecked? require('~/static/images/com_shoucang_1.svg'): require('~/static/images/com_shoucang.svg')"  alt="com_dianzan">
-                    <img class="icon" v-else src="~/static/images/com_shoucang_on.svg" alt="com_shoucang_on">
-                    <span class="words">{{ videoStatus.collectNumber || 0 }}</span>
-                </div>
-                <div class="controls" @click="onShowdialogLink()">
-                    <img class="icon" :src="themeChecked? require('~/static/images/com_fenxiang_1.svg'): require('~/static/images/com_fenxiang.svg')"  alt="com_fenxiang_1">
-                    <span class="words">{{ $t('str_share') }}</span>
-                </div>
-            </div>
+            <div class="video-line"></div>
             <!-- <div class="video-title" v-if="videoInfo.tags">
                 <h1 class="title" @click="handleClickType(row)" v-for="row in videoInfo.tags" :key="row.id">{{ row.name }}</h1>
             </div> -->
-            <div class="video-tags" v-if="videoInfo.tags && videoInfo.tags.length">
-                <div 
-                    class="tag" 
-                    @click="handleClickType(row)" 
-                    v-for="row in videoInfo.tags" 
-                    :key="row.id">
-                    {{ row.name }}
-                </div>
-                <!-- <h1 class="title" @click="changeVoteShow">
-                    <img class="icon" v-if="showVote" src="~/static/images/com_bq_shouqi_1.svg" />
-                    <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
-                </h1> -->
-            </div>
-            <!-- <div class="video-title" v-else>
-              <h1 class="title" @click="changeVoteShow">
-                    <img class="icon" v-if="showVote" src="~/static/images/com_bq_shouqi_1.svg" />
-                    <img class="icon" v-else src="~/static/images/com_bq_zhankai_1.svg" />
-                </h1>
-            </div> -->
-            <!-- <vote v-if="showVote" :tagsList="videoInfo.tags" :themeChecked="themeChecked" @refresh="handleRefesh"></vote> -->
-            <div class="video-line"></div>
-            <nuxt-link :to="localePath({
-                name: 'avatar',
-                query: { id: videoInfo.vodId}
-            })">
-              <div class="main-update-content">
-                <div class="main-update-img" v-if="videoInfo.user?.userPortrait"><img :src="videoInfo.user.userPortrait" alt="person"></div>
-                <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
-                <div>
-                  <!-- <div class="main-title">{{ item.vodName }}</div> -->
-                  <div class="main-title">{{ videoInfo.user.userName }}</div>
-                  <div class="main-btn">
-                    <div class="main-btn-right">
-                      <div class="main-btn-view">
-                        <div :class="themeChecked? 'main-view':'main-view-white'"></div>
-                        <div class="main-text">{{ formatNumber(videoInfo.vodHits) }}</div>
-                        <!-- <div class="main-text">{{ videoInfo.user.vodCount }}</div> -->
-                      </div>
-                      <div class="mian-btn-like">
-                        <div :class="themeChecked? 'main-like':'main-like-white'"></div>
-                        <div class="main-text">{{ formatPer(videoInfo.vodUp, videoInfo.vodUp+videoInfo.vodDown)}}</div>
-                        <!-- <div class="main-text">{{ videoInfo.user.praiseCount }}</div> -->
-                      </div>
-                    </div>
+            <div class="video-list">
+              <div class="video-tag-list" >
+                  <div class="tag-name" :class="activeTag === tag.id? 'active': ''" v-for="(tag,index) in tagList" :key="tag.id">
+                    <div @click="handleChangeTag(tag.id)">{{ tag.name }}</div>
                   </div>
-                </div>
               </div>
-            </nuxt-link>
-            <div class="video-line"></div>
+            </div>
+            <div class="video-line" style="margin-bottom: 1px;"></div>
             <van-tabs v-model="activeNav" class="video-more" v-if="videoInfo.vodId">
                 <van-tab name="about" :title="$t('str_video_about')">
                     <van-list
@@ -168,10 +108,7 @@
             <videoLoad />
             <cardLoad />
         </template>
-        <div class="sticky-top" @click="handleScroll" v-show="isDetailStickyVisible">
-          <div class="sticky-img"><img src="~/static/images/com_jt_sx_top.svg" alt="com_jt_sx_top"></div>
-          <div class="sticky-top-text">TOP</div>
-        </div>
+
 
         <dialogLogin ref="dialogLoginRef" @goRegister="goRegister"></dialogLogin>
         <dialogRegister ref="dialogRegisterRef" @goLogin="goLogin"></dialogRegister>
@@ -183,7 +120,7 @@ import videoContainer from "./video.vue";
 import cover from "~/components/cover";
 import { mapGetters } from "vuex";
 import commonMinxin from '~/plugins/mixins/common'
-import { dateFormat, formatNumber, formatPer, getQueryString } from '~/utils/format.js';
+import { dateFormat, formatNumber, formatPer } from '~/utils/format.js';
 import Empty from '~/components/empty'
 import cardLoad from "~/components/skeleton/cardLoad.vue"
 import videoLoad from "~/components/skeleton/videoLoad.vue"
@@ -222,11 +159,17 @@ export default {
             finishedChange: false,
             vodChangePage:{
                 size: 50,
-                page: 0
+                page: 1
             },
             showVote: false,
 
             vodId: "",
+            tagList: [
+              { id: 'vod_time_add', name: 'Most Relevant' }, 
+              { id: 'vod_hits', name: 'Most View' }, 
+              { id: 'vod_up', name: 'Top Rated' } 
+            ],
+            activeTag: 'vod_time_add'
         }
     },
     head(){
@@ -262,9 +205,8 @@ export default {
             ],
         }
     },
-    async asyncData({ $videoApi, params }) {
-        const str = params.id.split('-');
-        const vodId = str[str.length - 1];
+    async asyncData({ $videoApi, query }) {
+        const vodId = query.id
         const res1 =  await $videoApi.requestVodComment({ vodId: vodId });
         const seo = res1.data.seo ? res1.data.seo : {
                         description: "",
@@ -338,23 +280,19 @@ export default {
             // 跳转路由
             this.$router.push(this.localePath('/'+  this.$i18n.locale ))
         }
-        this.initVideo();
          
     },
 
     mounted(){
-        this.addHisVod(this.videoInfo);
-        if ( process.client ) {
-            this.getVideohits();
-        }
+        this.addHisVod(this.videoInfo)
     },
     methods:{
         dateFormat,
-        handleScroll(){
-          window.scrollTo(0, 0)
-        },
         formatNumber,
-        formatPer,
+        handleChangeTag(id){
+          this.activeTag = id
+          this.onLoadAboutVod()
+        },
         handleRefesh(){
           console.log('handleRefresh')
           this.initVideo()
@@ -365,7 +303,17 @@ export default {
             }
             this.showVote = !this.showVote
         },
-        
+        async getUserInfo(userinfo){
+          try {
+            const res = await this.$userApi.requestUserinfo()
+            if(res.code === 100){
+              this.$toast(this.$t('toast4'))
+              this.user = res.data
+            }
+          } catch (error) {
+            console.error(error)
+          }
+        },
         initVideo(){
             const vodId = this.vodId;
             // this.getVideo(vodId);
@@ -430,18 +378,27 @@ export default {
 
         // 相关视频
         onLoadAboutVod(){
-            this.vodChangePage.page++;
-            console.log("加载相关视频列表", this.videoInfo);
+          console.log('this.videoInfo',this.videoInfo)
+            // this.vodChangePage.page++;
+          console.log("加载相关视频列表", {
+            userId: this.userinfo.userId,
+            typeId: this.videoInfo.typeId,
+            excludes: this.videoInfo.vodId,
+            ...this.vodChangePage
+          });
             this.$videoApi.requestVodChange({
-                typeId: this.videoInfo.typeId,
-                tagId: this.videoInfo.tags && this.videoInfo.tags.length > 0 ? this.videoInfo.tags[0].id : "",
-                ...this.vodChangePage
+              orderBy: this.activeTag,
+              userId: this.userinfo.userId,
+              typeId: this.videoInfo.typeId,
+              excludes: this.videoInfo.vodId,
+              ...this.vodChangePage
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
-                    this.vodChange = [
-                        ...this.vodChange,
-                        ...res.data.data
-                    ];
+                    // this.vodChange = [
+                    //     ...this.vodChange,
+                    //     ...res.data.data
+                    // ];
+                    this.vodChange = res.data.data;
                     if( this.vodChangePage.page >= res.data.meta.pagination.total_pages ){
                         this.finishedChange = true;
                         this.loadingChange = false;
@@ -481,193 +438,6 @@ export default {
                 } 
             })
         },
-
-        // 点赞 取消点赞 
-        setVodUp(){
-            // if( !this.isLogin ){
-            //     return this.goLogin()
-            // }
-            const vodId = this.vodId;
-            const isUpVod = this.isUpVod(this.videoStatus);
-            if( this.onClick ){
-                return 
-            }
-            this.onClick = true;
-            if( isUpVod ){
-                gtag('event', 'gt4_click_down', {
-                    down_name: this.videoInfo.vodName,
-                });
-                // if( this.isLogin ){
-                    this.$set(this.videoStatus, "up", false)
-                    this.$videoApi.requestVodupcancel({
-                      vodId: vodId,
-                    }).then(res => {
-                        console.log('res',res)
-                        if( res.code === CODES.SUCCESS ){
-                            // const num = Number(this.videoStatus.vodUp) - 1;
-                            // this.$set(this.videoStatus, "vodUp", num)
-                            this.getVodState(vodId)
-                            this.getVideo(vodId);
-                        } else{
-                            this.$set(this.videoStatus, "up", true)
-                        }
-                    }).finally( () => {
-                        this.onClick = false
-                    })
-                // }else{
-                //     this.$store.commit("DEL_UPVOD", vodId)
-                //     this.onClick = false
-                // }
-            }else{
-                gtag('event', 'gt4_click_up', {
-                    up_name: this.videoInfo.vodName,
-                });
-                // if( this.isLogin ){
-                    this.$set(this.videoStatus, "down", false);
-                    this.$set(this.videoStatus, "up", true);
-                // }else{
-                //     this.$store.commit("DEL_DOWNVOD", vodId)
-                //     this.$store.commit("UPDATE_UPVOD", this.videoInfo )
-                // }
-                this.$videoApi.requestVodup({
-                  vodId: this.vodId,
-                }).then(res => {
-                    if( res.code === CODES.SUCCESS ){
-                        // const num = Number(this.videoStatus.vodUp) + 1;
-                        // this.$set(this.videoStatus, "vodUp", num);
-                        this.getVodState(vodId)
-                        this.getVideo(vodId);
-                    }else{
-                        this.$set(this.videoStatus, "up", false);
-                    }
-                }).finally( () => {
-                    this.onClick = false
-                })
-            }
-        },
-
-        // 收藏 取消收藏
-        setCollect(){
-            if( !this.isLogin ){
-                return this.goLogin()
-            }
-            if( this.onClick ){
-                return 
-            }
-            this.onClick = true;
-
-            if( this.videoStatus.collect ){
-                const num = Number(this.videoStatus.collectNumber) - 1;
-                this.$set(this.videoStatus, "collectNumber", num)
-                this.$set(this.videoStatus, "collect", false)
-                this.$videoApi.requestVodcollectcancel({
-                  vodId: this.vodId,
-                }).then(res => {
-                    if( res.code !== CODES.SUCCESS ){
-                        const num = Number(this.videoStatus.collectNumber) + 1;
-                        this.$set(this.videoStatus, "collectNumber", num)
-                        this.$set(this.videoStatus, "collect", true)
-                    }
-                }).finally( () => {
-                    this.onClick = false
-                })
-            }else{
-                gtag('event', 'gt4_click_collect', {
-                    collect_name: this.videoInfo.vodName,
-                });
-                const num = Number(this.videoStatus.collectNumber) + 1;
-                this.$set(this.videoStatus, "collectNumber", num)
-                this.$set(this.videoStatus, "collect", true)
-                this.$videoApi.requestVodcollect({
-                  vodId: this.vodId,
-                }).then(res => {
-                    if( res.code !== CODES.SUCCESS ){
-                        const num = Number(this.videoStatus.collectNumber) - 1;
-                        this.$set(this.videoStatus, "collectNumber", num)
-                        this.$set(this.videoStatus, "collect", false)
-                    }
-                }).finally( () => {
-                    this.onClick = false
-                })
-            }
-        },
-
-        // 点踩
-        setVodDown(){
-            // if( !this.isLogin ){
-            //     return this.goLogin()
-            // }
-            const vodId = this.vodId;
-            const isdownVod = this.isdownVod(this.videoStatus);
-            if( this.onClick ){
-                return 
-            }
-            this.onClick = true;
-            console.log( isdownVod , this.isLogin )
-            if( isdownVod ){
-                // if( this.isLogin ){
-                    this.$set(this.videoStatus, "down", false)
-                    this.$videoApi.requestVoddowncancel({
-                      vodId: vodId,
-                    }).then(res => {
-                        if( res.code === CODES.SUCCESS ){
-                            // const num = Number(this.videoStatus.vodDown) - 1;
-                            // this.$set(this.videoStatus, "vodDown", num)
-                            this.getVodState(vodId)
-                            this.getVideo(vodId);
-                        } else {
-                            this.$set(this.videoStatus, "down", true)
-                        }
-                        this.$toast(res.message);
-                    }).finally( () => {
-                        this.onClick = false;
-                    })
-                // }else{
-                //     this.$store.commit("DEL_DOWNVOD", vodId)
-                //     this.onClick = false
-                // }
-            }else{
-                
-                // if( this.isLogin ){
-                    this.$set(this.videoStatus, "up", false);
-                    this.$set(this.videoStatus, "down", true);
-                    this.$videoApi.requestVoddown({
-                      vodId: this.vodId,
-                    }).then(res => {
-                        if( res.code === CODES.SUCCESS ){
-                            // const num = Number(this.videoStatus.vodDown) + 1;
-                            // this.$set(this.videoStatus, "vodDown", num)
-                            this.getVodState(vodId)
-                            this.getVideo(vodId);
-                        } else{
-                            this.$set(this.videoStatus, "down", false)
-                        }
-                    }).finally( () => {
-                        this.onClick = false
-                    })
-
-                // }else{
-                //     this.$store.commit("DEL_UPVOD", vodId)
-                //     this.$store.commit("UPDATE_DOWNVOD", this.videoInfo )
-                //     this.onClick = false
-                // }
-
-            }
-        },
-
-        getShareLink(){
-            this.$videoApi.requestSharelink({
-              vodId: this.vodId,
-            }).then(res => {
-                if( res.code === CODES.SUCCESS ){
-                    console.log(res)
-                } 
-                
-            }).finally( () => {
-                
-            })
-        },
-
         // 评论
         sendVodReview(){
             gtag('event', 'gt4_video_review', {
@@ -714,7 +484,7 @@ export default {
 
         // 添加历史记录 在vuex里面去重，同样的视频点击也需要排序
         addHisVod(item){
-            console.log("添加历史")
+            // console.log("添加历史")
             // const idAdd = this.historyVod.some(  ele => ele.vodId === item.vodId);
             // if( !idAdd ){
                 this.$store.commit("UPDATE_HISTORYVOD", item)
@@ -761,33 +531,6 @@ export default {
 
         goLogin(){
             this.$refs.dialogLoginRef.onShow()
-        },
-
-        getVideohits(){
-            const id = this.vodId;
-            const timerNum = 30 * 60 * 1000;
-            // const timerNum = 1000;
-            let lastRequestTime = JSON.parse( localStorage.getItem('lastRequestTime') || '{}')
-            // 清理过期的id
-            Object.keys(lastRequestTime).forEach((key) => {
-                if (Date.now() - lastRequestTime[key] >= timerNum) {
-                    delete lastRequestTime[key];
-                }
-            });
-
-            if (lastRequestTime[id] && Date.now() - lastRequestTime[id] < timerNum) {
-                lastRequestTime[id] = Date.now();
-                localStorage.setItem('lastRequestTime', JSON.stringify(lastRequestTime));
-                return;
-            } else {
-                this.$videoApi.requestVideoHits({ vodId: id }).then(res => {
-                    if( res.code === CODES.SUCCESS ){
-                        this.$set(this.videoInfo, 'vodHits', res.data.vodHits)
-                        lastRequestTime[id] = Date.now();
-                        localStorage.setItem('lastRequestTime', JSON.stringify(lastRequestTime));
-                    }
-                });
-            }
         }
     },
     destroyed(){
@@ -841,9 +584,12 @@ export default {
     width: 375px;
     height: 212px;
     margin-top: 44px;
-
-    .flex-align-center;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .flex-align-center{
+      justify-content: center;
+    }
     .left-arrow{
         position: fixed;
         left: 16px;
@@ -1058,45 +804,21 @@ export default {
         padding: 0 12px;
     }
 }
-.sticky-top{
-  position: fixed;
-  right: 10px;
-  bottom: 20px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 1px solid rgba(246, 214, 88, 0.6);
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  .sticky-top-text{
-    font-size: 12px;
-    color: #F6D658;
-    margin-top: 5px;
+
+.main-update-img{
+  margin-top: 32px;
+  width: 80px;
+  height: 80px;
+  img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
   }
 }
-.main-update-content{
-  display: flex;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  .main-title{
-    font-size: 14px;
-    color: #FFFFFF;
-    padding-left: 12px;
-    margin-top: 5px;
-  }
-  .main-update-img{
-    margin-top: 8px;
-    margin-left: 12px;
-    img{
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-  }
+.main-title{
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-top: 16px;
 }
 .main-btn{
   display: flex;
@@ -1105,7 +827,7 @@ export default {
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   height: 17px;
   padding-left: 12px;
-  margin-top: 8px;
+  margin-top: 12px;
   .main-btn-right{
     display: flex;
     align-items: center;
@@ -1140,6 +862,35 @@ export default {
   align-items: center;
   margin-right: 24px;
   height: 17px;
-  line-height: 17px;
+}
+.video-tag-list{
+  display: flex;
+  // min-width: 375px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  flex-grow: 1;
+  margin-left: 12px;
+  // margin-right: 12px;
+  margin-top: 16px;
+  a{
+    color: #fff;
+    display: block;
+    display: flex;
+    flex-grow: 1;
+  }
+  .active{
+    border-color: #F6D658 !important;
+  }
+  .tag-name{
+    flex-shrink: 0;
+    padding: 5px 8px;
+    // width: 98px;
+    // height: 28px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    margin-right: 10px;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06));
+  }
 }
 </style>

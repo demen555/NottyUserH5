@@ -55,6 +55,21 @@ export function formatTime (myDate) {
 };
 
 
+export function formatTime1 (myDate) {
+  let date = new Date(myDate * 1000)
+  let Y = date.getFullYear() + '/';
+  let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/';
+  let D = date.getDate() + ' ';
+  let h = date.getHours();
+  let m = date.getMinutes();
+  let s = date.getSeconds();
+  if (D < 10) {
+    D = '0' + D
+  }
+  return Y + M + D 
+};
+
+
 
 // 刚刚(1小时内) 其他
 // 今天   24*60*60 特殊 60*60 

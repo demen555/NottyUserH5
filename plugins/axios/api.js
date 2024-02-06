@@ -8,6 +8,7 @@ let Api = {
     setpassword: "/api/v1/user/password/set", // 修改密码
     sendEmail: "/api/v1/user/password/send_email", // 邮件
     emailVerify: "/api/v1/user/password/email_verify", // 邮箱参数修改密码
+    userSetAvatar: "/api/v1/user/avatar", // 头像设置
   },
   search: {
     keys: '/api/v1/vod/keys'
