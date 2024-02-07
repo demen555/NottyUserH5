@@ -35,7 +35,7 @@
         </div>
         <nuxt-link :to="localePath({
             name: 'avatar',
-            query: { userId: item.user.userId}
+            query: { userId: item.user && item.user.userId}
         })">
           <div class="main-update-content">
             <div class="main-update-img" v-if="item.user && item.user.userPortrait"><img :src="item.user.userPortrait" alt="person"></div>
