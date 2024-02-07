@@ -12,10 +12,10 @@
               <div :class="themeChecked ? 'main-view' : 'main-view-white'"></div>
               <div class="main-text">{{ formatNumber(upInfo?.vodCount) || 0 }}</div>
             </div>
-            <div class="mian-btn-like">
+            <!-- <div class="mian-btn-like">
               <div :class="themeChecked ? 'main-like' : 'main-like-white'"></div>
               <div class="main-text">{{ upInfo?.praiseCount }}</div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
