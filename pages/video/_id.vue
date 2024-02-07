@@ -75,6 +75,32 @@
             </div> -->
             <!-- <vote v-if="showVote" :tagsList="videoInfo.tags" :themeChecked="themeChecked" @refresh="handleRefesh"></vote> -->
             <div class="video-line"></div>
+            <nuxt-link :to="localePath({
+                name: 'avatar',
+                query: { userId: videoInfo.user.userId}
+            })">
+              <div class="main-update-content">
+                <div class="main-update-img" v-if="videoInfo.user?.userPortrait"><img :src="videoInfo.user.userPortrait" alt="person"></div>
+                <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
+                <div>
+                  <!-- <div class="main-title">{{ item.vodName }}</div> -->
+                  <div class="main-title" v-if="videoInfo.user">{{ videoInfo.user.userName }}</div>
+                  <div class="main-btn">
+                    <div class="main-btn-right">
+                      <div class="main-btn-view">
+                        <div :class="themeChecked? 'main-view':'main-view-white'"></div>
+                        <div class="main-text">{{ formatNumber(videoInfo.vodHits) }}</div>
+                      </div>
+                      <!-- <div class="mian-btn-like">
+                        <div :class="themeChecked? 'main-like':'main-like-white'"></div>
+                        <div class="main-text">{{ formatPer(videoInfo.vodUp, videoInfo.vodUp+videoInfo.vodDown)}}</div>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nuxt-link>
+            <div class="video-line"></div>
             <van-tabs v-model="activeNav" class="video-more" v-if="videoInfo.vodId">
                 <van-tab name="about" :title="$t('str_video_about')">
                     <van-list
@@ -155,7 +181,7 @@ import videoContainer from "./video.vue";
 import cover from "~/components/cover";
 import { mapGetters } from "vuex";
 import commonMinxin from '~/plugins/mixins/common'
-import { dateFormat, getQueryString } from '~/utils/format.js';
+import { dateFormat, formatNumber, formatPer, getQueryString } from '~/utils/format.js';
 import Empty from '~/components/empty'
 import cardLoad from "~/components/skeleton/cardLoad.vue"
 import videoLoad from "~/components/skeleton/videoLoad.vue"
@@ -322,6 +348,8 @@ export default {
     },
     methods:{
         dateFormat,
+        formatNumber,
+        formatPer,
         handleScroll(){
           window.scrollTo(0, 0)
         },
@@ -1052,5 +1080,69 @@ export default {
     color: #F6D658;
     margin-top: 5px;
   }
+}
+.main-update-content{
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  .main-title{
+    font-size: 14px;
+    color: #FFFFFF;
+    padding-left: 12px;
+    margin-top: 5px;
+  }
+  .main-update-img{
+    margin-top: 8px;
+    margin-left: 12px;
+    img{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
+}
+.main-btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  height: 17px;
+  padding-left: 12px;
+  margin-top: 8px;
+  .main-btn-right{
+    display: flex;
+    align-items: center;
+  }
+}
+.main-view{
+  width: 16px;
+  height: 16px;
+  background-image: url('~~/static/images/com_shipinshu_1.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 4px;
+}
+.main-like{
+  width: 16px;
+  height: 16px;
+  background-image: url('~~/static/images/com_dianzan_1.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 4px;
+}
+.main-like-white{
+  width: 16px;
+  height: 16px;
+  background-image: url('~~/static/images/com_dianzan.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 4px;
+}
+.main-btn-view,.mian-btn-like{
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+  height: 17px;
+  line-height: 17px;
 }
 </style>

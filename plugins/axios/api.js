@@ -8,6 +8,7 @@ let Api = {
     setpassword: "/api/v1/user/password/set", // 修改密码
     sendEmail: "/api/v1/user/password/send_email", // 邮件
     emailVerify: "/api/v1/user/password/email_verify", // 邮箱参数修改密码
+    userSetAvatar: "/api/v1/user/avatar", // 头像设置
   },
   search: {
     keys: '/api/v1/vod/keys'
@@ -22,6 +23,7 @@ let Api = {
   },
   home: {
     vodpagehome: "/api/v1/vod/lists", // 首页视频列表
+    up: '/api/v1/user/podcaster', // up主详情
     vodpage: "/api/v1/vod/lists", // 相关视频
     vodpagesearch: "/api/v1/vod/lists", // 搜索列表
     vodpageconnect: "/api/v1/vod/lists", // 相关视频新的

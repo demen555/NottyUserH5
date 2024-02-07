@@ -1,5 +1,5 @@
 export function formatNumber(size) {
-  if (!size) return "--";
+  // if (!size) return "--";
   var num = 1000; //byte         
   if (size < num)
     return size;
@@ -52,6 +52,21 @@ export function formatTime (myDate) {
     s = '0' + s
   }
   return Y + M + D + h + ':' + m + ':' + s
+};
+
+
+export function formatTime1 (myDate) {
+  let date = new Date(myDate * 1000)
+  let Y = date.getFullYear() + '/';
+  let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/';
+  let D = date.getDate() + ' ';
+  let h = date.getHours();
+  let m = date.getMinutes();
+  let s = date.getSeconds();
+  if (D < 10) {
+    D = '0' + D
+  }
+  return Y + M + D 
 };
 
 
