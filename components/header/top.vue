@@ -597,6 +597,25 @@ header{
 .nav-list-tags{
   background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   border-radius: 7.992px;
+  &.type{
+    /deep/ .category-thumb {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .thumb-list{
+        width: 49%;
+        display: block;
+        margin-top: 0;
+      }
+      .van-image{
+        width: 100%;
+        height: 78px;
+      }
+      .thumb-text{
+        width: 100%;
+      }
+    }
+  }
 }
 .type-div{
   height: 4px;
@@ -790,10 +809,6 @@ header{
 }
 .category-thumb{
   padding: 0 12px;
-  /deep/ .van-image{
-    width: 49%;
-    height: 78px;
-  }
 }
 .tags-link{
   padding: 0 12px;
