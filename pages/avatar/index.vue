@@ -10,7 +10,7 @@
           <div class="main-btn-right">
             <div class="main-btn-view">
               <div :class="themeChecked ? 'main-view' : 'main-view-white'"></div>
-              <div class="main-text">{{ formatNumber(upInfo?.vodCount) || 0 }}</div>
+              <div class="main-text">{{ formatNumber(upInfo?.vodCount || 0)}}</div>
             </div>
             <!-- <div class="mian-btn-like">
               <div :class="themeChecked ? 'main-like' : 'main-like-white'"></div>
@@ -133,7 +133,8 @@ export default {
         const res = await this.$homeApi.requestUpInfo({userId: this.$route.query.userId})
         const { code, data = {} } = res
         if (code === CODES.SUCCESS) {
-          this.upInfo = data.data
+          console.log(data, 'upInfo')
+          this.upInfo = data
         }
       } catch (error) {
         console.error(error)
