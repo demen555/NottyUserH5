@@ -434,7 +434,7 @@ export default {
             console.log("加载相关视频列表", this.videoInfo);
             this.$videoApi.requestVodChange({
                 typeId: this.videoInfo.typeId,
-                tagId: this.videoInfo.tags && this.videoInfo.tags.length > 0 ? this.videoInfo.tags[0].id : "",
+                excludes: this.videoInfo.vodId,
                 ...this.vodChangePage
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
