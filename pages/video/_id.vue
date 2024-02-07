@@ -84,7 +84,7 @@
                 <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
                 <div>
                   <!-- <div class="main-title">{{ item.vodName }}</div> -->
-                  <div class="main-title" v-if="videoInfo.user">{{ videoInfo.user.userName }}</div>
+                  <div class="main-title" v-if="videoInfo.user">{{ videoInfo.user.name }}</div>
                   <div class="main-btn">
                     <div class="main-btn-right">
                       <div class="main-btn-view">
