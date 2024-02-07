@@ -525,6 +525,7 @@ header{
   width: 24px;
   height: 24px;
   border-radius: 24px;
+  object-fit: cover;
   img{
     width: 24px;
     height: 24px;
@@ -535,6 +536,7 @@ header{
   width: 24px;
   height: 24px;
   border-radius: 24px;
+  object-fit: cover;
   img{
     width: 24px;
     height: 24px;
@@ -852,6 +854,7 @@ header{
       width: 56px;
       height: 56px;
       border-radius: 56px;
+      object-fit: cover;
     }
   } 
   .register-name{
