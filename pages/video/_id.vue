@@ -77,7 +77,7 @@
             <div class="video-line"></div>
             <nuxt-link :to="localePath({
                 name: 'avatar',
-                query: { id: videoInfo.vodId}
+                query: { userId: videoInfo.user.userId}
             })">
               <div class="main-update-content">
                 <div class="main-update-img" v-if="videoInfo.user?.userPortrait"><img :src="videoInfo.user.userPortrait" alt="person"></div>

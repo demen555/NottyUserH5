@@ -23,6 +23,7 @@ let Api = {
   },
   home: {
     vodpagehome: "/api/v1/vod/lists", // 首页视频列表
+    up: '/api/v1/user/podcaster', // up主详情
     vodpage: "/api/v1/vod/lists", // 相关视频
     vodpagesearch: "/api/v1/vod/lists", // 搜索列表
     vodpageconnect: "/api/v1/vod/lists", // 相关视频新的

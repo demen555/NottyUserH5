@@ -33,9 +33,15 @@
   "str_page_text2": "como você pode facilmente",
   "str_page_text3": "bloquear o acesso a este site",
   "str_page_text4": "Carregar Vídeo", 
+<<<<<<< HEAD
   "str_page_text5": "Categoria Principal",
   "str_page_text6": "Mais",
   "str_page_text7": "Todos",
+=======
+  "str_page_text15": "Mais Relevante",
+  "str_page_text16": "Mais Vistas",
+  "str_page_text17": "Mais Votado",
+>>>>>>> P77-257
   
   "str_guild_age": "Verificação de Idade",
   
