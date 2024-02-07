@@ -38,7 +38,7 @@
             query: { id: item.vodId}
         })">
           <div class="main-update-content">
-            <div class="main-update-img" v-if="item.user.userPortrait"><img :src="item.user.userPortrait" alt="person"></div>
+            <div class="main-update-img" v-if="item.user && item.user.userPortrait"><img :src="item.user.userPortrait" alt="person"></div>
             <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
             <div class="main-content">
               <div class="main-title">{{ item.vodName }}</div>
