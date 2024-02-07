@@ -90,13 +90,11 @@
                       <div class="main-btn-view">
                         <div :class="themeChecked? 'main-view':'main-view-white'"></div>
                         <div class="main-text">{{ formatNumber(videoInfo.vodHits) }}</div>
-                        <!-- <div class="main-text">{{ videoInfo.user.vodCount }}</div> -->
                       </div>
-                      <div class="mian-btn-like">
+                      <!-- <div class="mian-btn-like">
                         <div :class="themeChecked? 'main-like':'main-like-white'"></div>
                         <div class="main-text">{{ formatPer(videoInfo.vodUp, videoInfo.vodUp+videoInfo.vodDown)}}</div>
-                        <!-- <div class="main-text">{{ videoInfo.user.praiseCount }}</div> -->
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
