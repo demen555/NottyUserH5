@@ -54,7 +54,6 @@ export default{
 .thumb-list{
   margin-top: 8px;
   position: relative;
-
   .mask{
     width: 100%;
     height: 100%;
