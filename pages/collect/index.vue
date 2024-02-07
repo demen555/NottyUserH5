@@ -16,7 +16,7 @@
           :offset="10"
         >
           <van-checkbox-group v-model="result" ref="checkboxGroup">
-            <Cover v-for="item in dataList" :item="item" :key="item.collectId" :showCheck="showFooter"></Cover>
+            <Cover v-for="item in dataList" :item="item || {}" :key="item && item.vodId" :showCheck="showFooter"></Cover>
           </van-checkbox-group>
         </van-list>
       </van-pull-refresh>
