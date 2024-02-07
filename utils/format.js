@@ -1,5 +1,5 @@
 export function formatNumber(size) {
-  if (!size) return "--";
+  // if (!size) return "--";
   var num = 1000; //byte         
   if (size < num)
     return size;
