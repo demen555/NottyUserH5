@@ -44,7 +44,7 @@
               <div class="main-title">{{ item.vodName }}</div>
               <!-- <div class="main-title">IPX-879丝袜SPA店攻略！哪个是最好的足交餐？-ss时尚大的IPX-879丝袜SPA店攻略！哪...</div> -->
               <div class="main-btn">
-                <div>{{ item.user?.userName || '--' }}</div>
+                <div>{{ item.user?.name || '--' }}</div>
                 <div class="main-btn-right">
                   <div class="main-btn-view">
                     <div :class="themeChecked? 'main-view':'main-view-white'"></div>
