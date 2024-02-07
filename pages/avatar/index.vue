@@ -122,7 +122,7 @@ export default {
     formatNumber,
     handleChangeTag(id) {
       this.activeTag = id
-      this.getList()
+      this.getList(true)
     },
     onLoad(){
       this.pageInfo.page += 1
