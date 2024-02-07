@@ -159,6 +159,7 @@ export default {
         width: 32px;
         height: 32px;
         border-radius: 32px;
+        object-fit: cover;
     }
     .icon{
         width: 12px;
