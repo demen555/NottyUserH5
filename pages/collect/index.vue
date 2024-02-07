@@ -106,7 +106,9 @@ methods: {
       if(this.result.length) {
         this.$dialog.confirm({
           title: this.$t('str_tip'),
-          message: this.$t('toast11')
+          message: this.$t('toast11'),
+          confirmButtonText: this.$t('str_get_back'),
+          cancelButtonText: this.$t('str_cancel')
         })
         .then(async () => {
           // on confirm

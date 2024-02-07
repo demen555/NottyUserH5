@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <navNew :title="txtTitle" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></navNew>
+    <navNew :title="categoryMetaData.h1 || paramsName" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></navNew>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -19,7 +19,7 @@
         </van-list>
       </van-pull-refresh>
       <h2 class="footer-title paddingTop88"> {{ categoryMetaData.h2}} </h2>
-      <p class="footer-description"> {{ categoryMetaData.footer_desc }} </p>
+      <p class="footer-description" v-html="categoryMetaData.footer_desc"> </p>
     </template>
     <Empty v-else></Empty>   
   </div>
@@ -44,7 +44,9 @@ data() {
       page: 1,
       size: 20
     },
-    categoryMetaData:{}
+    categoryMetaData:{},
+    categoryName: "",
+    paramsName: "",
   }
 },
 mixins: [commonMinxin],
@@ -54,15 +56,25 @@ computed: {
   }
 },
 async asyncData({ $homeApi, params }) {
-    const categoryName = params.name.replace(/\-/g, ' ').replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    const categoryName = '/category/' + params.name;
     const res = await $homeApi.requestvodpage({
       categoryName: categoryName,
       page: 1,
       size: 20
     })
+   
     return {
-      dataList: res.data.data,
-      categoryMetaData: res.data.categoryMetaData
+      dataList: res.data.data || [],
+      categoryMetaData: res.data.categoryMetaData || {
+        "title": "",
+        "description": "",
+        "keywords": "",
+        "h1": "",
+        "h2": "",
+        "footer_desc": ""
+      },
+      categoryName: categoryName,
+      paramsName: params.name
     }  
 },
 activated(){
@@ -84,12 +96,33 @@ created(){
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   return {
-    
+      title: this.categoryMetaData.title,
+      meta: [
+        {
+            hid: 'description',
+            name: 'description',
+            content: this.categoryMetaData.description
+        },
+        {
+            hid: 'keyswords',
+            name: 'keyswords',
+            content: this.categoryMetaData.keywords
+        },
+        {
+            hid: 'title',
+            name: 'title',
+            content: this.categoryMetaData.title
+        },
+        { hid: 'og:title', property: 'og:title', content: this.categoryMetaData.title },
+        { hid: 'og:description', property: 'og:description', content:  this.categoryMetaData.description},
+        { hid: 'og:keywords', property: 'og:keywords', content: this.categoryMetaData.keywords },
+    ],
     link: [
       {
         rel: 'canonical',
         href: `${hostName}${this.$nuxt.context.route.fullPath}`,
       },
+      
     ],
   }
 },
@@ -109,7 +142,7 @@ methods: {
       this.loading = true
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
     
-      params.categoryName = this.detail.name //分类名称
+      params.categoryName = this.categoryName //分类名称
 
       const { code, data } = await this.$homeApi.requestvodpage(params)
       if(code === CODES.SUCCESS){
@@ -159,15 +192,16 @@ overflow: visible;
 .footer-title{
   font-size: 16px;
   color: var(--bg-primary, #F6D658);
-  padding: 0 16px;
+  padding: 8px 16px;
   font-weight: normal;
 }
 .footer-description{
   font-size: 12px;
-  color: var(--bg-color4, rgba(0,0,0,0.6));
-  padding: 0 16px;
-}
-.paddingTop88{
-  padding-top: 77px;
+  color:white;
+  padding: 8px 16px;
+  a{
+    color: #FFF;
+    text-decoration: underline;
+  }
 }
 </style>

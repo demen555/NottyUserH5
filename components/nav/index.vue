@@ -26,7 +26,7 @@
     props: {
       title: {
         type: String,
-        default: () => this.$t('str_his')
+        default: () => ""
       },
       imgUrl: {
         type: String,
@@ -83,5 +83,11 @@
   line-height: 44px;
   display: flex;
   align-items: center;
+}  
+.h1{
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 18px;
+  text-align: left;
 }
 </style>

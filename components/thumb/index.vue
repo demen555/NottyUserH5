@@ -1,15 +1,7 @@
 <template>
   <nuxt-link 
     class="thumb-list" 
-    :to="localePath({
-        name: 'category-name',
-        params: { 
-          id: tag.id,
-          name: tag.title.toLowerCase().replace(/ /g, '-'),
-          refresh: true, 
-        }
-      })" 
-    @click="handleClickType(tag)"   
+    :to="localePath(tag.urlSlug)"      
     >
     <van-image
       lazy-load
@@ -22,12 +14,14 @@
         <img class="error-img" :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_white">
       </template>
     </van-image>
-    <div class="thumb-text">
+    <div class="thumb-text" >
       <div class="thumb-left">{{ tag.title }}</div>
       <!-- <div class="thumb-right">
         <div :class="themeChecked?'main-video-num': 'main-video-num-white'"></div>
         <div class="thumb-num">{{ tag.vodCount || 0 }} <span class="thumb-videos">Videos</span></div>
       </div> -->
+    </div>
+    <div class="mask" @click.stop="handleClickType(tag)">
     </div>
   </nuxt-link>
 </template>
@@ -50,6 +44,7 @@ export default{
   methods: {
     ...mapActions(['set_detail', 'set_typeid']),
     handleClickType(item){
+      console.log( 'set_typeid' )
       this.set_typeid(item.id)
     }
   }
@@ -59,14 +54,15 @@ export default{
 .thumb-list{
   margin-top: 8px;
   position: relative;
-  &::after{
-    content: "";
+
+  .mask{
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.00) 50%, rgba(0, 0, 0, 0.20) 75%, rgba(0, 0, 0, 0.60) 100%); 
+    z-index: 9;
   }
   /deep/ .van-image{
       width:185px;
