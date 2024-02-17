@@ -5,7 +5,6 @@
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
-    <!-- {{ result }} {{ dataList.length }} -->
     <div :class="['paddingTop88', showFooter ? 'paddingBottom50': 'paddingBottom10' ]" v-if="dataList.length">
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
