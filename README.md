@@ -20,3 +20,13 @@ $ npm run generate
 "build": "nuxt build",
 "start": "nuxt start --hostname 0.0.0.0 --port 3000",
 "generate": "nuxt generate"
+
+
+meta:[
+  { hid: "title", name: 'title', content: "" },
+  { hid: "description", name: 'description', content: "" },
+  { hid: "keywords", name: 'keywords', content: "" },
+  { property: 'og:title', content: "" },
+  { property: 'og:description', content: "" },
+  { property: 'og:keywords', content: "" },
+]
