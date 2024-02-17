@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HeaderTop @refresh="onRefresh"  id="home-top"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible" id="home-top"></HeaderTop>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -16,7 +16,37 @@
       </van-list>
     </van-pull-refresh> -->
     <div class="video-list paddingTop45" >
-      <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+      <div class="video-tag-list" >
+          <nuxt-link :to="localePath({
+              name: 'tag-name',
+              params: { id: tag.id, name: tag.name }
+          })" class="tag-name" v-for="tag in tagList" :key="tag.id">
+            <div @click.stop="set_tagid(item.id)">{{ tag.name }}</div>
+          </nuxt-link>
+          <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
+      </div>
+      <div v-for="(item,index) in dataList" :key="item.vodId">
+        <Cover style="margin-top: 12px;" :item="item"></Cover>
+        <div class="top-category" v-if="index === 1">
+          <div class="top-category-title">
+            <div>{{ $t('str_page_text5') }}</div>
+            <client-only>
+              <nuxt-link :to="localePath('category')" class="top-category-more">
+                {{ $t('str_page_text6') }} <img :src="require('~/static/images/com_jt_sx_you.svg')" alt="com_jt_sx_you">
+              </nuxt-link>
+            </client-only>
+          </div>
+          <div class="top-category-thumb">
+            <Thumb class="top-category-thumb-tag" :tag="tag" v-for="tag in categoryList" :key="tag.id"></Thumb>
+            <client-only>
+              <nuxt-link :to="localePath('category')" class="top-category-thumb-all">
+                <img :src="require('~/static/images/my_gn_fenlei_1.svg')" alt="my_gn_fenlei_1">
+                <div class="top-category-thumb-text">{{ $t('str_page_text7') }}</div>
+              </nuxt-link>
+            </client-only> 
+          </div>
+        </div>
+      </div>
       <div class="home-footer">
         <!-- <van-pagination class="pagination" @change="handleChanege" v-model="pageInfo.page" :total-items="pageInfo.total" pages="[1,2,3,4,5]" :page-count="pageInfo.total" :show-page-size="4" force-ellipses >
           <template #prev-text>
@@ -56,13 +86,21 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 import HeaderTop from '~/components/header/top.vue'
 import Cover from '~/components/cover'
-import cardLoad from "~/components/skeleton/cardLoad.vue"
 import CODES from "~/plugins/enums/codes"
 import vPagination from '~/components/pagination/index.vue'
+import commonMinxin from '~/plugins/mixins/common'
 export default{
+// async fetch() {
+//   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
+//   const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
+//   this.tagList = res1.data.data;
+//   this.categoryList = res2.data.data;
+// },
+fetchOnServer: true,
+mixins: [commonMinxin],
 data() {
   return {
     spainnerLoading: true,// 全局loading层
@@ -86,7 +124,9 @@ data() {
       { name: this.$t('str_footer_nav10'), id: 'policy-eu'},
     ],
     hostname: '',
-    showSticky: true
+    showSticky: true,
+    tagList: [],
+    categoryList: []
   }
 },
 computed: {
@@ -101,9 +141,9 @@ head(){
   return {
     title: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com",
     meta: [
-      { name: 'title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
-      { name: 'description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
-      { name: 'keywords', content: "XXX / Video de sexo / porno gratis / filme porno gratis / assistir filme porno gratis" },
+      { hid: "title", name: 'title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
+      { hid: "description", name: 'description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
+      { hid: "keywords", name: 'keywords', content: "XXX / Video de sexo / porno gratis / filme porno gratis / assistir filme porno gratis" },
 
       { property: 'og:title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
       { property: 'og:description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
@@ -111,6 +151,7 @@ head(){
     ],
     link: [
       {
+        hid: "canonical",
         rel: 'canonical',
         href: `${hostName}${this.$nuxt.context.route.fullPath}`,
       },
@@ -126,7 +167,6 @@ created(){
 components: {
   HeaderTop,
   Cover,
-  cardLoad,
   vPagination
 },
 watch: {
@@ -138,12 +178,23 @@ watch: {
     // this.onLoad()
   }
 },
-// async asyncData({ $homeApi }) {
-//   const res = await $homeApi.requestvodpageHome({ page: 1, size: 20})
-//   const { data } = res
-//   return { dataList: data.data }
-// },
+async asyncData({ $homeApi }) { 
+  const res2 = await $homeApi.postTypeList({ 
+    page: 1, 
+    size: 10, 
+    isSorted: true,
+  })
+  const res = await $homeApi.postTagListPage({
+    page: 1,
+    size: 10
+  });
+  return { 
+    tagList: res.data.data || [],
+    categoryList:  res2.data.data || []
+  }
+},
 methods: {
+  ...mapActions(['set_tagid']),
   handleClose(){
     this.showSticky = false
   },
@@ -163,7 +214,7 @@ methods: {
     
     // scrollTo() 把内容滚动到指定的坐标。减去导航高度的目的：导航用定位固定在顶部，如果不减去，导航栏会遮挡一部分内容
     // console.log(target.offsetTop, navHeight, target.offsetTop - navHeight, 'height')
-    // window.scrollTo(0, target.offsetTop - navHeight - 10)
+    window.scrollTo(0, 0)
   },
   handleClickPage(name){
     this.$router.push(this.localePath({name: name }))
@@ -265,12 +316,83 @@ overflow: visible;
     top: 0;
   }
   .sticky-text{
+    width: 100%;
     position: absolute;
-    left: 5px;
+    left: 0px;
     bottom: 15px;
     font-size: 10px;
     font-weight: bold;
+    text-align: center;
     color: var(--text-color1, #181E2A);
+  }
+}
+.video-tag-list{
+  display: flex;
+  // min-width: 375px;
+  overflow-x: auto;
+  flex-grow: 1;
+  margin-left: 12px;
+  // margin-right: 12px;
+  margin-top: 8px;
+  a{
+    color: #fff;
+    display: block;
+    display: flex;
+    flex-grow: 1;
+  }
+  .tag-name{
+    flex-shrink: 0;
+    padding: 5px 8px;
+    // width: 98px;
+    // height: 28px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    margin-right: 10px;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06));
+  }
+}
+.top-category{
+  // display: flex;
+  .top-category-title{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 12px;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  .top-category-more{
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-right: 4px;
+  }
+  .top-category-thumb{
+    display: flex;
+    overflow-x: auto;
+    margin-left: 12px;
+  }
+  .top-category-thumb-tag{
+    margin-right: 10px;
+  }
+  a{
+    color: #fff;
+  }
+  .top-category-thumb-all{
+    // width: 108px;
+    // height: 148px;
+    // height:105px;
+    margin-top: 10px;
+    padding: 0 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .top-category-thumb-text{
+      font-size: 14px;
+      margin-top: 8px;
+    }
   }
 }
 @media screen and (min-width: 420px) {

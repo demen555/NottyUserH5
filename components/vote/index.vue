@@ -105,16 +105,19 @@ export default {
       },
       changeFocus(e){
         this.test = e.target.tagName
-        let UA = window.navigator.userAgent.toLowerCase();
-        if (UA.indexOf('iphone') > -1) {
-            // 如果focus，则移除上一个输入框的timer
-            if (e && e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'input') { 
-              this.test = 1 
-              clearTimeout(this.timer);  
-            } 
+        if(process.client){
+          let UA = window.navigator.userAgent.toLowerCase();
+          if (UA.indexOf('iphone') > -1) {
+              // 如果focus，则移除上一个输入框的timer
+              if (e && e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'input') { 
+                this.test = 1 
+                clearTimeout(this.timer);  
+              } 
+          }
         }
       },
       changeBlur(e){
+        if(process.client){
         let UA = window.navigator.userAgent.toLowerCase();
           if (UA.indexOf('iphone') > -1) {
             if (e && e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'input') {  
@@ -127,6 +130,7 @@ export default {
               }, 0)  
           }  
           }
+        }
       },
       changTgasCheckUp(i){
           if( this.list[i].up ){

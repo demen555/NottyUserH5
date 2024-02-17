@@ -27,6 +27,18 @@ export default ($axios) => ({
     },
 
     /***
+     * @首页视频列表
+     * 
+     */ 
+    requestUpInfo(data){
+      return $axios({
+          url: Api.home.up,
+          method: "POST",
+          data: data
+      })
+    },
+
+    /***
      * @视频列表搜素
      * 
      */ 

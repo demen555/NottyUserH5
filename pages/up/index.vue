@@ -1,7 +1,7 @@
 <template>
   <div class="collect">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav @handleControl="handleControl" :title="$t('str_like')" :text="dataList.length > 0 ? true : false"></Nav>    
+    <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_dz_1.svg')" :title="$t('str_like')" :text="dataList.length > 0 ? true : false"></Nav>    
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -61,6 +61,7 @@ head(){
     
     link: [
       {
+        hid: "canonical",
         rel: 'canonical',
         href: `${hostName}${this.$nuxt.context.route.fullPath}`,
       },
@@ -131,7 +132,9 @@ methods: {
       if(this.result.length) {
         this.$dialog.confirm({
           title: this.$t('str_tip'),
-          message: this.$t('str_del_dianzan')
+          message: this.$t('str_del_dianzan'),
+          confirmButtonText: this.$t('str_get_back'),
+          cancelButtonText: this.$t('str_cancel')
         })
         .then(async () => {
           // on confirm

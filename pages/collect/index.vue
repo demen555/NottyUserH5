@@ -1,7 +1,7 @@
 <template>
   <div class="collect">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav @handleControl="handleControl" :title="$t('str_collect')" :text="dataList.length ? true : false"></Nav>
+    <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_wdsc_1.svg')" :title="$t('str_collect')" :text="dataList.length ? true : false"></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -16,7 +16,7 @@
           :offset="10"
         >
           <van-checkbox-group v-model="result" ref="checkboxGroup">
-            <Cover v-for="item in dataList" :item="item" :key="item.collectId" :showCheck="showFooter"></Cover>
+            <Cover v-for="item in dataList" :item="item || {}" :key="item && item.vodId" :showCheck="showFooter"></Cover>
           </van-checkbox-group>
         </van-list>
       </van-pull-refresh>
@@ -60,6 +60,7 @@ head(){
     
     link: [
       {
+        hid: "canonical",
         rel: 'canonical',
         href: `${hostName}${this.$nuxt.context.route.fullPath}`,
       },
@@ -105,7 +106,9 @@ methods: {
       if(this.result.length) {
         this.$dialog.confirm({
           title: this.$t('str_tip'),
-          message: this.$t('toast11')
+          message: this.$t('toast11'),
+          confirmButtonText: this.$t('str_get_back'),
+          cancelButtonText: this.$t('str_cancel')
         })
         .then(async () => {
           // on confirm

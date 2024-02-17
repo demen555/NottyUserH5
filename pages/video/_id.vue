@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderTop @refresh="onRefresh"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible" id="header-top"></HeaderTop>
     <div class="main-video">
         <div class="video-container"> 
             <client-only v-if="videoInfo.vodPlayUrl">
@@ -16,7 +16,7 @@
                 Loading... 
             </van-loading>
         </div>
-        <div class="video-space"></div>
+        <!-- <div class="video-space"></div> -->
         <template v-if="videoInfoLoding">
             
             <h1 class="video-title"> {{ videoInfo.seo.title }} </h1>
@@ -74,6 +74,32 @@
                 </h1>
             </div> -->
             <!-- <vote v-if="showVote" :tagsList="videoInfo.tags" :themeChecked="themeChecked" @refresh="handleRefesh"></vote> -->
+            <div class="video-line"></div>
+            <nuxt-link :to="localePath({
+                name: 'avatar',
+                query: { userId: videoInfo.user.userId}
+            })">
+              <div class="main-update-content">
+                <div class="main-update-img" v-if="videoInfo.user?.userPortrait"><img :src="videoInfo.user.userPortrait" alt="person"></div>
+                <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
+                <div>
+                  <!-- <div class="main-title">{{ item.vodName }}</div> -->
+                  <div class="main-title" v-if="videoInfo.user">{{ videoInfo.user.name }}</div>
+                  <div class="main-btn">
+                    <div class="main-btn-right">
+                      <div class="main-btn-view">
+                        <div :class="themeChecked? 'main-view':'main-view-white'"></div>
+                        <div class="main-text">{{ formatNumber(videoInfo.user?.vodCount) }}</div>
+                      </div>
+                      <!-- <div class="mian-btn-like">
+                        <div :class="themeChecked? 'main-like':'main-like-white'"></div>
+                        <div class="main-text">{{ formatPer(videoInfo.vodUp, videoInfo.vodUp+videoInfo.vodDown)}}</div>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nuxt-link>
             <div class="video-line"></div>
             <van-tabs v-model="activeNav" class="video-more" v-if="videoInfo.vodId">
                 <van-tab name="about" :title="$t('str_video_about')">
@@ -140,7 +166,10 @@
             <videoLoad />
             <cardLoad />
         </template>
-
+        <div class="sticky-top" @click="handleScroll" v-show="isDetailStickyVisible">
+          <div class="sticky-img"><img src="~/static/images/com_jt_sx_top.svg" alt="com_jt_sx_top"></div>
+          <div class="sticky-top-text">TOP</div>
+        </div>
 
         <dialogLogin ref="dialogLoginRef" @goRegister="goRegister"></dialogLogin>
         <dialogRegister ref="dialogRegisterRef" @goLogin="goLogin"></dialogRegister>
@@ -152,7 +181,7 @@ import videoContainer from "./video.vue";
 import cover from "~/components/cover";
 import { mapGetters } from "vuex";
 import commonMinxin from '~/plugins/mixins/common'
-import { dateFormat, getQueryString } from '~/utils/format.js';
+import { dateFormat, formatNumber, formatPer, getQueryString } from '~/utils/format.js';
 import Empty from '~/components/empty'
 import cardLoad from "~/components/skeleton/cardLoad.vue"
 import videoLoad from "~/components/skeleton/videoLoad.vue"
@@ -160,7 +189,6 @@ import vote from "~/components/vote/index.vue"
 import CODES from "~/plugins/enums/codes"
 
 export default {
-
     mixins: [commonMinxin],
     data(){
         return {
@@ -192,9 +220,11 @@ export default {
             finishedChange: false,
             vodChangePage:{
                 size: 50,
-                page: 1
+                page: 0
             },
-            showVote: false
+            showVote: false,
+
+            vodId: "",
         }
     },
     head(){
@@ -223,6 +253,7 @@ export default {
             ],
             link: [
                 {
+                    hid: "canonical",
                     rel: 'canonical',
                     href: `${hostName}${this.$nuxt.context.route.fullPath}`,
                 },
@@ -230,7 +261,9 @@ export default {
         }
     },
     async asyncData({ $videoApi, params }) {
-        const res1 =  await $videoApi.requestVodComment({ vodId: params.id });
+        const str = params.id.split('-');
+        const vodId = str[str.length - 1];
+        const res1 =  await $videoApi.requestVodComment({ vodId: vodId });
         const seo = res1.data.seo ? res1.data.seo : {
                         description: "",
                         keywords: "",
@@ -242,6 +275,7 @@ export default {
                 seo: seo,
                 code: res1.code
             },
+            vodId: vodId
         }
      
     },
@@ -298,7 +332,6 @@ export default {
 
     created(){
         // 在页面创建时检查是否有跳转信息
-        console.log( this.videoInfo.code,  this.$i18n.locale, "this.videoInfo.code" )
         if (this.videoInfo.code != 100 ) {
             // 跳转路由
             this.$router.push(this.localePath('/'+  this.$i18n.locale ))
@@ -308,10 +341,18 @@ export default {
     },
 
     mounted(){
-      this.addHisVod(this.videoInfo);
+        this.addHisVod(this.videoInfo);
+        if ( process.client ) {
+            this.getVideohits();
+        }
     },
     methods:{
         dateFormat,
+        formatNumber,
+        formatPer,
+        handleScroll(){
+          window.scrollTo(0, 0)
+        },
         handleRefesh(){
           console.log('handleRefresh')
           this.initVideo()
@@ -324,7 +365,7 @@ export default {
         },
         
         initVideo(){
-            const vodId = this.$route.params.id;
+            const vodId = this.vodId;
             // this.getVideo(vodId);
             this.getVodState(vodId)
         },
@@ -420,11 +461,11 @@ export default {
         onLoadReview(){
             this.vodReviewPage.page++;
             console.log("加载评论列表", {
-                vodId: this.$route.params.id,
+                vodId: this.vodId,
                 ...this.vodReviewPage
             })
             this.$videoApi.requestVodReviewe({
-              vodId: this.$route.params.id,
+              vodId: this.vodId,
               ...this.vodReviewPage
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
@@ -449,7 +490,7 @@ export default {
             // if( !this.isLogin ){
             //     return this.goLogin()
             // }
-            const vodId = this.$route.params.id;
+            const vodId = this.vodId;
             const isUpVod = this.isUpVod(this.videoStatus);
             if( this.onClick ){
                 return 
@@ -492,7 +533,7 @@ export default {
                 //     this.$store.commit("UPDATE_UPVOD", this.videoInfo )
                 // }
                 this.$videoApi.requestVodup({
-                  vodId: this.$route.params.id,
+                  vodId: this.vodId,
                 }).then(res => {
                     if( res.code === CODES.SUCCESS ){
                         // const num = Number(this.videoStatus.vodUp) + 1;
@@ -523,7 +564,7 @@ export default {
                 this.$set(this.videoStatus, "collectNumber", num)
                 this.$set(this.videoStatus, "collect", false)
                 this.$videoApi.requestVodcollectcancel({
-                  vodId: this.$route.params.id,
+                  vodId: this.vodId,
                 }).then(res => {
                     if( res.code !== CODES.SUCCESS ){
                         const num = Number(this.videoStatus.collectNumber) + 1;
@@ -541,7 +582,7 @@ export default {
                 this.$set(this.videoStatus, "collectNumber", num)
                 this.$set(this.videoStatus, "collect", true)
                 this.$videoApi.requestVodcollect({
-                  vodId: this.$route.params.id,
+                  vodId: this.vodId,
                 }).then(res => {
                     if( res.code !== CODES.SUCCESS ){
                         const num = Number(this.videoStatus.collectNumber) - 1;
@@ -559,7 +600,7 @@ export default {
             // if( !this.isLogin ){
             //     return this.goLogin()
             // }
-            const vodId = this.$route.params.id;
+            const vodId = this.vodId;
             const isdownVod = this.isdownVod(this.videoStatus);
             if( this.onClick ){
                 return 
@@ -594,7 +635,7 @@ export default {
                     this.$set(this.videoStatus, "up", false);
                     this.$set(this.videoStatus, "down", true);
                     this.$videoApi.requestVoddown({
-                      vodId: this.$route.params.id,
+                      vodId: this.vodId,
                     }).then(res => {
                         if( res.code === CODES.SUCCESS ){
                             // const num = Number(this.videoStatus.vodDown) + 1;
@@ -619,7 +660,7 @@ export default {
 
         getShareLink(){
             this.$videoApi.requestSharelink({
-              vodId: this.$route.params.id,
+              vodId: this.vodId,
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
                     console.log(res)
@@ -642,7 +683,7 @@ export default {
             // 需要审核，不能直接显示
             this.showInput = false;
             this.$videoApi.requestVodReviewInput({
-              vodId: this.$route.params.id,
+              vodId: this.vodId,
               content: this.content
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
@@ -725,6 +766,32 @@ export default {
             this.$refs.dialogLoginRef.onShow()
         },
 
+        getVideohits(){
+            const id = this.vodId;
+            const timerNum = 30 * 60 * 1000;
+            // const timerNum = 1000;
+            let lastRequestTime = JSON.parse( localStorage.getItem('lastRequestTime') || '{}')
+            // 清理过期的id
+            Object.keys(lastRequestTime).forEach((key) => {
+                if (Date.now() - lastRequestTime[key] >= timerNum) {
+                    delete lastRequestTime[key];
+                }
+            });
+
+            if (lastRequestTime[id] && Date.now() - lastRequestTime[id] < timerNum) {
+                lastRequestTime[id] = Date.now();
+                localStorage.setItem('lastRequestTime', JSON.stringify(lastRequestTime));
+                return;
+            } else {
+                this.$videoApi.requestVideoHits({ vodId: id }).then(res => {
+                    if( res.code === CODES.SUCCESS ){
+                        this.$set(this.videoInfo, 'vodHits', res.data.vodHits)
+                        lastRequestTime[id] = Date.now();
+                        localStorage.setItem('lastRequestTime', JSON.stringify(lastRequestTime));
+                    }
+                });
+            }
+        }
     },
     destroyed(){
         gtag('event', 'exit_video', {
@@ -776,10 +843,8 @@ export default {
 .video-container{
     width: 375px;
     height: 212px;
-    position: fixed;
-    top: 44px;
-    left: 0;
-    z-index: 889;
+    margin-top: 44px;
+
     .flex-align-center;
     justify-content: center;
     .left-arrow{
@@ -996,5 +1061,88 @@ export default {
         padding: 0 12px;
     }
 }
-
+.sticky-top{
+  position: fixed;
+  right: 10px;
+  bottom: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(246, 214, 88, 0.6);
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .sticky-top-text{
+    font-size: 12px;
+    color: #F6D658;
+    margin-top: 5px;
+  }
+}
+.main-update-content{
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  .main-title{
+    font-size: 14px;
+    color: #FFFFFF;
+    padding-left: 12px;
+    margin-top: 5px;
+  }
+  .main-update-img{
+    margin-top: 8px;
+    margin-left: 12px;
+    img{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
+}
+.main-btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  height: 17px;
+  padding-left: 12px;
+  margin-top: 8px;
+  .main-btn-right{
+    display: flex;
+    align-items: center;
+  }
+}
+.main-view{
+  width: 16px;
+  height: 16px;
+  background-image: url('~~/static/images/com_shipinshu_1.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 4px;
+}
+.main-like{
+  width: 16px;
+  height: 16px;
+  background-image: url('~~/static/images/com_dianzan_1.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 4px;
+}
+.main-like-white{
+  width: 16px;
+  height: 16px;
+  background-image: url('~~/static/images/com_dianzan.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 4px;
+}
+.main-btn-view,.mian-btn-like{
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+  height: 17px;
+  line-height: 17px;
+}
 </style>

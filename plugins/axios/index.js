@@ -30,10 +30,7 @@ function codeToast(code, app, store){
           break;
   }
 }
-const lanMap = {
-  en: "en_US",
-  pt: "pt_PT"
-}
+
 export default function ({ app, $axios, store }, inject) {
   console.log(app, 'app')
   $axios.onRequest((config) => {
@@ -62,7 +59,7 @@ export default function ({ app, $axios, store }, inject) {
     }
 
 
-    config.headers["Request-Lang"] = lanMap[app.i18n.locale] || "pt_PT";
+    config.headers["Request-Lang"] = app.i18n.localeProperties.iso || "en_US";
     
     config.headers["App-Type"] = 3;
     

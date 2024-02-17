@@ -4,6 +4,10 @@ export default function(ctx) {
   window.addEventListener('beforeunload', () => {
     localStorage.setItem("storeCache", JSON.stringify(ctx.store.state))
   });
+  // 兼容IOS
+  window.addEventListener('pagehide', () => {
+    localStorage.setItem("storeCache", JSON.stringify(ctx.store.state))
+  });
   // 获取localStorage中的store数据
   let storeCache = localStorage.getItem("storeCache")
   if (storeCache) {

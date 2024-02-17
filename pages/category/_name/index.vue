@@ -1,12 +1,12 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="txtTitle" text></Nav>
+    <navNew :title="categoryMetaData.h1 || paramsName" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></navNew>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
     <template v-if="dataList.length">
-      <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
+      <van-pull-refresh class="paddingTop77" v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
           :finished="finished"
@@ -18,12 +18,14 @@
           <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         </van-list>
       </van-pull-refresh>
+      <h2 class="footer-title paddingTop88"> {{ categoryMetaData.h2}} </h2>
+      <p class="footer-description" v-html="categoryMetaData.footer_desc"> </p>
     </template>
     <Empty v-else></Empty>   
   </div>
 </template>
 <script>
-import Nav from '~/components/nav'
+import navNew from '~/components/nav/new'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
 import commonMinxin from '~/plugins/mixins/common'
@@ -41,7 +43,10 @@ data() {
     pageInfo: {
       page: 1,
       size: 20
-    }
+    },
+    categoryMetaData:{},
+    categoryName: "",
+    paramsName: "",
   }
 },
 mixins: [commonMinxin],
@@ -49,6 +54,28 @@ computed: {
   txtTitle(){
     return  this.detail.name
   }
+},
+async asyncData({ $homeApi, params }) {
+    const categoryName = '/category/' + params.name;
+    const res = await $homeApi.requestvodpage({
+      categoryName: categoryName,
+      page: 1,
+      size: 20
+    })
+   
+    return {
+      dataList: res.data.data || [],
+      categoryMetaData: res.data.categoryMetaData || {
+        "title": "",
+        "description": "",
+        "keywords": "",
+        "h1": "",
+        "h2": "",
+        "footer_desc": ""
+      },
+      categoryName: categoryName,
+      paramsName: params.name
+    }  
 },
 activated(){
   const isRefresh = this.$route.params.refresh;
@@ -64,22 +91,43 @@ created(){
     name: name,
     id: id
   }
-  this.getList('first')
+  // this.getList('first')
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   return {
-    
+      title: this.categoryMetaData.title,
+      meta: [
+        {
+            hid: 'description',
+            name: 'description',
+            content: this.categoryMetaData.description
+        },
+        {
+            hid: 'keyswords',
+            name: 'keyswords',
+            content: this.categoryMetaData.keywords
+        },
+        {
+            hid: 'title',
+            name: 'title',
+            content: this.categoryMetaData.title
+        },
+        { hid: 'og:title', property: 'og:title', content: this.categoryMetaData.title },
+        { hid: 'og:description', property: 'og:description', content:  this.categoryMetaData.description},
+        { hid: 'og:keywords', property: 'og:keywords', content: this.categoryMetaData.keywords },
+    ],
     link: [
       {
         rel: 'canonical',
         href: `${hostName}${this.$nuxt.context.route.fullPath}`,
       },
+      
     ],
   }
 },
 components: {
-  Nav,
+  navNew,
   Cover,
   Empty
 },
@@ -94,18 +142,19 @@ methods: {
       this.loading = true
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
     
-      params.categoryName = this.detail.name //分类名称
+      params.categoryName = this.categoryName //分类名称
 
       const { code, data } = await this.$homeApi.requestvodpage(params)
       if(code === CODES.SUCCESS){
         if(isRefresh){
           // this.dataList = [ ...body.records, ...this.dataList ]
-          this.dataList = data.data
+          this.dataList = data.data;
           this.refreshing = false
         } else {
           this.dataList = [ ...this.dataList, ...data.data]
           this.loading = false
         }
+        this.categoryMetaData = data.categoryMetaData;
         if(data.data.length === 0){
           this.finished = true
         }
@@ -139,5 +188,20 @@ overflow: visible;
 }
 :deep(.van-nav-bar__left){
   font-size: 18px;
+}
+.footer-title{
+  font-size: 16px;
+  color: var(--bg-primary, #F6D658);
+  padding: 8px 16px;
+  font-weight: normal;
+}
+.footer-description{
+  font-size: 12px;
+  color:white;
+  padding: 8px 16px;
+  a{
+    color: #FFF;
+    text-decoration: underline;
+  }
 }
 </style>

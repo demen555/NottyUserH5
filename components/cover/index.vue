@@ -5,7 +5,7 @@
     </div>
     <nuxt-link class="main-list" @click.prevent :to="localePath({
         name: 'video-id',
-        params: { id: item.vodId }
+        params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
     })">
       <div class="main-list-group" @touchmove="longpressVideo(item)">
         <div class="main-video">
@@ -31,20 +31,34 @@
               <videoMp4 :vodPic="item.vodPic" :videoSrc="item.vodPreviewUrl" ></videoMp4>
             </div>
           </client-only>  
-
           <div class="main-time">{{ item.vodDuration }}</div>
         </div>
-        <div class="main-title">{{ item.vodName }}</div>
-        <div class="main-btn">
-          <div class="main-btn-view">
-            <div :class="themeChecked? 'main-view':'main-view-white'"></div>
-            <div class="main-text">{{ formatNumber(item.vodHits) }}</div>
+        <nuxt-link :to="localePath({
+            name: 'avatar',
+            query: { userId: item.user && item.user.userId}
+        })">
+          <div class="main-update-content">
+            <div class="main-update-img" v-if="item.user && item.user.userPortrait"><img :src="item.user.userPortrait" alt="person"></div>
+            <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
+            <div class="main-content">
+              <div class="main-title">{{ item.vodName }}</div>
+              <!-- <div class="main-title">IPX-879丝袜SPA店攻略！哪个是最好的足交餐？-ss时尚大的IPX-879丝袜SPA店攻略！哪...</div> -->
+              <div class="main-btn">
+                <div>{{ item.user?.name || '--' }}</div>
+                <div class="main-btn-right">
+                  <div class="main-btn-view">
+                    <div :class="themeChecked? 'main-view':'main-view-white'"></div>
+                    <div class="main-text">{{ formatNumber(item.vodHits) }}</div>
+                  </div>
+                  <div class="mian-btn-like">
+                    <div :class="themeChecked? 'main-like':'main-like-white'"></div>
+                    <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="mian-btn-like">
-            <div :class="themeChecked? 'main-like':'main-like-white'"></div>
-            <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div>
-          </div>
-        </div>
+        </nuxt-link>
       </div>
     </nuxt-link>
   </div>
@@ -172,6 +186,10 @@ export default{
   z-index: 6;
   color: rgba(255, 255, 255, 0.70); //黑白版都是这个颜色
 }
+.main-content{
+  width: 100%;
+  padding: 0 12px;
+}
 .main-title{
   font-size: 14px;
   font-weight: 400;
@@ -185,21 +203,37 @@ export default{
   -webkit-line-clamp: 2;
   overflow: hidden;
   margin-bottom: 8px;
-  padding: 0 12px;
+}
+.main-update-content{
+  display: flex;
+  .main-update-img{
+    margin-top: 8px;
+    margin-left: 12px;
+    img{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
 }
 .main-btn{
   display: flex;
   align-items: center;
+  justify-content: space-between;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   height: 17px;
-  padding-left: 12px;
+  // padding-left: 12px;
+  .main-btn-right{
+    display: flex;
+    align-items: center;
+  }
 }
 .main-btn-view,.mian-btn-like{
   display: flex;
   align-items: center;
-  margin-right: 24px;
+  margin-left: 24px;
   height: 17px;
-
+  line-height: 17px;
 }
 .main-like{
   width: 16px;

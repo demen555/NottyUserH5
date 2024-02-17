@@ -1,8 +1,7 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <!-- <Nav :title="$t('str_menu_tag_all') + ' ' + '('+ total + ' results' + ')'" text></Nav> -->
-    <Nav :title="tags[tagIndex] + ' ' + '('+ total + ' results' + ')'" text></Nav>
+    <nav-new :title="tags[tagIndex] + ' ' + '('+ total + ' results' + ')'" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></nav-new>
     <div class="paddingTop88"></div>
     <div class="tag-box" >
       <div v-for="(item, index) in tags" :key="index"><span class="tag-name" :class="tagIndex === index? 'tag-color': ''" @click="handleClickTagName(item, index)">{{ item }}</span><span v-if="tags.length -1 !== index" class="tag-line">-</span></div>
@@ -20,8 +19,20 @@
           @load="onLoad"
         >
           <div class="thumb">
-            <div @click="handleClickTag(tag)" class="tag-item" v-for="(tag, index) in tagList" :key="index"><span>{{ tag.name }}</span></div>
-            <!-- <Thumb :tag="tag" v-for="tag in tagList" :key="tag.id"></Thumb> -->
+            <nuxt-link :to="localePath({
+              name: 'tag-name',
+              params:{
+                id: tag.id,
+                name: tag.name,
+                refresh: true,
+              },
+            })" 
+           
+            class="tag-item" 
+            v-for="(tag, index) in tagList" 
+            :key="index">
+              <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.name }}</span>
+            </nuxt-link>
           </div>
         </van-list>
     </van-pull-refresh>
@@ -30,7 +41,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import Nav from '@/components/nav'
+import NavNew from '@/components/nav/new'
 import Thumb from '@/components/thumb'
 import empty from '@/components/empty'
 import tagLoad from "@/components/skeleton/tagLoad.vue"
@@ -58,7 +69,7 @@ export default{
     }
   },
   components: {
-    Nav,
+    NavNew,
     Thumb,
     empty,
     tagLoad
@@ -72,6 +83,7 @@ export default{
       
       link: [
         {
+          hid: "canonical",
           rel: 'canonical',
           href: `${hostName}${this.$nuxt.context.route.fullPath}`,
         },
@@ -88,14 +100,7 @@ export default{
       console.log(item)
       this.set_tagid(item.id)
 
-      this.$router.push(this.localePath({
-        name: 'tag-name',
-        params:{
-          id: item.id,
-          name: item.name,
-          refresh: true,
-        },
-      }));
+      this.$router.push(this);
     },
     handleClickTagName(item, index){
       this.tagIndex = index
@@ -178,6 +183,7 @@ export default{
   }
 }
 .tag-item{
+  display: block;
   width: 172px;
   height: 32px;
   border-radius: 4px;
@@ -189,5 +195,15 @@ export default{
   font-size: 12px;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   text-align: center;
+}
+.paddingTop88{
+  padding-top: 80px;
+}  
+.item-name{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

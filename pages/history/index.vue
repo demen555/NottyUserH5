@@ -1,11 +1,11 @@
 <template>
   <div class="collect">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav @handleControl="handleControl" :title="$t('str_his')" :text=" dataList.length > 0 ? true : historyVod.length === 0"></Nav>
+    <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')" :title="$t('str_his')" :text=" dataList.length > 0 ? true : historyVod.length === 0"></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
-    <div :class="['paddingTop78', showFooter ? 'paddingBottom50': 'paddingBottom10' ]"  v-if="dataList.length">
+    <div :class="['paddingTop88', showFooter ? 'paddingBottom50': 'paddingBottom10' ]"  v-if="dataList.length">
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -68,6 +68,7 @@ head(){
     
     link: [
       {
+        hid: "canonical",
         rel: 'canonical',
         href: `${hostName}${this.$nuxt.context.route.fullPath}`,
       },
@@ -223,5 +224,7 @@ methods: {
 :deep(.van-nav-bar__left){
   font-size: 18px;
 }
-
+.van-nav-bar__right{
+  right: -8px;
+}
 </style>
