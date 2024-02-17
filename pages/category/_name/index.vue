@@ -119,6 +119,7 @@ head(){
     ],
     link: [
       {
+        hid: "canonical",
         rel: 'canonical',
         href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
