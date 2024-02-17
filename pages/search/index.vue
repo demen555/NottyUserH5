@@ -163,7 +163,7 @@ head(){
     link: [
       {
         rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
     ],
     title: "Search for Free Porn Videos | Nottyhub.com",

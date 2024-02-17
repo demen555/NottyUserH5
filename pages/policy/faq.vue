@@ -51,7 +51,7 @@ export default{
         {
           hid: "canonical",
           rel: 'canonical',
-          href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+          href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
         },
       ],
     }
