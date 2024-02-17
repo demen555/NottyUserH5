@@ -136,8 +136,7 @@ computed: {
   }
 },
 head(){
-  // const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
-  const hostName = process.server ? this.$nuxt.context.req.headers.referer : window.location.href;
+  const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   
   return {
     title: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com",
@@ -154,7 +153,7 @@ head(){
       {
         hid: "canonical",
         rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
     ],
   }
