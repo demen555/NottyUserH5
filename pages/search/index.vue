@@ -140,8 +140,8 @@ created(){
   
   // this.set_show(true)
   if(process.client) {
-    // this.search = localStorage.getItem('search') || ''
     if(localStorage.getItem('searchBool')){
+      this.search = localStorage.getItem('search') || ''
       this.initSearchVideoList()
     }
     this.searchBool = localStorage.getItem('searchBool')
