@@ -55,7 +55,7 @@
           <template #page="{ number,text, active }">{{ handlePage(number, text, active) }}</template>
         </van-pagination> -->
         <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
-        <nuxt-link :to="localePath(item.id)" class="home-footer-list" v-for="(item, index) in footerList" :key="index">
+        <nuxt-link :to="localePath(item.id)" class="home-footer-list  d-sm-none" v-for="(item, index) in footerList" :key="index">
           <div class="home-footer-tag">{{ item.name }}</div>
           <div class="home-footer-right">
             <img :src="themeChecked? require('~/static/images/com_jt_sx_you.svg'): require('~/static/images/com_jt_sx_you_rj.svg')" alt="">
@@ -259,6 +259,7 @@ overflow: visible;
 
 
 .home-footer{
+  width: 100%;
   margin: 0 12px;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   background-color: var(--bg-color1, #0E0E0F);
