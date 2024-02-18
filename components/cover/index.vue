@@ -22,8 +22,6 @@
               <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_black">
             </template>
           </van-image>
-            <!-- <img v-if="item.vodPic" :src="item.vodPic" alt="part1"> -->
-            <!-- <img v-else src="~/static/images/cover1.svg" alt="part1"> -->
           </div>
           <client-only>
             <!-- 只加载当前视频id -->
@@ -135,37 +133,39 @@ export default{
 }
 .main-list-group{
   margin-top: 16px;
-  /* margin-bottom: .444rem; */
+  
 }
 .main-video{
+  padding-top: 56.53%;
   position: relative;
-  /* width: 9.528rem; */
-  /* height: 5.389rem; */
 }
 .main-like-radio{
   position:absolute;
   right: 12.5px;
   top: 12.5px;
-  /* background-color: rgba(43, 46, 52, 0.7); */
-  // width: 15px;
   height: 15px;
-  // border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 22;
 }
 .main-img{
-  width: 100vw;
-  height: 212px;
   overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
   &.main-img-opacity{
     display: none;
   }
 }
 .van-image{
-  width: 100vw;
-  height: 212px;
+  width: 100%;
+  height: 100%;
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 .main-img img{
   width: 100%;

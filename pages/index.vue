@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home container-fluid">
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible" id="home-top"></HeaderTop>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
@@ -15,8 +15,8 @@
         <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
       </van-list>
     </van-pull-refresh> -->
-    <div class="video-list paddingTop45" >
-      <div class="video-tag-list" >
+    <div class="video-list paddingTop45 row" >
+      <div class="video-tag-list d-sm-none" >
           <nuxt-link :to="localePath({
               name: 'tag-name',
               params: { id: tag.id, name: tag.name }
@@ -25,9 +25,9 @@
           </nuxt-link>
           <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
       </div>
-      <div v-for="(item,index) in dataList" :key="item.vodId">
+      <div v-for="(item,index) in dataList" :key="item.vodId" class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
         <Cover style="margin-top: 12px;" :item="item"></Cover>
-        <div class="top-category" v-if="index === 1">
+        <div class="top-category d-sm-none" v-if="index === 1">
           <div class="top-category-title">
             <div>{{ $t('str_page_text5') }}</div>
             <client-only>

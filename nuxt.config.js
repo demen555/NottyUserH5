@@ -89,6 +89,7 @@ module.exports = {
   css: [
     'vant/lib/index.css',
     '~/static/less/common.less',
+    '~/static/less/bootstrap-grid.css',
     '~/static/less/theme.less',
     '~/static/less/mobile.less'
   ],
