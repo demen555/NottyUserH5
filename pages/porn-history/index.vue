@@ -65,12 +65,20 @@ mounted(){
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   return {
-    
+    title: "My Porn History - Nottyhub.com",
+    meta: [
+      { hid: "title", name: 'title', content: "My Porn History - Nottyhub.com" },
+      { hid: "description", name: 'description', content: "Rewatch My Porn history. Trace back to our favorite scenes and categories, login Nottyhub to never lose your progress, premium XXX Sex Movies for everyone." },
+      { hid: "keywords", name: 'keywords', content: "Porn History" },
+      { property: 'og:title', content: "My Porn History - Nottyhub.com" },
+      { property: 'og:description', content: "Rewatch My Porn history. Trace back to our favorite scenes and categories, login Nottyhub to never lose your progress, premium XXX Sex Movies for everyone." },
+      { property: 'og:keywords', content: "Porn History" },
+    ],
     link: [
       {
         hid: "canonical",
         rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
     ],
   }

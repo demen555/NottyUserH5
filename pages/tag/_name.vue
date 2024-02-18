@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
+    <HeaderTop @refresh="onRefresh" ></HeaderTop>
     <nav-new :title="txtTitle" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></nav-new>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
@@ -52,7 +52,7 @@ head(){
       {
         hid: "canonical",
         rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
     ],
   }

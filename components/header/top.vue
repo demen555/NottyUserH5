@@ -107,7 +107,7 @@
             </div>
           </div>
           <!-- 历史记录 -->
-          <nuxt-link class="nav-menu-list" :to="localePath('history')" >
+          <nuxt-link class="nav-menu-list" :to="localePath('porn-history')" >
             <div class="nav-menu-left">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt="my_gn_lsjl"></div>
               <div>{{ $t('str_his') }}</div>

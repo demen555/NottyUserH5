@@ -163,9 +163,18 @@ head(){
     link: [
       {
         rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
     ],
+    title: "Search for Free Porn Videos | Nottyhub.com",
+    meta:[
+      { hid: "title", name: 'title', content: "Search for Free Porn Videos | Nottyhub.com" },
+      { hid: "description", name: 'description', content: "Search free porn videos, xxx adult porno on Nottyhub.com. Browse your interests with collection of videos. Fantasy and Pleasure like never before." },
+      { hid: "keywords", name: 'keywords', content: "Search Free Porn Videos" },
+      { property: 'og:title', content: "Search for Free Porn Videos | Nottyhub.com" },
+      { property: 'og:description', content: "Search free porn videos, xxx adult porno on Nottyhub.com. Browse your interests with collection of videos. Fantasy and Pleasure like never before." },
+      { property: 'og:keywords', content: "Search Free Porn Videos" },
+    ]
   }
 },
 // activated(){
