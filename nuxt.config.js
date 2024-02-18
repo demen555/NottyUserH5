@@ -112,11 +112,6 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/proxy'
   ],
-  styleResources: {
-    less: [
-        "./static/less/functions.less"
-      ]
-  },
   axios: {
     proxy: true
   },
