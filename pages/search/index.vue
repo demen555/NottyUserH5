@@ -145,7 +145,7 @@ created(){
       this.initSearchVideoList()
     }
     this.searchBool = localStorage.getItem('searchBool')
-    this.set_show(!localStorage.getItem('searchBool'))
+    this.set_show(localStorage.getItem('searchBool'))
   }
   this.getHistoryList()
   this.initKyesList()
