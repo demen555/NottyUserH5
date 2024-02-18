@@ -90,7 +90,7 @@ module.exports = {
     'vant/lib/index.css',
     '~/static/less/common.less',
     '~/static/less/theme.less',
-    // '~/static/less/pc.less'
+    '~/static/less/mobile.less'
   ],
   plugins: [
     '~/plugins/utils.js',
@@ -112,7 +112,11 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/proxy'
   ],
-
+  styleResources: {
+    less: [
+        "./static/less/functions.less"
+      ]
+  },
   axios: {
     proxy: true
   },
@@ -189,22 +193,22 @@ module.exports = {
     postcss: {
       postcssOptions: {
         plugins: {
-          'postcss-px-to-viewport-8-plugin': {
-            viewportWidth: 375, // 设计稿的宽度
-            // viewportHeight: 667, // 设计稿的高度
-            unitPrecision: 3, // px to vw无法整除时，保留几位小数
-            viewportUnit: 'vw', // 转换成vw单位
-            selectorBlackList: ['.ignore', '.hairlines'], // 不转换的类名
-            minPixelValue: 1, // 小于1px不转换
-            mediaQuery: false, // 允许在媒体查询中转换px
-          },
-          'postcss-mobile-forever': {
-            // "disableMobile": true, // 设置为 false 表示只在非移动端生效
-            "viewportWidth": 750,
-            "appSelector": "#__nuxt",
-            // "maxDisplayWidth": 600,
-            "enableMediaQuery": true,
-          },
+          // 'postcss-px-to-viewport-8-plugin': {
+          //   viewportWidth: 375, // 设计稿的宽度
+          //   // viewportHeight: 667, // 设计稿的高度
+          //   unitPrecision: 3, // px to vw无法整除时，保留几位小数
+          //   viewportUnit: 'vw', // 转换成vw单位
+          //   selectorBlackList: ['.ignore', '.hairlines'], // 不转换的类名
+          //   minPixelValue: 1, // 小于1px不转换
+          //   mediaQuery: false, // 允许在媒体查询中转换px
+          // },
+          // 'postcss-mobile-forever': {
+          //   // "disableMobile": true, // 设置为 false 表示只在非移动端生效
+          //   "viewportWidth": 750,
+          //   "appSelector": "#__nuxt",
+          //   // "maxDisplayWidth": 600,
+          //   "enableMediaQuery": true,
+          // },
           'postcss-css-variables': {},
           'postcss-import': {},
           'postcss-preset-env': {
