@@ -201,8 +201,11 @@ overflow: visible;
   color:white;
   padding: 8px 16px;
   a{
-    color: #FFF;
+    color: var(--bg-primary, #F6D658);
     text-decoration: underline;
+  }
+  h2{
+    color: var(--bg-primary, #F6D658);
   }
 }
 .paddingTop88{

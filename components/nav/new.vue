@@ -1,7 +1,7 @@
 <template>
   <div class="new-nav">
     <div class="fenlei"><img :src="imgUrl"></div>
-    <div>{{ title }}</div>
+    <h1>{{ title }}</h1>
   </div>
 </template>
 <script>
@@ -38,6 +38,9 @@ export default{
   color: #FFFFFF;
   .fenlei{
     margin-right: 8px;
+  }
+  h1{
+    font-size: 18px;
   }
 }
 </style>
