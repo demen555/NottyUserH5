@@ -378,7 +378,7 @@ methods: {
     this.historyList = Array.from(new Set(this.historyList))
     if(process.client){
       localStorage.setItem('historyList', JSON.stringify(this.historyList))
-      localStorage.setItem('search', this.search)
+      // localStorage.setItem('search', this.search)
       localStorage.setItem('searchBool', true)
     }
     this.set_show(false)

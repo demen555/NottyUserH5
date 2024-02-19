@@ -346,7 +346,7 @@ export default {
         id: item.id,
         name: item.name,
       });
-
+      localStorage.removeItem('search')
       this.set_tagid(item.id)
       this.$router.push(this.localePath({
         name: 'tag-name',

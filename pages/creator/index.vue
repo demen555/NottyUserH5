@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <div class="video-line" style="margin-bottom: 1px;"></div>
+        <!-- <div class="video-line" style="margin-bottom: 1px;"></div> -->
         <div class="loading-box" v-if="spainnerLoading">
           <cardLoad></cardLoad>
         </div>
