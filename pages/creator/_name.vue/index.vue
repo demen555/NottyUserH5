@@ -12,14 +12,9 @@
               <div :class="themeChecked ? 'main-view' : 'main-view-white'"></div>
               <div class="main-text">{{ formatNumber(upInfo?.vodCount || 0)}}</div>
             </div>
-            <!-- <div class="mian-btn-like">
-              <div :class="themeChecked ? 'main-like' : 'main-like-white'"></div>
-              <div class="main-text">{{ upInfo?.praiseCount }}</div>
-            </div> -->
           </div>
         </div>
       </div>
-      <!-- <div class="video-space"></div> -->
 
       <template>
         <div class="video-line"></div>
@@ -31,10 +26,9 @@
             </div>
           </div>
         </div>
-        <!-- <div class="video-line" style="margin-bottom: 1px;"></div> -->
-        <div class="loading-box" v-if="spainnerLoading">
+        <!-- <div class="loading-box" v-if="spainnerLoading">
           <cardLoad></cardLoad>
-        </div>
+        </div> -->
         <div v-if="dataList.length">
           <van-pull-refresh v-model="refreshing" @refresh="onRefresh" class="paddingTop52">
             <van-list
