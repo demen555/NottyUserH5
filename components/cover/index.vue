@@ -34,10 +34,10 @@
           <div class="main-time">{{ item.vodDuration }}</div>
         </div>
         <nuxt-link :to="localePath({
-            name: 'creator',
-            query: { userId: item.user && item.user.userId}
+            name: 'creator-name',
+            params: { name: item.user && item.user.name }
         })">
-          <div class="main-update-content">
+          <div class="main-update-content" @click.stop="handleClickCreator(item)">
             <div class="main-update-img" v-if="item.user && item.user.userPortrait"><img :src="item.user.userPortrait" alt="person"></div>
             <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
             <div class="main-content">
@@ -109,6 +109,9 @@ export default{
           id: item.vodId
         }
       }))
+    },
+    handleClickCreator(item){
+      localStorage.setItem('userId', item.user.userId)
     },
     longpressVideo(item){
       this.$store.commit("SET_VODID", item.vodId)
