@@ -98,7 +98,7 @@ export default {
               name: 'title',
               content: 'our creator' + this.name
           },
-          { hid: 'og:title', property: 'og:title', content: this.name },
+          { hid: 'og:title', property: 'og:title', content: 'our creator' + this.name },
           { hid: 'og:description', property: 'og:description', content:  `Checkout naked ${this.name} fuck hardcore in XXX videos. All sex scenes of anal, lesbian porn, threesome, and big dicks porno on Nottyhub, Free to Watch!`},
           { hid: 'og:keywords', property: 'og:keywords', content: this.name + '-' + 'Creator' },
       ],
