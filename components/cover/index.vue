@@ -3,36 +3,38 @@
     <div class="main-like-radio" v-if="showCheck" @click.stop>
       <van-checkbox :name="item.vodId" @click.native.stop="()=>{}"></van-checkbox>
     </div>
-    <nuxt-link class="main-list" @click.prevent :to="localePath({
-        name: 'video-id',
-        params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
-    })">
-      <div class="main-list-group" @touchmove="longpressVideo(item)">
-        <div class="main-video">
 
-          <div :class="['main-img', { 'main-img-opacity' : vodId == item.vodId && item.vodPreviewUrl }]" >
-           <van-image
-              lazy-load
-              :src="item.vodPic"
-              :alt="item.vodName || '-'">
-            <template slot="loading">
-              <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_black">
-            </template>
-            <template slot="error">
-              <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_black">
-            </template>
-          </van-image>
-            <!-- <img v-if="item.vodPic" :src="item.vodPic" alt="part1"> -->
-            <!-- <img v-else src="~/static/images/cover1.svg" alt="part1"> -->
-          </div>
-          <client-only>
-            <!-- 只加载当前视频id -->
-            <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId && item.vodPreviewUrl">
-              <videoMp4 :vodPic="item.vodPic" :videoSrc="item.vodPreviewUrl" ></videoMp4>
+      <div class="main-list-group" @touchmove="longpressVideo(item)">
+        <nuxt-link class="main-list" @click.prevent :to="localePath({
+            name: 'video-id',
+            params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
+        })">
+          <div class="main-video">
+
+            <div :class="['main-img', { 'main-img-opacity' : vodId == item.vodId && item.vodPreviewUrl }]" >
+            <van-image
+                lazy-load
+                :src="item.vodPic"
+                :alt="item.vodName || '-'">
+              <template slot="loading">
+                <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_black">
+              </template>
+              <template slot="error">
+                <img :src="themeChecked? require('~/static/images/com_lazy_black.svg') : require('~/static/images/com_lazy_white.svg')" alt="com_lazy_black">
+              </template>
+            </van-image>
+              <!-- <img v-if="item.vodPic" :src="item.vodPic" alt="part1"> -->
+              <!-- <img v-else src="~/static/images/cover1.svg" alt="part1"> -->
             </div>
-          </client-only>  
-          <div class="main-time">{{ item.vodDuration }}</div>
-        </div>
+            <client-only>
+              <!-- 只加载当前视频id -->
+              <div @click="handleGoDetail(item)" class="main-img" v-if="vodId == item.vodId && item.vodPreviewUrl">
+                <videoMp4 :vodPic="item.vodPic" :videoSrc="item.vodPreviewUrl" ></videoMp4>
+              </div>
+            </client-only>  
+            <div class="main-time">{{ item.vodDuration }}</div>
+          </div>
+        </nuxt-link>
         <nuxt-link :to="localePath({
             name: 'creator-name',
             params: { name: item.user && item.user.name }
@@ -60,7 +62,7 @@
           </div>
         </nuxt-link>
       </div>
-    </nuxt-link>
+    
   </div>
 </template>
 <script>
