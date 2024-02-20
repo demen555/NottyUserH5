@@ -81,7 +81,7 @@ export default {
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
     return {
-      title: 'our creator' + this.name,
+      title: 'our creator-' + this.name,
       meta: [
           {
               hid: 'description',
@@ -96,9 +96,9 @@ export default {
           {
               hid: 'title',
               name: 'title',
-              content: 'our creator' + this.name
+              content: 'our creator-' + this.name
           },
-          { hid: 'og:title', property: 'og:title', content: 'our creator' + this.name },
+          { hid: 'og:title', property: 'og:title', content: 'our creator-' + this.name },
           { hid: 'og:description', property: 'og:description', content:  `Checkout naked ${this.name} fuck hardcore in XXX videos. All sex scenes of anal, lesbian porn, threesome, and big dicks porno on Nottyhub, Free to Watch!`},
           { hid: 'og:keywords', property: 'og:keywords', content: this.name + '-' + 'Creator' },
       ],
