@@ -6,6 +6,7 @@ export default{
     return {
       lastScrollTop: 0,
       isStickyVisible: true,
+      isDetailStickyVisible: false
     }
   },
   mounted() {
@@ -23,6 +24,7 @@ export default{
     handleScrollShow() {
       // 获取滚动条滚动的距离
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      console.log(scrollTop, '666')
       // console.log(scrollTop, 'scrollTop')
       var scroll = scrollTop - this.lastScrollTop;
       
@@ -30,14 +32,21 @@ export default{
       if(scroll < 0){
           console.log(scroll,this.lastScrollTop, scrollTop,'up')
           //添加你想要的事件
-          if (Math.abs(scroll) >= 20) {
+        if (Math.abs(scroll) >= 20) {
           this.isStickyVisible = true;
+          this.isDetailStickyVisible = false
+        }
+        if (Math.abs(scroll) >= 300) {
+          this.isDetailStickyVisible = false
         }
       }else{
         console.log(scroll, scrollTop, 'down')
         //添加你想要的事件
         if (scrollTop >= 150) {
           this.isStickyVisible = false;
+        }
+        if (scrollTop >= 2100) {
+          this.isDetailStickyVisible = true;
         }
       }
       this.lastScrollTop = scrollTop;

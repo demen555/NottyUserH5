@@ -1,7 +1,7 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="$t('str_footer_nav5')" text></Nav>
+    <nav-new :title="$t('str_footer_nav5')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
       <div class="police-title">{{ $t('str_footer_ncc1') }}</div>
       <div class="police-title-text">{{ $t('str_footer_ncc5') }}</div>
@@ -103,7 +103,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import Nav from '@/components/nav'
+import NavNew from '@/components/nav/new'
 import Thumb from '@/components/thumb'
 import empty from '@/components/empty'
 import tagLoad from "@/components/skeleton/tagLoad.vue"
@@ -139,13 +139,13 @@ export default{
         {
           hid: "canonical",
           rel: 'canonical',
-          href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+          href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
         },
       ],
     }
   },
   components: {
-    Nav,
+    NavNew,
     Thumb,
     empty,
     tagLoad

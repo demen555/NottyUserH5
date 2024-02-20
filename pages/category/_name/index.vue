@@ -1,12 +1,12 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="categoryMetaData.h1 || paramsName" text></Nav>
+    <navNew :title="categoryMetaData.h1 || paramsName" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></navNew>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
     <template v-if="dataList.length">
-      <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
+      <van-pull-refresh class="paddingTop77" v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
           :finished="finished"
@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import Nav from '~/components/nav'
+import navNew from '~/components/nav/new'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
 import commonMinxin from '~/plugins/mixins/common'
@@ -66,12 +66,12 @@ async asyncData({ $homeApi, params }) {
     return {
       dataList: res.data.data || [],
       categoryMetaData: res.data.categoryMetaData || {
-        "title": null,
-        "description": null,
-        "keywords": null,
-        "h1": null,
-        "h2": null,
-        "footer_desc": null
+        "title": "",
+        "description": "",
+        "keywords": "",
+        "h1": "",
+        "h2": "",
+        "footer_desc": ""
       },
       categoryName: categoryName,
       paramsName: params.name
@@ -119,15 +119,16 @@ head(){
     ],
     link: [
       {
+        hid: "canonical",
         rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
       
     ],
   }
 },
 components: {
-  Nav,
+  navNew,
   Cover,
   Empty
 },
@@ -200,8 +201,11 @@ overflow: visible;
   color:white;
   padding: 8px 16px;
   a{
-    color: #FFF;
+    color: var(--bg-primary, #F6D658);
     text-decoration: underline;
+  }
+  h2{
+    color: var(--bg-primary, #F6D658);
   }
 }
 </style>

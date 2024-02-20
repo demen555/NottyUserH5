@@ -1,7 +1,7 @@
 <template>
   <div class="tag">
     <HeaderTop></HeaderTop>
-    <Nav :title="$t('str_footer_nav6')" text></Nav>
+    <nav-new :title="$t('str_footer_nav6')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
       <div class="police-title">{{ $t('str_footer_nav6') }}</div>
       <div class="police-title-text">{{ $t('str_footer_dmca1') }}</div>
@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import Nav from '@/components/nav'
+import NavNew from '@/components/nav/new'
 import commonMinxin from '~/plugins/mixins/common'
 
 
@@ -45,13 +45,13 @@ export default{
         {
           hid: "canonical",
           rel: 'canonical',
-          href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+          href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
         },
       ],
     }
   },
   components: {
-    Nav
+    NavNew
   }
 }
 </script>

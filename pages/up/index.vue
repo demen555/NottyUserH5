@@ -1,11 +1,10 @@
 <template>
   <div class="collect">
-    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
-    <Nav @handleControl="handleControl" :title="$t('str_like')" :text="dataList.length > 0 ? true : false"></Nav>    
+    <HeaderTop @refresh="onRefresh"></HeaderTop>
+    <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_dz_1.svg')" :title="$t('str_like')" :text="dataList.length > 0 ? true : false"></Nav>    
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
-    <!-- {{ result }} {{ dataList.length }} -->
     <div :class="['paddingTop88', showFooter ? 'paddingBottom50': 'paddingBottom10' ]" v-if="dataList.length">
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
@@ -63,7 +62,7 @@ head(){
       {
         hid: "canonical",
         rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
     ],
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="collect">
-    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
-    <Nav @handleControl="handleControl" :title="$t('str_collect')" :text="dataList.length ? true : false"></Nav>
+    <HeaderTop @refresh="onRefresh"></HeaderTop>
+    <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_wdsc_1.svg')" :title="$t('str_collect')" :text="dataList.length ? true : false"></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -16,7 +16,7 @@
           :offset="10"
         >
           <van-checkbox-group v-model="result" ref="checkboxGroup">
-            <Cover v-for="item in dataList" :item="item" :key="item.collectId" :showCheck="showFooter"></Cover>
+            <Cover v-for="item in dataList" :item="item || {}" :key="item && item.vodId" :showCheck="showFooter"></Cover>
           </van-checkbox-group>
         </van-list>
       </van-pull-refresh>
@@ -62,7 +62,7 @@ head(){
       {
         hid: "canonical",
         rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
     ],
   }

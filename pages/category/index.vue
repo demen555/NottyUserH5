@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="$t('str_menu_type_all')" text></Nav>
+    <!-- <Nav :title="$t('str_menu_type_all')" text></Nav> -->
+    <nav-new :title="$t('str_menu_type_all')" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></nav-new>
     <div class="loading-box" v-if="spainnerLoading">
       <tagLoad></tagLoad>
     </div>
@@ -27,6 +28,7 @@
 </template>
 <script>
 import Nav from '~/components/nav'
+import NavNew from '~/components/nav/new'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
 import Thumb from '~/components/thumb'
@@ -58,7 +60,7 @@ head(){
       {
         hid: "canonical",
         rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
     ],
   }
@@ -84,7 +86,7 @@ created(){
   this.getList('first')
 },
 components: {
-  Nav,
+  NavNew,
   Cover,
   Empty,
   Thumb,

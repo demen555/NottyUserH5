@@ -33,6 +33,12 @@
   "str_page_text2": "como você pode facilmente",
   "str_page_text3": "bloquear o acesso a este site",
   "str_page_text4": "Carregar Vídeo", 
+  "str_page_text5": "Categoria Principal",
+  "str_page_text6": "Mais",
+  "str_page_text7": "Todos",
+  "str_page_text15": "Mais Relevante",
+  "str_page_text16": "Mais Vistas",
+  "str_page_text17": "Mais Votado",
   
   "str_guild_age": "Verificação de Idade",
   
@@ -494,5 +500,6 @@
   "str_footer_ncc64": "ALEMANHA:",
   "str_footer_ncc65": "Associação sobre violência sexual contra mulheres",
 
-  "str_email_send_suc": "Enviamos a você um e-mail com seu nome de usuário e um link para redefinir sua senha"
+  "str_email_send_suc": "Enviamos a você um e-mail com seu nome de usuário e um link para redefinir sua senha",
+  "All": "Todos"
   }

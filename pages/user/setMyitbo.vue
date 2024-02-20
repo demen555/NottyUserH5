@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="$t('str_set_mibao')" text></Nav>
+    <NavNew :title="$t('str_set_mibao')" text></NavNew>
     <div class="set-myitbo paddingTop88">
         <div class="user-line"></div>
         <div class="user-lable">

@@ -31,7 +31,10 @@
 	"str_page_text1": "我们的<b>家长控制页面</b>说明",
 	"str_page_text2": "你如何能够轻松地",
 	"str_page_text3": "阻止访问该网站",
-	"str_page_text4": "上传影片",
+	"str_page_text4": "上传视频",
+	"str_page_text5": "全部分类",
+	"str_page_text6": "更多",
+	"str_page_text7": "全部",
 	"str_guild_age": "年龄验证",
 	"str_user_login": "用户登录",
 	"str_login": "登录",
@@ -462,5 +465,6 @@
 	"str_footer_ncc64": "德国：",
 	"str_footer_ncc65": "针对妇女的性暴力协会",
 
-	"str_email_send_suc": "我们已向您发送了一封电子邮件，其中包含您的用户名和链接，以便重置您的密码"
+	"str_email_send_suc": "我们已向您发送了一封电子邮件，其中包含您的用户名和链接，以便重置您的密码",
+  "All": "全部"
 }

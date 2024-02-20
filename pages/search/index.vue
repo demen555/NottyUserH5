@@ -63,7 +63,7 @@
     </main>
     <main v-show="!searchShow">
       <!-- 有搜索结果 -->
-      <Nav :title="search" text></Nav>
+      <NavNew :title="search + ' ' + '('+ total + ' results' + ')'" imgUrl=""></NavNew>
       <!-- <div class="search-result" id="searchName">{{ search }}</div> -->
       <div class="loading-box" style="margin-top: 42px;" v-if="spainnerLoading">
         <cardLoad></cardLoad>
@@ -103,7 +103,7 @@ import { mapGetters, mapActions } from 'vuex'
 import commonMinxin from '~/plugins/mixins/common'
 import Cover from '@/components/cover'
 import Empty from '@/components/empty'
-import Nav from '~/components/nav'
+import NavNew from '~/components/nav/new'
 import CODES from "~/plugins/enums/codes"
 import { uniArray } from '@/utils/format.js'
 export default{
@@ -122,9 +122,9 @@ data() {
     relatedList: [], //相关推荐数据
     pageInfo: {
       page: 1,
-      size: 20,
-      total: 0
+      size: 20
     },
+    total: 0,
     relatedLoading: false,
     searchBool: false
   }
@@ -140,12 +140,13 @@ created(){
   
   // this.set_show(true)
   if(process.client) {
-    this.search = localStorage.getItem('search') || ''
     if(localStorage.getItem('searchBool')){
+      this.search = localStorage.getItem('search') || ''
       this.initSearchVideoList()
     }
     this.searchBool = localStorage.getItem('searchBool')
-    this.set_show(!localStorage.getItem('searchBool'))
+    console.log(this.searchBool, 'created')
+    // this.set_show(localStorage.getItem('searchBool'))
   }
   this.getHistoryList()
   this.initKyesList()
@@ -154,7 +155,7 @@ created(){
 components: {
   Cover,
   Empty,
-  Nav
+  NavNew
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -163,9 +164,18 @@ head(){
     link: [
       {
         rel: 'canonical',
-        href: `${hostName}${this.$nuxt.context.route.fullPath}`,
+        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
     ],
+    title: "Search for Free Porn Videos | Nottyhub.com",
+    meta:[
+      { hid: "title", name: 'title', content: "Search for Free Porn Videos | Nottyhub.com" },
+      { hid: "description", name: 'description', content: "Search free porn videos, xxx adult porno on Nottyhub.com. Browse your interests with collection of videos. Fantasy and Pleasure like never before." },
+      { hid: "keywords", name: 'keywords', content: "Search Free Porn Videos" },
+      { property: 'og:title', content: "Search for Free Porn Videos | Nottyhub.com" },
+      { property: 'og:description', content: "Search free porn videos, xxx adult porno on Nottyhub.com. Browse your interests with collection of videos. Fantasy and Pleasure like never before." },
+      { property: 'og:keywords', content: "Search Free Porn Videos" },
+    ]
   }
 },
 // activated(){
@@ -281,7 +291,7 @@ methods: {
       console.log(code, data, 111)
       if(code === 100){
         if (!data) return this.loading = false
-        this.pageInfo.total = data.meta.pagination.total
+        this.total = data.meta.pagination.total
         if(data.meta.pagination.total == 0) {
           // this.noResultShow = true
           // this.set_show(true)
@@ -368,7 +378,7 @@ methods: {
     this.historyList = Array.from(new Set(this.historyList))
     if(process.client){
       localStorage.setItem('historyList', JSON.stringify(this.historyList))
-      localStorage.setItem('search', this.search)
+      // localStorage.setItem('search', this.search)
       localStorage.setItem('searchBool', true)
     }
     this.set_show(false)

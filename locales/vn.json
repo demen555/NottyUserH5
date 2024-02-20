@@ -32,6 +32,9 @@
 	"str_page_text2": "làm sao bạn có thể dễ dàng",
 	"str_page_text3": "chặn quyền truy cập vào trang web này",
 	"str_page_text4": "Đăng video",
+	"str_page_text5": "Danh mục hàng đầu",
+	"str_page_text6": "Thêm",
+	"str_page_text7": "Tất cả",
 	"str_guild_age": "Xác nhận tuổi",
 	"str_user_login": "Đăng nhập người dùng",
 	"str_login": "Đăng nhập",
@@ -462,5 +465,6 @@
 	"str_footer_ncc64": "NƯỚC ĐỨC:",
 	"str_footer_ncc65": "Hiệp hội liên quan đến bạo lực tình dục đối với phụ nữ",
 
-	"str_email_send_suc": "Chúng tôi đã gửi cho bạn một email có tên người dùng và liên kết để đặt lại mật khẩu của bạn"
+	"str_email_send_suc": "Chúng tôi đã gửi cho bạn một email có tên người dùng và liên kết để đặt lại mật khẩu của bạn",
+  "All": "Tất cả"
 }

@@ -46,6 +46,7 @@ export default{
     handleClickType(item){
       console.log( 'set_typeid' )
       this.set_typeid(item.id)
+      localStorage.removeItem('search')
     }
   }
 }
@@ -54,7 +55,6 @@ export default{
 .thumb-list{
   margin-top: 8px;
   position: relative;
-
   .mask{
     width: 100%;
     height: 100%;
@@ -67,6 +67,7 @@ export default{
   /deep/ .van-image{
       width:185px;
       height:105px;
+      border-radius: 4px;
       .loading-img, .error-img{
         width: 100%;
         height: 100%;

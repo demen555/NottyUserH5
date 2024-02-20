@@ -32,6 +32,9 @@
 	"str_page_text2": "¿Cómo puedes fácilmente?",
 	"str_page_text3": "bloquear el acceso a este sitio",
 	"str_page_text4": "Subir videos",
+	"str_page_text5": "Categoría principal",
+	"str_page_text6": "Más",
+	"str_page_text7": "Todos",
 	"str_guild_age": "Verificación de edad",
 	"str_user_login": "Inicio de sesión de usuario",
 	"str_login": "Acceso",
@@ -462,5 +465,6 @@
 	"str_footer_ncc64": "ALEMANIA:",
 	"str_footer_ncc65": "Asociación contra la violencia sexual contra la mujer",
 
-	"str_email_send_suc": "Le hemos enviado un correo electrónico con su nombre de usuario y un enlace para restablecer su contraseña."
+	"str_email_send_suc": "Le hemos enviado un correo electrónico con su nombre de usuario y un enlace para restablecer su contraseña.",
+  "All": "Toda"
 }
