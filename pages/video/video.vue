@@ -2,7 +2,7 @@
     <div
         @touchstart="handleTouchStart"
         @touchend="handleTouchEnd" 
-        :class="['myVideo', { 'video-not-full': !isfull }]"
+        :class="['myVideo', { 'video-not-full': !isfull }, 'col-sm-12 col-md-10 col-lg-8 col-xl-6']"
         id="HubmyVideo">
         <div id="dplayer" ref="player" class="dplayer video-box"></div>
         <div class="fast-forward-animation" v-show="fastWforward">

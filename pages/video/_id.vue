@@ -1,8 +1,8 @@
 <template>
   <div>
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible" id="header-top"></HeaderTop>
-    <div class="main-video">
-        <div class="video-container"> 
+    <div class="main-video container-fluid">
+        <div class="video-container row"> 
             <client-only v-if="videoInfo.vodPlayUrl">
                 <videoContainer  :videoInfo="videoInfo" :vodChange="vodChange"></videoContainer>
             </client-only>
@@ -21,36 +21,38 @@
             
             <h1 class="video-title"> {{ videoInfo.seo.title }} </h1>
             <p class="video-description" v-show="videoInfo.seo.description"> {{ videoInfo.seo.description }} </p>
-            <div class="video-data">
-                <div class="data-watch">
-                    <img class="icon" :src="themeChecked? require('~/static/images/com_bofangliang_big_1.svg'): require('~/static/images/com_bofangliang_big.svg')"  alt="com_dianzan">
-                    <span class="words">{{ videoInfo.vodHits }} {{$t('str_video_vodHits')}}</span>
-                </div> 
-                <div class="data-time">
-                    {{ $t(dateFormat(videoInfo.vodTimeAdd)) }}
+            <div class="row">           
+                <div class="video-data col-sm-7 col-md-8 col-lg-9 col-xl-10">
+                    <div class="data-watch">
+                        <img class="icon" :src="themeChecked? require('~/static/images/com_bofangliang_big_1.svg'): require('~/static/images/com_bofangliang_big.svg')"  alt="com_dianzan">
+                        <span class="words">{{ videoInfo.vodHits }} {{$t('str_video_vodHits')}}</span>
+                    </div> 
+                    <div class="data-time">
+                        {{ $t(dateFormat(videoInfo.vodTimeAdd)) }}
+                    </div>
                 </div>
-            </div>
-            <div class="video-controls">
-                <div class="controls" @click="setVodUp()">
-                    <img class="icon"  v-if="isUpVod(videoStatus)" src="~/static/images/com_dianzan_on.svg" alt="com_dianzan_on">
-                    <img class="icon"  v-else :src="themeChecked? require('~/static/images/com_dianzan_1.svg'): require('~/static/images/com_dianzan.svg')"  alt="com_dianzan">
-                    <span class="words">{{ vodPercent.vodUp }}%</span>
+                <div class="video-controls col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                    <div class="controls" @click="setVodUp()">
+                        <img class="icon"  v-if="isUpVod(videoStatus)" src="~/static/images/com_dianzan_on.svg" alt="com_dianzan_on">
+                        <img class="icon"  v-else :src="themeChecked? require('~/static/images/com_dianzan_1.svg'): require('~/static/images/com_dianzan.svg')"  alt="com_dianzan">
+                        <span class="words">{{ vodPercent.vodUp }}%</span>
+                    </div>
+                    <div class="controls" @click="setVodDown()">
+                        <img class="icon" v-if="isdownVod(videoStatus)" src="~/static/images/com_caizan_on.svg" alt="com_caizan_on">
+                        <img class="icon" v-else :src="themeChecked? require('~/static/images/com_caizan_1.svg'): require('~/static/images/com_caizan.svg')"  alt="com_dianzan">
+                        <span class="words">{{ vodPercent.vodDown }}%</span>
+                    </div>
+                    <div class="controls" @click="setCollect()">
+                        <img class="icon" v-if="!videoStatus.collect" :src="themeChecked? require('~/static/images/com_shoucang_1.svg'): require('~/static/images/com_shoucang.svg')"  alt="com_dianzan">
+                        <img class="icon" v-else src="~/static/images/com_shoucang_on.svg" alt="com_shoucang_on">
+                        <span class="words">{{ videoStatus.collectNumber || 0 }}</span>
+                    </div>
+                    <div class="controls" @click="onShowdialogLink()">
+                        <img class="icon" :src="themeChecked? require('~/static/images/com_fenxiang_1.svg'): require('~/static/images/com_fenxiang.svg')"  alt="com_fenxiang_1">
+                        <span class="words">{{ $t('str_share') }}</span>
+                    </div>
                 </div>
-                <div class="controls" @click="setVodDown()">
-                    <img class="icon" v-if="isdownVod(videoStatus)" src="~/static/images/com_caizan_on.svg" alt="com_caizan_on">
-                    <img class="icon" v-else :src="themeChecked? require('~/static/images/com_caizan_1.svg'): require('~/static/images/com_caizan.svg')"  alt="com_dianzan">
-                    <span class="words">{{ vodPercent.vodDown }}%</span>
-                </div>
-                <div class="controls" @click="setCollect()">
-                    <img class="icon" v-if="!videoStatus.collect" :src="themeChecked? require('~/static/images/com_shoucang_1.svg'): require('~/static/images/com_shoucang.svg')"  alt="com_dianzan">
-                    <img class="icon" v-else src="~/static/images/com_shoucang_on.svg" alt="com_shoucang_on">
-                    <span class="words">{{ videoStatus.collectNumber || 0 }}</span>
-                </div>
-                <div class="controls" @click="onShowdialogLink()">
-                    <img class="icon" :src="themeChecked? require('~/static/images/com_fenxiang_1.svg'): require('~/static/images/com_fenxiang.svg')"  alt="com_fenxiang_1">
-                    <span class="words">{{ $t('str_share') }}</span>
-                </div>
-            </div>
+             </div>
             <!-- <div class="video-title" v-if="videoInfo.tags">
                 <h1 class="title" @click="handleClickType(row)" v-for="row in videoInfo.tags" :key="row.id">{{ row.name }}</h1>
             </div> -->
@@ -110,8 +112,9 @@
                         :finished-text="$t('str_no_more')"
                         loading-text="loading"
                         @load="onLoadAboutVod"
+                        class="row"
                         >
-                        <cover v-for="item in vodChange" :item="item" :key="item.vodId"></cover>
+                        <cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in vodChange" :item="item" :key="item.vodId"></cover>
                     </van-list>
                     <Empty v-else></Empty>
                 </van-tab>
@@ -841,10 +844,8 @@ export default {
 
 }
 .video-container{
-    width: 375px;
-    height: 212px;
     margin-top: 44px;
-
+    position: relative;
     .flex-align-center;
     justify-content: center;
     .left-arrow{
