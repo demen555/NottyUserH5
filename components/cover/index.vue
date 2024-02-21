@@ -32,7 +32,7 @@
           <div class="main-time">{{ item.vodDuration }}</div>
         </div>
         <nuxt-link :to="localePath({
-            name: 'avatar',
+            name: 'creator',
             query: { userId: item.user && item.user.userId}
         })">
           <div class="main-update-content">

@@ -1,7 +1,7 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav :title="$t('str_footer_nav9')" text></Nav>
+    <nav-new :title="$t('str_footer_nav9')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
       <div class="police-title">{{ $t('str_footer_faq1') }}</div>
       <div class="police-title">{{ $t('str_footer_faq2') }}</div>
@@ -15,7 +15,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import Nav from '@/components/nav'
+import NavNew from '@/components/nav/new'
 import Thumb from '@/components/thumb'
 import empty from '@/components/empty'
 import tagLoad from "@/components/skeleton/tagLoad.vue"
@@ -57,7 +57,7 @@ export default{
     }
   },
   components: {
-    Nav,
+    NavNew,
     Thumb,
     empty,
     tagLoad
