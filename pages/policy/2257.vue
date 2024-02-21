@@ -1,7 +1,7 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <Nav title="2257" text></Nav>
+    <nav-new title="2257" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
       <div class="police-title">{{ $t('str_footer_22571') }}</div>
       <div class="police-text-content">
@@ -18,7 +18,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import Nav from '@/components/nav'
+import NavNew from '@/components/nav/new'
 import Thumb from '@/components/thumb'
 import empty from '@/components/empty'
 import tagLoad from "@/components/skeleton/tagLoad.vue"
@@ -60,7 +60,7 @@ export default{
     }
   },
   components: {
-    Nav,
+    NavNew,
     Thumb,
     empty,
     tagLoad

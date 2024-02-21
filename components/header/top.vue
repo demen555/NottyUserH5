@@ -3,9 +3,19 @@
     <Overlay v-model="overlayShow" v-if="overlayShow"></Overlay>
       <header class="home-header" id="home-header">
         <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common" alt="more">
-        <div @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        <div class="pc-logo d-none d-md-block" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        <div class="d-block d-md-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        <!-- <div class="d-md-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
+        <nuxt-link :to="localePath('search')" >
+          <div class="d-none d-md-block search-btn">
+            <form action="javascript:return true">
+              <input ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
+            </form>
+            <img class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
+          </div>
+        </nuxt-link>
         <div class="header-right">
-          <nuxt-link :to="localePath('search')">
+          <nuxt-link :to="localePath('search')" class="d-sm-none">
             <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search" alt="com_sousuo">
           </nuxt-link>
           <img v-if="userinfo.userPortrait" @click="handleExpand('right')" class="header-common1"  :src="userinfo.userPortrait" alt="avatar">
@@ -280,13 +290,8 @@ export default {
   mounted(){
     this.set_categoryList( this.typeList)
     this.set_tagList( this.tagList)
+    this.handleFocus()
     console.log( this.tagList, this.typeList, "typeList&tagList" )
-  },
-  activated(){
-    console.log( 'this.$route.name', this.$route.name )
-    this.showPop = false
-    this.showRightPop = false
-    
   },
   computed: {
     ...mapGetters(['userinfo', 'theme', 'isLogin', 'tagId', 'typeId','accessToken']),
@@ -306,6 +311,9 @@ export default {
     handleClick(id){
       this.set_typeid(id)
       console.log(id, 'typeid')
+    },
+    handleFocus(){
+      this.$refs.searchRef && this.$refs.searchRef.focus()
     },
     handleClickNotty(){
       console.log(this.$route.name)
@@ -341,7 +349,7 @@ export default {
         id: item.id,
         name: item.name,
       });
-
+      localStorage.removeItem('search')
       this.set_tagid(item.id)
       this.$router.push(this.localePath({
         name: 'tag-name',
@@ -458,6 +466,7 @@ export default {
       this.showRightPop = false
     },
     handleGoPage(val){
+    console.log(val, 'input')
       console.log(this.$route.name, 'route')
       if( val == "collect" && !this.isLogin ){
         return this.$refs.dialogLoginRef.onShow()
@@ -796,6 +805,10 @@ header{
     left: 50%;
     transform: translate(-54px, -12px);
   }
+  .pc-logo{
+    position: absolute;
+    left: 100px;
+  }
 }
 
 .menu-header{
@@ -887,6 +900,48 @@ header{
 
 .all-tag, .all-type{
   color: #FFFFFF;
+}
+
+.search-img{
+  width: 16px;
+  height: 16px;
+  display: flex;
+}
+.search-btn{
+  width: 70vw;
+  margin: 0 auto;
+  font-size: 14px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-input{
+  width: 75vw;
+  margin: 0 auto;
+  background-color: var(--bg-color3, rgba(246, 214, 88, 0.1));
+  border-radius: 24px;
+  text-indent: 2.5em;
+  color: var(--bg-secondry,  #FD46F6);
+  height: 48px;
+  border: 1PX solid var(--bg-primary, #F6D658);
+}
+input::placeholder{
+  color: var(--bg-secondry,  #FD46F6);
+}
+.com-sousuo{
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  width: 16px;
+  height: 16px;
+}
+.search-icon{
+  position: absolute;
+  left: 12px;
+  top: 40px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 }
 
 </style>

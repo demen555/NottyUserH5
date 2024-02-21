@@ -46,6 +46,7 @@ export default{
     handleClickType(item){
       console.log( 'set_typeid' )
       this.set_typeid(item.id)
+      localStorage.removeItem('search')
     }
   }
 }
