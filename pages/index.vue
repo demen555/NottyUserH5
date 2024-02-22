@@ -83,6 +83,7 @@
         <img :src="require('~/static/images/upload.svg')" alt="upload">
       </a>
     </div>
+    <dialogBottom ref="dialogBottomRef"></dialogBottom>
   </div>
 </template>
 <script>
@@ -92,6 +93,7 @@ import Cover from '~/components/cover'
 import CODES from "~/plugins/enums/codes"
 import vPagination from '~/components/pagination/index.vue'
 import commonMinxin from '~/plugins/mixins/common'
+import dialogBottom from "~/components/dialog/dialog-bottom.vue"
 export default{
 // async fetch() {
 //   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
@@ -126,7 +128,8 @@ data() {
     hostname: '',
     showSticky: true,
     tagList: [],
-    categoryList: []
+    categoryList: [],
+    showPopup: false, //底部popup
   }
 },
 computed: {
@@ -163,11 +166,18 @@ created(){
     this.hostname = window.location.hostname
   }
   this.getList('first')
+  if(process.client){
+    this.$nextTick(() => {
+      !localStorage.getItem('showBottom') && this.$refs.dialogBottomRef.onShow()
+    })
+  }
+  // this.showPopup = true
 },
 components: {
   HeaderTop,
   Cover,
-  vPagination
+  vPagination,
+  dialogBottom
 },
 watch: {
   ['pageInfo.page'](val){
@@ -405,5 +415,9 @@ overflow: visible;
     font-weight: bold;
     color: var(--text-color1, #181E2A);
   }
+}
+
+.van-overlay{
+  display: none;
 }
 </style>
