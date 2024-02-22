@@ -12,7 +12,7 @@
       <div class="police-text-content">{{ $t('str_footer_cookie5') }}</div>
       <div class="police-text-content">{{ $t('str_footer_cookie6') }} </div>
       <div class="police-text-content">{{ $t('str_footer_cookie7') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_cookie8') }} </div>
+      <!-- <div class="police-text-content">{{ $t('str_footer_cookie8') }} </div> -->
       <div class="police-text-content">{{ $t('str_footer_cookie9') }}</div>
       <div class="police-text-content">{{ $t('str_footer_cookie10') }} </div>
       <div class="police-text-content">{{ $t('str_footer_cookie11') }}</div>
