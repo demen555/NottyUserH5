@@ -27,6 +27,7 @@
   "str_error_password": "Password not long enough",
   "str_guild_text": "This website contains age-restricted materials including nudity and explicit depictions of sexual activity. By entering, you affirm that you are at least 18 years of age or the age of majority in the jurisdiction you are accessing the website from and you consent to viewing sexually explicit content.",
   "str_enter_text": "I am 18 or older - Enter",
+  "str_enter_text1": "ACCEPT",
   "str_exit_text": "I am under 18 - Exit",
   "str_page_text1": "Our <b>parental controls page</b> explains ",
   "str_page_text2": "how you can easily",
@@ -38,6 +39,8 @@
   "str_page_text15": "Most Relevant",
   "str_page_text16": "Most View",
   "str_page_text17": "Top Rated",
+  "str_page_text18": "We use cookies to enhance your browsing experience and provide personalized content. By clicking 'Accept', you agree to the use of cookies as described in our",
+  "str_page_text19": "Cookie Policy.",
   
   "str_guild_age": "Age Verification",
   
