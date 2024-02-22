@@ -1,34 +1,39 @@
 <template>
   <div>
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <NavNew :title="$t('str_user_center')"></NavNew>
-    <div class="user-info">
-        <div class="user-content avatar">
-            <span class="title">{{ $t('str_header') }}</span>
-            <van-uploader :before-read="beforeRead">
-                <div class="img-icon">
-                    <img class="img" v-if="userinfo.userPortrait" :src="userinfo.userPortrait" alt="avatar">
-                    <img class="img" v-else src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
-                    <i :class="themeChecked?'icon': 'icon-white'"></i>
-                </div>
-            </van-uploader>
-        </div>
+    <div class="user-pc">
 
-        <div class="user-content account"> 
-            <span class="title">{{ $t('str_user_account') }}</span>
-            <span class="words">{{ userinfo.userName }}</span>
-        </div>
-        <div class="user-content time">
-            <span class="title">{{ $t('str_register_time') }} </span>
-            <span class="words">{{ formatTime(userinfo.userRegTime) }}</span>
-            
-        </div>
+    </div>
+    <div class="user-mobile d-md-none">   
+        <NavNew :title="$t('str_user_center')"></NavNew>
+        <div class="user-info ">
+            <div class="user-content avatar">
+                <span class="title">{{ $t('str_header') }}</span>
+                <van-uploader :before-read="beforeRead">
+                    <div class="img-icon">
+                        <img class="img" v-if="userinfo.userPortrait" :src="userinfo.userPortrait" alt="avatar">
+                        <img class="img" v-else src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
+                        <i :class="themeChecked?'icon': 'icon-white'"></i>
+                    </div>
+                </van-uploader>
+            </div>
 
-        <div class="user-content pwdChange" @click="goPages('user-pwdChange')">
-            <span class="title"> {{ $t('str_change_pwd') }} </span>
-            <i class="words" :class="themeChecked?'icon': 'icon-white'"></i>
-        </div>
+            <div class="user-content account"> 
+                <span class="title">{{ $t('str_user_account') }}</span>
+                <span class="words">{{ userinfo.userName }}</span>
+            </div>
+            <div class="user-content time">
+                <span class="title">{{ $t('str_register_time') }} </span>
+                <span class="words">{{ formatTime(userinfo.userRegTime) }}</span>
+                
+            </div>
 
+            <div class="user-content pwdChange" @click="goPages('user-pwdChange')">
+                <span class="title"> {{ $t('str_change_pwd') }} </span>
+                <i class="words" :class="themeChecked?'icon': 'icon-white'"></i>
+            </div>
+
+        </div>
     </div>
   </div>
 </template>
