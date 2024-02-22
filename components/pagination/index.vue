@@ -96,6 +96,7 @@ export default {
 
 <style lang="less">
 .pagination {
+  width: 400px;
   overflow: hidden;
   display: table;
   margin: 0 auto;
