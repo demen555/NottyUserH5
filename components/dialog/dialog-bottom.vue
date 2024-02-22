@@ -1,6 +1,6 @@
 <template>
   <van-popup v-model="showPopup" position="bottom" :style="{ height: '170px' }">
-    <div class="pop-content">{{ $t('str_page_text18') }} <a>{{ $t('str_page_text19') }}</a></div>
+    <div class="pop-content">{{ $t('str_page_text18') }} <nuxt-link :to="localePath('policy-cookie')">{{ $t('str_page_text19') }}</nuxt-link></div>
     <div class="dialog-btns" @click="handleSubmit">
       {{ $t('str_enter_text1') }}
     </div>
