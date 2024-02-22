@@ -66,7 +66,6 @@ export default {
     width: 100%;
     height: 100%;
     background: url("~~/static/images/01.png") center/cover fixed no-repeat;
-    filter: blur(4px);
     z-index: -1;
   }
 }
