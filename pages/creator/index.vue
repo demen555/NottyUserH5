@@ -2,7 +2,7 @@
   <div>
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
     <div class="main-video">
-      <div class="video-container">
+      <div class="video-container d-sm-none">
         <div class="main-update-img" v-if="upInfo?.userPortrait"><img :src="upInfo.userPortrait" alt="person"></div>
         <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
         <div class="main-title">{{ upInfo?.name || 'None' }}</div>
@@ -12,15 +12,28 @@
               <div :class="themeChecked ? 'main-view' : 'main-view-white'"></div>
               <div class="main-text">{{ formatNumber(upInfo?.vodCount || 0)}}</div>
             </div>
-            <!-- <div class="mian-btn-like">
-              <div :class="themeChecked ? 'main-like' : 'main-like-white'"></div>
-              <div class="main-text">{{ upInfo?.praiseCount }}</div>
-            </div> -->
           </div>
         </div>
       </div>
-      <!-- <div class="video-space"></div> -->
-
+      <div class="d-none d-md-block">
+        <div class="video-container-pc">
+          <div class="video-container-pc-left">
+            <div class="main-update-img" v-if="upInfo?.userPortrait"><img :src="upInfo.userPortrait" alt="person"></div>
+            <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
+          </div>
+          <div class="video-container-pc-right">
+            <div class="main-title">{{ upInfo?.name || 'None' }}</div>
+            <div class="main-btn">
+              <div class="main-btn-right">
+                <div class="main-btn-view">
+                  <div :class="themeChecked ? 'main-view' : 'main-view-white'"></div>
+                  <div class="main-text">{{ formatNumber(upInfo?.vodCount || 0)}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <template>
         <div class="video-line"></div>
         <div class="video-list">
@@ -44,7 +57,9 @@
               :immediate-check='false'
               @load="onLoad"
             >
-              <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+              <div class="row">
+                <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+              </div>
             </van-list>
           </van-pull-refresh>
         </div>
@@ -242,6 +257,25 @@ export default {
     left: 16px;
     top: 60px;
     z-index: 99;
+  }
+}
+
+.video-container-pc{
+  width: 100%;
+  display: flex;
+  padding-top: 92px;
+  padding-bottom: 24px;
+  .video-container-pc-left{
+    margin-left: 44px;
+  }
+  .video-container-pc-right{
+    margin-left: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .main-title{
+      padding-left: 12px;
+    }
   }
 }
 
@@ -557,7 +591,7 @@ export default {
 .video-tag-list {
   display: flex;
   // min-width: 375px;
-  margin-bottom: 16px;
+  // margin-bottom: 16px;
   overflow-x: auto;
   flex-grow: 1;
   margin-left: 12px;
@@ -569,10 +603,13 @@ export default {
     display: block;
     display: flex;
     flex-grow: 1;
+    font-size: 14px;
   }
 
   .active {
     border-color: #F6D658 !important;
+    background-color: #F6D658 !important;
+    color: rgba(24, 30, 42, 1);
   }
 
   .tag-name {
