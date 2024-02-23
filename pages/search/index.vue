@@ -2,9 +2,7 @@
   <div class="search-page"  id="search">
     <HeaderTop ref="header" v-show="!searchShow"></HeaderTop>
     <div class="search" ref="search" v-show="searchShow">
-      <!-- <div class="search-img" @click="handleGoHome"><img class="svg-icon" :src="themeChecked? require('~/static/images/com_jt_sx_zuo.svg'): require('~/static/images/com_jt_sx_zuo_rj.svg')" alt=""></div> -->
       <div class="search-btn">
-        <!-- <input ref="searchRef" v-model="search" placeholder="搜索什么" class="search-input" type="text" @keyup.enter="handleSearch"> -->
         <form action="javascript:return true">
           <input ref="searchRef" type="search"  :placeholder="$t('str_search_something')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
         </form>
@@ -20,10 +18,20 @@
             <div class="search-title">{{ $t('str_search_his_title') }}</div>
             <div class="search-clear" @click="handleClearCurrentHistory">{{ $t('str_search_clear') }}</div>
           </div>
-          <div class="search-list-new">
-            <div  class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
+          <!-- 移动版布局 -->
+          <div class="search-list-new d-sm-none">
+            <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
               <div @click="handleGoToResult(item)" >{{ item }}</div>
               <img @click="handleClearHistory(index)" class="header-common svg-icon" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+            </div>
+          </div>
+          <!-- pc版布局 -->
+          <div class="d-none d-md-block">
+            <div class="search-list-new-pc">
+              <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
+                <div @click="handleGoToResult(item)" >{{ item }}</div>
+                <img style="margin-left: 13px; margin-right: 24px;" @click="handleClearHistory(index)" class="header-common svg-icon" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+              </div>
             </div>
           </div>
           <!-- 第一版 -->
@@ -42,6 +50,7 @@
           </div> -->
           <!-- 第一版 -->
           <div class="search-title">{{ $t('str_rec_title') }}</div>
+          <div style="height: 16px;" class="d-none d-md-block"></div>
           <div class="search-list">
             <a @click="handleGoToResult(item)" v-for="(item, index) in keysList" :key="index">{{ item }}</a>
           </div>
@@ -79,7 +88,9 @@
               :immediate-check="false"
               :offset="30"
             >
-              <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+              <div class="row">
+                <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+              </div>
             </van-list>
           </van-pull-refresh>
         </template>
@@ -392,8 +403,8 @@ methods: {
 </script>
 <style lang="less" scoped>
 .search{
-  // width: 90%;
-  margin: 0 12px;
+  width: 90%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   height: 32px;
@@ -406,6 +417,9 @@ methods: {
   .van-pull-refresh__head{
     z-index: -1;
   }
+}
+.svg-icon{
+  cursor: pointer;
 }
 .no-match{
   text-align: center;
@@ -431,14 +445,15 @@ methods: {
   display: flex;
 }
 .search-btn{
-  width: 306px;
+  width: 90%;
+  // width: 100%;
   font-size: 14px;
   position: relative;
   display: flex;
   align-items: center;
 }
 .search-input{
-  width: 294px;
+  width: 70vw;
   background-color: var(--bg-color3, rgba(246, 214, 88, 0.1));
   border-radius: 16px;
   text-indent: 2.5em;
@@ -498,6 +513,19 @@ input::placeholder{
 .search-list-new{
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   font-size: 14px;
+  .search-list-li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+}
+.search-list-new-pc{
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  font-size: 14px;
+  display: flex;
+  margin-top: 24px;
+  margin-bottom: 40px;
   .search-list-li{
     display: flex;
     align-items: center;

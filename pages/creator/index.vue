@@ -1,6 +1,7 @@
 <template>
   <div>
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
+    <!-- 移动端布局 -->
     <div class="main-video">
       <div class="video-container d-sm-none">
         <div class="main-update-img" v-if="upInfo?.userPortrait"><img :src="upInfo.userPortrait" alt="person"></div>
@@ -15,6 +16,7 @@
           </div>
         </div>
       </div>
+      <!-- pc样式布局 -->
       <div class="d-none d-md-block">
         <div class="video-container-pc">
           <div class="video-container-pc-left">

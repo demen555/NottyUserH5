@@ -7,11 +7,14 @@
         <div class="d-block d-md-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
         <!-- <div class="d-md-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
         <nuxt-link :to="localePath('search')" >
-          <div class="d-none d-md-block search-btn">
-            <form action="javascript:return true">
+          <div class="d-none d-md-block search-btn" @click.stop="handleGoPage('search')">
+            <!-- <form>
               <input ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
-            </form>
-            <img class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
+            </form> -->
+            <div class="search-top-btn">
+              <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
+              <div class="search-top-text">{{ $t('str_search') }}</div>
+            </div>
           </div>
         </nuxt-link>
         <div class="header-right">
@@ -510,7 +513,7 @@ header{
   justify-content: space-between;
   align-items: center;
   padding: 0 12px;
-  background-color: var(--bg-color1, #0E0E0F);
+  background-color: #0C1015;
   border-bottom: 1px solid var(--bg-color2, rgba(245, 245, 247, 0.06));
   z-index: 999;
   position: fixed;
@@ -914,6 +917,29 @@ header{
   position: relative;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  .search-top-btn{
+    width: 80%;
+    margin: 0 auto;
+    height: 48px;
+    border: 1PX solid rgba(246, 214, 88, 1);
+    border-radius: 24px;
+    position: relative;
+    background: rgba(255, 229, 0, 0.1);
+    .search-top-text{
+      color: rgba(253, 70, 246, 1);
+      font-size: 16px;
+      position: absolute;
+      left: 48px;
+      top: -24px;
+    }
+    .search-top-icon{
+      display: block;
+      position: absolute;
+      left: 16px;
+      top: 12px;
+    }
+  }
 }
 .search-input{
   width: 75vw;
