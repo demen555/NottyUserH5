@@ -39,7 +39,7 @@
                 <span class="words">{{ formatTime(userinfo.userRegTime) }}</span>
             </div>
 
-            <div class="user-content pwdChange col-sm-12 col-md-4 col-lg-4 col-xl-4" @click="goPages('user-pwdChange')">
+            <div class="user-content pwdChange col-sm-12 col-md-4 col-lg-4 col-xl-4" @click="showPwdDialog = true">
                 <span class="title"> {{ $t('str_change_pwd') }} </span>
                 <span class="words"> ****** </span>
                 <i class="words" :class="themeChecked?'icon': 'icon-white'"></i>
@@ -47,6 +47,11 @@
 
         </div>
     </div>
+    <van-overlay z-index="999" class-name="set-pwd-dialog" :show="showPwdDialog" >
+        <div class="pwd-dialog">
+            <pwdChange @cancel="cancel"></pwdChange>
+        </div>
+    </van-overlay>
   </div>
 </template>
 <script>
@@ -56,12 +61,17 @@ import userMinxin from '~/plugins/mixins/user'
 import commonMinxin from '~/plugins/mixins/common'
 import { dateFormat, formatTime } from '@/utils/format.js'
 import CODES from "~/plugins/enums/codes"
-
+import pwdChange from "./pwdChange.vue"
 
 export default {
     name: "user",
     mixins: [userMinxin, commonMinxin],
-   
+    components:{ pwdChange },
+    data(){
+        return{
+            showPwdDialog: false
+        }
+    },
     computed:{
         ...mapGetters([
             "userinfo"
@@ -119,7 +129,9 @@ export default {
             }
         },
 
-
+        cancel(){
+            this.showPwdDialog = false;
+        }
     },
     
 }
@@ -170,7 +182,6 @@ export default {
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-
     }
     .img{
         width: 32px;
@@ -197,9 +208,28 @@ export default {
         transform: translateY(-50%);
         background: url("~~/static/images/com_jt_sx_you_rj.svg");
     }
+    &.pwdChange {
+        .words{
+            margin-right: 8px;
+        }
+        .icon{
+            margin-right: 0;
+        }
+    }
 }
 :deep(.van-nav-bar__left){
   font-size: 18px;
+}
+.pwd-dialog{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 343px;
+    height: 286px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(24, 24, 28, 1);
 }
 @media (min-width: 1024px) {
     .user{
