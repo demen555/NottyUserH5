@@ -268,6 +268,8 @@ overflow: visible;
   .tag-name{
     flex-shrink: 0;
     padding: 5px 8px;
+    display: flex;
+    justify-content: center;
     // width: 98px;
     // height: 28px;
     border-radius: 4px;

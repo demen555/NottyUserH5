@@ -71,6 +71,7 @@
   z-index: 999;
   position: fixed;
   top: 44px;
+  left: 0;
   width: 100%;
 }
 .header-common{

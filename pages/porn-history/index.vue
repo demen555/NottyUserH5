@@ -1,11 +1,12 @@
 <template>
-  <div class="collect">
+  <div class="collect container-fluid">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')" :title="$t('str_his')" :text=" dataList.length > 0 ? true : historyVod.length === 0"></Nav>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
     <div :class="['paddingTop88', showFooter ? 'paddingBottom50': 'paddingBottom10' ]"  v-if="dataList.length">
+      <div style="height: 50px;" class="d-none d-md-block"></div>
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -16,7 +17,9 @@
           :offset="10"
         >
           <van-checkbox-group v-model="result" ref="checkboxGroup">
-            <Cover :class="{ 'cover-mask': result.includes(item.vodId) }" v-for="item in dataList" :item="item" :key="item.vodId" :showCheck="showFooter"></Cover>
+            <div class="row">
+              <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" :class="{ 'cover-mask': result.includes(item.vodId) }" v-for="(item,index) in dataList" :style="index === 0 ?'padding-top: 18px': '' " :item="item" :key="item.vodId" :showCheck="showFooter"></Cover>
+            </div>
           </van-checkbox-group>
         </van-list>
       </van-pull-refresh>

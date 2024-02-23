@@ -1,17 +1,16 @@
 <template>
   <div class="cover" >
-    <div class="main-like-radio" v-if="showCheck" @click.stop>
+    <div class="main-like-radio" v-show="showCheck" @click.stop>
       <van-checkbox :name="item.vodId" @click.native.stop="()=>{}"></van-checkbox>
     </div>
     <nuxt-link class="main-list" @click.prevent :to="localePath({
         name: 'video-id',
         params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
     })">
-      <div style="height: 50px;" v-if="!['index___en','index___pt'].includes(this.$route.name)" class="d-none d-md-block"></div>
-      <div style="height: 16px;" v-if="!['index___en','index___pt'].includes(this.$route.name)" class="d-sm-none"></div>
+      <!-- <div style="height: 50px;" v-if="!['index___en','index___pt'].includes(this.$route.name)" class="d-none d-md-block"></div> -->
+      <!-- <div style="height: 16px;" v-if="!['index___en','index___pt'].includes(this.$route.name)" class="d-sm-none"></div> -->
       <div class="main-list-group" @touchmove="longpressVideo(item)">
         <div class="main-video">
-
           <div :class="['main-img', { 'main-img-opacity' : vodId == item.vodId && item.vodPreviewUrl }]" >
            <van-image
               lazy-load
@@ -134,8 +133,7 @@ export default{
   
 }
 .main-list-group{
-  // margin-top: 16px;
-  
+  margin-top: 16px;
 }
 .main-video{
   padding-top: 56.53%;
@@ -144,7 +142,7 @@ export default{
 .main-like-radio{
   position:absolute;
   right: 12.5px;
-  top: 12.5px;
+  top: 30px;
   height: 15px;
   display: flex;
   align-items: center;

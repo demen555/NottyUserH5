@@ -15,6 +15,12 @@
 
 /* mobile 端样式 */
 @media (max-width: 579px) {
+  .nav-menu-left,.thumb-left{
+    .pxToVW(14, font-size) !important;
+  }
+  .tags{
+    .pxToVW(12, font-size) !important;
+  }
   // 首页
   .home{
     .home-footer{
@@ -79,6 +85,27 @@
         }
       }
     }
+  }
+  // 封面
+  .main-text{
+    .pxToVW(12, font-size) !important;
+  }
+  .main-title{
+    .pxToVW(14, font-size) !important;
+  }
+  .main-update-img{
+    img{
+      .pxToVW(40, width) !important;
+      .pxToVW(40, height) !important;
+    }
+  }
+  .main-like{
+    .pxToVW(16, width) !important;
+    .pxToVW(16, height) !important;
+  }
+  .main-view{
+    .pxToVW(16, width) !important;
+    .pxToVW(16, height) !important;
   }
   //视频详情
   .main-video{

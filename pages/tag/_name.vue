@@ -1,11 +1,12 @@
 <template>
-  <div class="home">
+  <div class="home container-fluid">
     <HeaderTop @refresh="onRefresh" ></HeaderTop>
     <nav-new :title="txtTitle" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></nav-new>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
     <template v-if="dataList.length">
+      <div style="height: 60px;" class="d-none d-md-block"></div>
       <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
