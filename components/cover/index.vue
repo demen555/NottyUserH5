@@ -7,6 +7,8 @@
         name: 'video-id',
         params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
     })">
+      <div style="height: 50px;" v-if="!['index___en','index___pt'].includes(this.$route.name)" class="d-none d-md-block"></div>
+      <div style="height: 16px;" v-if="!['index___en','index___pt'].includes(this.$route.name)" class="d-sm-none"></div>
       <div class="main-list-group" @touchmove="longpressVideo(item)">
         <div class="main-video">
 
@@ -132,7 +134,7 @@ export default{
   
 }
 .main-list-group{
-  margin-top: 16px;
+  // margin-top: 16px;
   
 }
 .main-video{

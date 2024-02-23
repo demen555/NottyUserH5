@@ -15,7 +15,9 @@
           :immediate-check="false"
           :offset="10"
         >
-          <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+          <div class="row">
+            <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+          </div>
         </van-list>
       </van-pull-refresh>
       <h2 class="footer-title paddingTop88"> {{ categoryMetaData.h2}} </h2>
