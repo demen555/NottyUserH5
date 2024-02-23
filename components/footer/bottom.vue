@@ -59,6 +59,10 @@ export default{
 </script>
 <style lang="less" scoped>
 .home-footer{
+  // position: fixed;
+  // z-index: 9999;
+  // bottom: 0;
+  // left: 0;
   width: 100%;
   padding: 0 12px;
   color: var(--text-color2, rgba(255, 255, 255, 0.70));

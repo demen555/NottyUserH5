@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home container-fluid">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <!-- <Nav :title="$t('str_menu_type_all')" text></Nav> -->
     <nav-new :title="$t('str_menu_type_all')" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></nav-new>
@@ -7,6 +7,7 @@
       <tagLoad></tagLoad>
     </div>
     <template v-if="typeList.length">
+      <div style="height: 50px;" class="d-none d-md-block"></div>
       <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -16,8 +17,8 @@
           :immediate-check="false"
           :offset="10"
         >
-          <div class="thumb">
-            <Thumb :tag="tag" v-for="tag in typeList" :key="tag.id"></Thumb>
+          <div class="thumb row">
+            <Thumb class="col-sm-4 col-md-4 col-lg-3 col-xl-6" :tag="tag" v-for="tag in typeList" :key="tag.id"></Thumb>
           </div>
           <!-- <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover> -->
         </van-list>

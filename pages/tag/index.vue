@@ -3,6 +3,7 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <nav-new :title="tags[tagIndex] + ' ' + '('+ total + ' results' + ')'" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></nav-new>
     <div class="paddingTop88"></div>
+    <div style="height: 50px;" class="d-none d-md-block"></div>
     <div class="tag-box" >
       <div v-for="(item, index) in tags" :key="index"><span class="tag-name" :class="tagIndex === index? 'tag-color': ''" @click="handleClickTagName(item, index)">{{ item }}</span><span v-if="tags.length -1 !== index" class="tag-line">-</span></div>
     </div>
@@ -18,25 +19,29 @@
           :immediate-check='false'
           @load="onLoad"
         >
-          <div class="thumb">
-            <nuxt-link :to="localePath({
-              name: 'tag-name',
-              params:{
-                id: tag.id,
-                name: tag.name,
-                refresh: true,
-              },
-            })" 
-           
-            class="tag-item" 
-            v-for="(tag, index) in tagList" 
-            :key="index">
-              <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.name }}</span>
-            </nuxt-link>
+          <div class="container-fluid">
+            <div class="thumb row">
+              <nuxt-link :to="localePath({
+                name: 'tag-name',
+                params:{
+                  id: tag.id,
+                  name: tag.name,
+                  refresh: true,
+                },
+              })" 
+            
+              class="tag-item col-5 col-sm-6 col-md-4 col-lg-3 col-xl-2" 
+              v-for="(tag, index) in tagList" 
+              :key="index">
+                <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.name }}</span>
+              </nuxt-link>
+            </div>
           </div>
         </van-list>
     </van-pull-refresh>
     <empty v-else></empty>
+    <div style="height: 160px;" class="d-none d-md-block"></div>
+    <fBottom class="d-none d-md-block"></fBottom>
   </div>
 </template>
 <script>
@@ -45,6 +50,7 @@ import NavNew from '@/components/nav/new'
 import Thumb from '@/components/thumb'
 import empty from '@/components/empty'
 import tagLoad from "@/components/skeleton/tagLoad.vue"
+import fBottom from '~/components/footer/bottom.vue'
 import commonMinxin from '~/plugins/mixins/common'
 import CODES from "~/plugins/enums/codes"
 
@@ -72,7 +78,8 @@ export default{
     NavNew,
     Thumb,
     empty,
-    tagLoad
+    tagLoad,
+    fBottom
   },
   created(){
     this.initTagList('first')
@@ -184,8 +191,9 @@ export default{
 }
 .tag-item{
   display: block;
-  width: 172px;
+  // min-width: 172px;
   height: 32px;
+  margin-right: 10px;
   border-radius: 4px;
   background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   display: flex;
