@@ -19,6 +19,10 @@ export default {
     handleSubmit() {
       this.showPopup = false
       localStorage.setItem('showBottom', true)
+      gtag('consent', 'update', {
+        'ad_storage': 'granted',
+        'analytics_storage': 'granted'
+      });
     },
     onShow() {
       this.showPopup = true

@@ -169,7 +169,13 @@ created(){
   this.getList('first')
   if(process.client){
     this.$nextTick(() => {
-      !localStorage.getItem('showBottom') && this.$refs.dialogBottomRef.onShow()
+      if( !localStorage.getItem('showBottom') ){
+        this.$refs.dialogBottomRef.onShow()
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'analytics_storage': 'denied'
+        });
+      }
     })
   }
   // this.showPopup = true
