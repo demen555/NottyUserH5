@@ -16,7 +16,7 @@
         <div class="search-card">
           <div class="search-card-top">
             <div class="search-title">{{ $t('str_search_his_title') }}</div>
-            <div class="search-clear" @click="handleClearCurrentHistory">{{ $t('str_search_clear') }}</div>
+            <div class="search-clear" @click="handleClearCurrentHistory"><img class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete"></div>
           </div>
           <!-- 移动版布局 -->
           <div class="search-list-new d-sm-none">
@@ -561,5 +561,8 @@ input::placeholder{
 }
 .search-page {
   z-index: 10;
+}
+.header-common{
+  cursor: pointer;
 }
 </style>
