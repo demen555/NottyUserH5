@@ -1,10 +1,9 @@
 <template>
   <div class="sendEmail">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
+    <h1 class="title1  d-none d-sm-block">Lost password？</h1>
     <h1 class="title"> {{ $t('str_get_back_pwd') }} </h1>
     <div class="pwd-Forgot">
-
-        
         <div class="user-lable">
             <img :src="themeChecked ? require('~/static/images/login_email_1.svg'): require('~/static/images/login_email.svg')">
             <label for="email">
@@ -24,6 +23,10 @@
         <div class="user-btn-submit" @click="onClickRight">
             {{ $t('str_get_back') }}
             <van-loading class="user-icon" type="spinner" v-show="showLoading" />
+        </div>
+        <div class="rta-com d-none d-sm-flex">
+            <p class="com">  © {{ hostname }}, 2023 </p>
+            <img class="rta" :src="require('~/static/images/rat.png')" alt="rta">
         </div>
     </div>
   </div>
@@ -48,12 +51,19 @@ export default {
                 showError: false,
                 errorMsg: ''
             },
+            hostname: ""
         }
     },
     computed:{
         ...mapGetters([
             "userinfo"
         ])
+    },
+
+    created(){
+        if(process.client){
+            this.hostname = window.location.hostname
+        }
     },
 
     methods:{
@@ -110,6 +120,7 @@ export default {
 <style lang="less" scoped>
 .sendEmail{
     padding: 0 32px;
+    margin-top: 88px;
     .pwd-Forgot{
         margin-top: 24px;
     }
@@ -127,7 +138,6 @@ export default {
         font-style: normal;
         font-weight: 500;
         line-height: normal;
-        margin-top: 88px;
     }
     .title_sub{
         color: var(--ffffff-70, rgba(255, 255, 255, 0.70));

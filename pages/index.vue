@@ -16,7 +16,7 @@
       </van-list>
     </van-pull-refresh> -->
     <div class="video-list paddingTop45 row" >
-      <div class="video-tag-list" >
+      <div class="video-tag-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
           <nuxt-link :to="localePath({
               name: 'tag-name',
               params: { id: tag.id, name: tag.name }

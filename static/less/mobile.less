@@ -8,6 +8,11 @@
   @{attr}: ~"@{vw}vw";
 }
 
+.pxToVW1440 (@px, @attr: width) {
+  @vw: (@px / 1440) * 100;
+  @{attr}: ~"@{vw}vw";
+}
+
 .pxToVW1920 (@px, @attr: width) {
   @vw: (@px / 1920) * 100;
   @{attr}: ~"@{vw}vw";
@@ -134,7 +139,113 @@
   }
 }
 
-// PC 样式
+// PC 579px 样式
+@media (min-width: 579px) {
+  #__nuxt{
+    .sendEmail{
+      .pxToVW1920(1440, width);
+      .pxToVW1920(816, height);
+      margin: 45px auto;
+      position: relative;
+      min-width: 579px;
+      min-height: 328px;
+      .pxToVW1920(80, padding-top);
+      &::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.1;
+        background: url("~~/static/images/Babe-1.png");
+        background-size: cover;
+        // z-index: -1;
+      }
+      .title{
+        width: 484px;
+        margin: 0 auto;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .title1{
+        font-size: 32px;
+        margin-bottom: 32px;
+        color: #FFF;
+        text-align: center;
+      }
+      .pwd-Forgot{
+        width: 484px;
+        margin: 0 auto;
+      }
+      .rta-com{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 26px;
+        .com{
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.7);
+        }
+        .rta{
+          width: 64px;
+          height: 24px;
+          margin-left: 12px;
+        }
+      }
+    }
+    .pwdForgot{
+      .pxToVW1920(1440, width);
+      .pxToVW1920(816, height);
+      margin: 45px auto;
+      position: relative;
+      min-width: 579px;
+      min-height: 328px;
+      .pxToVW1920(80, padding-top);
+      &::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.1;
+        background: url("~~/static/images/Babe-1.png");
+        background-size: cover;
+        // z-index: -1;
+      }
+      .title{
+        text-align: center;
+      }
+
+      .pwd-Forgot{
+        width: 484px;
+        margin: 0 auto;
+      }
+      .rta-com{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 26px;
+        .com{
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.7);
+        }
+        .rta{
+          width: 64px;
+          height: 24px;
+          margin-left: 12px;
+        }
+      }
+    }
+
+  }
+
+}
+
+// PC 1024px 样式
 @media (min-width: 1024px) {
   .paddingTop45{
     padding-top: 96px;
@@ -144,5 +255,8 @@
   }
   .new-nav{
     top: 96px !important;
+  }
+  .sendEmail, .pwdForgot{
+    margin-top: 96px !important;
   }
 }

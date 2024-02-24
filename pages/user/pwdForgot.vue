@@ -36,6 +36,11 @@
             {{ $t('str_get_back') }}
             <van-loading class="user-icon" type="spinner" v-show="showLoading" />
         </div>
+        <div class="rta-com d-none d-sm-flex">
+            <p class="com">  © {{ hostname }}, 2023 </p>
+            <img class="rta" :src="require('~/static/images/rat.png')" alt="rta">
+        </div>
+
     </div>
   </div>
 </template>
@@ -66,7 +71,8 @@ export default {
             password1: {
                 showError: false,
                 errorMsg: ''
-            }
+            },
+            hostname: ""
         }
     },
     computed:{
@@ -74,7 +80,11 @@ export default {
             "userinfo"
         ])
     },
-
+    created(){
+        if(process.client){
+            this.hostname = window.location.hostname
+        }
+    },
     methods:{
        
         validatorPassword(){
@@ -143,6 +153,7 @@ export default {
 <style lang="less" scoped>
 .pwdForgot{
     padding: 0 32px;
+    margin-top: 88px;
     .pwd-Forgot{
         margin-top: 24px;
     }
@@ -160,7 +171,6 @@ export default {
         font-style: normal;
         font-weight: 500;
         line-height: normal;
-        margin-top: 88px;
     }
     .title_sub{
         color: var(--ffffff-70, rgba(255, 255, 255, 0.70));
