@@ -9,7 +9,7 @@
     })">
       <!-- <div style="height: 50px;" v-if="!['index___en','index___pt'].includes(this.$route.name)" class="d-none d-md-block"></div> -->
       <!-- <div style="height: 16px;" v-if="!['index___en','index___pt'].includes(this.$route.name)" class="d-sm-none"></div> -->
-      <div class="main-list-group" @touchmove="longpressVideo(item)">
+      <div class="main-list-group" @touchmove="longpressVideo(item)" @mouseenter="longpressVideo(item)">
         <div class="main-video">
           <div :class="['main-img', { 'main-img-opacity' : vodId == item.vodId && item.vodPreviewUrl }]" >
            <van-image
