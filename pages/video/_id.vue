@@ -438,7 +438,7 @@ export default {
             this.$videoApi.requestVodChange({
                 typeId: this.videoInfo.typeId,
                 excludes: this.videoInfo.vodId,
-                categoryId: this.videoInfo.categoryId ? [Number(this.videoInfo.categoryId)] : '',
+                categoryId: this.videoInfo.categoryId,
                 tagId: this.videoInfo.tags && this.videoInfo.tags.length > 0 ? this.videoInfo.tags.map( ele => ele.id) : [],
                 ...this.vodChangePage
             }).then(res => {
