@@ -119,9 +119,13 @@
                     <Empty v-else></Empty>
                 </van-tab>
                 <van-tab name="review" :title="$t('str_review')">
+                    <div class="review-input-pc d-none d-sm-flex" v-if="isLogin">
+                        <textarea placeholder="Please input your comment here" class="textarea" v-model="content"></textarea>
+                        <div class="btn" @click="sendVodReview">{{ $t('str_get_back') }}</div>
+                    </div>
                     <div class="review-btn" @click="showVodReview">
                         <span class="num"> {{ $t('str_vodReviewList', { num: vodReviewtotal }) }} </span>
-                        <div class="btn words-ellipsis">{{ $t('str_review_btn') }}</div>
+                        <div class="btn words-ellipsis d-sm-none">{{ $t('str_review_btn') }}</div>
                     </div>
                     <div class="review-input" v-show="showInput">
                         <input
@@ -133,6 +137,7 @@
                             class="input" 
                             type="text">
                     </div>
+
                     <van-list
                         v-model="loadingReview"
                         :finished="finishedReview"
@@ -688,10 +693,10 @@ export default {
                 if( res.code === CODES.SUCCESS ){
                     this.$toast(this.$t('str_show_when_allow'))
                 }
-
             }).finally( () => {
                 this.onClick = false;
                 this.showInput = false;
+                this.content = ""
             })
         },
 
@@ -1058,6 +1063,38 @@ export default {
         padding: 0 12px;
     }
 }
+
+.review-input-pc{
+    width: 100%;
+    height: 80px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .textarea{
+        flex: 1;
+        background-color: transparent;
+        border: none;
+        resize:none
+    }
+    .btn{
+        width: 80px;
+        height: 32px;
+        text-align: center;
+        line-height: 32px;
+        background-color: var(--bg-primary, #F6D658);
+        color: var(--text-color1, #181E2A);
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 32px;
+        padding: 0 8px;
+        margin-left: 8px;
+    }
+}
+
 .sticky-top{
   position: fixed;
   right: 10px;
