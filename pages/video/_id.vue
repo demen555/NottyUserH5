@@ -913,6 +913,7 @@ export default {
         .flex-align-center;
         flex-direction: column;
         justify-content: center;
+        cursor: pointer;
         .words{
             margin-top: 4px;
         }
@@ -984,6 +985,7 @@ export default {
         border-radius: 4px;
         background: var(--bg-color3, rgba(255, 255, 255, 0.10));
         margin: 0 4px 4px 0;
+        cursor: pointer;
     }
 }
 .video-line{

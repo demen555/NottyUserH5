@@ -813,6 +813,7 @@ header{
   .pc-logo{
     position: absolute;
     left: 100px;
+    cursor: pointer;
   }
 }
 
