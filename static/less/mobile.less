@@ -240,9 +240,33 @@
         }
       }
     }
+    // 右边 导航弹出样式
+    .vant-pop-320{
+      width: 350px;
+      height: 840px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      right: 40px;
+      top: 88px;
+      transform: translateY(0%);
+      &.van-popup--left{
+        left: 40px;
+        height: auto;
+        .menu-right{
+          height: auto;
+          padding: 16px;
+        }
+      }
+      .menu-left{
+        width: 350px;
+        height: 840px;
+      }
+      .menu-header{
+        display: none;
+      }
+    }
 
   }
-
 }
 
 // PC 1024px 样式

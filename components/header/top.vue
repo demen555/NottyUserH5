@@ -31,6 +31,7 @@
       position="left"
       class="vant-pop-320"
       :lazy-render="false"
+      overlay-class="nav-overlay"
     >
       <div id="drawer" class="nav-menu menu-right">
         <div class="menu-header">
@@ -78,6 +79,7 @@
       v-model="showRightPop"
       position="right"
       class="vant-pop-320"
+      overlay-class="nav-overlay"
     >
       <div id="drawer" class="nav-menu menu-left">
         <div class="menu-flex">
