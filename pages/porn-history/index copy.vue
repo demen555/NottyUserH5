@@ -7,15 +7,22 @@
     </div>
     <div :class="['paddingTop88', showFooter ? 'paddingBottom50': 'paddingBottom10' ]"  v-if="dataList.length">
       <div style="height: 50px;" class="d-none d-md-block"></div>
-      <van-checkbox-group v-model="result" ref="checkboxGroup">
-        <div class="row">
-          <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" :class="{ 'cover-mask': result.includes(item.vodId) }" v-for="(item,index) in dataList" :style="index === 0 ?'padding-top: 18px': '' " :item="item" :key="item.vodId" :showCheck="showFooter"></Cover>
-          <div class="pagination">
-            <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
-          </div>
-          <fBottom></fBottom>
-        </div>
-      </van-checkbox-group>
+      <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :finished-text="$t('str_no_more')"
+          :immediate-check="false"
+          @load="onLoad"
+          :offset="10"
+        >
+          <van-checkbox-group v-model="result" ref="checkboxGroup">
+            <div class="row">
+              <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" :class="{ 'cover-mask': result.includes(item.vodId) }" v-for="(item,index) in dataList" :style="index === 0 ?'padding-top: 18px': '' " :item="item" :key="item.vodId" :showCheck="showFooter"></Cover>
+            </div>
+          </van-checkbox-group>
+        </van-list>
+      </van-pull-refresh>
     </div>
     <Empty v-else></Empty>
     <Footer v-if="showFooter && dataList.length" @handleAll="handleAll" :result="result" :showCheck="showCheck"></Footer>  
@@ -186,7 +193,6 @@ methods: {
         // const arr = historyVod.splice(this.pageInfo.page-1, this.pageInfo.size)
         // this.update_historyvod(arr)
         this.dataList = this.historyVod
-        this.pageInfoTotal = this.historyVod.length
         this.loading = false
         this.refreshing = false
         this.spainnerLoading = false
