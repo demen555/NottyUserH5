@@ -4,17 +4,6 @@
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
-    <!-- <van-pull-refresh v-model="refreshing" @refresh="onRefresh" class="paddingTop52">
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        :finished-text="$t('str_no_more')"
-        :immediate-check='false'
-        @load="onLoad"
-      >
-        <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
-      </van-list>
-    </van-pull-refresh> -->
     <div class="video-list paddingTop45 row" >
       <div class="video-tag-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
           <nuxt-link :to="localePath({
@@ -68,12 +57,6 @@ import Cover from '~/components/cover'
 import CODES from "~/plugins/enums/codes"
 import commonMinxin from '~/plugins/mixins/common'
 export default{
-// async fetch() {
-//   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
-//   const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
-//   this.tagList = res1.data.data;
-//   this.categoryList = res2.data.data;
-// },
 fetchOnServer: true,
 mixins: [commonMinxin],
 data() {
