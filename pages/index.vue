@@ -122,20 +122,11 @@ head(){
   }
 },
 created(){
-  this.getList('first')
+  // this.getList('first')
 },
 components: {
   HeaderTop,
   Cover
-},
-watch: {
-  ['pageInfo.page'](val){
-    console.log(val, 'watch')
-    this.pageInfo.page = val
-    this.getList();
-    this.handleScroll()
-    // this.onLoad()
-  }
 },
 async asyncData({ $homeApi }) { 
   const res2 = await $homeApi.postTypeList({ 
@@ -156,24 +147,6 @@ methods: {
   ...mapActions(['set_tagid']),
   handleClose(){
     this.showSticky = false
-  },
-  handlePage(val){
-    this.pageInfo.page = val
-    this.getList();
-    this.handleScroll()
-    console.log(val, 'page')
-  }, 
-  handleScroll() {
-    console.log(document.querySelector('#home-top'))
-    const navHeight = document.querySelector('.home-header').offsetHeight
-    
-    // scrollIntoView() js原生方法，实现锚点滚动过渡
-    const target = document.querySelector('#home-top')
-    target.scrollIntoView({ behavior: 'smooth',  block: "start" })
-    
-    // scrollTo() 把内容滚动到指定的坐标。减去导航高度的目的：导航用定位固定在顶部，如果不减去，导航栏会遮挡一部分内容
-    // console.log(target.offsetTop, navHeight, target.offsetTop - navHeight, 'height')
-    window.scrollTo(0, 0)
   },
   handleClickPage(name){
     this.$router.push(this.localePath({name: name }))
@@ -289,6 +262,12 @@ overflow: visible;
   }
   .top-category-thumb-tag{
     margin-right: 10px;
+    width: 185px;
+    height: 105px;
+    .van-image{
+      width: 185px;
+      height: 105px;
+    }
   }
   a{
     color: #fff;

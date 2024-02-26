@@ -26,14 +26,22 @@
   .tags,.item-name{
     .pxToVW(12, font-size) !important;
   }
+  .paddingTop45{
+    .pxToVW(45, padding-top);
+  }
   // 首页
   .home{
+    .home-header{
+      .pxToVW(45, height);
+      .pxToVW(45, line-height);
+    }
     .home-footer{
       .pxToVW(0, margin-top);
       .pxToVW(0, margin-bottom);
       .pxToVW(12, padding-left);
       .pxToVW(12, padding-right);
       .pxToVW(24, padding-bottom);
+      padding-bottom: -24px !important;
       .home-footer-list{
         .pxToVW(40, height);
         .pxToVW(40, line-height);          

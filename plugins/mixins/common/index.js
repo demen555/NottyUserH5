@@ -60,6 +60,23 @@ export default{
       //   this.isStickyVisible = true;
       // }
       // this.lastScrollTop = scrollTop;
+    },
+    handleScroll() {
+      window.scrollTo(0, 0)
+    },
+    handlePage(val){
+      this.pageInfo.page = val
+      this.getList();
+      this.handleScroll()
+      console.log(val, 'page')
+    }, 
+  },
+  watch: {
+    ['pageInfo.page'](val){
+      console.log(val, 'watch')
+      this.pageInfo.page = val
+      this.getList();
+      this.handleScroll()
     }
   },
   components: {

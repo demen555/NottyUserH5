@@ -26,7 +26,6 @@
         <div class="pagination">
           <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
         </div>
-        <div style="height: 20px;"></div>
         <fBottom></fBottom>
         <h2 class="footer-title paddingTop88" style="display: none;"> {{ categoryMetaData.h2}} </h2>
         <p class="footer-description" style="display: none;" v-html="categoryMetaData.footer_desc"> </p>
