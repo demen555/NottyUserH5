@@ -7,15 +7,22 @@
     </div>
     <div :class="['paddingTop88', showFooter ? 'paddingBottom50': 'paddingBottom10' ]" v-if="dataList.length">
       <div style="height: 80px;" class="d-none d-md-block"></div>
-      <van-checkbox-group v-model="result" ref="checkboxGroup">
-        <div class="row">
-          <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2"  v-for="(item, index) in dataList" :item="item" :style="index === 0 ?'padding-top: 18px': '' " :key="item.vodId" :showCheck="showFooter"></Cover>
-          <div class="pagination">
-            <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
-          </div>
-          <fBottom></fBottom>
-        </div>  
-      </van-checkbox-group>
+      <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :finished-text="$t('str_no_more')"
+          :immediate-check="false"
+          @load="onLoad"
+          :offset="10"
+        >
+          <van-checkbox-group v-model="result" ref="checkboxGroup">
+            <div class="row">
+              <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2"  v-for="(item, index) in dataList" :item="item" :style="index === 0 ?'padding-top: 18px': '' " :key="item.vodId" :showCheck="showFooter"></Cover>
+            </div>
+          </van-checkbox-group>
+        </van-list>
+      </van-pull-refresh>
     </div>
     <Empty v-else></Empty>
     <Footer v-if="showFooter && dataList.length" @handleAll="handleAll" :result="result" :showCheck="showCheck"></Footer>  
@@ -215,13 +222,24 @@ methods: {
         data.data = data.data.map(item => {
           return  item = item.vod
         })
-        this.pageInfoTotal = data.meta.pagination.total
-        this.dataList = data.data
+        if(isRefresh){
+          // this.dataList = [ ...body.records, ...this.dataList ]
+          this.dataList = data.data
+          this.refreshing = false
+        } else {
+          this.dataList = uniArray([ ...this.dataList, ...data.data], 'vodId')
+          this.loading = false
+        }
+        if(data.data.length === 0){
+          this.finished = true
+        }
       }
     } catch (error) {
       console.error(error)
     } finally {
       this.spainnerLoading = false
+      this.loading = false
+      this.refreshing = false
       console.log(this.loading)
     }
   },

@@ -7,22 +7,15 @@
     </div>
     <div :class="['paddingTop88', showFooter ? 'paddingBottom50': 'paddingBottom10' ]"  v-if="dataList.length">
       <div style="height: 50px;" class="d-none d-md-block"></div>
-      <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-        <van-list
-          v-model="loading"
-          :finished="finished"
-         :finished-text="$t('str_no_more')"
-          :immediate-check="false"
-          @load="onLoad"
-          :offset="10"
-        >
-          <van-checkbox-group v-model="result" ref="checkboxGroup">
-            <div class="row">
-              <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="(item,index) in dataList" :item="item || {}" :key="item && item.vodId"  :style="index === 0 ?'padding-top: 18px': '' " :showCheck="showFooter"></Cover>
-            </div>
-          </van-checkbox-group>
-        </van-list>
-      </van-pull-refresh>
+      <van-checkbox-group v-model="result" ref="checkboxGroup">
+        <div class="row">
+          <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="(item,index) in dataList" :item="item || {}" :key="item && item.vodId"  :style="index === 0 ?'padding-top: 18px': '' " :showCheck="showFooter"></Cover>
+          <div class="pagination">
+            <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+          </div>
+          <fBottom></fBottom>
+        </div>
+      </van-checkbox-group>
     </div>
     <Empty v-else></Empty>
     <Footer v-if="showFooter" @handleAll="handleAll" :showCheck="showCheck" :result="result"></Footer>  
@@ -168,16 +161,8 @@ methods: {
         data.data = data.data.map(item => {
           return  item = item.vod
         })
-        if(isRefresh){
-          console.log(data.data, '1111')
-          // this.dataList = [ ...body.records, ...this.dataList ]
-          this.dataList = data.data
-          this.refreshing = false
-        } else {
-          console.log('2222')
-          this.dataList = uniArray([ ...this.dataList, ...data.data], 'vodId')
-          this.loading = false
-        }
+        this.dataList = data.data
+        this.pageInfoTotal = data.meta.pagination.total
         if(data.data.length === 0){
           this.showFooter = false
           this.finished = true

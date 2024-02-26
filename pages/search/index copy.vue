@@ -72,17 +72,14 @@
     </main>
     <main v-show="!searchShow">
       <!-- 有搜索结果 -->
-      <NavNew :title="search + ' ' + '('+ pageTotal + ' results' + ')'" imgUrl=""></NavNew>
+      <NavNew :title="search + ' ' + '('+ total + ' results' + ')'" imgUrl=""></NavNew>
       <!-- <div class="search-result" id="searchName">{{ search }}</div> -->
       <div class="loading-box" style="margin-top: 42px;" v-if="spainnerLoading">
         <cardLoad></cardLoad>
       </div>
       <div class="content paddingTop88">
         <template v-if="dataList.length">
-          <div class="row">
-            <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
-          </div>
-          <!-- <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+          <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
             <van-list
               v-model="loading"
               :finished="finished"
@@ -95,7 +92,7 @@
                 <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
               </div>
             </van-list>
-          </van-pull-refresh> -->
+          </van-pull-refresh>
         </template>
         <template v-if="!dataList.length">
           <div class="no-match-empty"><img src="~/static/images/com_qsy_nothing.svg" alt="com_qsy_nothing"></div>
@@ -112,9 +109,6 @@
         </template>
         <!-- <Empty v-else></Empty> -->
         <div class="row">
-          <div class="pagination">
-            <v-pagination :total="pageTotal? pageTotal : pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
-          </div>
           <fBottom></fBottom>
         </div>
       </div>
@@ -147,10 +141,9 @@ data() {
       page: 1,
       size: 20
     },
-    pageTotal: 0,
+    total: 0,
     relatedLoading: false,
-    searchBool: false,
-    pageInfoTotal: 0
+    searchBool: false
   }
 },
 mixins: [commonMinxin],
@@ -288,7 +281,6 @@ methods: {
             }
         }
         console.log(resultArr, 'resultArr')
-        this.pageInfoTotal = data.meta.pagination.total
         this.relatedList = resultArr
       }
     } catch (error) {
@@ -316,7 +308,7 @@ methods: {
       console.log(code, data, 111)
       if(code === 100){
         if (!data) return this.loading = false
-        this.pageTotal = data.meta.pagination.total
+        this.total = data.meta.pagination.total
         if(data.meta.pagination.total == 0) {
           // this.noResultShow = true
           // this.set_show(true)
