@@ -7,13 +7,20 @@
     </div>
     <template v-if="dataList.length">
       <div style="height: 60px;" class="d-none d-md-block"></div>
-      <div class="row paddingTop88">
-        <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
-        <div class="pagination">
-          <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
-        </div>
-        <fBottom></fBottom>
-      </div>
+      <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :finished-text="$t('str_no_more')"
+          @load="onLoad"
+          :immediate-check="false"
+          :offset="10"
+        >
+          <div class="row">
+            <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+          </div>
+        </van-list>
+      </van-pull-refresh>
     </template>
     <Empty v-else></Empty>   
   </div>
@@ -88,18 +95,32 @@ methods: {
       isRefresh  === 'first' && (this.spainnerLoading = true)
       this.loading = true
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
+    
       // params.tagId = this.detail.id //标签
       params.tagName = this.detail.name //标签
+
+
       const { code, data } = await this.$homeApi.requestvodpage(params)
       if(code === CODES.SUCCESS){
-        this.pageInfo.total = data.meta.pagination.total
-        this.dataList = data.data
+        if(isRefresh){
+          // this.dataList = [ ...body.records, ...this.dataList ]
+          this.dataList = data.data
+          this.refreshing = false
+        } else {
+          this.dataList = [ ...this.dataList, ...data.data]
+          this.loading = false
+        }
+        if(data.data.length === 0){
+          this.finished = true
+        }
       }
     } catch (error) {
       console.error(error)
     } finally {
       console.log(this.dataList,'list')
       this.spainnerLoading = false
+      this.loading = false
+      this.refreshing = false
     }
   },
   onRefresh() {

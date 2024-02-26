@@ -124,7 +124,6 @@ created(){
 components: {
   HeaderTop,
   Cover,
-  vPagination,
   dialogBottom
 },
 async asyncData({ $homeApi }) { 
