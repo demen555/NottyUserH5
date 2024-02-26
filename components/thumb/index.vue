@@ -55,8 +55,8 @@ export default{
 .thumb-list{
   margin-top: 8px;
   position: relative;
-  min-width: 185px;
-  min-height: 105px;
+  // min-width: 185px;
+  // min-height: 105px;
   .mask{
     width: 100%;
     height: 100%;
@@ -67,8 +67,10 @@ export default{
     z-index: 9;
   }
   /deep/ .van-image{
-      min-width:185px;
-      min-height:105px;
+      // min-width:185px;
+      // min-height:105px;
+      width:185px;
+      height:105px;
       border-radius: 4px;
       .loading-img, .error-img{
         width: 100%;
