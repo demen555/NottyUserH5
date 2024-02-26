@@ -68,7 +68,7 @@ export default{
   padding: 0 12px;
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
   background-color: #262627;
-  padding-bottom: 24px;
+  // padding-bottom: 24px;
   a {
     color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   }
