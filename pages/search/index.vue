@@ -1,5 +1,5 @@
 <template>
-  <div class="search-page"  id="search">
+  <div class="search-page container-fluid"  id="search">
     <HeaderTop ref="header" v-show="!searchShow"></HeaderTop>
     <div class="search" ref="search" v-show="searchShow">
       <div class="search-btn">
@@ -108,7 +108,9 @@
           </div>
         </template>
         <!-- <Empty v-else></Empty> -->
-        <fBottom></fBottom>
+        <div class="row">
+          <fBottom></fBottom>
+        </div>
       </div>
     </main>
   </div>
@@ -437,7 +439,7 @@ methods: {
 .no-match-link{
   margin-top: 40px;
   .no-match-title{
-    padding-left: 16px;
+    // padding-left: 16px;
   }
   .no-match-list{
     margin-bottom: 14px;

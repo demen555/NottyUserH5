@@ -7,7 +7,7 @@
     </div>
     <template v-if="dataList.length">
       <div style="height: 60px;" class="d-none d-md-block"></div>
-      <!-- <van-pull-refresh class="paddingTop77" v-model="refreshing" @refresh="onRefresh">
+      <van-pull-refresh class="paddingTop77" v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"
           :finished="finished"
@@ -20,17 +20,9 @@
             <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
           </div>
         </van-list>
-      </van-pull-refresh> -->
-      <div class="row paddingTop77">
-        <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
-        <div class="pagination">
-          <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
-        </div>
-        <div style="height: 20px;"></div>
-        <fBottom></fBottom>
-        <h2 class="footer-title paddingTop88" style="display: none;"> {{ categoryMetaData.h2}} </h2>
-        <p class="footer-description" style="display: none;" v-html="categoryMetaData.footer_desc"> </p>
-      </div>
+      </van-pull-refresh>
+      <h2 class="footer-title paddingTop88"> {{ categoryMetaData.h2}} </h2>
+      <p class="footer-description" v-html="categoryMetaData.footer_desc"> </p>
     </template>
     <Empty v-else></Empty>   
   </div>
@@ -85,11 +77,14 @@ async asyncData({ $homeApi, params }) {
         "footer_desc": ""
       },
       categoryName: categoryName,
-      paramsName: params.name,
-      pageInfo: {
-        total: res.data.meta.pagination.total
-      }
+      paramsName: params.name
     }  
+},
+activated(){
+  const isRefresh = this.$route.params.refresh;
+  if( isRefresh ){
+    this.getList('first')
+  }
 },
 created(){
   let { name, id } = this.$route.params;
@@ -155,9 +150,18 @@ methods: {
 
       const { code, data } = await this.$homeApi.requestvodpage(params)
       if(code === CODES.SUCCESS){
-        this.pageInfo.total = data.meta.pagination.total
-        this.dataList = data.data
+        if(isRefresh){
+          // this.dataList = [ ...body.records, ...this.dataList ]
+          this.dataList = data.data;
+          this.refreshing = false
+        } else {
+          this.dataList = [ ...this.dataList, ...data.data]
+          this.loading = false
+        }
         this.categoryMetaData = data.categoryMetaData;
+        if(data.data.length === 0){
+          this.finished = true
+        }
       }
     } catch (error) {
       console.error(error)
@@ -177,11 +181,14 @@ methods: {
 </script>
 <style lang="less">
 .van-pull-refresh{
-  overflow: visible;
+overflow: visible;
 }
 .color{
   color: var(--text-color3, rgba(96, 105, 128, 0.40));
   font-size: 15px;
+}
+.main-bottom{
+  margin-bottom: 50px;
 }
 :deep(.van-nav-bar__left){
   font-size: 18px;

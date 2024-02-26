@@ -66,8 +66,6 @@ import { mapGetters, mapActions } from "vuex"
 import HeaderTop from '~/components/header/top.vue'
 import Cover from '~/components/cover'
 import CODES from "~/plugins/enums/codes"
-import vPagination from '~/components/pagination/index.vue'
-import fBottom from '~/components/footer/bottom.vue'
 import commonMinxin from '~/plugins/mixins/common'
 export default{
 // async fetch() {
@@ -128,9 +126,7 @@ created(){
 },
 components: {
   HeaderTop,
-  Cover,
-  vPagination,
-  fBottom
+  Cover
 },
 watch: {
   ['pageInfo.page'](val){
@@ -220,13 +216,6 @@ overflow: visible;
   font-size: 15px;
 }
 
-.pagination{
-  margin-top: 20px !important;
-  margin-bottom: 20px !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .sticky-upload{
   position: fixed;
   right: 12px;

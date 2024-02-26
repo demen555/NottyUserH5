@@ -69,8 +69,8 @@ export default{
   /deep/ .van-image{
       // min-width:185px;
       // min-height:105px;
-      width:185px;
-      height:105px;
+      // width:185px;
+      // height:105px;
       border-radius: 4px;
       .loading-img, .error-img{
         width: 100%;
