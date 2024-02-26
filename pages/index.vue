@@ -37,17 +37,18 @@
         </div>
       </div>
       <div class="pagination">
-        <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+        <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
       </div>
       <fBottom></fBottom>
     </div>
     <div class="sticky-upload" v-show="showSticky">
       <div class="sticky-close" @click="handleClose"></div>
       <div class="sticky-text">{{ $t('str_page_text4') }}</div>
-      <a href="https://t.me/NottyHubClub" target="_blank">
+      <a href="https://t.me/NottyOF" target="_blank">
         <img :src="require('~/static/images/upload.svg')" alt="upload">
       </a>
     </div>
+    <dialogBottom ref="dialogBottomRef"></dialogBottom>
   </div>
 </template>
 <script>
@@ -56,23 +57,25 @@ import HeaderTop from '~/components/header/top.vue'
 import Cover from '~/components/cover'
 import CODES from "~/plugins/enums/codes"
 import commonMinxin from '~/plugins/mixins/common'
+import dialogBottom from "~/components/dialog/dialog-bottom.vue"
 export default{
 fetchOnServer: true,
 mixins: [commonMinxin],
 data() {
   return {
-    spainnerLoading: true,// 全局loading层
+    spainnerLoading: false,// 全局loading层
     loading: false, // 是否处于加载状态
     finished: false, // 是否加载完成
     refreshing: false, // 当前是否刷新重置信息
     dataList: [],
     pageInfo: {
       page: 1,
-      size: 60
+      size: 60,
     },
     showSticky: true,
     tagList: [],
-    categoryList: []
+    categoryList: [],
+    showPopup: false, //底部popup
   }
 },
 computed: {
@@ -105,11 +108,24 @@ head(){
   }
 },
 created(){
-  // this.getList('first')
+  if(process.client){
+    this.$nextTick(() => {
+      if( !localStorage.getItem('showBottom') ){
+        this.$refs.dialogBottomRef.onShow()
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'analytics_storage': 'denied'
+        });
+      }
+    })
+  }
+  // this.showPopup = true
 },
 components: {
   HeaderTop,
-  Cover
+  Cover,
+  vPagination,
+  dialogBottom
 },
 async asyncData({ $homeApi }) { 
   const res2 = await $homeApi.postTypeList({ 
@@ -121,9 +137,17 @@ async asyncData({ $homeApi }) {
     page: 1,
     size: 10
   });
+
+  const res1 = await $homeApi.requestvodpageHome({
+    page: 1, 
+    size: 60
+  })
+
   return { 
     tagList: res.data.data || [],
-    categoryList:  res2.data.data || []
+    categoryList:  res2.data.data || [],
+    dataList: res1.data.data || [],
+    pageInfoTotal: res1.data.meta.pagination.total || 0
   }
 },
 methods: {
@@ -139,6 +163,7 @@ methods: {
     this.getList();
   },
   async getList(isRefresh ){
+    console.log( isRefresh, "isRefresh" )
     try {
       this.spainnerLoading = true
       isRefresh  === 'first' && (this.spainnerLoading = true)
@@ -146,7 +171,7 @@ methods: {
       const res = await this.$homeApi.requestvodpageHome({ page: this.pageInfo.page, size: this.pageInfo.size})
       const { code, data } = res
       if(code == CODES.SUCCESS && data){
-        this.pageInfo.total = data.meta.pagination.total
+        this.pageInfoTotal = data.meta.pagination.total
         this.dataList = data.data
         // console.log( code, data, this.dataList, 'data' )
       }
@@ -283,5 +308,9 @@ overflow: visible;
     font-weight: bold;
     color: var(--text-color1, #181E2A);
   }
+}
+
+.van-overlay{
+  display: none;
 }
 </style>

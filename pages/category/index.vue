@@ -50,13 +50,38 @@ data() {
     pageInfo: {
       page: 1,
       size: 20
+    },
+    categoryMetaData: {
+      description: "",
+      keywords: "",
+      title: ""
     }
   }
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   return {
-    
+    title: this.categoryMetaData && this.categoryMetaData.title,
+    meta: [
+        {
+            hid: 'description',
+            name: 'description',
+            content: this.categoryMetaData.description
+        },
+        {
+            hid: 'keyswords',
+            name: 'keyswords',
+            content: this.categoryMetaData.keywords
+        },
+        {
+            hid: 'title',
+            name: 'title',
+            content: this.categoryMetaData.title
+        },
+        { hid: 'og:title', property: 'og:title', content: this.categoryMetaData.title },
+        { hid: 'og:description', property: 'og:description', content:  this.categoryMetaData.description},
+        { hid: 'og:keywords', property: 'og:keywords', content: this.categoryMetaData.keywords },
+    ],
     link: [
       {
         hid: "canonical",
@@ -106,6 +131,7 @@ methods: {
       const { code, data } = await this.$homeApi.postTypeList(params)
       console.log(code, CODES.SUCCESS, data, 'postTagListPage')
       if(code === CODES.SUCCESS){
+        this.categoryMetaData = data.categoryMetaData || this.categoryMetaData 
         if(isRefresh){
           this.typeList = data.data
           this.refreshing = false

@@ -78,10 +78,10 @@
             <!-- <vote v-if="showVote" :tagsList="videoInfo.tags" :themeChecked="themeChecked" @refresh="handleRefesh"></vote> -->
             <div class="video-line"></div>
             <nuxt-link :to="localePath({
-                name: 'creator',
-                query: { userId: videoInfo.user.userId}
+                name: 'creator-name',
+                params: { name: videoInfo.user && videoInfo.user.name }
             })">
-              <div class="main-update-content">
+              <div class="main-update-content" @click.stop="handleClickCreator(videoInfo)">
                 <div class="main-update-img" v-if="videoInfo.user?.userPortrait"><img :src="videoInfo.user.userPortrait" alt="person"></div>
                 <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
                 <div>
@@ -358,9 +358,14 @@ export default {
         dateFormat,
         formatNumber,
         formatPer,
+        handleClickCreator(item){
+          localStorage.setItem('userId', item.user.userId)
+        },
         handleScroll(){
           window.scrollTo(0, 0)
         },
+        formatNumber,
+        formatPer,
         handleRefesh(){
           console.log('handleRefresh')
           this.initVideo()
@@ -441,6 +446,7 @@ export default {
             this.$videoApi.requestVodChange({
                 typeId: this.videoInfo.typeId,
                 excludes: this.videoInfo.vodId,
+                categoryId: this.videoInfo.categoryId,
                 tagId: this.videoInfo.tags && this.videoInfo.tags.length > 0 ? this.videoInfo.tags.map( ele => ele.id) : [],
                 ...this.vodChangePage
             }).then(res => {
@@ -721,7 +727,7 @@ export default {
 
         // 添加历史记录 在vuex里面去重，同样的视频点击也需要排序
         addHisVod(item){
-            // console.log("添加历史")
+            console.log("添加历史")
             // const idAdd = this.historyVod.some(  ele => ele.vodId === item.vodId);
             // if( !idAdd ){
                 this.$store.commit("UPDATE_HISTORYVOD", item)

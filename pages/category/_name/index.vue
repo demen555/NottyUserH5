@@ -1,7 +1,7 @@
 <template>
   <div class="home container-fluid">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <navNew :title="categoryMetaData.h1 || paramsName" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></navNew>
+    <NavNew :title="categoryMetaData.h1 || paramsName" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></NavNew>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -35,7 +35,7 @@
   </div>
 </template>
 <script>
-import navNew from '~/components/nav/new'
+import NavNew from '~/components/nav/new'
 import Cover from '~/components/cover'
 import Empty from '~/components/empty'
 import commonMinxin from '~/plugins/mixins/common'
@@ -135,7 +135,7 @@ head(){
   }
 },
 components: {
-  navNew,
+  NavNew,
   Cover,
   Empty
 },
@@ -202,5 +202,8 @@ methods: {
   h2{
     color: var(--bg-primary, #F6D658);
   }
+}
+.paddingTop88{
+  padding-top: 77px;
 }
 </style>

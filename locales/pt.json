@@ -27,6 +27,7 @@
   "str_error_password": "O comprimento da senha está errado",
   "str_guild_text": "Este site contém materiais com restrição de idade, incluindo nudez e conteúdo explícito. representações de atividade sexual. Porentrando, você afirma que está empelo menos 18 anos de idade ou a idade demaioria na jurisdição em que você estáacessando o site e vocêconsentimento para ver vídeos sexualmente explícitos contente.",
   "str_enter_text": "Tenho 18 anos ou mais - Entre",
+  "str_enter_text1": "ACEITAR",
   "str_exit_text": "Tenho menos de 18 anos - Sair",
   
   "str_page_text1": "Nossa página de <b>  controles parentais </b> explica  ",
@@ -39,6 +40,8 @@
   "str_page_text15": "Mais Relevante",
   "str_page_text16": "Mais Vistas",
   "str_page_text17": "Mais Votado",
+  "str_page_text18": "Utilizamos cookies para melhorar sua experiência de navegação e fornecer conteúdo personalizado. Ao clicar em 'Aceitar', você concorda com o uso de cookies conforme descrito em nosso",
+  "str_page_text19": "Política de Cookies.",
   
   "str_guild_age": "Verificação de Idade",
   
@@ -312,6 +315,7 @@
   "str_footer_nav8": "2257",
   "str_footer_nav9": "FAQ",
   "str_footer_nav10": "EU DSA",
+  "str_footer_nav11": "Política de Cookies",
   
   "str_footer_csam1": "Política de material de abuso sexual infantil",
   "str_footer_csam2": "Agosto de 2022",
@@ -499,6 +503,23 @@
   "str_footer_ncc63": "Site do governo francês que explica os direitos legais que um indivíduo tem sobre sua imagem, bem como os caminhos para solicitar a remoção de uma imagem.",
   "str_footer_ncc64": "ALEMANHA:",
   "str_footer_ncc65": "Associação sobre violência sexual contra mulheres",
+
+  
+  "str_footer_cookie1": "No Nottyhub.com, temos o compromisso de fornecer conteúdo de vídeo personalizado, adaptado às suas preferências. Para isso, usamos cookies e tecnologias semelhantes para coletar e analisar informações sobre seu comportamento de navegação e preferências de vídeo. Esta política de cookies descreve como coletamos e usamos esses dados para aprimorar sua experiência de visualização.",
+  "str_footer_cookie2": "Tipos de cookies usados:",
+  "str_footer_cookie3": "Cookies de preferência: Esses cookies são usados para lembrar suas preferências, como suas categorias ou gêneros de vídeo preferidos. Cookies analíticos: Usamos cookies analíticos para analisar como você interage com nosso site e conteúdo de vídeo, inclusive quais vídeos você assiste, por quanto tempo os assiste e quais categorias você explora.",
+  "str_footer_cookie4": "Finalidade da coleta de dados:",
+  "str_footer_cookie5": "Personalização: Usamos os dados coletados dos cookies para personalizar suas recomendações de vídeo e sugerir conteúdo que se alinhe aos seus interesses. Aprimoramento da experiência do usuário: Ao analisar seu comportamento de navegação, podemos aprimorar sua experiência de usuário, fornecendo conteúdo de vídeo relevante e melhorando a navegação no site.",
+  "str_footer_cookie6": "Coleta e uso de dados:",
+  "str_footer_cookie7": "Dados anônimos: Os dados coletados dos cookies são anônimos e não o identificam pessoalmente. Não coletamos nem armazenamos nenhuma informação de identificação pessoal por meio de cookies. Análise agregada: Podemos agregar os dados coletados dos cookies para analisar tendências e padrões em nossa base de usuários, mas os dados individuais dos usuários permanecem anônimos.",
+  "str_footer_cookie9": "Consentimento de cookies:",
+  "str_footer_cookie10": "Consentimento de opt-in: Ao usar nosso site, você concorda com o uso de cookies para fins de personalização e análise. Você pode optar por não usar cookies não essenciais por meio das configurações do navegador ou ajustando suas preferências de cookies em nosso site.",
+  "str_footer_cookie11": "Segurança e privacidade de dados:",
+  "str_footer_cookie12": "Segurança de dados: Tomamos medidas para garantir a segurança e a confidencialidade dos dados coletados por meio de cookies para evitar acesso ou divulgação não autorizados. Política de privacidade: Para obter mais informações sobre como lidamos com seus dados pessoais, consulte nossa Política de Privacidade.",
+  "str_footer_cookie13": "Atualizações da Política de Cookies:",
+  "str_footer_cookie14": "Atualizações da política: Podemos atualizar esta política de cookies periodicamente para refletir alterações em nossas práticas de uso de cookies ou para cumprir requisitos legais. Nós o notificaremos sobre quaisquer alterações significativas nesta política.",
+  "str_footer_cookie15": "Entre em contato conosco:",
+  "str_footer_cookie16": "Dúvidas ou preocupações: Se tiver alguma dúvida ou preocupação sobre nossa política de cookies ou práticas de uso de dados, entre em contato conosco pelo e-mail support@nottyhub.com.",
 
   "str_email_send_suc": "Enviamos a você um e-mail com seu nome de usuário e um link para redefinir sua senha",
   "All": "Todos"

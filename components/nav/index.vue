@@ -11,7 +11,7 @@
         <img class="header-common" :src="themeChecked? require('~/static/images/com_jt_sx_zuo.svg'): require('~/static/images/com_jt_sx_zuo_rj.svg')" alt="com_jt_sx_zuo">
       </template> -->
       <template #left>
-        <span class="nav-title"><img style="margin-right: 8px;" :src="imgUrl" alt="my_gn_lsjl">{{ title }}</span>
+        <h1 class="nav-title"><img style="margin-right: 8px;" :src="imgUrl" alt="my_gn_lsjl">{{ title || $t('str_his') }}</h1>
       </template>
       <template #right >
         <img v-if="text" class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete">
@@ -84,11 +84,5 @@
   line-height: 44px;
   display: flex;
   align-items: center;
-}  
-.h1{
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 18px;
-  text-align: left;
 }
 </style>

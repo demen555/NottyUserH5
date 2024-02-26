@@ -6,7 +6,7 @@
       <div class="video-container d-sm-none">
         <div class="main-update-img" v-if="upInfo?.userPortrait"><img :src="upInfo.userPortrait" alt="person"></div>
         <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
-        <div class="main-title">{{ upInfo?.name || 'None' }}</div>
+        <h1 class="main-title">{{ upInfo?.name || 'None' }}</h1>
         <div class="main-btn">
           <div class="main-btn-right">
             <div class="main-btn-view">
@@ -46,10 +46,9 @@
             </div>
           </div>
         </div>
-        <!-- <div class="video-line" style="margin-bottom: 1px;"></div> -->
-        <div class="loading-box" v-if="spainnerLoading">
+        <!-- <div class="loading-box" v-if="spainnerLoading">
           <cardLoad></cardLoad>
-        </div>
+        </div> -->
         <div v-if="dataList.length">
           <van-pull-refresh v-model="refreshing" @refresh="onRefresh" class="paddingTop52">
             <van-list
@@ -104,13 +103,33 @@ export default {
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
     return {
-      
+      title: 'our creator-' + this.name,
+      meta: [
+          {
+              hid: 'description',
+              name: 'description',
+              content: `Checkout naked ${this.name} fuck hardcore in XXX videos. All sex scenes of anal, lesbian porn, threesome, and big dicks porno on Nottyhub, Free to Watch!`
+          },
+          {
+              hid: 'keyswords',
+              name: 'keyswords',
+              content: this.name + '-' + 'Creator'
+          },
+          {
+              hid: 'title',
+              name: 'title',
+              content: 'our creator-' + this.name
+          },
+          { hid: 'og:title', property: 'og:title', content: 'our creator-' + this.name },
+          { hid: 'og:description', property: 'og:description', content:  `Checkout naked ${this.name} fuck hardcore in XXX videos. All sex scenes of anal, lesbian porn, threesome, and big dicks porno on Nottyhub, Free to Watch!`},
+          { hid: 'og:keywords', property: 'og:keywords', content: this.name + '-' + 'Creator' },
+      ],
       link: [
-        {
-          hid: "canonical",
-          rel: 'canonical',
-          href: `${hostName}${this.$nuxt.context.route.fullPath}`,
-        },
+          {
+              hid: "canonical",
+              rel: 'canonical',
+              href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
+          },
       ],
     }
   },
@@ -122,6 +141,12 @@ export default {
       "noLoginDownVod",
       "isLogin"
     ]),
+    userId(){
+      return localStorage.getItem('userId')
+    },
+    name(){
+      return this.$route.params.name
+    }
   },
 
   components: {
@@ -147,7 +172,7 @@ export default {
     },
     async getUpInfo() {
       try {
-        const res = await this.$homeApi.requestUpInfo({userId: this.$route.query.userId})
+        const res = await this.$homeApi.requestUpInfo({userId: this.userId})
         const { code, data = {} } = res
         if (code === CODES.SUCCESS) {
           console.log(data, 'upInfo')
@@ -161,7 +186,7 @@ export default {
       try {
         isRefresh === 'first' && (this.spainnerLoading = true)
         this.loading = true
-        const params = { page: this.pageInfo.page, size: this.pageInfo.size, userId: this.$route.query.userId, orderBy: this.activeTag}
+        const params = { page: this.pageInfo.page, size: this.pageInfo.size, userId: this.userId, orderBy: this.activeTag}
         const res = await this.$homeApi.requestvodpageHome(params)
         const { code, data = {} } = res
         if (code === CODES.SUCCESS) {
