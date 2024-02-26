@@ -48,13 +48,7 @@
         </div>
       </div>
       <div class="home-footer">
-        <!-- <van-pagination class="pagination" @change="handleChanege" v-model="pageInfo.page" :total-items="pageInfo.total" pages="[1,2,3,4,5]" :page-count="pageInfo.total" :show-page-size="4" force-ellipses >
-          <template #prev-text>
-            Prev
-          </template>
-          <template #page="{ number,text, active }">{{ handlePage(number, text, active) }}</template>
-        </van-pagination> -->
-        <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+        <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
         <nuxt-link :to="localePath(item.id)" class="home-footer-list" v-for="(item, index) in footerList" :key="index">
           <div class="home-footer-tag">{{ item.name }}</div>
           <div class="home-footer-right">
@@ -95,25 +89,21 @@ import vPagination from '~/components/pagination/index.vue'
 import commonMinxin from '~/plugins/mixins/common'
 import dialogBottom from "~/components/dialog/dialog-bottom.vue"
 export default{
-// async fetch() {
-//   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
-//   const res2 = await this.$homeApi.postTypeList({ page: 1, size: 10, isSorted: true,})
-//   this.tagList = res1.data.data;
-//   this.categoryList = res2.data.data;
-// },
+
 fetchOnServer: true,
 mixins: [commonMinxin],
 data() {
   return {
-    spainnerLoading: true,// 全局loading层
+    spainnerLoading: false,// 全局loading层
     loading: false, // 是否处于加载状态
     finished: false, // 是否加载完成
     refreshing: false, // 当前是否刷新重置信息
     dataList: [],
     pageInfo: {
       page: 1,
-      size: 60
+      size: 60,
     },
+    pageInfoTotal: 0,
     footerList: [
       { name: this.$t('str_footer_nav1'), id: 'policy-csam'},
       { name: this.$t('str_footer_nav2'), id: 'policy-terms'},
@@ -166,7 +156,6 @@ created(){
   if(process.client){
     this.hostname = window.location.hostname
   }
-  this.getList('first')
   if(process.client){
     this.$nextTick(() => {
       if( !localStorage.getItem('showBottom') ){
@@ -190,9 +179,7 @@ watch: {
   ['pageInfo.page'](val){
     console.log(val, 'watch')
     this.pageInfo.page = val
-    this.getList();
     this.handleScroll()
-    // this.onLoad()
   }
 },
 async asyncData({ $homeApi }) { 
@@ -205,9 +192,17 @@ async asyncData({ $homeApi }) {
     page: 1,
     size: 10
   });
+
+  const res1 = await $homeApi.requestvodpageHome({
+    page: 1, 
+    size: 60
+  })
+
   return { 
     tagList: res.data.data || [],
-    categoryList:  res2.data.data || []
+    categoryList:  res2.data.data || [],
+    dataList: res1.data.data || [],
+    pageInfoTotal: res1.data.meta.pagination.total || 0
   }
 },
 methods: {
@@ -219,7 +214,6 @@ methods: {
     this.pageInfo.page = val
     this.getList();
     this.handleScroll()
-    console.log(val, 'page')
   }, 
   handleScroll() {
     console.log(document.querySelector('#home-top'))
@@ -241,6 +235,7 @@ methods: {
     this.getList();
   },
   async getList(isRefresh ){
+    console.log( isRefresh, "isRefresh" )
     try {
       this.spainnerLoading = true
       isRefresh  === 'first' && (this.spainnerLoading = true)
@@ -248,7 +243,7 @@ methods: {
       const res = await this.$homeApi.requestvodpageHome({ page: this.pageInfo.page, size: this.pageInfo.size})
       const { code, data } = res
       if(code == CODES.SUCCESS && data){
-        this.pageInfo.total = data.meta.pagination.total
+        this.pageInfoTotal = data.meta.pagination.total
         this.dataList = data.data
         // console.log( code, data, this.dataList, 'data' )
       }
