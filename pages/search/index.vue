@@ -100,11 +100,15 @@
           <div class="no-match-link">
             <div class="no-match-title">{{ $t('str_related_videos') }}</div>
             <div class="no-match-list">
-              <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
+              <div class="row">
+                <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
+              </div>
+              <!-- <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover> -->
             </div>
           </div>
         </template>
         <!-- <Empty v-else></Empty> -->
+        <fBottom></fBottom>
       </div>
     </main>
   </div>
@@ -148,11 +152,12 @@ computed: {
   },
 },
 created(){
-  
+  if(!this.searchShow){
+    this.search = localStorage.getItem('search') || ''
+  }
   // this.set_show(true)
   if(process.client) {
     if(localStorage.getItem('searchBool')){
-      this.search = localStorage.getItem('search') || ''
       this.initSearchVideoList()
     }
     this.searchBool = localStorage.getItem('searchBool')
@@ -217,7 +222,6 @@ watch: {
     }
   }
 },
-
 methods: {
   ...mapActions(['set_show']),
   onLoad(){
@@ -389,7 +393,7 @@ methods: {
     this.historyList = Array.from(new Set(this.historyList))
     if(process.client){
       localStorage.setItem('historyList', JSON.stringify(this.historyList))
-      // localStorage.setItem('search', this.search)
+      localStorage.setItem('search', this.search)
       localStorage.setItem('searchBool', true)
     }
     this.set_show(false)
@@ -535,7 +539,7 @@ input::placeholder{
 }
 .search-list{
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
-  font-size: 12px;
+  font-size: 14px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -544,7 +548,7 @@ input::placeholder{
   padding: 3.5px 8px;
   background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   margin-right: 8px;
-  font-size: 12px;
+  font-size: 14px;
   border-radius: 4px;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }

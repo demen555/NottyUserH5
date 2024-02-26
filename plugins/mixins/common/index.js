@@ -1,5 +1,6 @@
 import { mapGetters } from "vuex"
 import cardLoad from "~/components/skeleton/cardLoad.vue"
+import fBottom from '~/components/footer/bottom.vue'
 // import HeaderTop from '~/components/header/top.vue'
 export default{
   data() {
@@ -62,6 +63,7 @@ export default{
   },
   components: {
     cardLoad,
+    fBottom
     // HeaderTop
   },  
   computed: {
