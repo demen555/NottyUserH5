@@ -30,16 +30,16 @@
                 </div>
             </div>
 
-            <div class="user-content account col-sm-12 col-md-4 col-lg-4 col-xl-4"> 
+            <div class="user-content account col-sm-4 col-md-4 col-lg-4 col-xl-4"> 
                 <span class="title">{{ $t('str_user_account') }}</span>
                 <span class="words">{{ userinfo.userName }}</span>
             </div>
-            <div class="user-content time col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="user-content time col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <span class="title">{{ $t('str_register_time') }} </span>
                 <span class="words">{{ formatTime(userinfo.userRegTime) }}</span>
             </div>
 
-            <div class="user-content pwdChange col-sm-12 col-md-4 col-lg-4 col-xl-4" @click="showPwdDialog = true">
+            <div class="user-content pwdChange col-sm-4 col-md-4 col-lg-4 col-xl-4" @click="showPwdDialog = true">
                 <span class="title"> {{ $t('str_change_pwd') }} </span>
                 <span class="words"> ****** </span>
                 <i class="words" :class="themeChecked?'icon': 'icon-white'"></i>
