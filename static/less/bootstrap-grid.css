@@ -56,7 +56,6 @@
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
-  min-height: 410px;
 }
 
 .no-gutters {
@@ -1203,6 +1202,7 @@
 }
 
 @media (min-width: 1024px) {
+
   .d-md-none {
     display: none !important;
   }
