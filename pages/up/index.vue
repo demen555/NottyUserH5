@@ -65,9 +65,6 @@ head(){
 },
 computed: {
   ...mapGetters(['userinfo','noLoginUpVod','isLogin']),
-  txtTitle(){
-    return this.detail.typeName
-  }
 },
 created(){
   this.pageInfo = {

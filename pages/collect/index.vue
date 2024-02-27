@@ -65,14 +65,10 @@ head(){
 },
 computed: {
   ...mapGetters(['userinfo']),
-  txtTitle(){
-    return this.detail.typeName
-  }
 },
 mounted(){
   document.documentElement.scrollTop = 0// 滚动到顶部
   this.getList('first')
-  console.log(this.detail)
 },
 components: {
   Nav,

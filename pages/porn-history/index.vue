@@ -50,13 +50,9 @@ data() {
 },
 computed: {
   ...mapGetters(['userinfo', 'historyVod']),
-  txtTitle(){
-    return this.detail.typeName
-  }
 },
 mounted(){
   this.getList('first')
-  console.log(this.detail)
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
