@@ -2,7 +2,7 @@
   <div class="search-page container-fluid"  id="search">
     <HeaderTop ref="header" v-show="!searchShow"></HeaderTop>
     <div class="search" ref="search" v-show="searchShow">
-      <div class="search-btn">
+      <div class="search-btn search-btn-page">
         <form action="javascript:return true">
           <input ref="searchRef" type="search"  :placeholder="$t('str_search_something')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
         </form>
