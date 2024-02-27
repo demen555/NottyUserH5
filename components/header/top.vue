@@ -240,11 +240,6 @@ export default {
     this.tagList = res1.data.data;
     this.typeList = res2.data.data;
   },
-  // async fetch() {
-  //   const res1 = await this.$homeApi.postTagListPage({ page: 1, size: 10})
-  //   this.tagList = res1.data.data;
-  //   this.set_tagList(res.data.data || [])
-  // },
   fetchOnServer: true,
   data() {
     return {
@@ -316,8 +311,8 @@ export default {
     }
   },
   methods: {
+    formatTime1 ,
     ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken', 'set_tagList', 'set_categoryList']),
-    formatTime1,
     handleClick(id){
       this.set_typeid(id)
       console.log(id, 'typeid')

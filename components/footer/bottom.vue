@@ -68,6 +68,7 @@ export default{
   padding: 0 12px;
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
   background-color: #262627;
+  min-height: 250px;
   a {
     color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   }

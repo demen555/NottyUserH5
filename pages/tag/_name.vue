@@ -9,6 +9,8 @@
       <div style="height: 60px;" class="d-none d-md-block"></div>
       <div class="row paddingTop88">
         <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+      </div>
+      <div class="row">
         <div class="pagination">
           <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
         </div>
