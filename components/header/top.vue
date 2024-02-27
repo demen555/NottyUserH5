@@ -2,16 +2,16 @@
   <div class="header">
     <Overlay v-model="overlayShow" v-if="overlayShow"></Overlay>
       <header class="home-header" id="home-header">
-        <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common" alt="more">
-        <div class="pc-logo d-none d-sm-block" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
-        <div class="d-block d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common cursor-pointer" alt="more">
+        <div class="pc-logo d-none d-sm-block cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        <div class="d-block d-sm-none cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
         <!-- <div class="d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
         <nuxt-link :to="localePath('search')" >
-          <div class="d-none d-sm-block search-btn" @click.stop="handleGoPage('search')">
+          <div class="d-none d-sm-block search-btn cursor-pointer" @click.stop="handleGoPage('search')">
             <!-- <form>
               <input ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
             </form> -->
-            <div class="search-top-btn">
+            <div class="search-top-btn cursor-pointer">
               <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
               <div class="search-top-text">{{ $t('str_search') }}</div>
             </div>
@@ -19,10 +19,10 @@
         </nuxt-link>
         <div class="header-right">
           <nuxt-link :to="localePath('search')" class="d-sm-none">
-            <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search" alt="com_sousuo">
+            <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search cursor-pointer" alt="com_sousuo">
           </nuxt-link>
-          <img v-if="userinfo.userPortrait" @click="handleExpand('right')" class="header-common1"  :src="userinfo.userPortrait" alt="avatar">
-          <img v-else @click="handleExpand('right')" class="header-common1" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
+          <img v-if="userinfo.userPortrait" @click="handleExpand('right')" class="header-common1 cursor-pointer"  :src="userinfo.userPortrait" alt="avatar">
+          <img v-else @click="handleExpand('right')" class="header-common1 cursor-pointer" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
         </div>
       </header>
     <!-- 左边抽屉 -->
@@ -88,7 +88,7 @@
           <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
           </div>
           <!-- 登录 -->
-          <div class="nav-menu-btns" v-if="!isLogin">
+          <div class="nav-menu-btns cursor-pointer" v-if="!isLogin">
             <nuxt-link class="nav-menu-btns-left" :to="localePath('login')">
               <div class="nav-menu-login">
                 <img :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_2">
@@ -96,7 +96,7 @@
               <div>{{ $t('str_login') }}</div>
             </nuxt-link>
             <!-- 注册 -->
-            <nuxt-link class="nav-menu-btns-left" :to="localePath('register')">
+            <nuxt-link class="nav-menu-btns-left cursor-pointer" :to="localePath('register')">
               <div class="nav-menu-res">
                 <img :src="themeChecked? require('~/static/images/home_top_zhuce_1.svg'): require('~/static/images/home_top_zhuce.svg')" alt="home_top_zhuce">
               </div>
@@ -104,7 +104,7 @@
             </nuxt-link>
           </div>
           <!-- 用户中心 -->
-          <div class="nav-list-tags nav-user-center" @click="handleGoPage('user')" v-show="isLogin">
+          <div class="nav-list-tags nav-user-center cursor-pointer" @click="handleGoPage('user')" v-show="isLogin">
             <div class="nav-menu-list-tag nav-menu-list-spec">
               <div class="nav-menu-left">
                 <div class="nav-menu-tag">
@@ -122,28 +122,28 @@
             </div>
           </div>
           <!-- 历史记录 -->
-          <nuxt-link class="nav-menu-list" :to="localePath('porn-history')" >
+          <nuxt-link class="nav-menu-list cursor-pointer" :to="localePath('porn-history')" >
             <div class="nav-menu-left">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_lsjl_1.svg'): require('~/static/images/my_gn_lsjl.svg')" alt="my_gn_lsjl"></div>
               <div>{{ $t('str_his') }}</div>
             </div>
           </nuxt-link>
           <!-- 收藏 -->
-          <div class="nav-menu-list" @click="handleGoPage('collect')" >
+          <div class="nav-menu-list cursor-pointer" @click="handleGoPage('collect')" >
             <div class="nav-menu-left">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
               <div>{{ $t('str_collect') }}</div>
             </div>
           </div>
           <!-- 点赞 -->
-          <div class="nav-menu-list" @click="handleGoPage('up')"  >
+          <div class="nav-menu-list cursor-pointer" @click="handleGoPage('up')"  >
             <div class="nav-menu-left">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
               <div>{{ $t('str_like') }}</div>
             </div>
           </div>
           <!-- 语言 -->
-          <div class="nav-list-tags">
+          <div class="nav-list-tags cursor-pointer">
             <div class="nav-menu-list-tag" @click="handleShowExpand('language')">
               <div class="nav-menu-left">
                 <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_yuyan_1.svg'): require('~/static/images/my_gn_yuyan.svg')" alt="my_gn_yuyan"></div>
@@ -155,7 +155,7 @@
               </div>
             </div>
             <template v-if="!showLanguageExpand">
-              <nuxt-link class="nav-menu-list-tag-sub" v-for="item in languageList" :key="item.code" :to="switchLocalePath(item.code)">
+              <nuxt-link class="nav-menu-list-tag-sub cursor-pointer" v-for="item in languageList" :key="item.code" :to="switchLocalePath(item.code)">
                 <!-- @click.stop="window.reload()" -->
                 <div class="nav-menu-left" >
                   <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
@@ -169,7 +169,7 @@
           </div>
           <!-- 地区 -->
           <div v-if="!showLanguageExpand" class="type-div"></div>
-          <div class="nav-list-tags" ref="main">
+          <div class="nav-list-tags cursor-pointer" ref="main">
             <div class="nav-menu-list-tag" @click="handleShowExpand('location')">
               <div class="nav-menu-left">
                 <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_guojia_1.svg'): require('~/static/images/my_gn_guojia.svg')" alt="my_gn_guojia"></div>
@@ -181,7 +181,7 @@
               </div>
             </div>
             <template v-if="!showLocationExpand">
-              <div class="location-menu" ref="content">
+              <div class="location-menu cursor-pointer" ref="content">
                 <div class="nav-menu-list-tag-sub" v-for="item in locationList" :key="item.id" @click="handleChangLocation(item)">
                   <div class="nav-menu-left">
                     <div class="nav-menu-tag hide-opacity"><img src="~/static/images/my_gn_biaoqian_1.svg" alt="my_gn_biaoqian_1"></div>
@@ -196,7 +196,7 @@
           </div>
           <div v-if="!showLocationExpand" class="type-div"></div>
           <!-- 添加主屏 -->
-          <div class="nav-menu-dl">
+          <div class="nav-menu-dl cursor-pointer">
             <div class="nav-menu-btn nav-ios" @click="handleAddMain">
               <div class="header-common"><img :src="themeChecked? require('~/static/images/my_gn_xz_ios_1.svg'): require('~/static/images/my_gn_xz_ios.svg')"></div>
               <div class="nav-text">{{ $t('str_tianjia_zhupin') }}</div>

@@ -9,28 +9,28 @@
         <img @click="handleFocus" class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
         <img v-show="search" @click="handleReset" class="header-common com-close svg-icon" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
       </div>
-      <div class="search-cancel" @click="handleGoHome">{{ $t('str_cancel') }}</div>
+      <div class="search-cancel cursor-pointer" @click="handleGoHome">{{ $t('str_cancel') }}</div>
     </div>
     <main v-show="searchShow">
       <template>
         <div class="search-card">
           <div class="search-card-top">
-            <div class="search-title">{{ $t('str_search_his_title') }}</div>
-            <div class="search-clear" @click="handleClearCurrentHistory"><img class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete"></div>
+            <div class="search-title cursor-pointer">{{ $t('str_search_his_title') }}</div>
+            <div class="search-clear cursor-pointer" @click="handleClearCurrentHistory"><img class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete"></div>
           </div>
           <!-- 移动版布局 -->
           <div class="search-list-new d-sm-none">
             <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
-              <div @click="handleGoToResult(item)" >{{ item }}</div>
-              <img @click="handleClearHistory(index)" class="header-common svg-icon" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+              <div @click="handleGoToResult(item)" class="cursor-pointer">{{ item }}</div>
+              <img @click="handleClearHistory(index)" class="header-common svg-icon cursor-pointer" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
             </div>
           </div>
           <!-- pc版布局 -->
           <div class="d-none d-sm-block">
             <div class="search-list-new-pc">
               <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
-                <div @click="handleGoToResult(item)" >{{ item }}</div>
-                <img style="margin-left: 13px; margin-right: 24px;" @click="handleClearHistory(index)" class="header-common svg-icon" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+                <div @click="handleGoToResult(item)" class="cursor-pointer">{{ item }}</div>
+                <img style="margin-left: 13px; margin-right: 24px;" @click="handleClearHistory(index)" class="header-common svg-icon cursor-pointer" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@
           <div class="search-title">{{ $t('str_rec_title') }}</div>
           <div style="height: 16px;" class="d-none d-sm-block"></div>
           <div class="search-list">
-            <a @click="handleGoToResult(item)" v-for="(item, index) in keysList" :key="index">{{ item }}</a>
+            <a class="cursor-pointer" @click="handleGoToResult(item)" v-for="(item, index) in keysList" :key="index">{{ item }}</a>
           </div>
         </div>
       </template>
