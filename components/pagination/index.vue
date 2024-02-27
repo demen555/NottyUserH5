@@ -96,11 +96,11 @@ export default {
 
 <style lang="less">
 .pagination {
-  width: 400px;
+  // width: 400px;
   overflow: hidden;
   display: table;
   margin: 0 auto;
-  /*width: 100%;*/
+  width: 100%;
   height: 24px;
 
   div {

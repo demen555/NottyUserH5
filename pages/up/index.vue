@@ -74,23 +74,31 @@ created(){
     page: 1,
     size: 20
   }
-  // this.getList('first')
+  this.getList('first')
 },
+// 重新进入点赞，更新当前未登录点赞视频
+activated(){
+  this.pageInfo = {
+    page: 1,
+    size: 20
+  }
+  this.getList('first')
+  // if(this.isLogin){
+  //   this.pageInfo = {
+  //     page: 1,
+  //     size: 20
+  //   }
+  //   this.getList('first')
+  // }else{
+  //   this.dataList = this.noLoginUpVod || []
+  // }
+},
+
 components: {
   Nav,
   Cover,
   Empty,
   Footer
-},
-async asyncData({ $upApi }) { 
-  const res = await $upApi.postUpList({
-    page: 1,
-    size: 20
-  })
-  return { 
-    dataList: res.data.data || [],
-    pageInfoTotal: res.data.meta.pagination.total || 0
-  }
 },
 methods: {
   ...mapActions(['update_upvod', 'clear_upvod']),
