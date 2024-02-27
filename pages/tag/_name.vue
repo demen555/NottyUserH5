@@ -9,10 +9,8 @@
       <div style="height: 60px;" class="d-none d-md-block"></div>
       <div class="row paddingTop88">
         <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
-      </div>
-      <div class="row">
         <div class="pagination">
-          <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+          <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
         </div>
         <fBottom></fBottom>
       </div>
@@ -29,6 +27,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
+fetchOnServer: true,
 data() {
   return {
     spainnerLoading: false,
@@ -61,10 +60,19 @@ computed: {
     return  '#'+this.detail.name
   }
 },
-activated(){
-  const isRefresh = this.$route.params.refresh;
-  if( isRefresh ){
-    this.getList('first')
+async asyncData({ $homeApi, route }) { 
+  try {
+    const res = await $homeApi.requestvodpage({
+      page: 1,
+      size: 20,
+      tagName: route.params.name
+    })
+    return { 
+      dataList: res.data.data || [],
+      pageInfoTotal: res.data.meta.pagination.total || 0
+    }
+  } catch (error) {
+    console.error(error)
   }
 },
 created(){
@@ -73,7 +81,7 @@ created(){
     name: name,
     id: id
   }
-  this.getList('first')
+  // this.getList('first')
 },
 components: {
   NavNew,
