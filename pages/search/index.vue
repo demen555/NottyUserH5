@@ -26,7 +26,7 @@
             </div>
           </div>
           <!-- pc版布局 -->
-          <div class="d-none d-md-block">
+          <div class="d-none d-sm-block">
             <div class="search-list-new-pc">
               <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
                 <div @click="handleGoToResult(item)" >{{ item }}</div>
@@ -50,7 +50,7 @@
           </div> -->
           <!-- 第一版 -->
           <div class="search-title">{{ $t('str_rec_title') }}</div>
-          <div style="height: 16px;" class="d-none d-md-block"></div>
+          <div style="height: 16px;" class="d-none d-sm-block"></div>
           <div class="search-list">
             <a @click="handleGoToResult(item)" v-for="(item, index) in keysList" :key="index">{{ item }}</a>
           </div>

@@ -7,7 +7,7 @@
       <tagLoad></tagLoad>
     </div>
     <template v-if="typeList.length">
-      <div style="height: 50px;" class="d-none d-md-block"></div>
+      <div style="height: 50px;" class="d-none d-sm-block"></div>
       <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"

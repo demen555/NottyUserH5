@@ -6,7 +6,7 @@
       <cardLoad></cardLoad>
     </div>
     <template v-if="dataList.length">
-      <div style="height: 60px;" class="d-none d-md-block"></div>
+      <div style="height: 60px;" class="d-none d-sm-block"></div>
       <div class="row paddingTop88">
         <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         <div class="pagination">

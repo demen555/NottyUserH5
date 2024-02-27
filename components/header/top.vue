@@ -3,11 +3,11 @@
     <Overlay v-model="overlayShow" v-if="overlayShow"></Overlay>
       <header class="home-header" id="home-header">
         <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common" alt="more">
-        <div class="pc-logo d-none d-md-block" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        <div class="pc-logo d-none d-sm-block" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
         <div class="d-block d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
-        <!-- <div class="d-md-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
+        <!-- <div class="d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
         <nuxt-link :to="localePath('search')" >
-          <div class="d-none d-md-block search-btn" @click.stop="handleGoPage('search')">
+          <div class="d-none d-sm-block search-btn" @click.stop="handleGoPage('search')">
             <!-- <form>
               <input ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
             </form> -->
@@ -907,37 +907,7 @@ header{
   height: 16px;
   display: flex;
 }
-.search-btn{
-  width: 70vw;
-  margin: 0 auto;
-  font-size: 14px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  .search-top-btn{
-    width: 80%;
-    margin: 0 auto;
-    height: 48px;
-    border: 1PX solid rgba(246, 214, 88, 1);
-    border-radius: 24px;
-    position: relative;
-    background: rgba(255, 229, 0, 0.1);
-    .search-top-text{
-      color: rgba(253, 70, 246, 1);
-      font-size: 16px;
-      position: absolute;
-      left: 48px;
-      top: -24px;
-    }
-    .search-top-icon{
-      display: block;
-      position: absolute;
-      left: 16px;
-      top: 12px;
-    }
-  }
-}
+
 .search-input{
   width: 75vw;
   margin: 0 auto;

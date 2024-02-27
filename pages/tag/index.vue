@@ -3,7 +3,7 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <nav-new :title="tags[tagIndex] + ' ' + '('+ total + ' results' + ')'" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></nav-new>
     <div class="paddingTop88"></div>
-    <div style="height: 50px;" class="d-none d-md-block"></div>
+    <div style="height: 50px;" class="d-none d-sm-block"></div>
     <div class="tag-box" >
       <div v-for="(item, index) in tags" :key="index"><span class="tag-name" :class="tagIndex === index? 'tag-color': ''" @click="handleClickTagName(item, index)">{{ item }}</span><span v-if="tags.length -1 !== index" class="tag-line">-</span></div>
     </div>
@@ -40,8 +40,8 @@
         </van-list>
     </van-pull-refresh>
     <empty v-else></empty>
-    <div style="height: 160px;" class="d-none d-md-block"></div>
-    <fBottom class="d-none d-md-block"></fBottom>
+    <div style="height: 160px;" class="d-none d-sm-block"></div>
+    <fBottom class="d-none d-sm-block"></fBottom>
   </div>
 </template>
 <script>

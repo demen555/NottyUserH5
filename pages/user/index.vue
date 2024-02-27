@@ -2,8 +2,8 @@
   <div>
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <div class="user container-fluid">   
-        <NavNew class="d-md-none" :title="$t('str_user_center')"></NavNew>
-        <h1 class="d-none d-md-block user-title" > {{ $t('str_user_center') }} </h1>
+        <NavNew class="d-sm-none" :title="$t('str_user_center')"></NavNew>
+        <h1 class="d-none d-sm-block user-title" > {{ $t('str_user_center') }} </h1>
         <div class="user-info row">
             <div class="user-content avatar d-sm-none">
                 <span class="title">{{ $t('str_header') }}</span>
@@ -16,7 +16,7 @@
                 </van-uploader>
             </div>
 
-            <div class="user-avatar d-none d-md-flex ">
+            <div class="user-avatar d-none d-sm-flex ">
                 <van-uploader :before-read="beforeRead">
                     <div class="img-icon">
                         <img class="img" v-if="userinfo.userPortrait" :src="userinfo.userPortrait" alt="avatar">

@@ -6,7 +6,7 @@
       <cardLoad></cardLoad>
     </div>
     <div :class="['paddingTop88', showFooter ? 'paddingBottom50': 'paddingBottom10' ]"  v-if="dataList.length">
-      <div style="height: 50px;" class="d-none d-md-block"></div>
+      <div style="height: 50px;" class="d-none d-sm-block"></div>
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model="loading"

@@ -17,7 +17,7 @@
         </div>
       </div>
       <!-- pc样式布局 -->
-      <div class="d-none d-md-block">
+      <div class="d-none d-sm-block">
         <div class="video-container-pc">
           <div class="video-container-pc-left">
             <div class="main-update-img" v-if="upInfo?.userPortrait"><img :src="upInfo.userPortrait" alt="person"></div>
