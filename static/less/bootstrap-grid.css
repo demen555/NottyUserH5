@@ -1203,10 +1203,6 @@
 }
 
 @media (min-width: 1024px) {
-  header{
-    height: 96px !important;
-    line-height: 96px !important;
-  }
   .d-md-none {
     display: none !important;
   }

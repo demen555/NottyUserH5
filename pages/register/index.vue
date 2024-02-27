@@ -48,7 +48,7 @@
       </div>
       <div class="dialog-submit-text">
         <div>{{ $t('str_login_text3') }}</div>
-        <div @click="handleLogin" class="tip">{{ $t('str_login_account2') }}</div>
+        <nuxt-link :to="localePath('login')" class="tip">{{ $t('str_login_account2') }}</nuxt-link>
       </div>
       <div class="land_footer">
           <p class="com">  © {{ hostname }}, 2023 </p>
@@ -153,9 +153,7 @@
           console.error(error)
         }
       },
-      handleLogin(){
-        this.$emit('goLogin')
-      },
+
       async handleSubmit(){
         try {
           const params = {

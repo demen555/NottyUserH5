@@ -5,7 +5,7 @@
         <NavNew class="d-md-none" :title="$t('str_user_center')"></NavNew>
         <h1 class="d-none d-md-block user-title" > {{ $t('str_user_center') }} </h1>
         <div class="user-info row">
-            <div class="user-content avatar d-md-none">
+            <div class="user-content avatar d-sm-none">
                 <span class="title">{{ $t('str_header') }}</span>
                 <van-uploader :before-read="beforeRead">
                     <div class="img-icon">
@@ -230,59 +230,5 @@ export default {
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.06);
     background: rgba(24, 24, 28, 1);
-}
-@media (min-width: 1024px) {
-    .user{
-        margin: 96px auto 0;
-        overflow: hidden;
-        .user-title{
-            margin: 24px 0;
-        }
-        .user-info{
-            width: 1000px;
-            height: 185px;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.06);
-            margin: 0 auto;
-            padding: 24px;
-        }
-        .user-content{
-            &.col-sm-4, &.col-md-4, &.col-lg-4, &.col-xl-4{
-                flex-direction: column;
-                align-items: inherit;
-                // justify-content: inherit;
-                .words{
-                    text-align: left;
-                }
-            }
-        }
-        .user-avatar{
-            width: 100%;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            .img-icon{
-                width: 56px;
-                height: 56px;
-                padding-right: 0;
-                img{
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-            .user-name{
-                display: flex;
-                flex-direction: column;
-                margin-left: 8px;
-                span{
-                    margin: 4px 0;
-                    font-size: 16px;
-                    &:nth-child(2){
-                        color: rgba(255, 255, 255, 0.7);
-                    }
-                }
-            }
-        }
-    }
 }
 </style>

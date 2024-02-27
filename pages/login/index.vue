@@ -1,11 +1,12 @@
 <template>
   <div class="login">
     <HeaderTop ></HeaderTop>
-    <div class="dialog-top-img">
+    <div class="dialog-top-img d-sm-none">
       <div class="logo-pop" :class="themeChecked? 'logo-black': 'logo-white'"></div>
     </div>
-    <div class="dialog-top-img-title">{{ $t('str_no_login') }}</div>
+    
     <div class="dialog">
+      <div class="dialog-top-img-title">{{ $t('str_no_login') }}</div>
       <div class="dialog-form">
         <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
         <div class="user-center-info-input dialog-input">
@@ -32,16 +33,16 @@
       </div>
       <div class="dialog-submit-text">
         <div>{{ $t('str_login_text1') }}</div>
-        <div @click="handleRegister" class="tip">{{ $t('str_reg_user') }}</div>
+        <nuxt-link :to="localePath('register')" class="tip">{{ $t('str_reg_user') }} 55</nuxt-link>
         <div>{{ $t('str_login_text2') }}</div>
-        <div @click="$router.push(localePath({ name: 'user-sendEmail' }))" class="tip">{{ $t('str_pwd_fog') }}</div>
+        <nuxt-link :to="localePath('user-sendEmail')" class="tip">{{ $t('str_pwd_fog') }}</nuxt-link>
       </div>
       <div class="land_footer">
           <p class="com">  © {{ hostname }}, 2023 </p>
           <img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta">
       </div>
     </div>
-    <!-- <fBottom></fBottom> -->
+    <fBottom class="d-none d-sm-block"></fBottom>
   </div>
 </template>
 <script>
@@ -123,9 +124,7 @@ export default {
         }
       }
     },
-    handleRegister(){
-        this.$emit('goRegister')
-    },
+
     async handleSubmit() {
       try {
         const params = {

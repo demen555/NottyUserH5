@@ -4,7 +4,7 @@
       <header class="home-header" id="home-header">
         <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common" alt="more">
         <div class="pc-logo d-none d-md-block" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
-        <div class="d-block d-md-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        <div class="d-block d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
         <!-- <div class="d-md-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
         <nuxt-link :to="localePath('search')" >
           <div class="d-none d-md-block search-btn" @click.stop="handleGoPage('search')">
@@ -89,19 +89,19 @@
           </div>
           <!-- 登录 -->
           <div class="nav-menu-btns" v-if="!isLogin">
-            <div class="nav-menu-btns-left">
-              <div class="nav-menu-login" @click="handleLoginorRegister('login')">
+            <nuxt-link class="nav-menu-btns-left" :to="localePath('login')">
+              <div class="nav-menu-login">
                 <img :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_2">
               </div>
               <div>{{ $t('str_login') }}</div>
-          </div>
-          <!-- 注册 -->
-          <div class="nav-menu-btns-left">
-            <div class="nav-menu-res" @click="handleLoginorRegister('register')">
-              <img :src="themeChecked? require('~/static/images/home_top_zhuce_1.svg'): require('~/static/images/home_top_zhuce.svg')" alt="home_top_zhuce">
-            </div>
-            <div>{{ $t('str_register') }}</div>
-          </div>
+            </nuxt-link>
+            <!-- 注册 -->
+            <nuxt-link class="nav-menu-btns-left" :to="localePath('register')">
+              <div class="nav-menu-res">
+                <img :src="themeChecked? require('~/static/images/home_top_zhuce_1.svg'): require('~/static/images/home_top_zhuce.svg')" alt="home_top_zhuce">
+              </div>
+              <div>{{ $t('str_register') }}</div>
+            </nuxt-link>
           </div>
           <!-- 用户中心 -->
           <div class="nav-list-tags nav-user-center" @click="handleGoPage('user')" v-show="isLogin">
@@ -462,14 +462,7 @@ export default {
         this.update_theme('light')
       }
     },
-    handleLoginorRegister(val){
-      if(val === 'login'){
-        this.$refs.dialogLoginRef.onShow()
-      } else if (val === 'register') {
-        this.$refs.dialogRegisterRef && this.$refs.dialogRegisterRef.handleShow()
-      }
-      this.showRightPop = false
-    },
+
     handleGoPage(val){
     console.log(val, 'input')
       console.log(this.$route.name, 'route')
@@ -591,6 +584,7 @@ header{
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #FFFFFF;
 }
 .nav-menu-btns-left:first-child{
   margin-right: 80px;
