@@ -25,7 +25,7 @@
                 name: 'tag-name',
                 params:{
                   id: tag.id,
-                  name: tag.name,
+                  name: tag.urlSlug,
                   refresh: true,
                 },
               })" 
@@ -33,7 +33,7 @@
               class="tag-item col-5 col-sm-6 col-md-4 col-lg-3 col-xl-2" 
               v-for="(tag, index) in tagList" 
               :key="index">
-                <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.name }}</span>
+                <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.urlSlug }}</span>
               </nuxt-link>
             </div>
           </div>
@@ -82,7 +82,7 @@ export default{
     fBottom
   },
   created(){
-    this.initTagList('first')
+    this.getList('first')
   },
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -120,9 +120,9 @@ export default{
       if(this.clickShow) return this.loading = false
       console.log(this.pageInfo, 'onLoad')
       this.pageInfo.page += 1
-      this.initTagList(); 
+      this.getList(); 
     },
-    async initTagList(isRefresh = false){
+    async getList(isRefresh = false){
       try {
         isRefresh === 'first'  && (this.spinnerLoading = true)
         !isRefresh  && (this.loading = true)
@@ -153,7 +153,7 @@ export default{
     },
     onRefresh() {
       this.pageInfo.page = 1
-      this.initTagList(true)
+      this.getList(true)
     }
   }
 }
