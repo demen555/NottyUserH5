@@ -309,7 +309,7 @@ overflow: visible;
   }
 }
 
-.van-overlay{
+.nav-overlay{
   display: none;
 }
 </style>
