@@ -516,5 +516,12 @@
   "str_footer_cookie16": "Questions or Concerns: If you have any questions or concerns about our cookie policy or data usage practices, please contact us at support@nottyhub.com.",
 
   "str_email_send_suc": "We have sent you an email with your username and a link in order to reset your password",
-  "All": "All"
+  "All": "All",
+
+  "str_login_title1": "NottyHub XXX Member Login Benefits",
+  "str_login_title2": "Watch Free XXX Videos",
+  "str_login_title3": "Create [Playlist]",
+  "str_login_title4": "Access Comment Function",
+  "str_login_title5": "Upload Video and get Paid."
+  
 }

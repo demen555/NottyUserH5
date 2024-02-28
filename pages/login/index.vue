@@ -5,6 +5,28 @@
       <div class="logo-pop" :class="themeChecked? 'logo-black': 'logo-white'"></div>
     </div>
     <div class="dialog-bg">
+      <div class="dialog-pc d-none d-md-block">
+        <img class="logo" src="~@/static/images/logo-black.svg" alt="">
+        <h2> {{ $t('str_login_title1') }} </h2>
+        <div class="advantage">
+          <div class="advantage-item">
+            <img class="img" src="~@/static/images/Advantage_free.png" alt="">
+            <span class="words"> {{ $t('str_login_title2') }} </span>
+          </div>
+          <div class="advantage-item">
+            <img class="img" src="~@/static/images/Advantage_create.png" alt="">
+            <span class="words"> {{ $t('str_login_title3') }}  </span>
+          </div>
+          <div class="advantage-item">
+            <img class="img" src="~@/static/images/Advantage_Comment.png" alt="">
+            <span class="words"> {{ $t('str_login_title4') }} </span>
+          </div>
+          <div class="advantage-item">
+            <img class="img" src="~@/static/images/Advantage_paid.png" alt="">
+            <span class="words"> {{ $t('str_login_title5') }} </span>
+          </div>
+        </div>
+      </div>
       <div class="dialog">
         <div class="dialog-top-img-title">{{ $t('str_no_login') }}</div>
         <div class="dialog-form">
