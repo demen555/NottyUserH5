@@ -217,8 +217,7 @@
         </div>
       </div>
     </van-popup>
-    <dialogLogin ref="dialogLoginRef" @goRegister="goRegister"></dialogLogin>
-    <dialogRegister ref="dialogRegisterRef" @goLogin="goLogin"></dialogRegister>
+
     <dialogLine ref="dialogLineRef" @goLogin="goLogin"></dialogLine>
     <dialogGuild ref="dialogGuildRef"></dialogGuild>
   </div>
@@ -266,8 +265,6 @@ export default {
   },
 
   components: {
-    dialogLogin: () => import('@/components/dialog/dialog-login.vue'),
-    dialogRegister: () => import('@/components/dialog/dialog-register.vue'),
     dialogLine: () => import('@/components/dialog/dialog-line.vue'),
     // dialogGuild: () => import('@/components/dialog/dialog-guild.vue'),
     dialogGuild,
@@ -406,18 +403,13 @@ export default {
           this.$toast(this.$t('toast7'))
           this.set_userinfo({})
           this.clearAccessToken()
-          this.$refs.dialogLoginRef.onShow()
         }
       } catch (error) {
         console.error(error)
       }
     },
-    goRegister(){
-      this.$refs.dialogRegisterRef.onShow()
-    },
-    goLogin(){
-      this.$refs.dialogLoginRef.onShow()
-    },
+
+
     handleShowExpand(val){
       if(val==='type'){
         this.showTypeExpand = !this.showTypeExpand
@@ -464,16 +456,11 @@ export default {
     },
 
     handleGoPage(val){
-    console.log(val, 'input')
-      console.log(this.$route.name, 'route')
       if( val == "collect" && !this.isLogin ){
-        return this.$refs.dialogLoginRef.onShow()
+        return this.$router.push(this.localePath('login'))
       }
-      // if( val == "up" && !this.isLogin ){
-      //   return this.$refs.dialogLoginRef.onShow()
-      // }
       if( val == "pwdset" && !this.isLogin ){
-        return this.$refs.dialogLoginRef.onShow()
+        return this.$router.push(this.localePath('login'))
       }
       if(val === 'line') {
         this.$refs.dialogLineRef.onLineShow()
