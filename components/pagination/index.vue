@@ -139,4 +139,18 @@ export default {
   cursor: default;
   opacity: 0.6;
 }
+@media (min-width: 579px) {
+  .pagination{
+    height: 35px;
+    div{
+      height: 35px;
+      margin-right: 12px;
+      a{
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+      }
+    }
+  }
+}
 </style>

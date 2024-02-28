@@ -19,7 +19,7 @@
           :immediate-check='false'
           @load="onLoad"
         >
-          <div class="container-fluid">
+          <div class="container-fluid-sp">
             <div class="thumb row">
               <nuxt-link :to="localePath({
                 name: 'tag-name',
@@ -82,7 +82,7 @@ export default{
     fBottom
   },
   created(){
-    this.initTagList('first')
+    this.getList('first')
   },
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -120,9 +120,9 @@ export default{
       if(this.clickShow) return this.loading = false
       console.log(this.pageInfo, 'onLoad')
       this.pageInfo.page += 1
-      this.initTagList(); 
+      this.getList(); 
     },
-    async initTagList(isRefresh = false){
+    async getList(isRefresh = false){
       try {
         isRefresh === 'first'  && (this.spinnerLoading = true)
         !isRefresh  && (this.loading = true)
@@ -153,7 +153,7 @@ export default{
     },
     onRefresh() {
       this.pageInfo.page = 1
-      this.initTagList(true)
+      this.getList(true)
     }
   }
 }
@@ -162,12 +162,24 @@ export default{
 .thumb{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  // justify-content: space-between;
   margin: 0 12px;
+}
+@media (max-width: 579px) {
+  .thumb{
+    // padding-left: 15px;
+    // padding-right: 15px;
+    // width: 100%;
+    // width: 455px;
+    justify-content: space-between;
+  }
+  .tag-item{
+    min-width: 172px !important;
+  }
 }
 .tag-box{
   margin: 10px 12px;
-  height: 44px;
+  // height: 44px;
   border-radius: 4px;
   background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
   border: 1px solid var(--bg-color3, rgba(255, 255, 255, 0.10));
@@ -190,7 +202,7 @@ export default{
   }
 }
 .tag-item{
-  display: block;
+  // display: block;
   // min-width: 172px;
   height: 32px;
   margin-right: 10px;
