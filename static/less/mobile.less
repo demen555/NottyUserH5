@@ -428,5 +428,44 @@
         margin-top: 96px;
       }
     }
+    .login, .register{
+      padding-top: 96px !important;
+      .dialog-bg{
+        width: 1440px;
+        height: 816px;
+        // .pxToVW1920(1440, width);
+        // .pxToVW1920(816, height);
+
+        // min-width: 579px;
+        // min-height: 328px;
+        max-width: 100vw;
+        position: relative;
+        background: url("~~/static/images/login_top.png");
+        background-position: center;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .dialog{
+        width: 500px;
+        height: 620px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(24, 24, 28, 1);
+        .dialog-top-img-title{
+          margin: 40px 0 32px 0;
+        }
+        .user-center-info-input{
+          margin-bottom: 16px;
+        }
+        .dialog-btns{
+          margin-top: 24px;
+        }
+        .dialog-submit-text{
+          margin-top: 24px;
+        }
+      }
+    }
   }
 }
