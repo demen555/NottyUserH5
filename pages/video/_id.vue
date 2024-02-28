@@ -174,7 +174,7 @@
             <videoLoad />
             <cardLoad />
         </template>
-        <div class="sticky-top" @click="handleScroll" v-show="isDetailStickyVisible">
+        <div class="sticky-top cursor-pointer" @click="handleScroll" v-show="isDetailStickyVisible">
           <div class="sticky-img"><img src="~/static/images/com_jt_sx_top.svg" alt="com_jt_sx_top"></div>
           <div class="sticky-top-text">TOP</div>
         </div>
