@@ -163,12 +163,13 @@ methods: {
 .thumb{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 @media (max-width: 579px) {
   .thumb{
     padding-left: 15px;
     padding-right: 15px;
+    justify-content: space-between;
   }
 }
 .van-pull-refresh{
