@@ -2,7 +2,7 @@
   <div class="collect container-fluid">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <client-only>
-    <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_wdsc_1.svg')" :title="$t('str_collect')" :text="dataList.length ? true : false"></Nav>
+      <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_wdsc_1.svg')" :title="$t('str_collect')" :text="dataList.length ? true : false"></Nav>
     </client-only>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>

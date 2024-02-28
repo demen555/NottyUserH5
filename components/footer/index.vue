@@ -1,10 +1,10 @@
 <template>
   <van-sticky>
     <main class="footer-sz">
-      <div @click="handleBtn('all')" v-if="isAll">{{ $t('str_choose_all') }}</div>
-      <div @click="handleBtn('noall')" v-else>{{ $t('str_cancel') }}</div>
+      <div @click="handleBtn('all')" v-if="isAll" class="cursor-pointer">{{ $t('str_choose_all') }}</div>
+      <div @click="handleBtn('noall')" v-else class="cursor-pointer">{{ $t('str_cancel') }}</div>
       <span class="footer-line"></span>
-      <div @click="handleBtn('del')" class="footer-del">{{ $t('str_delete') }}<span v-if="result.length">({{ result.length }})</span></div>
+      <div @click="handleBtn('del')" class="footer-del cursor-pointer">{{ $t('str_delete') }}<span v-if="result.length">({{ result.length }})</span></div>
     </main>
   </van-sticky>
 </template>
