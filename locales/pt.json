@@ -522,5 +522,11 @@
   "str_footer_cookie16": "Dúvidas ou preocupações: Se tiver alguma dúvida ou preocupação sobre nossa política de cookies ou práticas de uso de dados, entre em contato conosco pelo e-mail support@nottyhub.com.",
 
   "str_email_send_suc": "Enviamos a você um e-mail com seu nome de usuário e um link para redefinir sua senha",
-  "All": "Todos"
+  "All": "Todos",
+
+  "str_login_title1": "Benefícios de login de membro do NottyHub XXX ",
+  "str_login_title2": "Assistir a vídeos XXX gratuitos",
+  "str_login_title3": "Criar [lista de reprodução]",
+  "str_login_title4": "Acessar a função de comentários",
+  "str_login_title5": "Faça upload de vídeos e seja pago."
   }

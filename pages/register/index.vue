@@ -6,6 +6,28 @@
       <div class="logo-pop" :class="themeChecked? 'logo-black': 'logo-white'"></div>
     </div>
     <div class="dialog-bg">
+      <div class="dialog-pc d-none d-md-block">
+        <img class="logo" src="~@/static/images/logo-black.svg" alt="">
+        <h2> {{ $t('str_login_title1') }} </h2>
+        <div class="advantage">
+          <div class="advantage-item">
+            <img class="img" src="~@/static/images/Advantage_free.png" alt="">
+            <span class="words"> {{ $t('str_login_title2') }} </span>
+          </div>
+          <div class="advantage-item">
+            <img class="img" src="~@/static/images/Advantage_create.png" alt="">
+            <span class="words"> {{ $t('str_login_title3') }}  </span>
+          </div>
+          <div class="advantage-item">
+            <img class="img" src="~@/static/images/Advantage_Comment.png" alt="">
+            <span class="words"> {{ $t('str_login_title4') }} </span>
+          </div>
+          <div class="advantage-item">
+            <img class="img" src="~@/static/images/Advantage_paid.png" alt="">
+            <span class="words"> {{ $t('str_login_title5') }} </span>
+          </div>
+        </div>
+      </div>
       <div class="dialog">
         <div class="dialog-top-img-title">{{ $t('str_reg') }}</div>
         <div class="dialog-form">
@@ -56,6 +78,132 @@
             <img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta">
         </div>
       </div>
+    </div>
+    <div id="main-content" class="wiki-content d-none d-sm-block">
+      <h1>
+        <strong>Nottyhub Free XXX Videos | A Worldwide Finest Porno Tube</strong>
+      </h1>
+      <p>
+        <span>An uprising Porn Tube for the world. Introduced in late 2023,</span>
+        <a href="https://nottyhub.com/" class="external-link" rel="nofollow">
+          <strong>Nottyhub free XXX videos</strong>
+        </a>
+        <span>quickly absorbed hundreds of thousands of viewers online, now serving 1 Million viewers daily as we speak!&nbsp;</span>
+      </p>
+      <p>
+        <span>Enjoy one of the internet's largest and greatest collections of free porn films.</span>
+        <strong>
+          <a href="http://Nottyhub.com" class="external-link" rel="nofollow">Nottyhub.com</a>
+        </strong>
+        <span>is the first choice to find the most intense member-uploaded adult videos. Nottyhub takes pride in providing an incredible selection of unique</span>
+        <a href="https://nottyhub.com/category/" class="external-link" rel="nofollow">
+          <strong>sex categories</strong>
+        </a>
+        <span>and porn actors that will satisfy you in every way you thirst.</span>
+        <span>
+          <br>
+        </span>
+        <span>
+          <br>
+        </span>
+      </p>
+      <h2>
+        <strong>Register for free and enjoy all features as a Member</strong>
+      </h2>
+      <p>
+        <span>If you are currently not a member, you are in for a treat! Our Free Registration is quick, secure, and discrete. As our precious member, you will be entitled to&nbsp;</span>
+      </p>
+      <ol>
+        <li>
+          <span>1. Unlock member-only contents and privileges.</span>
+        </li>
+        <li>
+          <span>2. Revisit all of your favorite watch history,&nbsp;</span>
+        </li>
+        <li>
+          <span>3. Rate videos as part of the community (Upvote/Downvote),&nbsp;</span>
+        </li>
+        <li>
+          <span>4. Comment and interact with other members,&nbsp;</span>
+        </li>
+        <li>
+          <span>5. Earn money from uploading videos!&nbsp;</span>
+        </li>
+      </ol>
+      <p>
+        <span>Your contribution helps us curate a healthy and better adult entertainment environment.</span>
+      </p>
+      <h2>
+        <strong>Hundreds of Porn Category Awaits You&nbsp;</strong>
+      </h2>
+      <p>
+        <span>As a Freemium Member, you will get to access all our curated pornography sex videos. Our categories are vast and deep. Let us interest you with our Top 10 category as analyzed up to date.</span>
+      </p>
+      <ol>
+        <li>
+          <a href="https://nottyhub.com/category/anime-hentai" class="external-link" rel="nofollow">
+            <span>1. Anime Hentai</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://nottyhub.com/category/gay-porn" class="external-link" rel="nofollow">
+            <span>2. Gay Porn</span>
+          </a>
+        </li>
+        <li>
+          <span>3. Fisting</span>
+        </li>
+        <li>
+          <a href="https://nottyhub.com/category/blacked" class="external-link" rel="nofollow">
+            <span>4. Blacked</span>
+          </a>
+        </li>
+        <li>
+          <span>5. Cuckold</span>
+        </li>
+        <li>
+          <span>6. Squirting</span>
+        </li>
+        <li>
+          <span>7. Cam Sex</span>
+        </li>
+        <li>
+          <a href="https://nottyhub.com/category/teens-xxx" class="external-link" rel="nofollow">
+            <span>8. Teen Porn</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://nottyhub.com/category/japanese" class="external-link" rel="nofollow">
+            <span>9. Jav Porn</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://nottyhub.com/category/cosplay" class="external-link" rel="nofollow">
+            <span>10. Cosplay Porn</span>
+          </a>
+        </li>
+      </ol>
+      <p>
+        <span>Join us and contribute your views to push the number! With that, we learn what you love the most and refresh daily trending and popular videos to serve your desires.</span>
+      </p>
+      <p>
+        <span>Follow our channels and make friends in our Telegram group for everyday recommended videos!</span>
+      </p>
+      <ul>
+        <li>
+          <a href="https://t.me/NottyAsian" class="external-link" rel="nofollow">
+            <span>Nottyhub Asian</span>
+          </a>
+          <span>|</span>
+          <a href="https://t.me/NottyOF" class="external-link" rel="nofollow">
+            <span>Nottyhub OnlyFans</span>
+          </a>
+          <span>|</span>
+          <a href="https://t.me/nottygay" class="external-link" rel="nofollow">
+            <span>Nottyhub Gay</span>
+          </a>
+        </li>
+      </ul>
     </div>
     <fBottom class="d-none d-sm-block"></fBottom>
    </div>
