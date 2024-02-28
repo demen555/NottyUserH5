@@ -1,7 +1,9 @@
 <template>
   <div class="collect container-fluid">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
+    <client-only>
     <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')" :title="$t('str_his')" :text=" dataList.length > 0 ? true : historyVod.length === 0"></Nav>
+    </client-only>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>

@@ -454,7 +454,9 @@ export default {
         this.update_theme('light')
       }
     },
-
+    goLogin(){
+      this.$router.push(this.localePath('login'))
+    },
     handleGoPage(val){
       if( val == "collect" && !this.isLogin ){
         return this.$router.push(this.localePath('login'))

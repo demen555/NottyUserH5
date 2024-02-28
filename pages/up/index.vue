@@ -1,7 +1,9 @@
 <template>
   <div class="collect container-fluid">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
+    <client-only>
     <Nav @handleControl="handleControl" :imgUrl="require('~/static/images/my_gn_dz_1.svg')" :title="$t('str_like')" :text="dataList.length > 0 ? true : false"></Nav>    
+    </client-only>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>

@@ -178,9 +178,6 @@
           <div class="sticky-img"><img src="~/static/images/com_jt_sx_top.svg" alt="com_jt_sx_top"></div>
           <div class="sticky-top-text">TOP</div>
         </div>
-
-        <dialogLogin ref="dialogLoginRef" @goRegister="goRegister"></dialogLogin>
-        <dialogRegister ref="dialogRegisterRef" @goLogin="goLogin"></dialogRegister>
     </div>
   </div>
 </template>
@@ -497,9 +494,6 @@ export default {
 
         // 点赞 取消点赞 
         setVodUp(){
-            // if( !this.isLogin ){
-            //     return this.goLogin()
-            // }
             const vodId = this.vodId;
             const isUpVod = this.isUpVod(this.videoStatus);
             if( this.onClick ){
@@ -607,9 +601,7 @@ export default {
 
         // 点踩
         setVodDown(){
-            // if( !this.isLogin ){
-            //     return this.goLogin()
-            // }
+
             const vodId = this.vodId;
             const isdownVod = this.isdownVod(this.videoStatus);
             if( this.onClick ){
@@ -768,12 +760,10 @@ export default {
         onRefresh(){
           console.log('onRefresh')
         },
-        goRegister(){
-            this.$refs.dialogRegisterRef.onShow()
-        },
+
 
         goLogin(){
-            this.$refs.dialogLoginRef.onShow()
+            this.$router.push(this.localePath('login'))
         },
 
         getVideohits(){
