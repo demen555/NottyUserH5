@@ -308,8 +308,4 @@ overflow: visible;
     color: var(--text-color1, #181E2A);
   }
 }
-
-.van-overlay{
-  display: none;
-}
 </style>

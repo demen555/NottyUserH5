@@ -2,60 +2,62 @@
 <template>
   <div class="register"> 
     <HeaderTop ></HeaderTop>
-    <div class="dialog-top-img">
+    <div class="dialog-top-img d-sm-none">
       <div class="logo-pop" :class="themeChecked? 'logo-black': 'logo-white'"></div>
     </div>
-    <div class="dialog-top-img-title">{{ $t('str_reg') }}</div>
-    <div class="dialog">
-      <div class="dialog-form">
-        <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
-        <div class="user-center-info-input dialog-input">
-          <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_email_1.svg'): require('~/static/images/login_email.svg')" alt="login_email"></div>
-          <label for="email">
-            <input id="email" @blur="validatorEmail" v-model="form.email" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_email')" type="text">
-          </label>
-        </div>
-        <div class="error-msg" v-show="user.showError">{{ user.errorMsg }}</div>
-        <div class="user-center-info-input dialog-input">
-          <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_zhanghao_1.svg'): require('~/static/images/login_zhanghao.svg')" alt=""></div>
-          <label for="username">
-            <input id="username" @blur="validatorUser" v-model="form.username" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_num') +'(' +  $t('str_validator_username') +')'" type="text">
-          </label>
-        </div>
-        <div class="error-msg" v-show="pwd.showError">{{ pwd.errorMsg }}</div>
-        <div class="user-center-info-input dialog-input">
-          <div class="dialog-img img-mima"><img  :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
-          <label for="password">
-            <input @blur="validatorPwd" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd') +'(' +  $t('str_validator_username') +')'">
-          </label>  
-        </div>
+    <div class="dialog-bg">
+      <div class="dialog">
+        <div class="dialog-top-img-title">{{ $t('str_reg') }}</div>
+        <div class="dialog-form">
+          <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
+          <div class="user-center-info-input dialog-input">
+            <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_email_1.svg'): require('~/static/images/login_email.svg')" alt="login_email"></div>
+            <label for="email">
+              <input id="email" @blur="validatorEmail" v-model="form.email" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_email')" type="text">
+            </label>
+          </div>
+          <div class="error-msg" v-show="user.showError">{{ user.errorMsg }}</div>
+          <div class="user-center-info-input dialog-input">
+            <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_zhanghao_1.svg'): require('~/static/images/login_zhanghao.svg')" alt=""></div>
+            <label for="username">
+              <input id="username" @blur="validatorUser" v-model="form.username" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_num') +'(' +  $t('str_validator_username') +')'" type="text">
+            </label>
+          </div>
+          <div class="error-msg" v-show="pwd.showError">{{ pwd.errorMsg }}</div>
+          <div class="user-center-info-input dialog-input">
+            <div class="dialog-img img-mima"><img  :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
+            <label for="password">
+              <input @blur="validatorPwd" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd') +'(' +  $t('str_validator_username') +')'">
+            </label>  
+          </div>
 
-        <div class="user-center-info-input input-code">
-          <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_yanzhengma_1.svg'): require('~/static/images/login_yanzhengma.svg')"></div>
-          <label for="code">
-            <input id="code"  v-model="form.code" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_code')" type="text">
-          </label>
-          <div class="user-center-input-code">
-            <div class="input-code" @click="initCode">
-              <img class="code-img" :src="code" alt="code">
+          <div class="user-center-info-input input-code">
+            <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_yanzhengma_1.svg'): require('~/static/images/login_yanzhengma.svg')"></div>
+            <label for="code">
+              <input id="code"  v-model="form.code" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_code')" type="text">
+            </label>
+            <div class="user-center-input-code">
+              <div class="input-code" @click="initCode">
+                <img class="code-img" :src="code" alt="code">
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="dialog-btns" @click="handleSubmit">
-        {{ $t('str_register') }}
-        <van-loading class="user-icon" type="spinner" v-show="showLoading" />
-      </div>
-      <div class="dialog-submit-text">
-        <div>{{ $t('str_login_text3') }}</div>
-        <nuxt-link :to="localePath('login')" class="tip">{{ $t('str_login_account2') }}</nuxt-link>
-      </div>
-      <div class="land_footer">
-          <p class="com">  © {{ hostname }}, 2023 </p>
-          <img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta">
+        <div class="dialog-btns" @click="handleSubmit">
+          {{ $t('str_register') }}
+          <van-loading class="user-icon" type="spinner" v-show="showLoading" />
+        </div>
+        <div class="dialog-submit-text">
+          <div>{{ $t('str_login_text3') }}</div>
+          <nuxt-link :to="localePath('login')" class="tip">{{ $t('str_login_account2') }}</nuxt-link>
+        </div>
+        <div class="land_footer">
+            <p class="com">  © {{ hostname }}, 2023 </p>
+            <img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta">
+        </div>
       </div>
     </div>
-
+    <fBottom class="d-none d-sm-block"></fBottom>
    </div>
 </template>
 <script>

@@ -4,42 +4,43 @@
     <div class="dialog-top-img d-sm-none">
       <div class="logo-pop" :class="themeChecked? 'logo-black': 'logo-white'"></div>
     </div>
-    
-    <div class="dialog">
-      <div class="dialog-top-img-title">{{ $t('str_no_login') }}</div>
-      <div class="dialog-form">
-        <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
-        <div class="user-center-info-input dialog-input">
-          <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_email_1.svg'): require('~/static/images/login_email.svg')"></div>
-          <label for="email">
-            <input id="email" @blur="validatorEmail" v-model="form.email" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_email')" type="text">
-          </label>
+    <div class="dialog-bg">
+      <div class="dialog">
+        <div class="dialog-top-img-title">{{ $t('str_no_login') }}</div>
+        <div class="dialog-form">
+          <div class="error-msg" v-show="email.showError">{{ email.errorMsg }}</div>
+          <div class="user-center-info-input dialog-input">
+            <div class="dialog-img img-zhanghao"><img :src="themeChecked ? require('~/static/images/login_email_1.svg'): require('~/static/images/login_email.svg')"></div>
+            <label for="email">
+              <input id="email" @blur="validatorEmail" v-model="form.email" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_email')" type="text">
+            </label>
+          </div>
+          <div class="error-msg" v-show="password.showError">{{ password.errorMsg }}</div>
+          <div class="user-center-info-input dialog-input">
+            <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
+            <label for="password">
+              <input @blur="validatorPassword" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd') +'(' +  $t('str_validator_username') +')'">
+            </label>
+          </div>
+          <div class="user-center-info-input dialog-checkbox">
+            <van-checkbox v-model="isLocale"></van-checkbox>
+            <div class="dialog-tishi">{{ $t('str_login_tip') }}</div>
+          </div>
         </div>
-        <div class="error-msg" v-show="password.showError">{{ password.errorMsg }}</div>
-        <div class="user-center-info-input dialog-input">
-          <div class="dialog-img img-mima"><img :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')" alt=""></div>
-          <label for="password">
-            <input @blur="validatorPassword" type="password" v-model="form.password" class="user-center-info-btn dialog-btn" :class="!themeChecked && 'white'" :placeholder="$t('str_input_pwd') +'(' +  $t('str_validator_username') +')'">
-          </label>
+        <div class="dialog-btns" @click.enter="handleSubmit">
+          {{ $t('str_login') }}
+          <van-loading class="user-icon" type="spinner" v-show="showLoading" />
         </div>
-        <div class="user-center-info-input dialog-checkbox">
-          <van-checkbox v-model="isLocale"></van-checkbox>
-          <div class="dialog-tishi">{{ $t('str_login_tip') }}</div>
+        <div class="dialog-submit-text">
+          <div>{{ $t('str_login_text1') }}</div>
+          <nuxt-link :to="localePath('register')" class="tip">{{ $t('str_reg_user') }} </nuxt-link>
+          <div>{{ $t('str_login_text2') }}</div>
+          <nuxt-link :to="localePath('user-sendEmail')" class="tip">{{ $t('str_pwd_fog') }}</nuxt-link>
         </div>
-      </div>
-      <div class="dialog-btns" @click.enter="handleSubmit">
-        {{ $t('str_login') }}
-        <van-loading class="user-icon" type="spinner" v-show="showLoading" />
-      </div>
-      <div class="dialog-submit-text">
-        <div>{{ $t('str_login_text1') }}</div>
-        <nuxt-link :to="localePath('register')" class="tip">{{ $t('str_reg_user') }} 55</nuxt-link>
-        <div>{{ $t('str_login_text2') }}</div>
-        <nuxt-link :to="localePath('user-sendEmail')" class="tip">{{ $t('str_pwd_fog') }}</nuxt-link>
-      </div>
-      <div class="land_footer">
-          <p class="com">  © {{ hostname }}, 2023 </p>
-          <img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta">
+        <div class="land_footer">
+            <p class="com">  © {{ hostname }}, 2023 </p>
+            <img class="rta" :src="themeChecked? require('~/static/images/rat.png'): require('~/static/images/rat-1.png')" alt="rta">
+        </div>
       </div>
     </div>
     <fBottom class="d-none d-sm-block"></fBottom>
@@ -308,6 +309,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
   
 .dialog-btns{
