@@ -25,7 +25,7 @@
                 name: 'tag-name',
                 params:{
                   id: tag.id,
-                  name: tag.name,
+                  name: tag.urlSlug,
                   refresh: true,
                 },
               })" 
@@ -33,7 +33,7 @@
               class="tag-item col-5 col-sm-6 col-md-4 col-lg-3 col-xl-2" 
               v-for="(tag, index) in tagList" 
               :key="index">
-                <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.name }}</span>
+                <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.urlSlug }}</span>
               </nuxt-link>
             </div>
           </div>

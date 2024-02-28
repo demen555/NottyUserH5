@@ -1,7 +1,7 @@
 <template>
   <div class="home container-fluid">
-    <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <NavNew :title="categoryMetaData.h1 || paramsName" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></NavNew>
+    <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
+    <NavNew v-show="isStickyVisible" :title="categoryMetaData.h1 || paramsName" :imgUrl="require('~/static/images/my_gn_fenlei_1.svg')"></NavNew>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
