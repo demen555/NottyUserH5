@@ -145,7 +145,7 @@ data() {
     relatedList: [], //相关推荐数据
     pageInfo: {
       page: 1,
-      size: 20
+      size: 24
     },
     pageTotal: 0,
     relatedLoading: false,
@@ -167,7 +167,7 @@ created(){
   // this.set_show(true)
   if(process.client) {
     if(localStorage.getItem('searchBool')){
-      this.initSearchVideoList()
+      this.getList()
     }
     this.searchBool = localStorage.getItem('searchBool')
     console.log(this.searchBool, 'created')
@@ -247,7 +247,7 @@ methods: {
     if(process.client) {
       const list = JSON.parse(localStorage.getItem('historyList') || '[]')
       this.historyList1 = list
-      this.historyList = list.length > 5 ? list.slice(1, list.length) : list
+      this.historyList = list.length > 4 ? list.slice(1, list.length) : list
     } else {
       this.historyList = []
     }
@@ -298,7 +298,7 @@ methods: {
       this.relatedLoading = false
     }
   },
-  async initSearchVideoList(isRefresh){
+  async getList(isRefresh){
     try {
       isRefresh === 'first' && (this.spainnerLoading = true)
       this.loading = true
@@ -358,7 +358,7 @@ methods: {
   onRefresh() {
     console.log('onRefresh')
     this.pageInfo.page = 1
-    this.initSearchVideoList(true);
+    this.getList(true);
   },
   handleSearch(){
     if(this.search){
@@ -407,7 +407,7 @@ methods: {
       localStorage.setItem('searchBool', true)
     }
     this.set_show(false)
-    this.initSearchVideoList('first')
+    this.getList('first')
   },
   handleGoHome(){
     this.$router.go('-1')

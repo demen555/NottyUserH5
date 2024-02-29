@@ -45,7 +45,7 @@ data() {
     dataList: [],
     pageInfo: {
       page: 1,
-      size: 20
+      size: 24
     },
     showCheck: false,
     showFooter: false,
@@ -71,7 +71,7 @@ computed: {
 created(){
   this.pageInfo = {
     page: 1,
-    size: 20
+    size: 24
   }
   this.getList('first')
 },
@@ -79,7 +79,7 @@ created(){
 activated(){
   this.pageInfo = {
     page: 1,
-    size: 20
+    size: 24
   }
   this.getList('first')
   // if(this.isLogin){

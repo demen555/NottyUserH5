@@ -45,7 +45,7 @@ data() {
     dataList: [],
     pageInfo: {
       page: 1,
-      size: 20
+      size: 24
     },
     showCheck: false,
     showFooter: false,

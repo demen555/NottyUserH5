@@ -8,7 +8,7 @@
       <div class="video-tag-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
           <nuxt-link :to="localePath({
               name: 'tag-name',
-              params: { id: tag.id, name: tag.name }
+              params: { name: tag.name }
           })" class="tag-name" v-for="tag in tagList" :key="tag.id">
             <div @click.stop="set_tagid(item.id)">{{ tag.name }}</div>
           </nuxt-link>
@@ -139,7 +139,7 @@ async asyncData({ $homeApi }) {
 
   const res1 = await $homeApi.requestvodpageHome({
     page: 1, 
-    size: 60
+    size: 24
   })
 
   return { 

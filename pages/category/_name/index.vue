@@ -70,7 +70,7 @@ async asyncData({ $homeApi, params }) {
     const res = await $homeApi.requestvodpage({
       categoryName: categoryName,
       page: 1,
-      size: 20
+      size: 24
     })
    
     return {
