@@ -174,11 +174,10 @@ export default {
                     if(res.code === CODES.SUCCESS){
                         this.$toast.success(this.$t('toast16'));
                         this.onClickLeft();
-                        this.showLoading = false;
                         this.cancel()
                     }
                 }).finally( res => {
-                    
+                    this.showLoading = false;
                 })
             }
 
