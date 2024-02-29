@@ -161,7 +161,7 @@ export default {
     width: 100%;
     height: 48px;
     .flex-align-center-between;
-    cursor: pointer;
+   
     position: relative;
     .title, .placeholder{
         color: var(--text-color2,  rgba(255, 255, 255, 0.70));
@@ -209,6 +209,7 @@ export default {
         background: url("~~/static/images/com_jt_sx_you_rj.svg");
     }
     &.pwdChange {
+        cursor: pointer;
         .words{
             margin-right: 8px;
         }

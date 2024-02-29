@@ -17,7 +17,7 @@
         </div>
         <div class="dplayer-top-controller" v-show="controller">
             <div class="controller-tips">Long press the screen to speed up playback</div>
-            <div class="controller-btn">
+            <div class="controller-btn d-sm-none">
                 <div class="speed" @click.stop="speedStatus = !speedStatus">{{nowSpeed}}x</div>
                 <div class="full" @click.stop="fullScreenBtn"></div>
                 <div class="speed-check" v-show="speedStatus">
