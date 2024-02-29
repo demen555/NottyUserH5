@@ -237,7 +237,7 @@ methods: {
     console.log(this.loading, this.pageInfo, 'onLoad')
     // if(!this.loading){
       this.pageInfo.page += 1
-      this.initSearchVideoList();
+      this.getList();
     // }
   },
   handleFocus(){
@@ -247,7 +247,7 @@ methods: {
     if(process.client) {
       const list = JSON.parse(localStorage.getItem('historyList') || '[]')
       this.historyList1 = list
-      this.historyList = list.length > 4 ? list.slice(1, list.length) : list
+      this.historyList = list.length > 4 ? list.slice(0, 5) : list
     } else {
       this.historyList = []
     }
