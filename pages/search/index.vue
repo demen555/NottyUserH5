@@ -329,15 +329,16 @@ methods: {
           // this.noResultShow = false
           // this.set_show(false)
         }
-        if(isRefresh){
-          // this.dataList = [ ...body.records, ...this.dataList ]
-          this.dataList = data.data || []
-          this.refreshing = false
-        } else {
-          this.dataList = uniArray([ ...this.dataList, ...data.data], 'vodId') || []
-          // this.dataList = body.records || []
-          this.loading = false
-        }
+        // if(isRefresh){
+        //   // this.dataList = [ ...body.records, ...this.dataList ]
+        //   this.dataList = data.data || []
+        //   this.refreshing = false
+        // } else {
+        //   this.dataList = uniArray([ ...this.dataList, ...data.data], 'vodId') || []
+        //   // this.dataList = body.records || []
+        //   this.loading = false
+        // }
+        this.dataList = data.data || []
         if(data.data.length === 0){
           this.finished = true
         }
