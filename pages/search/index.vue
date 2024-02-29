@@ -272,7 +272,7 @@ methods: {
     try {
       this.relatedLoading = true
       // this.loading = true
-      const res = await this.$homeApi.requestvodpageHome({ page: this.pageInfo.page, size: 60})
+      const res = await this.$homeApi.requestvodpageHome({ page: this.pageInfo.page, size: 24})
       const { code, data } = res
       if(code == CODES.SUCCESS && data){
         // this.relatedList = data.data
