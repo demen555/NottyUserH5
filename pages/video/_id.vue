@@ -215,7 +215,7 @@ export default {
             finishedReview: false,
             vodReviewtotal: 0,
             vodReviewPage:{
-                size: 20,
+                size: 24,
                 page: 0
             },
 
@@ -224,7 +224,7 @@ export default {
             loadingChange: false,
             finishedChange: false,
             vodChangePage:{
-                size: 50,
+                size: 24,
                 page: 0
             },
             showVote: false,
