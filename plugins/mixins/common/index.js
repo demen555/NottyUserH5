@@ -66,7 +66,9 @@ export default{
     },
     handlePage(val){
       this.pageInfo.page = val
-      this.getList();
+      if(this.getList){
+        this.getList()
+      }
       this.handleScroll()
       console.log(val, 'page')
     }, 

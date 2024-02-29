@@ -112,7 +112,7 @@
         </template>
         <!-- <Empty v-else></Empty> -->
         <div class="row">
-          <div class="pagination">
+          <div class="pagination" v-if="dataList.length">
             <v-pagination :total="pageTotal? pageTotal : pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
           </div>
           <fBottom></fBottom>
@@ -233,13 +233,13 @@ watch: {
 },
 methods: {
   ...mapActions(['set_show']),
-  onLoad(){
-    console.log(this.loading, this.pageInfo, 'onLoad')
-    // if(!this.loading){
-      this.pageInfo.page += 1
-      this.getList();
-    // }
-  },
+  // onLoad(){
+  //   console.log(this.loading, this.pageInfo, 'onLoad')
+  //   // if(!this.loading){
+  //     this.pageInfo.page += 1
+  //     this.getList();
+  //   // }
+  // },
   handleFocus(){
     this.$refs.searchRef && this.$refs.searchRef.focus()
   },
@@ -355,11 +355,11 @@ methods: {
       this.loading = false
     }
   },
-  onRefresh() {
-    console.log('onRefresh')
-    this.pageInfo.page = 1
-    this.getList(true);
-  },
+  // onRefresh() {
+  //   console.log('onRefresh')
+  //   this.pageInfo.page = 1
+  //   this.getList(true);
+  // },
   handleSearch(){
     if(this.search){
       this.historyList.unshift(this.search)
