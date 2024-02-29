@@ -83,7 +83,7 @@ export default {
       dataList: [],
       pageInfo: {
         page: 1,
-        size: 20
+        size: 24
       },
       tagList: [
         { id: 'vod_time_add', name: this.$t('str_page_text15') },
