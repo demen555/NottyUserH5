@@ -845,6 +845,7 @@ header{
 .login-out{
   margin-top: 12px;
   margin-bottom: 32px;
+  cursor: pointer;
 }
 .nav-user-center{
   background-color: transparent;
