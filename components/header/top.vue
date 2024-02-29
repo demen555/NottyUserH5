@@ -21,6 +21,19 @@
           <nuxt-link :to="localePath('search')" class="d-sm-none">
             <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search cursor-pointer" alt="com_sousuo">
           </nuxt-link>
+          <div class="home-nav-loc d-none d-sm-table">
+            <img class="loc-img" @click="pcNavLocShow = !pcNavLocShow" src="~/static/images/home_top_yuyan.png" alt="home_top_yuyan">
+            <div class="nav-loc-pop" v-show="pcNavLocShow">
+              <nuxt-link :class="['nav-menu-list-tag-sub', 'cursor-pointer', { 'nav-menu-list-tag-sub-a': item.code === language }]" v-for="item in languageList" :key="item.code" :to="switchLocalePath(item.code)">
+                <div class="nav-menu-left" >
+                  <div>{{ item.name }}</div>
+                </div>
+                <div class="nav-menu-right" v-if="item.code === language">
+                  <img src="~/static/images/com_select_on1.svg" alt="com_select_on">
+                </div>
+              </nuxt-link>
+            </div>
+          </div>
           <img v-if="userinfo.userPortrait" @click="handleExpand('right')" class="header-common1 cursor-pointer"  :src="userinfo.userPortrait" alt="avatar">
           <img v-else @click="handleExpand('right')" class="header-common1 cursor-pointer" :src="themeChecked? require('~/static/images/home_top_mrtx_1.svg'): require('~/static/images/home_top_mrtx_2.svg')" alt="home_top_mrtx_1">
         </div>
@@ -260,7 +273,8 @@ export default {
       pageInfo: {
         page: 1,
         size: 10
-      }
+      },
+      pcNavLocShow: false,
     }
   },
 
@@ -293,6 +307,22 @@ export default {
     this.set_categoryList( this.typeList)
     this.set_tagList( this.tagList)
     this.handleFocus()
+
+    // 点击其他元素，卸载视频
+    document.addEventListener(
+        "click",
+        (e) => {
+            let homenavlocDom = document.querySelector('.home-nav-loc');
+            if( !homenavlocDom ){
+                return;
+            }
+            if (!homenavlocDom.contains(e.target)) {
+                this.pcNavLocShow = false;
+            }
+        },
+        true
+    );
+
     console.log( this.tagList, this.typeList, "typeList&tagList" )
   },
   computed: {
