@@ -78,6 +78,7 @@
         <cardLoad></cardLoad>
       </div>
       <div class="content paddingTop88">
+        <div style="height: 50px;" class="d-none d-sm-block"></div>
         <template v-if="dataList.length">
           <div class="row">
             <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
