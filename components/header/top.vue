@@ -6,7 +6,7 @@
         <div class="pc-logo d-none d-sm-block cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
         <div class="d-block d-sm-none cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
         <!-- <div class="d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
-        <nuxt-link :to="localePath('search')" >
+        <nuxt-link :to="localePath('search')" class="search-btn-content">
           <div class="d-none d-sm-block search-btn cursor-pointer" @click.stop="handleGoPage('search')">
             <!-- <form>
               <input ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>

@@ -166,13 +166,15 @@ export default{
     display: none;
   }
 }
-.van-image{
+
+/deep/ .van-image{
   width: 100%;
   height: 100%;
   img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 8px;
   }
 }
 .main-img img{
