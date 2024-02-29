@@ -20,9 +20,9 @@
   </div>
 </template>
 <script>
-  import commonMinxin from '~/plugins/mixins/common'
+  // import commonMinxin from '~/plugins/mixins/common'
   export default{
-    mixins: [commonMinxin],
+    // mixins: [commonMinxin],
     props: {
       title: {
         type: String,
