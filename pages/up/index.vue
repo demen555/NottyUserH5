@@ -10,7 +10,7 @@
     <div :class="['paddingTop88', showFooter ? 'paddingBottom50': 'paddingBottom10' ]" v-if="dataList.length">
       <div style="height: 80px;" class="d-none d-sm-block"></div>
       <van-checkbox-group v-model="result" ref="checkboxGroup">
-        <div class="row">
+        <div class="row pc-content">
           <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2"  v-for="(item, index) in dataList" :item="item" :style="index === 0 ?'padding-top: 18px': '' " :key="item.vodId" :showCheck="showFooter"></Cover>
           <div class="pagination">
             <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
