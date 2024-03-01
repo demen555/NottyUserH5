@@ -73,7 +73,7 @@ data() {
     dataList: [],
     pageInfo: {
       page: 1,
-      size: 60,
+      size: 24,
     },
     showSticky: true,
     tagList: [],

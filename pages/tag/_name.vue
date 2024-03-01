@@ -12,7 +12,7 @@
       </div>
       <div class="row">
         <div class="pagination">
-          <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+          <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
         </div>
         <fBottom></fBottom>
       </div>
@@ -39,8 +39,8 @@ data() {
     dataList: [],
     pageInfo: {
       page: 1,
-      size: 20
-    }
+      size: 24
+    },
   }
 },
 head(){
@@ -66,12 +66,16 @@ async asyncData({ $homeApi, route }) {
   try {
     const res = await $homeApi.requestvodpage({
       page: 1,
-      size: 20,
+      size: 24,
       tagName: route.params.name
     })
     return { 
       dataList: res.data.data || [],
-      pageInfoTotal: res.data.meta.pagination.total || 0
+      pageInfo:{
+        page: 1,
+        size: 24,
+        total: res.data.meta.pagination.total
+      }
     }
   } catch (error) {
     console.error(error)
@@ -91,10 +95,7 @@ components: {
   Empty
 },
 methods: {
-  onLoad(){
-    this.pageInfo.page += 1
-    this.getList();
-  },
+
   async getList(isRefresh){
     try {
       isRefresh  === 'first' && (this.spainnerLoading = true)

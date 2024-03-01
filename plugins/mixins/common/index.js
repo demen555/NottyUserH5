@@ -26,13 +26,13 @@ export default{
     handleScrollShow() {
       // 获取滚动条滚动的距离
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      console.log(scrollTop, '666')
+      // console.log(scrollTop, '666')
       // console.log(scrollTop, 'scrollTop')
       var scroll = scrollTop - this.lastScrollTop;
       
       // 判断是否需要隐藏 sticky
       if(scroll < 0){
-          console.log(scroll,this.lastScrollTop, scrollTop,'up')
+          // console.log(scroll,this.lastScrollTop, scrollTop,'up')
           //添加你想要的事件
         if (Math.abs(scroll) >= 20) {
           this.isStickyVisible = true;
@@ -42,7 +42,7 @@ export default{
           this.isDetailStickyVisible = false
         }
       }else{
-        console.log(scroll, scrollTop, 'down')
+        // console.log(scroll, scrollTop, 'down')
         //添加你想要的事件
         if (scrollTop >= 150) {
           this.isStickyVisible = false;
@@ -77,7 +77,7 @@ export default{
     ['pageInfo.page'](val){
       console.log(val, 'watch')
       this.pageInfo.page = val
-      this.getList();
+      // this.getList();
       this.handleScroll()
     }
   },
