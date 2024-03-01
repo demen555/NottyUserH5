@@ -1124,8 +1124,6 @@ export default {
     margin-top: 5px;
   }
   .main-update-img{
-    margin-top: 8px;
-    margin-left: 12px;
     img{
       width: 40px;
       height: 40px;

@@ -141,6 +141,7 @@ export default {
 .webm-previewEl{
     width: 100%;
     height: 100%;
+    border-radius: 8px;
 }
 .video-js{
     width: 100%;
