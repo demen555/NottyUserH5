@@ -635,5 +635,6 @@ export default {
     text-align: center;
     margin-right: 10px;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06));
+    cursor: pointer;
   }
 }</style>

@@ -42,7 +42,7 @@
     <van-popup
       v-model="showPop"
       position="left"
-      class="vant-pop-320"
+      class="vant-pop-320 vant-pop-320-left"
       :lazy-render="false"
       overlay-class="nav-overlay"
     >
@@ -91,7 +91,7 @@
     <van-popup
       v-model="showRightPop"
       position="right"
-      class="vant-pop-320"
+      class="vant-pop-320 vant-pop-320-right"
       overlay-class="nav-overlay"
     >
       <div id="drawer" class="nav-menu menu-left">
@@ -312,12 +312,20 @@ export default {
     document.addEventListener(
         "click",
         (e) => {
-            let homenavlocDom = document.querySelector('.home-nav-loc');
-            if( !homenavlocDom ){
-                return;
+            
+            let vantPopleft = document.querySelector('.vant-pop-320-left');
+            if( vantPopleft && !vantPopleft.contains(e.target) ){
+              this.showPop = false;
             }
-            if (!homenavlocDom.contains(e.target)) {
-                this.pcNavLocShow = false;
+
+            let vantPopright = document.querySelector('.vant-pop-320-right');
+            if( vantPopright && !vantPopright.contains(e.target) ){
+              this.showRightPop = false;
+            }
+          
+            let homenavlocDom = document.querySelector('.home-nav-loc');
+            if( homenavlocDom && !homenavlocDom.contains(e.target) ){
+              this.pcNavLocShow = false;
             }
         },
         true
