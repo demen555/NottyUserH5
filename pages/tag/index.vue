@@ -1,5 +1,5 @@
 <template>
-  <div class="tag">
+  <div class="tag tag-page">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <nav-new :title="tags[tagIndex] + ' ' + '('+ total + ' results' + ')'" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></nav-new>
     <div class="paddingTop88"></div>
@@ -30,7 +30,7 @@
                 },
               })" 
             
-              class="tag-item col-5 col-sm-6 col-md-4 col-lg-3 col-xl-2" 
+              class="tag-item  col-sm-6 col-md-4 col-lg-3 col-xl-2" 
               v-for="(tag, index) in tagList" 
               :key="index">
                 <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.name }}</span>
@@ -163,20 +163,9 @@ export default{
   display: flex;
   flex-wrap: wrap;
   // justify-content: space-between;
-  margin: 0 12px;
+  margin: 0 4px;
 }
-@media (max-width: 579px) {
-  .thumb{
-    // padding-left: 15px;
-    // padding-right: 15px;
-    // width: 100%;
-    // width: 455px;
-    justify-content: space-between;
-  }
-  .tag-item{
-    min-width: 172px !important;
-  }
-}
+
 .tag-box{
   margin: 10px 12px;
   // height: 44px;
@@ -202,19 +191,11 @@ export default{
   }
 }
 .tag-item{
-  // display: block;
-  // min-width: 172px;
   height: 32px;
-  margin-right: 10px;
-  border-radius: 4px;
-  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
-  font-size: 12px;
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
-  text-align: center;
 }
 .paddingTop88{
   padding-top: 80px;
@@ -225,5 +206,9 @@ export default{
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 12px;
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
+  border-radius: 4px;
 }
 </style>
