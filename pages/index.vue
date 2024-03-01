@@ -194,11 +194,6 @@ methods: {
 .van-pull-refresh{
 overflow: visible;
 }
-.video-list{
-  min-height: 100%;
-  width: 100%;
-  // margin-bottom: -124px;
-}
 .color{
   color: var(--text-color3, rgba(96, 105, 128, 0.40));
   font-size: 15px;
