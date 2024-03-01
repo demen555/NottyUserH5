@@ -7,8 +7,10 @@
     </div>
     <template v-if="dataList.length">
       <div style="height: 60px;" class="d-none d-sm-block"></div>
-      <div class="row paddingTop88">
+      <div class="row paddingTop88 pc-content">
         <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
+      </div>
+      <div class="row">
         <div class="pagination">
           <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
         </div>

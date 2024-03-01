@@ -253,6 +253,7 @@ export default {
 .video-container {
   width: 375px;
   height: 212px;
+  margin: 0 auto;
   margin-top: 44px;
   display: flex;
   flex-direction: column;
