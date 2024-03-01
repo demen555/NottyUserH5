@@ -8,7 +8,7 @@
       <div class="video-tag-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
           <nuxt-link :to="localePath({
               name: 'tag-name',
-              params: { name: tag.name }
+              params: { id: tag.id, name: tag.urlSlug }
           })" class="tag-name" v-for="tag in tagList" :key="tag.id">
             <div @click.stop="set_tagid(item.id)">{{ tag.name }}</div>
           </nuxt-link>
@@ -39,6 +39,7 @@
       <div class="pagination">
         <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
       </div>
+      <!-- <div style="min-height: 304px;" class="d-none d-sm-block"></div> -->
       <fBottom></fBottom>
     </div>
     <div class="sticky-upload" v-show="showSticky">
