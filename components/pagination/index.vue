@@ -28,7 +28,7 @@ export default {
     },
     display: {// 每页显示条数
       type: Number,
-      default: 60
+      default: 24
     },
     currentPage: {// 当前页码
       type: Number,

@@ -52,7 +52,7 @@ data() {
     dataList: [],
     pageInfo: {
       page: 1,
-      size: 20
+      size: 24
     },
     categoryMetaData:{},
     categoryName: "",
@@ -86,7 +86,9 @@ async asyncData({ $homeApi, params }) {
       categoryName: categoryName,
       paramsName: params.name,
       pageInfo: {
-        total: res.data.meta.pagination.total
+        total: res.data.meta.pagination.total,
+        size: 24,
+        page: 1,
       }
     }  
 },
@@ -151,7 +153,7 @@ methods: {
       const params = { page: this.pageInfo.page, size: this.pageInfo.size }
     
       params.categoryName = this.categoryName //分类名称
-
+      console.log( 'params', params )
       const { code, data } = await this.$homeApi.requestvodpage(params)
       if(code === CODES.SUCCESS){
         this.pageInfo.total = data.meta.pagination.total
