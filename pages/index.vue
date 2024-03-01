@@ -8,7 +8,7 @@
       <div class="video-tag-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
           <nuxt-link :to="localePath({
               name: 'tag-name',
-              params: { name: tag.name }
+              params: { id: tag.id, name: tag.urlSlug }
           })" class="tag-name" v-for="tag in tagList" :key="tag.id">
             <div @click.stop="set_tagid(item.id)">{{ tag.name }}</div>
           </nuxt-link>
@@ -36,9 +36,12 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="row">
       <div class="pagination">
         <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
       </div>
+        <!-- <div style="min-height: 304px;" class="d-none d-sm-block"></div> -->
       <fBottom></fBottom>
     </div>
     <div class="sticky-upload" v-show="showSticky">
@@ -191,6 +194,11 @@ methods: {
 .van-pull-refresh{
 overflow: visible;
 }
+.video-list{
+  min-height: 100%;
+  width: 100%;
+  // margin-bottom: -124px;
+}
 .color{
   color: var(--text-color3, rgba(96, 105, 128, 0.40));
   font-size: 15px;
@@ -230,13 +238,13 @@ overflow: visible;
   margin-top: 8px;
   a{
     color: #fff;
-    display: block;
+    // display: block;
     display: flex;
-    flex-grow: 1;
+    // flex-grow: 1;
   }
   .tag-name{
     flex-shrink: 0;
-    padding: 5px 8px;
+    padding: 6px 12px;
     display: flex;
     justify-content: center;
     // width: 98px;

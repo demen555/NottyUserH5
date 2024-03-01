@@ -80,7 +80,7 @@
               name: 'tag-name',
               params: { id: tag.id, name: tag.urlSlug }
             })"  v-for="tag in tagList" :key="tag.id" >
-              <span class="tags"> {{ tag.urlSlug }}</span>
+              <span class="tags"> {{ tag.name }}</span>
             </nuxt-link>
           </div>
           <div class="nav-menu-list-tag-empty"></div>

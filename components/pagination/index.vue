@@ -141,7 +141,7 @@ export default {
 }
 @media (min-width: 579px) {
   .pagination{
-    height: 35px;
+    height: 85px;
     div{
       height: 35px;
       margin-right: 12px;

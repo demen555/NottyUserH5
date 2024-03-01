@@ -60,16 +60,18 @@ export default{
 </script>
 <style lang="less" scoped>
 .home-footer{
-  // position: absolute;
-  // z-index: 9999;
+  // position: fixed;
+  // z-index: 998;
   // bottom: 0;
   // left: 0;
   // right: 0;
+  bottom: 0;
+  min-height: 124px;
   width: 100%;
   padding: 0 12px;
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
   background-color: #262627;
-  min-height: 144px;
+  // min-height: 144px;
   a {
     color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   }
