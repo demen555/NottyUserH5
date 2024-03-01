@@ -24,7 +24,7 @@ export default{
   position: fixed;
   left: 0;
   top: 45px;
-  z-index: 999;
+  z-index: 97;
   // padding-top: 52px;
   display: flex;
   align-items: center;
