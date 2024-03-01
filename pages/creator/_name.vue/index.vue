@@ -274,7 +274,7 @@ export default {
 .video-container-pc{
   width: 100%;
   display: flex;
-  padding-top: 92px;
+  padding-top: 72px;
   padding-bottom: 24px;
   .video-container-pc-left{
     margin-left: 44px;
@@ -286,6 +286,7 @@ export default {
     justify-content: center;
     .main-title{
       padding-left: 12px;
+      font-size: 20px;
     }
   }
 }
@@ -534,12 +535,12 @@ export default {
 
 .main-update-img {
   margin-top: 32px;
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
 
   img {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
   }
 }
