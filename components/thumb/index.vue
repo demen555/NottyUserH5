@@ -81,10 +81,10 @@ export default{
 }
 .thumb-text{
   position: absolute;
-  left: 0;
+  // left: 0;
   bottom: 0;
   width: 185px;
-  z-index: 1;
+  z-index: 10;
   // display: flex;
   // justify-content: space-between;
   // align-items: center;
