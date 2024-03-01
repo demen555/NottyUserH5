@@ -4,7 +4,7 @@
       <van-checkbox :name="item.vodId" @click.native.stop="()=>{}"></van-checkbox>
     </div>
 
-      <div class="main-list-group" @touchmove="longpressVideo(item)">
+      <div class="main-list-group" @touchmove="longpressVideo(item)" @mousemove="longpressVideo(item)">
         <nuxt-link class="main-list" @click.prevent :to="localePath({
             name: 'video-id',
             params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
