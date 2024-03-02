@@ -1,15 +1,31 @@
 <template>
   <nav>
     <ul class="pagination">
-      <div :class="{ 'disabled': current == 1 }" class="cursor-pointer"><a href="javascript:;" @click="setCurrent(1)"> <img :src="require('~/static/images/com_zuo_fysy.svg')"> </a></div>
+      {{ currentPage }} {{ routeName.split('__')[0] }} {{ $route.query.page }}
       <div :class="{ 'disabled': current == 1 }" class="cursor-pointer">
-        <a class="pagination__prev" href="javascript:;" @click="setCurrent(current - 1)"><img :src="require('~/static/images/com_jt_sx_zuo_fy.svg')"></a>
+        <nuxt-link :to="localePath({ name: currentName, query: { page: 1 }})"> 
+          <img  @click.stop="setCurrent(1)" :src="require('~/static/images/com_zuo_fysy.svg')"> 
+        </nuxt-link>
+      </div>
+      <div :class="{ 'disabled': current == 1 }" class="cursor-pointer">
+        <nuxt-link class="pagination__prev" :to="localePath({ name: currentName, query: { page: current - 1 }})">
+          <img @click.stop="setCurrent(current - 1)" :src="require('~/static/images/com_jt_sx_zuo_fy.svg')">
+        </nuxt-link>
       </div>
       <div v-for="p in grouplist" :class="{ 'active': current == p.val }">
-        <a @click="setCurrent(p.val)" class="cursor-pointer">{{ p.text }}</a>
+        <nuxt-link class="cursor-pointer" :to="localePath({ name: currentName, query: { page: p.val }})"><span @click.stop="setCurrent(p.val)">{{ p.text }}</span></nuxt-link>
+        <!-- <a @click="setCurrent(p.val)" class="cursor-pointer">{{ p.text }}</a> -->
       </div>
-      <div :class="{ 'disabled': current == page }" class="cursor-pointer"><a class="pagination__next" href="javascript:;" @click="setCurrent(current + 1)"><img :src="require('~/static/images/com_jt_sx_you_fy.svg')" alt=""> </a></div>
-      <div :class="{ 'disabled': current == page }" class="cursor-pointer"><a href="javascript:;" @click="setCurrent(page)">   <img :src="require('~/static/images/com_you_fywy.svg')"> </a></div>
+      <div :class="{ 'disabled': current == page }" class="cursor-pointer">
+        <nuxt-link class="pagination__next" :to="localePath({ name: currentName, query: { page: current + 1 }})"> 
+          <img @click.stop="setCurrent(current + 1)" :src="require('~/static/images/com_jt_sx_you_fy.svg')" alt="">
+        </nuxt-link>
+      </div>
+      <div :class="{ 'disabled': current == page }" class="cursor-pointer">
+        <nuxt-link :to="localePath({ name: currentName, query: { page: page }})"> 
+          <img  @click.stop="setCurrent(page)" :src="require('~/static/images/com_you_fywy.svg')">
+        </nuxt-link>
+      </div>
     </ul>
   </nav>
 </template>
@@ -18,7 +34,8 @@
 export default {
   data() {
     return {
-      current: this.currentPage
+      // current: this.$route.query.page || this.currentPage
+      current: this.$route.query.page*1
     }
   },
   props: {
@@ -41,9 +58,15 @@ export default {
         v = v > 0 ? v : 5;
         return v % 2 === 1 ? v : v + 1;
       }
+    },
+    routeName: {
+      type: String
     }
   },
   computed: {
+    currentName(){
+      return this.routeName.split('__')[0]
+    },
     page: function () { // 总页数
       return Math.ceil(this.total / this.display);
     },

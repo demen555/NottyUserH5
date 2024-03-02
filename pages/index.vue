@@ -39,7 +39,8 @@
     </div>
     <div class="row">
       <div class="pagination">
-        <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+        {{ $route.name }}
+        <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
       </div>
         <!-- <div style="min-height: 304px;" class="d-none d-sm-block"></div> -->
       <fBottom></fBottom>
