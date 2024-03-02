@@ -72,8 +72,8 @@ data() {
     refreshing: false, // 当前是否刷新重置信息
     dataList: [],
     pageInfo: {
-      page: 1,
-      size: 24,
+      page:1,
+      size: 24
     },
     showSticky: true,
     tagList: [],
@@ -129,7 +129,7 @@ components: {
   Cover,
   dialogBottom
 },
-async asyncData({ $homeApi }) { 
+async asyncData({ $homeApi, query }) { 
   const res2 = await $homeApi.postTypeList({ 
     page: 1, 
     size: 10, 
@@ -141,7 +141,7 @@ async asyncData({ $homeApi }) {
   });
 
   const res1 = await $homeApi.requestvodpageHome({
-    page: 1, 
+    page: query.page, 
     size: 24
   })
 
@@ -149,7 +149,11 @@ async asyncData({ $homeApi }) {
     tagList: res.data.data || [],
     categoryList:  res2.data.data || [],
     dataList: res1.data.data || [],
-    pageInfoTotal: res1.data.meta.pagination.total || 0
+    pageInfoTotal: res1.data.meta.pagination.total || 0,
+    pageInfo: {
+      page: Number(query.page),
+      size: 24,
+    },
   }
 },
 methods: {
