@@ -141,7 +141,7 @@ async asyncData({ $homeApi, query }) {
   });
 
   const res1 = await $homeApi.requestvodpageHome({
-    page: query.page, 
+    page: query.page * 1 || 1,  
     size: 24
   })
 
@@ -151,7 +151,7 @@ async asyncData({ $homeApi, query }) {
     dataList: res1.data.data || [],
     pageInfoTotal: res1.data.meta.pagination.total || 0,
     pageInfo: {
-      page: Number(query.page),
+      page: Number(query.page) || 1,
       size: 24,
     },
   }

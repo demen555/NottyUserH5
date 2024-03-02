@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       // current: this.$route.query.page || this.currentPage
-      current: this.$route.query.page*1
+      current: this.$route.query.page*1 || 1
     }
   },
   props: {
