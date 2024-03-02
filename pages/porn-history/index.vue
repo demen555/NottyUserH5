@@ -13,7 +13,7 @@
         <div class="row">
           <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" :class="{ 'cover-mask': result.includes(item.vodId) }" v-for="(item,index) in dataList" :style="index === 0 ?'padding-top: 18px': '' " :item="item" :key="item.vodId" :showCheck="showFooter"></Cover>
           <div class="pagination">
-            <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+            <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
           </div>
           <fBottom></fBottom>
         </div>
@@ -42,7 +42,7 @@ data() {
     spainnerLoading: false,
     dataList: [],
     pageInfo: {
-      page: 1,
+      page: this.$route.query.page * 1 || 1,
       size: 24
     },
     showCheck: false,

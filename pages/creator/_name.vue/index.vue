@@ -53,7 +53,7 @@
           <div class="row">
             <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
             <div class="pagination">
-              <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+              <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
             </div>
             <fBottom></fBottom>
           </div>
@@ -82,7 +82,7 @@ export default {
       refreshing: false, // 当前是否刷新重置信息
       dataList: [],
       pageInfo: {
-        page: 1,
+        page: this.$route.query.page * 1 || 1,
         size: 24
       },
       tagList: [

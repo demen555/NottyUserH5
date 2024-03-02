@@ -12,7 +12,7 @@
       </div>
       <div class="row">
         <div class="pagination">
-          <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+          <v-pagination :total="pageInfo.total" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
         </div>
         <fBottom></fBottom>
       </div>
@@ -38,7 +38,7 @@ data() {
     refreshing: true, // 当前是否刷新重置信息
     dataList: [],
     pageInfo: {
-      page: 1,
+      page: this.$route.query.page * 1 || 1,
       size: 24
     },
   }
@@ -65,14 +65,14 @@ computed: {
 async asyncData({ $homeApi, route }) { 
   try {
     const res = await $homeApi.requestvodpage({
-      page: 1,
+      page: route.query.name,
       size: 24,
       tagName: route.params.name
     })
     return { 
       dataList: res.data.data || [],
       pageInfo:{
-        page: 1,
+        page: route.query.name,
         size: 24,
         total: res.data.meta.pagination.total
       }

@@ -24,7 +24,7 @@
       <div class="row paddingTop77">
         <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
         <div class="pagination">
-          <v-pagination :total="pageInfo.total" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+          <v-pagination :total="pageInfo.total" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
         </div>
         <fBottom></fBottom>
         <h2 class="footer-title paddingTop88" style="display: none;"> {{ categoryMetaData.h2}} </h2>
@@ -51,7 +51,7 @@ data() {
     refreshing: true, // 当前是否刷新重置信息
     dataList: [],
     pageInfo: {
-      page: 1,
+      page: this.$route.query.page * 1 || 1,
       size: 24
     },
     categoryMetaData:{},
@@ -65,11 +65,11 @@ computed: {
     return  this.detail.name
   }
 },
-async asyncData({ $homeApi, params }) {
+async asyncData({ $homeApi, params, query }) {
     const categoryName = '/category/' + params.name;
     const res = await $homeApi.requestvodpage({
       categoryName: categoryName,
-      page: 1,
+      page: query.page * 1 || 1,
       size: 24
     })
    
@@ -88,7 +88,7 @@ async asyncData({ $homeApi, params }) {
       pageInfo: {
         total: res.data.meta.pagination.total,
         size: 24,
-        page: 1,
+        page: query.page * 1,
       }
     }  
 },

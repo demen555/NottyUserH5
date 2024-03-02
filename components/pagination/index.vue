@@ -1,7 +1,7 @@
 <template>
   <nav>
     <ul class="pagination">
-      {{ currentPage }} {{ routeName.split('__')[0] }} {{ $route.query.page }}
+      <!-- {{ currentPage }} {{ routeName.split('__')[0] }} {{ $route.query.page }} -->
       <div :class="{ 'disabled': current == 1 }" class="cursor-pointer">
         <nuxt-link :to="localePath({ name: currentName, query: { page: 1 }})"> 
           <img  @click.stop="setCurrent(1)" :src="require('~/static/images/com_zuo_fysy.svg')"> 

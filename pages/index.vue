@@ -39,7 +39,6 @@
     </div>
     <div class="row">
       <div class="pagination">
-        {{ $route.name }}
         <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
       </div>
         <!-- <div style="min-height: 304px;" class="d-none d-sm-block"></div> -->
@@ -73,7 +72,7 @@ data() {
     refreshing: false, // 当前是否刷新重置信息
     dataList: [],
     pageInfo: {
-      page:1,
+      page: this.$route.query.page * 1 || 1,
       size: 24
     },
     showSticky: true,

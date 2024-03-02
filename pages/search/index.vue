@@ -114,7 +114,7 @@
         <!-- <Empty v-else></Empty> -->
         <div class="row">
           <div class="pagination" v-if="dataList.length">
-            <v-pagination :total="pageTotal? pageTotal : pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+            <v-pagination :total="pageTotal? pageTotal : pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
           </div>
           <fBottom></fBottom>
         </div>
@@ -145,7 +145,7 @@ data() {
     dataList: [],
     relatedList: [], //相关推荐数据
     pageInfo: {
-      page: 1,
+      page: this.$route.query.page * 1 || 1,
       size: 24
     },
     pageTotal: 0,

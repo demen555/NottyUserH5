@@ -13,7 +13,7 @@
         <div class="row pc-content">
           <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2"  v-for="(item, index) in dataList" :item="item" :style="index === 0 ?'padding-top: 18px': '' " :key="item.vodId" :showCheck="showFooter"></Cover>
           <div class="pagination">
-            <v-pagination :total="pageInfoTotal" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
+            <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
           </div>
           <fBottom></fBottom>
         </div>  
@@ -44,7 +44,7 @@ data() {
     refreshing: false, // 当前是否刷新重置信息
     dataList: [],
     pageInfo: {
-      page: 1,
+      page: this.$route.query.page * 1 || 1,
       size: 24
     },
     showCheck: false,
@@ -70,27 +70,10 @@ computed: {
 },
 created(){
   this.pageInfo = {
-    page: 1,
+    page: this.$route.query.page * 1 || 1,
     size: 24
   }
   this.getList('first')
-},
-// 重新进入点赞，更新当前未登录点赞视频
-activated(){
-  this.pageInfo = {
-    page: 1,
-    size: 24
-  }
-  this.getList('first')
-  // if(this.isLogin){
-  //   this.pageInfo = {
-  //     page: 1,
-  //     size: 20
-  //   }
-  //   this.getList('first')
-  // }else{
-  //   this.dataList = this.noLoginUpVod || []
-  // }
 },
 
 components: {
