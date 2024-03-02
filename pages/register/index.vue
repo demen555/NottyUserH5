@@ -81,126 +81,120 @@
     </div>
     <div id="main-content" class="wiki-content d-none d-sm-block">
       <h1>
-        <strong>Nottyhub Free XXX Videos | A Worldwide Finest Porno Tube</strong>
+        <strong>{{ $t('str_login_html1') }}</strong>
       </h1>
       <p>
-        <span>An uprising Porn Tube for the world. Introduced in late 2023,</span>
+        <span>{{ $t('str_login_html2') }}</span>
         <a href="https://nottyhub.com/" class="external-link" rel="nofollow">
-          <strong>Nottyhub free XXX videos</strong>
+          <strong>{{ $t('str_login_html3') }}</strong>
         </a>
-        <span>quickly absorbed hundreds of thousands of viewers online, now serving 1 Million viewers daily as we speak!&nbsp;</span>
+        <span>{{ $t('str_login_html4') }}&nbsp;</span>
       </p>
       <p>
-        <span>Enjoy one of the internet's largest and greatest collections of free porn films.</span>
+        <span>{{ $t('str_login_html5') }}</span>
         <strong>
-          <a href="http://Nottyhub.com" class="external-link" rel="nofollow">Nottyhub.com</a>
+          <a href="http://Nottyhub.com" class="external-link" rel="nofollow">{{ $t('str_login_html6') }}</a>
         </strong>
-        <span>is the first choice to find the most intense member-uploaded adult videos. Nottyhub takes pride in providing an incredible selection of unique</span>
+        <span>{{ $t('str_login_html7') }}</span>
         <a href="https://nottyhub.com/category/" class="external-link" rel="nofollow">
-          <strong>sex categories</strong>
+          <strong>{{ $t('str_login_html8') }}</strong>
         </a>
-        <span>and porn actors that will satisfy you in every way you thirst.</span>
-        <span>
-          <br>
-        </span>
-        <span>
-          <br>
-        </span>
+        <span>{{ $t('str_login_html9') }}</span>
       </p>
       <h2>
-        <strong>Register for free and enjoy all features as a Member</strong>
+        <strong>{{ $t('str_login_html10') }}</strong>
       </h2>
       <p>
-        <span>If you are currently not a member, you are in for a treat! Our Free Registration is quick, secure, and discrete. As our precious member, you will be entitled to&nbsp;</span>
+        <span>{{ $t('str_login_html11') }}&nbsp;</span>
       </p>
       <ol>
         <li>
-          <span>1. Unlock member-only contents and privileges.</span>
+          <span>{{ $t('str_login_html12') }}</span>
         </li>
         <li>
-          <span>2. Revisit all of your favorite watch history,&nbsp;</span>
+          <span>{{ $t('str_login_html13') }}&nbsp;</span>
         </li>
         <li>
-          <span>3. Rate videos as part of the community (Upvote/Downvote),&nbsp;</span>
+          <span>{{ $t('str_login_html14') }}&nbsp;</span>
         </li>
         <li>
-          <span>4. Comment and interact with other members,&nbsp;</span>
+          <span>{{ $t('str_login_html15') }}&nbsp;</span>
         </li>
         <li>
-          <span>5. Earn money from uploading videos!&nbsp;</span>
+          <span>{{ $t('str_login_html16') }}&nbsp;</span>
         </li>
       </ol>
       <p>
-        <span>Your contribution helps us curate a healthy and better adult entertainment environment.</span>
+        <span>{{ $t('str_login_html17') }}</span>
       </p>
       <h2>
-        <strong>Hundreds of Porn Category Awaits You&nbsp;</strong>
+        <strong>{{ $t('str_login_html18') }}&nbsp;</strong>
       </h2>
       <p>
-        <span>As a Freemium Member, you will get to access all our curated pornography sex videos. Our categories are vast and deep. Let us interest you with our Top 10 category as analyzed up to date.</span>
+        <span>{{ $t('str_login_html19') }}</span>
       </p>
       <ol>
         <li>
           <a href="https://nottyhub.com/category/anime-hentai" class="external-link" rel="nofollow">
-            <span>1. Anime Hentai</span>
+            <span>{{ $t('str_login_html20') }}</span>
           </a>
         </li>
         <li>
           <a href="https://nottyhub.com/category/gay-porn" class="external-link" rel="nofollow">
-            <span>2. Gay Porn</span>
+            <span>{{ $t('str_login_html21') }}</span>
           </a>
         </li>
         <li>
-          <span>3. Fisting</span>
+          <span>{{ $t('str_login_html22') }}</span>
         </li>
         <li>
           <a href="https://nottyhub.com/category/blacked" class="external-link" rel="nofollow">
-            <span>4. Blacked</span>
+            <span>{{ $t('str_login_html23') }}</span>
           </a>
         </li>
         <li>
-          <span>5. Cuckold</span>
+          <span>{{ $t('str_login_html24') }}</span>
         </li>
         <li>
-          <span>6. Squirting</span>
+          <span>{{ $t('str_login_html25') }}</span>
         </li>
         <li>
-          <span>7. Cam Sex</span>
+          <span>{{ $t('str_login_html26') }}</span>
         </li>
         <li>
           <a href="https://nottyhub.com/category/teens-xxx" class="external-link" rel="nofollow">
-            <span>8. Teen Porn</span>
+            <span>{{ $t('str_login_html27') }}</span>
           </a>
         </li>
         <li>
           <a href="https://nottyhub.com/category/japanese" class="external-link" rel="nofollow">
-            <span>9. Jav Porn</span>
+            <span>{{ $t('str_login_html28') }}</span>
           </a>
         </li>
         <li>
           <a href="https://nottyhub.com/category/cosplay" class="external-link" rel="nofollow">
-            <span>10. Cosplay Porn</span>
+            <span>{{ $t('str_login_html29') }}</span>
           </a>
         </li>
       </ol>
       <p>
-        <span>Join us and contribute your views to push the number! With that, we learn what you love the most and refresh daily trending and popular videos to serve your desires.</span>
+        <span>{{ $t('str_login_html30') }}</span>
       </p>
       <p>
-        <span>Follow our channels and make friends in our Telegram group for everyday recommended videos!</span>
+        <span>{{ $t('str_login_html31') }}</span>
       </p>
       <ul>
         <li>
           <a href="https://t.me/NottyAsian" class="external-link" rel="nofollow">
-            <span>Nottyhub Asian</span>
+            <span>{{ $t('str_login_html32') }}</span>
           </a>
           <span>|</span>
           <a href="https://t.me/NottyOF" class="external-link" rel="nofollow">
-            <span>Nottyhub OnlyFans</span>
+            <span>{{ $t('str_login_html33') }}</span>
           </a>
           <span>|</span>
           <a href="https://t.me/nottygay" class="external-link" rel="nofollow">
-            <span>Nottyhub Gay</span>
+            <span>{{ $t('str_login_html34') }}</span>
           </a>
         </li>
       </ul>
