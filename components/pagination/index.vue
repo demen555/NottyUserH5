@@ -18,7 +18,7 @@
       </div>
       <div :class="{ 'disabled': current == page }" class="cursor-pointer">
         <nuxt-link class="pagination__next" :to="localePath({ name: currentName, query: { page: current + 1 }})"> 
-          <img @click.stop="setCurrent(current + 1)" :src="require('~/static/images/com_jt_sx_you_fy.svg')" alt="">
+          <img :current="current + 1" @click.stop="setCurrent(current + 1)" :src="require('~/static/images/com_jt_sx_you_fy.svg')" alt="">
         </nuxt-link>
       </div>
       <div :class="{ 'disabled': current == page }" class="cursor-pointer">
@@ -107,11 +107,11 @@ export default {
   },
   methods: {
     setCurrent: function (idx) {
-      console.log(idx, 'idx')
-      if (this.current != idx && idx > 0 && idx < this.page + 1) {
-        this.current = idx;
-        this.$emit('pagechange', this.current);
-      }
+      // console.log(idx, 'idx')
+      // if (this.current != idx && idx > 0 && idx < this.page + 1) {
+      //   this.current = idx;
+      //   this.$emit('pagechange', this.current);
+      // }
     }
   }
 }

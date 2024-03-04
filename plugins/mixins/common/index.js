@@ -65,11 +65,11 @@ export default{
       window.scrollTo(0, 0)
     },
     handlePage(val){
-      this.pageInfo.page = val
-      if(this.getList){
-        this.getList()
-      }
-      this.handleScroll()
+      // this.pageInfo.page = val
+      // if(this.getList){
+      //   this.getList()
+      // }
+      // this.handleScroll()
       console.log(val, 'page')
     }, 
   },
