@@ -187,6 +187,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
 .dialog-exit{
   background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));

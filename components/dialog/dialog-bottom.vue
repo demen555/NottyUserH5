@@ -57,6 +57,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 .van-popup{
   background-color: #262627 !important;
