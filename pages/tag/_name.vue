@@ -1,7 +1,7 @@
 <template>
   <div class="home container-fluid">
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
-    <nav-new v-show="isStickyVisible" :title="txtTitle" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></nav-new>
+    <nav-new v-show="isStickyVisible" :title="tagNameData.name" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></nav-new>
     <div class="loading-box" v-if="spainnerLoading">
       <cardLoad></cardLoad>
     </div>
@@ -37,6 +37,9 @@ data() {
     finished: false, // 是否加载完成
     refreshing: true, // 当前是否刷新重置信息
     dataList: [],
+    tagNameData:{
+      name: "",
+    },
     pageInfo: {
       page: this.$route.query.page * 1 || 1,
       size: 24
@@ -71,6 +74,7 @@ async asyncData({ $homeApi, route }) {
     })
     return { 
       dataList: res.data.data || [],
+      tagNameData: res.data.tagNameData || {},
       pageInfo:{
         page: route.query.name,
         size: 24,
@@ -107,6 +111,7 @@ methods: {
       if(code === CODES.SUCCESS){
         this.pageInfo.total = data.meta.pagination.total
         this.dataList = data.data
+        this.tagNameData = data.tagNameData
       }
     } catch (error) {
       console.error(error)
