@@ -3,8 +3,10 @@
     <Overlay v-model="overlayShow" v-if="overlayShow"></Overlay>
       <header class="home-header" id="home-header">
         <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common cursor-pointer" alt="more">
-        <div class="pc-logo d-none d-sm-block cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
-        <div class="d-block d-sm-none cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        <nuxt-link :to="localePath({ name: 'index', query: { page: 1 }})"> 
+          <div class="pc-logo d-none d-sm-block cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+          <div class="d-block d-sm-none cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
+        </nuxt-link>
         <!-- <div class="d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
         <nuxt-link :to="localePath('search')" class="search-btn-content">
           <div class="d-none d-sm-block search-btn cursor-pointer" @click.stop="handleGoPage('search')">
@@ -48,7 +50,9 @@
     >
       <div id="drawer" class="nav-menu menu-right">
         <div class="menu-header">
-         <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
+          <nuxt-link :to="localePath({ name: 'index', query: { page: 1 }})"> 
+            <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
+          </nuxt-link>
          <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
         </div>
         <!-- 分类 -->
@@ -98,7 +102,9 @@
         <div class="menu-flex">
           <div class="menu-header">
           <img class="close-pop" @click="showRightPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
-          <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
+          <nuxt-link :to="localePath({ name: 'index', query: { page: 1 }})"> 
+            <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
+          </nuxt-link>
           </div>
           <!-- 登录 -->
           <div class="nav-menu-btns cursor-pointer" v-if="!isLogin">

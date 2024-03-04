@@ -12,9 +12,10 @@
       <van-checkbox-group v-model="result" ref="checkboxGroup">
         <div class="row">
           <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" :class="{ 'cover-mask': result.includes(item.vodId) }" v-for="(item,index) in dataList" :style="index === 0 ?'padding-top: 18px': '' " :item="item" :key="item.vodId" :showCheck="showFooter"></Cover>
-          <div class="pagination">
+          <!-- <div class="pagination">
             <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
-          </div>
+          </div> -->
+          <div class="pagination"></div>
           <fBottom></fBottom>
         </div>
       </van-checkbox-group>

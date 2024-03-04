@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       // current: this.$route.query.page || this.currentPage
-      current: this.$route.query.page*1 || 1
+      
     }
   },
   props: {
@@ -64,6 +64,9 @@ export default {
     }
   },
   computed: {
+    current() {
+      return this.$route.query.page * 1 || 1
+    },
     currentName(){
       return this.routeName.split('__')[0]
     },
