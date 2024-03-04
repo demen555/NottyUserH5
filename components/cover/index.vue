@@ -37,7 +37,7 @@
         </nuxt-link>
         <nuxt-link :to="localePath({
             name: 'creator-name',
-            params: { name: item.user && item.user.name }
+            params: { name: item.user && item.user.urlSlug }
         })">
           <div class="main-update-content" @click.stop="handleClickCreator(item)">
             <div class="main-update-img" v-if="item.user && item.user.userPortrait"><img :src="item.user.userPortrait" alt="person"></div>

@@ -79,7 +79,7 @@
             <div class="video-line"></div>
             <nuxt-link :to="localePath({
                 name: 'creator-name',
-                params: { name: videoInfo.user && videoInfo.user.name }
+                params: { name: videoInfo.user && videoInfo.user.urlSlug }
             })">
               <div class="main-update-content" @click.stop="handleClickCreator(videoInfo)">
                 <div class="main-update-img" v-if="videoInfo.user?.userPortrait"><img :src="videoInfo.user.userPortrait" alt="person"></div>
