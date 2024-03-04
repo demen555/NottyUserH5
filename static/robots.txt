@@ -2,3 +2,5 @@ User-agent: *
 Disallow: 
 Disallow: /cgi-bin/
 Disallow: /type/
+Disallow: /search?/
+Sitemap: https://nottyhub.com/sitemap.xml
