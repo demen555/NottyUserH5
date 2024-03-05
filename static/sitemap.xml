@@ -6,12 +6,6 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 <url>
-<loc>https://nottyhub.com/</loc> 
-<xhtml:link rel="alternate" hreflang="x-default" href="https://nottyhub.com/"/>
-<xhtml:link rel="alternate" hreflang="en" href="https://nottyhub.com/"/> 
-<xhtml:link rel="alternate" hreflang="pt" href="https://nottyhub.com/pt"/>
-</url>
-<url>
   <loc>https://nottyhub.com/</loc>
   <lastmod>2024-03-04T03:38:14+00:00</lastmod>
   <priority>1.00</priority>
