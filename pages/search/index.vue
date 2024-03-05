@@ -173,6 +173,9 @@ created(){
     this.searchBool = localStorage.getItem('searchBool')
     console.log(this.searchBool, 'created')
     // this.set_show(localStorage.getItem('searchBool'))
+    if(!this.searchBool){
+      this.set_show(true)
+    }
   }
   this.getHistoryList()
   this.initKyesList()
