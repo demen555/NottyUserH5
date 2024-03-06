@@ -182,6 +182,7 @@ export default {
           text-align: center;
           line-height: 35px;
           height: 35px;
+          cursor: pointer;
         }
       }
     }
