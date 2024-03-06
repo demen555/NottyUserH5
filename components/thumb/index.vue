@@ -9,7 +9,6 @@
       })"      
     >
     <van-image
-      lazy-load
       :src="tag.img"
     >
       <template slot="loading">
