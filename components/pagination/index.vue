@@ -18,16 +18,16 @@
         </nuxt-link>
         <!-- <a @click="setCurrent(p.val)" class="cursor-pointer">{{ p.text }}</a> -->
       </div>
-      <nuxt-link class="pagination__next" :to="localePath({ name: currentName, query: { page: current + 1 }})">
-        <div :class="{ 'disabled': current == page }" class="cursor-pointer">
+      <div :class="{ 'disabled': current == page }" class="cursor-pointer">
+        <nuxt-link class="pagination__next" :to="localePath({ name: currentName, query: { page: current + 1 }})">
           <img :current="current + 1" @click.stop="setCurrent(current + 1)" :src="require('~/static/images/com_jt_sx_you_fy.svg')" alt="">
-        </div>
-      </nuxt-link>
-      <nuxt-link :to="localePath({ name: currentName, query: { page: page }})"> 
-        <div :class="{ 'disabled': current == page }" class="cursor-pointer">
-          <img  @click.stop="setCurrent(page)" :src="require('~/static/images/com_you_fywy.svg')">
-        </div>
-     </nuxt-link>
+        </nuxt-link>
+      </div>
+      <div :class="{ 'disabled': current == page }" class="cursor-pointer">
+        <nuxt-link :to="localePath({ name: currentName, query: { page: page }})"> 
+          <img  @click.stop="setCurrent(page)" :src="require('~/static/images/com_you_fywy.svg')">       
+        </nuxt-link>
+      </div>
     </ul>
   </nav>
 </template>
