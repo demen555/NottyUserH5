@@ -299,7 +299,7 @@ export default {
     if(process.client){
       document.documentElement.setAttribute('data-theme', this.theme)
       this.$nextTick(() => {
-        this.handleFocus()
+        // this.handleFocus()
         this.location = localStorage.getItem('location') || 'US1'
         !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
       })
