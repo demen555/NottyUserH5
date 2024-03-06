@@ -167,6 +167,7 @@ created(){
   }
   // this.set_show(true)
   if(process.client) {
+    this.handleFocus()
     if(localStorage.getItem('searchBool')){
       this.getList()
     }
