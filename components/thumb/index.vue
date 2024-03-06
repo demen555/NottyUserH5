@@ -1,7 +1,12 @@
 <template>
   <nuxt-link 
-    class="thumb-list" 
-    :to="localePath(tag.urlSlug)"      
+    class="thumb-list"
+    :to="localePath({
+        name: 'category-name',
+        params:{
+          name: tag.urlSlug,
+        },
+      })"      
     >
     <van-image
       lazy-load
