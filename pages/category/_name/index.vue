@@ -66,7 +66,7 @@ computed: {
   }
 },
 async asyncData({ $homeApi, params, query }) {
-    const categoryName = '/category/' + params.name;
+    const categoryName = params.name;
     const res = await $homeApi.requestvodpage({
       categoryName: categoryName,
       page: query.page * 1 || 1,

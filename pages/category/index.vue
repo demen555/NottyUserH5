@@ -18,7 +18,7 @@
           :offset="10"
         >
           <div class="thumb row">
-            <Thumb class="col-5 col-sm-6 col-md-4 col-lg-3 col-xl-2" :tag="tag" v-for="tag in typeList" :key="tag.id"></Thumb>
+            <Thumb class="col-sm-6 col-md-4 col-lg-3 col-xl-2" :tag="tag" v-for="tag in typeList" :key="tag.id"></Thumb>
           </div>
           <!-- <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover> -->
         </van-list>
@@ -163,14 +163,7 @@ methods: {
 .thumb{
   display: flex;
   flex-wrap: wrap;
-  // justify-content: space-between;
-}
-@media (max-width: 579px) {
-  .thumb{
-    padding-left: 15px;
-    padding-right: 15px;
-    justify-content: space-between;
-  }
+  justify-content: space-between;
 }
 .van-pull-refresh{
 overflow: visible;
