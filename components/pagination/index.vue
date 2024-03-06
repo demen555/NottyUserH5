@@ -13,19 +13,21 @@
         </nuxt-link>
       </div>
       <div v-for="p in grouplist" :class="{ 'active': current == p.val }">
-        <nuxt-link class="cursor-pointer" :to="localePath({ name: currentName, query: { page: p.val }})"><span @click.stop="setCurrent(p.val)">{{ p.text }}</span></nuxt-link>
+        <nuxt-link class="cursor-pointer" :to="localePath({ name: currentName, query: { page: p.val }})">
+          <span @click.stop="setCurrent(p.val)">{{ p.text }}</span>
+        </nuxt-link>
         <!-- <a @click="setCurrent(p.val)" class="cursor-pointer">{{ p.text }}</a> -->
       </div>
-      <div :class="{ 'disabled': current == page }" class="cursor-pointer">
-        <nuxt-link class="pagination__next" :to="localePath({ name: currentName, query: { page: current + 1 }})"> 
+      <nuxt-link class="pagination__next" :to="localePath({ name: currentName, query: { page: current + 1 }})">
+        <div :class="{ 'disabled': current == page }" class="cursor-pointer">
           <img :current="current + 1" @click.stop="setCurrent(current + 1)" :src="require('~/static/images/com_jt_sx_you_fy.svg')" alt="">
-        </nuxt-link>
-      </div>
-      <div :class="{ 'disabled': current == page }" class="cursor-pointer">
-        <nuxt-link :to="localePath({ name: currentName, query: { page: page }})"> 
+        </div>
+      </nuxt-link>
+      <nuxt-link :to="localePath({ name: currentName, query: { page: page }})"> 
+        <div :class="{ 'disabled': current == page }" class="cursor-pointer">
           <img  @click.stop="setCurrent(page)" :src="require('~/static/images/com_you_fywy.svg')">
-        </nuxt-link>
-      </div>
+        </div>
+     </nuxt-link>
     </ul>
   </nav>
 </template>
@@ -175,6 +177,12 @@ export default {
         width: 35px;
         height: 35px;
         font-size: 14px;
+        span{
+          width: 35px;
+          text-align: center;
+          line-height: 35px;
+          height: 35px;
+        }
       }
     }
   }
