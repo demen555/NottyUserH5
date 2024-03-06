@@ -35,32 +35,33 @@
             <div class="main-time">{{ item.vodDuration }}</div>
           </div>
         </nuxt-link>
-        <nuxt-link :to="localePath({
-            name: 'creator-name',
-            params: { name: item.user && item.user.urlSlug }
-        })">
-          <div class="main-update-content" @click.stop="handleClickCreator(item)">
-            <div class="main-update-img" v-if="item.user && item.user.userPortrait"><img :src="item.user.userPortrait" alt="person"></div>
-            <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
-            <div class="main-content">
-              <div class="main-title">{{ item.vodName }}</div>
-              <!-- <div class="main-title">IPX-879丝袜SPA店攻略！哪个是最好的足交餐？-ss时尚大的IPX-879丝袜SPA店攻略！哪...</div> -->
-              <div class="main-btn">
-                <div class="main-name">{{ item.user?.name || '--' }}</div>
-                <div class="main-btn-right">
-                  <div class="main-btn-view">
-                    <div :class="themeChecked? 'main-view':'main-view-white'"></div>
-                    <div class="main-text">{{ formatNumber(item.vodHits) }}</div>
-                  </div>
-                  <div class="mian-btn-like">
-                    <div :class="themeChecked? 'main-like':'main-like-white'"></div>
-                    <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div>
-                  </div>
+        <div class="main-update-content" @click.stop="handleClickCreator(item)">
+          <nuxt-link class="main-update-img" :to="localePath({ name: 'creator-name', params: { name: item.user && item.user.urlSlug } })">
+              <img v-if="item.user && item.user.userPortrait" :src="item.user.userPortrait" alt="person">
+              <img v-else src="~/static/images/person.svg" alt="person">
+          </nuxt-link>
+          <div class="main-content">
+            <nuxt-link class="main-title" :to="localePath({ name: 'video-id', params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') } })" >
+              {{ item.vodName }}
+            </nuxt-link>
+            <div class="main-btn">
+              <nuxt-link class="main-name" :to="localePath({ name: 'creator-name', params: { name: item.user && item.user.urlSlug } })" >
+                  {{ item.user?.name || '--' }}
+              </nuxt-link>
+              <nuxt-link class="main-btn-right" :to="localePath({ name: 'video-id', params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') } })" >
+                <div class="main-btn-view">
+                  <div :class="themeChecked? 'main-view':'main-view-white'"></div>
+                  <div class="main-text">{{ formatNumber(item.vodHits) }}</div>
                 </div>
-              </div>
+                <div class="mian-btn-like">
+                  <div :class="themeChecked? 'main-like':'main-like-white'"></div>
+                  <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div>
+                </div>
+              </nuxt-link>
             </div>
           </div>
-        </nuxt-link>
+        </div>
+        
       </div>
     
   </div>
@@ -216,6 +217,7 @@ export default{
 }
 .main-name{
   font-size: 12px;
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }
 .main-update-content{
   display: flex;
@@ -269,6 +271,7 @@ export default{
   font-size: 12px;
   display: flex;
   align-items: center;
+  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }
 .mian-like{
 	transform: translateY(0px);
