@@ -350,9 +350,6 @@ export default {
         opacity: 0.5;
     }
 }
-.dplayer{
-    overflow: inherit;
-}
 .fast-forward-animation {
     position: absolute;
     right: 50px;
@@ -485,6 +482,7 @@ export default {
 
 .video-not-full{
     /deep/ .dplayer-mobile{
+        overflow: inherit;
         &.dplayer-hide-controller{
             .dplayer-time{
                 display: none !important;
