@@ -270,6 +270,7 @@ export default{
 .main-text{
   font-size: 12px;
   display: flex;
+  line-height: 24px;
   align-items: center;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
 }

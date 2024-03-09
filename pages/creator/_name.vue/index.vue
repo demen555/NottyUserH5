@@ -41,7 +41,7 @@
               <div class="main-btn-right">
                 <div class="main-btn-view">
                   <div :class="themeChecked? 'main-like':'main-like-white'"></div>
-                  <div class="main-text">{{ formatNumber(upInfo?.praiseCount || 0) }}</div>
+                  <div class="main-text">{{ formatNumber(upInfo?.totalViewCount || 0) }}</div>
                 </div>
               </div>
             </div>
@@ -590,7 +590,7 @@ export default {
 .main-like {
   width: 16px;
   height: 16px;
-  background-image: url('~~/static/images/com_dianzan_1.svg');
+  background-image: url('~~/static/images/com_bofangliang_big_1.svg');
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 4px;
