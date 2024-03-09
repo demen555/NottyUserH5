@@ -8,10 +8,16 @@
         <div class="main-update-img" v-else><img src="~/static/images/person.svg" alt="person"></div>
         <h1 class="main-title">{{ upInfo?.name || 'None' }}</h1>
         <div class="main-btn">
-          <div class="main-btn-right">
+          <div class="main-btn-left">
             <div class="main-btn-view">
               <div :class="themeChecked ? 'main-view' : 'main-view-white'"></div>
               <div class="main-text">{{ formatNumber(upInfo?.vodCount || 0)}}</div>
+            </div>
+          </div>
+          <div class="main-btn-right">
+            <div class="main-btn-view">
+              <div :class="themeChecked? 'main-like':'main-like-white'"></div>
+              <div class="main-text">{{ formatNumber(upInfo?.praiseCount || 0) }}</div>
             </div>
           </div>
         </div>
@@ -26,10 +32,16 @@
           <div class="video-container-pc-right">
             <div class="main-title">{{ upInfo?.name || 'None' }}</div>
             <div class="main-btn">
-              <div class="main-btn-right">
+              <div class="main-btn-left">
                 <div class="main-btn-view">
                   <div :class="themeChecked ? 'main-view' : 'main-view-white'"></div>
                   <div class="main-text">{{ formatNumber(upInfo?.vodCount || 0)}}</div>
+                </div>
+              </div>
+              <div class="main-btn-right">
+                <div class="main-btn-view">
+                  <div :class="themeChecked? 'main-like':'main-like-white'"></div>
+                  <div class="main-text">{{ formatNumber(upInfo?.totalViewCount || 0) }}</div>
                 </div>
               </div>
             </div>
@@ -578,7 +590,7 @@ export default {
 .main-like {
   width: 16px;
   height: 16px;
-  background-image: url('~~/static/images/com_dianzan_1.svg');
+  background-image: url('~~/static/images/com_bofangliang_big_1.svg');
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 4px;
