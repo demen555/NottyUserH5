@@ -111,7 +111,7 @@ module.exports = {
   modules: [
     'nuxt-i18n',
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
   ],
   axios: {
     proxy: true
