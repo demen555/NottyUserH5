@@ -75,14 +75,41 @@ export default{
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
     return {
-      
-      link: [
-        {
-          hid: "canonical",
-          rel: 'canonical',
-          href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
-        },
-      ],
+        title: this.seoInfo.seoTitle,
+        meta: [
+            {
+                hid: 'description',
+                name: 'description',
+                content: this.seoInfo.seoDescription
+            },
+            {
+                hid: 'keyswords',
+                name: 'keyswords',
+                content: this.seoInfo.seoKeywords
+            },
+            {
+                hid: 'title',
+                name: 'title',
+                content: this.seoInfo.seoTitle
+            },
+            { hid: 'og:title', property: 'og:title', content: this.seoInfo.seoTitle },
+            { hid: 'og:description', property: 'og:description', content:  this.seoInfo.seoDescription },
+            { hid: 'og:keywords', property: 'og:keywords', content: this.seoInfo.seoKeywords },
+        ],
+        link: [
+            {
+                hid: "canonical",
+                rel: 'canonical',
+                href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
+            },
+        ],
+    }
+  },
+  async asyncData({ $homeApi }) { 
+    const res = await $homeApi.postSeo('policy-terms')
+    console.log(res.data, 'seo')
+    return { 
+      seoInfo: res.data || {},
     }
   },
   components: {

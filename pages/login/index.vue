@@ -223,6 +223,39 @@ export default {
   computed: {
     ...mapGetters(['register'])
   },
+  head(){
+    const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
+    return {
+        title: this.seoInfo.seoTitle,
+        meta: [
+            {
+                hid: 'description',
+                name: 'description',
+                content: this.seoInfo.seoDescription
+            },
+            {
+                hid: 'keyswords',
+                name: 'keyswords',
+                content: this.seoInfo.seoKeywords
+            },
+            {
+                hid: 'title',
+                name: 'title',
+                content: this.seoInfo.seoTitle
+            },
+            { hid: 'og:title', property: 'og:title', content: this.seoInfo.seoTitle },
+            { hid: 'og:description', property: 'og:description', content:  this.seoInfo.seoDescription },
+            { hid: 'og:keywords', property: 'og:keywords', content: this.seoInfo.seoKeywords },
+        ],
+        link: [
+            {
+                hid: "canonical",
+                rel: 'canonical',
+                href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
+            },
+        ],
+    }
+  },
   created() {
     if(process.client){
       this.hostname = window.location.hostname
@@ -230,6 +263,7 @@ export default {
       this.form.email = user.account
       this.form.password = user.password
     }
+    // this.getSeo()
     console.log(this.register, 'register')
   },
   watch: {
@@ -241,8 +275,23 @@ export default {
       deep: true
     }
   },
+  async asyncData({ $homeApi }) { 
+    const res = await $homeApi.postSeo('login')
+    console.log(res.data, 'seo')
+    return { 
+      seoInfo: res.data || {},
+    }
+  },
   methods: {
     ...mapActions(['set_userinfo','setAccessToken']),
+    async getSeo(){
+      try {
+        const res = await this.$homeApi.postSeo('login')
+        console.log(res.data, 'getSeo')
+      } catch (error) {
+        console.error(error)
+      }
+    },
     validatorEmail(){
       const myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;  
       if(!myreg.test(this.form.email)){
