@@ -158,8 +158,19 @@ export default ($axios) => ({
         return $axios({
             url: Api.home.tagListPage,
             method: "POST",
-            data: data
+            data: data,
+            params: { urlSlug: data.urlSlug }
         })
     },
-
+    /***
+     * @ 静态页面seo tdk
+     * 
+     */ 
+    postSeo(data){
+      return $axios({
+          url: Api.home.seo,
+          method: "POST",
+          params: { urlSlug: data }
+      })
+  },
 });

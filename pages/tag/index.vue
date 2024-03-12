@@ -67,7 +67,7 @@ export default{
       pageInfo: {
         page: 1,
         size: 50,
-        letter: ''
+        urlSlug: 'tag'
       },
       total: 0,
       tagIndex: 0,
