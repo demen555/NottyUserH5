@@ -452,13 +452,15 @@ export default {
                         ...this.vodChange,
                         ...res.data.data
                     ];
-                    if( this.vodChangePage.page >= res.data.meta.pagination.total_pages ){
-                        this.finishedChange = true;
-                        this.loadingChange = false;
-                    }else{
-                        this.finishedChange = false;
-                        this.loadingChange = false;
-                    }
+                    this.finishedChange = true;
+                    this.loadingChange = false;
+                    // if( this.vodChangePage.page >= res.data.meta.pagination.total_pages ){
+                    //     this.finishedChange = true;
+                    //     this.loadingChange = false;
+                    // }else{
+                    //     this.finishedChange = false;
+                    //     this.loadingChange = false;
+                    // }
                 }
             })
             
@@ -811,6 +813,9 @@ export default {
 }
 
 .main-video{
+    /deep/ .van-list__finished-text{
+        margin: 0 auto;
+    }
     /deep/ .main-list-no{
         margin-top: 20px;
     }
