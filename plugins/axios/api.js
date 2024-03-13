@@ -36,6 +36,7 @@ let Api = {
     loginOut: '/api/v1/access/logout',
     tagList: '/api/v1/tag/lists',
     tagListPage: '/api/v1/tag/lists',
+    seo: '/api/v1/page/detail'
   },
   video: {
     vodComment: "/api/v1/vod/detail", //  视频详情

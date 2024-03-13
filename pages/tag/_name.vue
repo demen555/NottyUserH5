@@ -43,20 +43,40 @@ data() {
     pageInfo: {
       page: this.$route.query.page * 1 || 1,
       size: 24
-    },
+    }
   }
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   return {
-    
-    link: [
-      {
-        hid: "canonical",
-        rel: 'canonical',
-        href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
-      },
-    ],
+      title: this.tagNameData.seo_title,
+      meta: [
+          {
+              hid: 'description',
+              name: 'description',
+              content: this.tagNameData.seo_description
+          },
+          {
+              hid: 'keyswords',
+              name: 'keyswords',
+              content: this.tagNameData.seo_keywords
+          },
+          {
+              hid: 'title',
+              name: 'title',
+              content: this.tagNameData.seo_title
+          },
+          { hid: 'og:title', property: 'og:title', content: this.tagNameData.seo_title },
+          { hid: 'og:description', property: 'og:description', content:  this.tagNameData.seo_description },
+          { hid: 'og:keywords', property: 'og:keywords', content: this.tagNameData.seo_keywords },
+      ],
+      link: [
+          {
+              hid: "canonical",
+              rel: 'canonical',
+              href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
+          },
+      ],
   }
 },
 mixins: [commonMinxin],
@@ -72,6 +92,7 @@ async asyncData({ $homeApi, route }) {
       size: 24,
       tagName: route.params.name
     })
+    console.log(res.data, 'tagNameData')
     return { 
       dataList: res.data.data || [],
       tagNameData: res.data.tagNameData || {},
