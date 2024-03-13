@@ -34,12 +34,13 @@
           <div class="no-match">{{ $t('str_related_no') }}</div>
           <div class="no-match-link">
             <div class="no-match-title">{{ $t('str_related_videos') }}</div>
-            <div class="no-match-list">
+            <div class="no-match-list" v-if="relatedList.length">
               <div class="row">
                 <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
               </div>
               <!-- <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover> -->
             </div>
+            <Empty v-else style="margin-top: 0; margin-bottom: 20px;"></Empty>
           </div>
         </template>
         <!-- <Empty v-else></Empty> -->
