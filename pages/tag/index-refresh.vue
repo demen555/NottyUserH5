@@ -11,28 +11,37 @@
       <tagLoad></tagLoad>
     </div>
     <!-- <van-loading size="48px" type="spinner" v-if="loading" /> -->
-    <div class="container-fluid-sp" v-if="tagList.length">
-      <div class="thumb row">
-        <nuxt-link :to="localePath({
-          name: 'tag-name',
-          params:{
-            id: tag.id,
-            name: tag.urlSlug,
-            refresh: true,
-          },
-        })" 
-      
-        class="tag-item  col-sm-6 col-md-4 col-lg-3 col-xl-2" 
-        v-for="(tag, index) in tagList" 
-        :key="index">
-          <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.name }}</span>
-        </nuxt-link>
-      </div>
-    </div>
+    <van-pull-refresh v-model="refreshing" @refresh="onRefresh"  v-if="tagList.length">
+      <van-list
+          v-model="loading"
+          :finished="finished"
+          :finished-text="$t('str_no_more')"
+          :immediate-check='false'
+          @load="onLoad"
+        >
+          <div class="container-fluid-sp">
+            <div class="thumb row">
+              <nuxt-link :to="localePath({
+                name: 'tag-name',
+                params:{
+                  id: tag.id,
+                  name: tag.urlSlug,
+                  refresh: true,
+                },
+              })" 
+            
+              class="tag-item  col-sm-6 col-md-4 col-lg-3 col-xl-2" 
+              v-for="(tag, index) in tagList" 
+              :key="index">
+                <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.name }}</span>
+              </nuxt-link>
+            </div>
+          </div>
+        </van-list>
+    </van-pull-refresh>
     <empty v-else></empty>
-    <div style="height: 40px;" class="d-none d-sm-block"></div>
-    <div style="height: 60px;"></div>
-    <fBottom></fBottom>
+    <div style="height: 160px;" class="d-none d-sm-block"></div>
+    <fBottom class="d-none d-sm-block"></fBottom>
   </div>
 </template>
 <script>
@@ -56,7 +65,7 @@ export default{
       loading: false,
       finished: false,
       pageInfo: {
-        // page: 1,
+        page: 1,
         size: 50,
         letter: ''
       },
@@ -119,12 +128,23 @@ export default{
         !isRefresh  && (this.loading = true)
         const res = await this.$homeApi.postTagListPage(this.pageInfo)
         if(res.code === CODES.SUCCESS){
-          this.tagList = res.data.data || []
-          this.total = res.data.data.length
+          this.total = res.data.meta.pagination.total
+          if(isRefresh){
+            this.tagList = res.data.data || []
+            this.refreshing = false
+          } else {
+            this.tagList = [ ...this.tagList, ...res.data.data]
+            this.loading = false
+          }
+          if(res.data.data.length === 0){
+            this.finished = true
+          } else {
+            this.finished = false
+          }
         }
 
       } catch (error) {
-        console.error(error)
+
       } finally {
         this.spinnerLoading = false
         this.loading = false
