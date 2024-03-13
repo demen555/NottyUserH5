@@ -159,7 +159,7 @@ export default{
       }
     },
     onRefresh() {
-      this.pageInfo.page = 1
+      // this.pageInfo.page = 1
       this.getList(true)
     }
   }
