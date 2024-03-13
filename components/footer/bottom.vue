@@ -69,6 +69,7 @@ export default{
   min-height: 124px;
   width: 100%;
   padding: 0 12px;
+  padding-bottom: 12px;
   color: var(--text-color2, rgba(255, 255, 255, 0.70));
   background-color: #262627;
   // min-height: 144px;
