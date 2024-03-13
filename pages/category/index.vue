@@ -15,7 +15,9 @@
     <Empty v-else></Empty>   
     <div style="height: 40px;" class="d-none d-sm-block"></div>
     <div style="height: 60px;"></div>
-    <fBottom></fBottom>
+    <div class="row">
+      <fBottom></fBottom>
+    </div>
   </div>
 </template>
 <script>
