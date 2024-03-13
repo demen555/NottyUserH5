@@ -8,14 +8,23 @@
     </div>
     <template v-if="typeList.length">
       <div style="height: 50px;" class="d-none d-sm-block"></div>
-      <div class="thumb row paddingTop88">
-        <Thumb class="col-sm-6 col-md-4 col-lg-3 col-xl-2" :tag="tag" v-for="tag in typeList" :key="tag.id"></Thumb>
-      </div>
+      <van-pull-refresh class="paddingTop88" v-model="refreshing" @refresh="onRefresh">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :finished-text="$t('str_no_more')"
+          @load="onLoad"
+          :immediate-check="false"
+          :offset="10"
+        >
+          <div class="thumb row">
+            <Thumb class="col-sm-6 col-md-4 col-lg-3 col-xl-2" :tag="tag" v-for="tag in typeList" :key="tag.id"></Thumb>
+          </div>
+          <!-- <Cover v-for="item in dataList" :item="item" :key="item.vodId"></Cover> -->
+        </van-list>
+      </van-pull-refresh>
     </template>
     <Empty v-else></Empty>   
-    <div style="height: 40px;" class="d-none d-sm-block"></div>
-    <div style="height: 60px;"></div>
-    <fBottom></fBottom>
   </div>
 </template>
 <script>
@@ -154,7 +163,7 @@ methods: {
 .thumb{
   display: flex;
   flex-wrap: wrap;
-  // justify-content: space-between;
+  justify-content: space-between;
 }
 .van-pull-refresh{
 overflow: visible;
