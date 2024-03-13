@@ -14,6 +14,19 @@
           </nuxt-link>
           <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
       </div>
+
+      <div class="shorts-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
+        <div class="list-title"></div>
+        <div class="list-content">
+          <div class="list-item" v-for="item in 10" :key="item">
+
+          </div>
+          <div class="list-more">
+            
+          </div>
+        </div>
+      </div>
+
       <div v-for="(item,index) in dataList" :key="item.vodId" class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
         <Cover style="margin-top: 12px;" :item="item"></Cover>
         <div class="top-category d-sm-none" v-if="index === 1">
@@ -34,15 +47,6 @@
               </nuxt-link>
             </client-only> 
           </div>
-        </div>
-        <div class="shorts-list" v-if="index === 2">
-          <div class="list-title"></div>
-          <div class="list-content">
-            <div class="list-item" v-for="item in 10" :key="item">
-
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
@@ -326,16 +330,28 @@ overflow: visible;
 }
 .shorts-list{
   width: 100%;
+  margin-top: 12px;
   .list-content{
-    width: 100%;
-    overflow: auto;
     display: flex;
+    overflow-x: auto;
+    flex-grow: 1;
+    justify-content: space-between;
   }
   .list-item{
+    flex-shrink: 0;
     width: 161px;
     height: 289px;
     background-color: pink;
-    border-radius: 4px;
+    border-radius: 12px;
+    margin-left: 12px;
+  }
+  .list-more{
+    flex-shrink: 0;
+    width: 56px;
+    height: 289px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-left: 12px;
   }
 }
 </style>
