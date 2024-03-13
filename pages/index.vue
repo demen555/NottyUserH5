@@ -17,9 +17,12 @@
 
       <div class="shorts-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
         <div class="list-title"></div>
-        <div class="list-content">
-          <div class="list-item" v-for="item in 10" :key="item">
-
+        <div class="list-content" ref="shortsList">
+          <div class="list-item" v-for="item in storiesList" :key="item.vodId">
+            <img :src="item.vodPic" alt="">
+            <div class="list-des">
+              <h2 class="vodName">{{ item.vodName }}</h2>
+            </div>
           </div>
           <div class="list-more">
             
@@ -92,6 +95,8 @@ data() {
     tagList: [],
     categoryList: [],
     showPopup: false, //底部popup
+
+    storiesList:[],
   }
 },
 computed: {
@@ -137,6 +142,9 @@ created(){
   }
   // this.showPopup = true
 },
+mounted(){
+  this.initHorizontalScroll();
+},
 components: {
   HeaderTop,
   Cover,
@@ -155,7 +163,15 @@ async asyncData({ $homeApi, query }) {
 
   const res1 = await $homeApi.requestvodpageHome({
     page: query.page * 1 || 1,  
-    size: 24
+    size: 24,
+    kind: "videos",
+  })
+
+  const res3 = await $homeApi.requestvodpageHome({
+    page: 1,  
+    size: 10,
+    kind: "videos",
+    // kind: "stories",
   })
 
   return { 
@@ -167,6 +183,7 @@ async asyncData({ $homeApi, query }) {
       page: Number(query.page) || 1,
       size: 24,
     },
+    storiesList: res3.data.data || [],
   }
 },
 methods: {
@@ -204,6 +221,38 @@ methods: {
     this.pageInfo.page = 1
     this.getList(true);
   },
+  initHorizontalScroll() {
+      let isMouseDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+
+      const content = this.$refs.shortsList;
+
+      content.addEventListener('mousedown', (event) => {
+        isMouseDown = true;
+        startX = event.pageX - content.offsetLeft;
+        scrollLeft = content.scrollLeft;
+        content.style.cursor = 'grabbing'; /* 鼠标样式为抓取中手型 */
+      });
+
+      content.addEventListener('mousemove', (event) => {
+        if (!isMouseDown) return;
+        const x = event.pageX - content.offsetLeft;
+        const walk = (x - startX) * 2; // 控制滚动速度
+        content.scrollLeft = scrollLeft - walk;
+      });
+
+      content.addEventListener('mouseup', () => {
+        isMouseDown = false;
+        content.style.cursor = 'grab'; /* 鼠标样式为抓取手型 */
+      });
+
+      content.addEventListener('mouseleave', () => {
+        isMouseDown = false;
+        content.style.cursor = 'grab'; /* 鼠标样式为抓取手型 */
+      });
+    }
+
 }
 }
 </script>
@@ -331,6 +380,7 @@ overflow: visible;
 .shorts-list{
   width: 100%;
   margin-top: 12px;
+  cursor: grab; /* 鼠标样式为抓取手型 */
   .list-content{
     display: flex;
     overflow-x: auto;
@@ -341,9 +391,32 @@ overflow: visible;
     flex-shrink: 0;
     width: 161px;
     height: 289px;
-    background-color: pink;
+    // background-color: pink;
     border-radius: 12px;
     margin-left: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+    .list-des{
+      position: absolute;
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      h2{
+        font-size: 14px;
+        font-weight: 400;
+        color: #fff;
+        word-break: break-word;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+    }
   }
   .list-more{
     flex-shrink: 0;
