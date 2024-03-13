@@ -10,15 +10,15 @@
         <!-- <div class="d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
         <div class="search-btn-content">
           <div class="d-none d-sm-block search-btn cursor-pointer">
-            <form class="search-top-btn cursor-pointer" action="javascript:return true">
-              <input @keyup.enter="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
+            <form class="search-top-btn cursor-pointer">
+              <input @keyup.enter.stop="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
             </form>
             <!-- <div class="search-top-btn cursor-pointer">
               <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
               <div class="search-top-text">{{ $t('str_search') }}</div>
             </div> -->
           </div>
-          <main class="search-dialog">
+          <main class="search-dialog" v-show="searchDialogShow">
             <div class="search-card">
               <div class="search-card-top">
                 <div class="search-title cursor-pointer">{{ $t('str_search_his_title') }}</div>
@@ -317,6 +317,7 @@ export default {
       keysList: [],
       historyList: [],
       historyList1: [],
+      searchDialogShow: false
     }
   },
 
@@ -328,6 +329,7 @@ export default {
     Thumb
   },
   created(){
+    this.search = ''
     console.log( 'this.$route.name', this.$route.name )
     // this.initTypeList()
     // this.initTagList()
@@ -390,6 +392,14 @@ export default {
     sliceHistoryList(){
       return this.historyList.slice(0,5)
     },
+  },
+  watch: {
+    search(val){
+      if(val){
+        console.log(val, 'watch search')
+        this.searchDialogShow = true
+      }
+    }
   },
   methods: {
     formatTime1 ,
@@ -600,8 +610,8 @@ export default {
         // this.handleReset()
         // this.handleGoToResult(this.search)
         this.$refs.searchRef.blur();//关闭手机软键盘
+        this.searchDialogShow = false
         // this.handleReset()
-        // this.search = ''
         this.$router.push(this.localePath({
           name: 'search',
           query: { value: this.search }
