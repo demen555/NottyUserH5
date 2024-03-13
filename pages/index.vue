@@ -35,6 +35,15 @@
             </client-only> 
           </div>
         </div>
+        <div class="shorts-list" v-if="index === 2">
+          <div class="list-title"></div>
+          <div class="list-content">
+            <div class="list-item" v-for="item in 10" :key="item">
+
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
     <div class="row">
@@ -313,6 +322,20 @@ overflow: visible;
     font-size: 10PX !important;
     font-weight: bold;
     color: var(--text-color1, #181E2A);
+  }
+}
+.shorts-list{
+  width: 100%;
+  .list-content{
+    width: 100%;
+    overflow: auto;
+    display: flex;
+  }
+  .list-item{
+    width: 161px;
+    height: 289px;
+    background-color: pink;
+    border-radius: 4px;
   }
 }
 </style>
