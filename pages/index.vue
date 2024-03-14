@@ -16,16 +16,39 @@
       </div>
 
       <div class="shorts-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
-        <div class="list-title"></div>
+        <div class="list-title">
+          <div class="title-left">
+            <img src="~/static/images/gn_shorts.png" alt="gn_shorts">
+            <span> Shorts </span>
+          </div>
+          <div class="title-right">
+            <span> More </span>
+            <img src="~/static/images/com_jt_sx_you.png" alt="com_jt_sx_you">
+          </div>
+        </div>
         <div class="list-content" ref="shortsList">
-          <div class="list-item" v-for="item in storiesList" :key="item.vodId">
-            <img :src="item.vodPic" alt="">
+          <nuxt-link class="list-item" v-for="item in storiesList" :key="item.vodId" :to="localePath({
+              name: 'shorts-id',
+              params: { id: item.vodId }
+          })">
+            <img :src="item.vodPic" alt="" draggable="false">
             <div class="list-des">
               <h2 class="vodName">{{ item.vodName }}</h2>
+              <div class="list-btn">
+                <div class="main-btn-view">
+                  <img :src="require('~/static/images/com_shipinshu_1.svg')" alt="com_shipinshu_1">
+                  <div class="main-text">{{ formatNumber(item.vodHits) }}</div>
+                </div>
+                <div class="mian-btn-like">
+                  <img :src="require('~/static/images/com_dianzan_1.svg')" alt="com_dianzan_1">
+                  <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div>
+                </div>
+              </div>
             </div>
-          </div>
+          </nuxt-link>
           <div class="list-more">
-            
+            <img src="~/static/images/gn_shorts.png" alt="gn_shorts">
+            <span>All</span>
           </div>
         </div>
       </div>
@@ -77,6 +100,7 @@ import Cover from '~/components/cover'
 import CODES from "~/plugins/enums/codes"
 import commonMinxin from '~/plugins/mixins/common'
 import dialogBottom from "~/components/dialog/dialog-bottom.vue"
+import { formatNumber, formatPer } from '@/utils/format.js'
 export default{
 fetchOnServer: true,
 mixins: [commonMinxin],
@@ -187,6 +211,8 @@ async asyncData({ $homeApi, query }) {
   }
 },
 methods: {
+  formatNumber,
+  formatPer,
   ...mapActions(['set_tagid']),
   handleClose(){
     this.showSticky = false
@@ -416,7 +442,27 @@ overflow: visible;
         -webkit-line-clamp: 2;
         overflow: hidden;
       }
+      .list-btn{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 8px 0 12px 0;
+      }
+      .main-btn-view, .mian-btn-like{
+        display: flex;
+        align-items: center;
+        img{
+          width: 16px;
+          height: 16px;
+          margin-right: 4px;
+        }
+        .main-text{
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
     }
+
   }
   .list-more{
     flex-shrink: 0;
@@ -425,6 +471,49 @@ overflow: visible;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.1);
     margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img{
+      width: 24px;
+      height: 24px;
+    }
+    span{
+      font-size: 14px;
+      color: #fff;
+      margin-top: 8px;
+    }
+
+  }
+  .list-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-left: 12px;
+    .title-right, .title-left{
+      display: flex;
+      align-items: center;
+    }
+    .title-right img{
+      width: 12px;
+      height: 12px;
+      margin-left: 8px;
+    }
+    .title-left img{
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+    .title-right span{
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .title-left span{
+      font-size: 16px;
+      color: #fff;
+    }
   }
 }
 </style>

@@ -9,9 +9,8 @@
     </div>
 </template>
 <script>
-// import videojs from 'video.js';
-// import 'video.js/dist/video-js.css';
-import { mapGetters } from 'vuex';
+
+
 export default {
     name: 'videoM3u8',
     props: {
@@ -27,6 +26,12 @@ export default {
                 return ""
             }
         },
+        vodId: {
+            type: Number,
+            default() {
+                return 0
+            }
+        },
     },
     data() {
         return {
@@ -36,9 +41,7 @@ export default {
             isOpen: false,
         }
     },
-    computed:{
-        ...mapGetters(['vodId']),
-    },
+
     mounted() {
         this.animateProgress(99, 2000)
         this.player = videojs(`hls-video-${this.vodId}`, {
@@ -115,7 +118,8 @@ export default {
         vodPlayUrl (){
             const arr = this.videoSrc.split('$')
             const str = arr.find(  ele => ele.includes('.m3u8'))
-            return (str || "") + '?segments=8&time=2';
+            return str
+            // return (str || "") + '?segments=8&time=2';
         },
         contains(e){
             let $video = document.querySelector(`#hls-video-${this.vodId}`);

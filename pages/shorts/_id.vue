@@ -1,8 +1,9 @@
 <template>
   <div class="porn-shorts" @wheel="handleScrollDebounced">
-    <van-swipe ref="pornShorts" vertical :loop="false" :show-indicators="false">
-      <van-swipe-item v-for="item in dataList" :key="item.vodId">
-        <!-- <videoM3u8 :videoSrc="item.vodPlayUrl" :vodPic="item.vodPic"></videoM3u8> -->
+    <van-swipe ref="pornShorts" vertical :loop="false" :show-indicators="false" @change="changeswipe">
+      <van-swipe-item v-for="(item,i) in dataList" :key="item.vodId">
+        <videoM3u8 :videoSrc="item.vodPlayUrl" :vodPic="item.vodPic" :vodId="item.vodId" v-if="swipeIndex == i"></videoM3u8>
+        <!-- {{ item }} -->
         <div class="shorts-controls">
           <!-- 点赞 -->
           <div class="controls-btn controls-up"> 
@@ -77,7 +78,8 @@ export default {
         page: 1,  
         size: 10
       },
-      dataList:[]
+      dataList:[],
+      swipeIndex: 0,
     }
   },
 
@@ -92,6 +94,9 @@ export default {
         swipeInstance.next();
       }
     }, 300),
+    changeswipe(i){
+      this.swipeIndex = i;
+    }
   },
 }
 </script>
