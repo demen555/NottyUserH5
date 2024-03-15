@@ -93,10 +93,10 @@
                         <div :class="themeChecked? 'main-view':'main-view-white'"></div>
                         <div class="main-text">{{ formatNumber(videoInfo.user?.vodCount) }}</div>
                       </div>
-                      <!-- <div class="mian-btn-like">
+                      <div class="mian-btn-like">
                         <div :class="themeChecked? 'main-like':'main-like-white'"></div>
-                        <div class="main-text">{{ formatPer(videoInfo.vodUp, videoInfo.vodUp+videoInfo.vodDown)}}</div>
-                      </div> -->
+                        <div class="main-text">{{ formatNumber(videoInfo.user?.totalViewCount || 0)}}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1155,7 +1155,7 @@ export default {
 .main-like{
   width: 16px;
   height: 16px;
-  background-image: url('~~/static/images/com_dianzan_1.svg');
+  background-image: url('~~/static/images/com_bofangliang_big_1.svg');
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 4px;
