@@ -10,9 +10,11 @@
         <!-- <div class="d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
         <div class="search-btn-content">
           <div class="d-none d-sm-block search-btn cursor-pointer">
-            <form class="search-top-btn cursor-pointer">
+            <div class="search-top-btn cursor-pointer">
+              <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
               <input @keyup.enter.stop="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
-            </form>
+              <img v-show="search" @click="handleReset" class="header-common com-close svg-icon1" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+            </div>
             <!-- <div class="search-top-btn cursor-pointer">
               <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
               <div class="search-top-text">{{ $t('str_search') }}</div>
@@ -21,11 +23,11 @@
           <main class="search-dialog" v-show="searchDialogShow">
             <div class="search d-sm-none" ref="search">
               <div class="search-btn search-btn-page">
-                <form action="javascript:return true">
+                <div>
                   <input ref="searchRef" type="search"  :placeholder="$t('str_search_something')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
-                </form>
+                </div>
                 <img @click="handleFocus" class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
-                <img v-show="search" @click="handleReset" class="header-common com-close svg-icon" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+                <img v-show="search" @click="handleReset" class="header-common com-close svg-icon2" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
               </div>
               <div class="search-cancel cursor-pointer" @click="handleGoHome">{{ $t('str_cancel') }}</div>
             </div>
@@ -408,6 +410,8 @@ export default {
       if(val){
         console.log(val, 'watch search')
         this.searchDialogShow = true
+      } else {
+        this.searchDialogShow = false
       }
     }
   },
@@ -628,6 +632,23 @@ export default {
           query: { value: this.search }
         }))
       }
+    },
+    handleGoToResult(search){
+      console.log(search, 'search')
+      gtag('event', 'view_search_results', {
+          keyword: search,
+      });
+      this.dataList = []
+      this.search = search
+      this.historyList.unshift(this.search)
+      this.historyList = Array.from(new Set(this.historyList))
+      if(process.client){
+        localStorage.setItem('historyList', JSON.stringify(this.historyList))
+      }
+      this.$router.push(this.localePath({
+        name: 'search',
+        query: { value: this.search }
+      }))
     },
     async initKyesList(){
       try {
@@ -1113,7 +1134,8 @@ input::placeholder{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
+  // height: 40px;
+  padding-top: 10px;
   .search-clear {
     color: var(--text-color2,  rgba(255, 255, 255, 0.70));
     font-size: 12px;
@@ -1189,13 +1211,28 @@ input::placeholder{
   display: flex;
   align-items: center;
 }
+.search-top-icon{
+  position: absolute;
+  left: 10px;
+  top: 8px;
+}
+.svg-icon1{
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+.svg-icon2{
+  position: absolute;
+  right: 45px;
+  top: 14px;
+}
 .search-input{
   width: 70vw;
   background-color: var(--bg-color3, rgba(246, 214, 88, 0.1));
-  border-radius: 16px;
-  text-indent: 2.5em;
+  border-radius: 24px;
+  text-indent: 3.5em;
   color: var(--bg-secondry,  #FD46F6);
-  height: 32px;
+  height: 48px;
   border: 1PX solid var(--bg-primary, #F6D658);
 }
 </style>
