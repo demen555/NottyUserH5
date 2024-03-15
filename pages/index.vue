@@ -42,6 +42,7 @@
         <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
       </div>
         <!-- <div style="min-height: 304px;" class="d-none d-sm-block"></div> -->
+      <div v-html="homepage.content"></div>  
       <fBottom></fBottom>
     </div>
     <div class="sticky-upload" v-show="showSticky">
@@ -79,6 +80,8 @@ data() {
     tagList: [],
     categoryList: [],
     showPopup: false, //底部popup
+
+    homepage:{}
   }
 },
 computed: {
@@ -146,6 +149,9 @@ async asyncData({ $homeApi, query }) {
     size: 24
   })
 
+
+  const home = await $homeApi.postSeo('homepage')
+
   return { 
     tagList: res.data.data || [],
     categoryList:  res2.data.data || [],
@@ -155,6 +161,7 @@ async asyncData({ $homeApi, query }) {
       page: Number(query.page) || 1,
       size: 24,
     },
+    homepage: home.data
   }
 },
 methods: {

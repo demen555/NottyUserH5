@@ -32,6 +32,7 @@
     <empty v-else></empty>
     <div style="height: 40px;" class="d-none d-sm-block"></div>
     <div style="height: 60px;"></div>
+    <div v-html="seoInfo.content"></div>  
     <fBottom></fBottom>
   </div>
 </template>
