@@ -3,7 +3,7 @@
     <Overlay v-model="overlayShow" v-if="overlayShow"></Overlay>
       <header class="home-header" id="home-header">
         <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common cursor-pointer" alt="more">
-        <nuxt-link :to="localePath({ name: 'index', query: { page: 1 }})"> 
+        <nuxt-link :to="localePath({ name: 'index'})"> 
           <div class="pc-logo d-none d-sm-block cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
           <div class="d-block d-sm-none cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
         </nuxt-link>
@@ -50,7 +50,7 @@
     >
       <div id="drawer" class="nav-menu menu-right">
         <div class="menu-header">
-          <nuxt-link :to="localePath({ name: 'index', query: { page: 1 }})"> 
+          <nuxt-link :to="localePath({ name: 'index'})"> 
             <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
           </nuxt-link>
          <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
@@ -102,7 +102,7 @@
         <div class="menu-flex">
           <div class="menu-header">
           <img class="close-pop" @click="showRightPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
-          <nuxt-link :to="localePath({ name: 'index', query: { page: 1 }})"> 
+          <nuxt-link :to="localePath({ name: 'index'})"> 
             <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
           </nuxt-link>
           </div>
