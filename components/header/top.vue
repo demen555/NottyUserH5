@@ -622,6 +622,9 @@ export default {
       if(this.search){
         this.historyList.unshift(this.search)
         this.historyList = Array.from(new Set(this.historyList))
+        if(process.client){
+          localStorage.setItem('historyList', JSON.stringify(this.historyList))
+        }
         // this.handleReset()
         // this.handleGoToResult(this.search)
         this.$refs.searchRef.blur();//关闭手机软键盘

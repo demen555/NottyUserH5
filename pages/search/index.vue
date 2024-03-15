@@ -93,13 +93,23 @@ computed: {
     return this.historyList.slice(0,5)
   },
 },
-created(){
-  this.getList()
-},
 components: {
   Cover,
   Empty,
   NavNew
+},
+watch: {
+  '$route.query': {
+      immediate: true,
+      handler(newQuery, oldQuery) {
+        // 当查询字符串参数改变时，这里会被触发
+        if(newQuery) {
+          this.getList()
+        }
+        console.log('查询字符串变化了：', newQuery, oldQuery);
+        // 你可以在这里根据新的查询字符串执行相应的逻辑
+      }
+    }
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
