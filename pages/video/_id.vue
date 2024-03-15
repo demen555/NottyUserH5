@@ -337,6 +337,7 @@ export default {
     },
 
     created(){
+        console.log( 'this.videoInfo', this.videoInfo )
         // 在页面创建时检查是否有跳转信息
         if (this.videoInfo.code != 100 ) {
             // 跳转路由

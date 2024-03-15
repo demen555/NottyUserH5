@@ -681,7 +681,7 @@ export default function ({ route, redirect, app }) {
   const currentLocale = app.i18n.locale
   const { name, params } = route;
   console.log( 'route', route )
-  if( name.indexOf("tag-name") != -1 && tagsUrl[params.name] ){
+  if( name && name.indexOf("tag-name") != -1 && tagsUrl[params.name] ){
     if( currentLocale != "en" ){
       redirect(301, `/${currentLocale}/tag/${tagsUrl[params.name]}`)
     }else{
@@ -690,6 +690,6 @@ export default function ({ route, redirect, app }) {
   }
   // 如果路由不匹配任何页面，重定向到当前语言的首页
   if (route.matched.length == 0) {
-    redirect(`/`)
+    redirect(301, `/`)
   }
 }
