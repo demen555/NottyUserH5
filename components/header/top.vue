@@ -12,7 +12,7 @@
           <div class="d-none d-sm-block search-btn cursor-pointer">
             <div class="search-top-btn cursor-pointer">
               <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
-              <input @focus="searchDialogShow = true"  @blur="searchDialogShow = false" @keyup.enter.stop="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
+              <input @focus="searchDialogShow = true" @keyup.enter.stop="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
               <img v-show="search" @click="handleReset" class="header-common com-close svg-icon1" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
             </div>
             <!-- <div class="search-top-btn cursor-pointer">
@@ -24,7 +24,7 @@
             <div class="search d-sm-none" ref="search">
               <div class="search-btn search-btn-page">
                 <div>
-                  <input @focus="searchDialogShow = true"  @blur="searchDialogShow = false" ref="searchRef" type="search"  :placeholder="$t('str_search_something')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
+                  <input @focus="searchDialogShow = true" ref="searchRef" type="search"  :placeholder="$t('str_search_something')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
                 </div>
                 <img @click="handleFocus" class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
                 <img v-show="search" @click="handleReset" class="header-common com-close svg-icon2" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
@@ -413,6 +413,16 @@ export default {
       } else {
         this.searchDialogShow = false
       }
+    },
+    '$route.query': {
+      immediate: true,
+      handler(newQuery, oldQuery) {
+        // 当查询字符串参数改变时，这里会被触发
+        if(newQuery) {
+          console.log(newQuery, '$route.query')
+          this.searchDialogShow = false
+        }
+      }
     }
   },
   methods: {
@@ -648,6 +658,7 @@ export default {
       if(process.client){
         localStorage.setItem('historyList', JSON.stringify(this.historyList))
       }
+      this.searchDialogShow = false
       this.$router.push(this.localePath({
         name: 'search',
         query: { value: this.search }
