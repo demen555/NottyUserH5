@@ -41,6 +41,7 @@
     </van-pull-refresh>
     <empty v-else></empty>
     <div style="height: 160px;" class="d-none d-sm-block"></div>
+    <div v-html="seoInfo.content"></div>  
     <fBottom class="d-none d-sm-block"></fBottom>
   </div>
 </template>

@@ -25,6 +25,7 @@
       </van-pull-refresh>
     </template>
     <Empty v-else></Empty>   
+    <div v-html="seoInfo.content"></div>  
   </div>
 </template>
 <script>
@@ -56,6 +57,13 @@ data() {
       keywords: "",
       title: ""
     }
+  }
+},
+async asyncData({ $homeApi }) { 
+  const res = await $homeApi.postSeo('category')
+  console.log(res.data, 'seo')
+  return { 
+    seoInfo: res.data || {},
   }
 },
 head(){
