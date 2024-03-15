@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="list-content" ref="shortsList">
-          <nuxt-link class="list-item" v-for="item in storiesList" :key="item.vodId" :to="localePath({
+          <nuxt-link class="list-item" v-for="item in storiesList" :key="item.vodId" draggable="false" :to="localePath({
               name: 'shorts-id',
               params: { id: item.vodId }
           })">
@@ -277,7 +277,7 @@ methods: {
         isMouseDown = false;
         content.style.cursor = 'grab'; /* 鼠标样式为抓取手型 */
       });
-    }
+  }
 
 }
 }

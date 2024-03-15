@@ -1,62 +1,69 @@
 <template>
-  <div class="porn-shorts" @wheel="handleScrollDebounced">
-    <van-swipe ref="pornShorts" vertical :loop="false" :show-indicators="false" @change="changeswipe">
-      <van-swipe-item v-for="(item,i) in dataList" :key="item.vodId">
-        <videoM3u8 :videoSrc="item.vodPlayUrl" :vodPic="item.vodPic" :vodId="item.vodId" v-if="swipeIndex == i"></videoM3u8>
-        <!-- {{ item }} -->
-        <div class="shorts-controls">
-          <!-- 点赞 -->
-          <div class="controls-btn controls-up"> 
-            <div class="controls-img">
-              <img class="img" src="~/static/images/my_gn_dz_1.png" alt="my_gn_dz_1">
+  <div class="porn-shorts" >
+    <HeaderTop class="d-none d-sm-block"></HeaderTop>
+    <div class="shorts-content" @wheel="handleScrollDebounced">
+      <van-swipe ref="pornShorts" class="shorts-swipe" vertical :loop="false" :show-indicators="false" @change="changeswipe">
+        <van-swipe-item v-for="(item,i) in dataList" :key="item.vodId">
+          <videoM3u8 :videoSrc="item.vodPlayUrl" :vodPic="item.vodPic" :vodId="item.vodId" v-if="swipeIndex == i"></videoM3u8>
+          <!-- <img class="vodPic" v-else :src="item.vodPic" alt=""> -->
+          <!-- {{ item }} -->
+          <div class="shorts-controls">
+            <!-- 点赞 -->
+            <div class="controls-btn controls-up"> 
+              <div class="controls-img">
+                <img class="img" src="~/static/images/my_gn_dz_1.png" alt="my_gn_dz_1">
+              </div>
+              <span class="words">{{ item.vodUp }}</span>
             </div>
-            <span class="words">{{ item.vodUp }}</span>
-          </div>
-          <!-- 点踩 -->
-          <div class="controls-btn controls-down">
-            <div class="controls-img">
-              <img class="img" src="~/static/images/my_gn_caizan_1.png" alt="my_gn_caizan_1">
+            <!-- 点踩 -->
+            <div class="controls-btn controls-down">
+              <div class="controls-img">
+                <img class="img" src="~/static/images/my_gn_caizan_1.png" alt="my_gn_caizan_1">
+              </div>
+              <span class="words">{{ item.vodDown }}</span>
             </div>
-            <span class="words">{{ item.vodDown }}</span>
-          </div>
-          <!-- 评论 -->
-          <div class="controls-btn controls-review">
-            <div class="controls-img">
-              <img class="img" src="~/static/images/my_gn_comments_1.png" alt="my_gn_comments_1">
+            <!-- 评论 -->
+            <div class="controls-btn controls-review">
+              <div class="controls-img">
+                <img class="img" src="~/static/images/my_gn_comments_1.png" alt="my_gn_comments_1">
+              </div>
+              <span class="words">{{ item.vodHits }}</span>
             </div>
-            <span class="words">{{ item.vodHits }}</span>
-          </div>
-          <!-- 收藏 -->
-          <div class="controls-btn controls-collect">
-            <div class="controls-img">
-              <img class="img" src="~/static/images/my_gn_wdsc_1.png" alt="my_gn_wdsc_1">
+            <!-- 收藏 -->
+            <div class="controls-btn controls-collect">
+              <div class="controls-img">
+                <img class="img" src="~/static/images/my_gn_wdsc_1.png" alt="my_gn_wdsc_1">
+              </div>
+              <span class="words">Collect</span>
             </div>
-            <span class="words">Collect</span>
-          </div>
-          <!-- 分享 -->
-          <div class="controls-btn controls-share">
-            <div class="controls-img">
-              <img class="img" src="~/static/images/my_gn_share_1.png" alt="my_gn_share_1">
+            <!-- 分享 -->
+            <div class="controls-btn controls-share">
+              <div class="controls-img">
+                <img class="img" src="~/static/images/my_gn_share_1.png" alt="my_gn_share_1">
+              </div>
+              <span class="words">Share</span>
             </div>
-            <span class="words">Share</span>
           </div>
-        </div>
-        <div class="shorts-des">
-          <div class="des-upid">
-            <img class="img" :src="item.user.userPortrait" alt="userPortrait">
-            <span class="name">{{ item.user.userName }}</span>
+          <div class="shorts-des">
+            <div class="des-upid">
+              <img class="img" :src="item.user.userPortrait" alt="userPortrait">
+              <span class="name">{{ item.user.userName }}</span>
+            </div>
+            <h2> {{ item.vodName }} </h2>
           </div>
-          <h2> {{ item.vodName }} </h2>
-        </div>
-      </van-swipe-item>
-    </van-swipe>
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+    <fBottom class="d-none d-sm-block"></fBottom>
   </div>
 </template>
 <script>
 import { debounce  } from 'lodash';
 import videoM3u8 from "@/components/videoM3u8"
+import commonMinxin from '~/plugins/mixins/common'
 export default {
   components:{ videoM3u8 },
+  mixins: [commonMinxin],
   async asyncData({ $homeApi, params }) { 
     console.log( params.id )
     const res1 = await $homeApi.requestvodpageHome({

@@ -1,5 +1,5 @@
 import Vue from "vue";
-import '@vant/touch-emulator';
+// import '@vant/touch-emulator';
 import { Pagination, Button, NavBar, Image as VanImage, Lazyload, PullRefresh, List, Popup, Switch, Toast, Tab, Tabs, Sticky, Checkbox, CheckboxGroup, Dialog, Loading, Overlay, Progress, Search, Skeleton, Locale, Uploader,  Swipe, SwipeItem  } from "vant";
 import VueClipboard from 'vue-clipboard2';
 
