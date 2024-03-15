@@ -1,9 +1,78 @@
 <template>
   <div class="search-page container-fluid"  id="search">
-    <HeaderTop ref="header"></HeaderTop>
-    <main>
+    <HeaderTop ref="header" v-show="!searchShow"></HeaderTop>
+    <div class="search" ref="search" v-show="searchShow">
+      <div class="search-btn search-btn-page">
+        <form action="javascript:return true">
+          <input ref="searchRef" type="search"  :placeholder="$t('str_search_something')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
+        </form>
+        <img @click="handleFocus" class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
+        <img v-show="search" @click="handleReset" class="header-common com-close svg-icon" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+      </div>
+      <div class="search-cancel cursor-pointer" @click="handleGoHome">{{ $t('str_cancel') }}</div>
+    </div>
+    <main v-show="searchShow">
+      <template>
+        <div class="search-card">
+          <div class="search-card-top">
+            <div class="search-title cursor-pointer">{{ $t('str_search_his_title') }}</div>
+            <div class="search-clear cursor-pointer" @click="handleClearCurrentHistory"><img class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete"></div>
+          </div>
+          <!-- 移动版布局 -->
+          <div class="search-list-new d-sm-none">
+            <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
+              <div @click="handleGoToResult(item)" class="cursor-pointer">{{ item }}</div>
+              <img @click="handleClearHistory(index)" class="header-common svg-icon cursor-pointer" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+            </div>
+          </div>
+          <!-- pc版布局 -->
+          <div class="d-none d-sm-block">
+            <div class="search-list-new-pc">
+              <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
+                <div @click="handleGoToResult(item)" class="cursor-pointer">{{ item }}</div>
+                <img style="margin-left: 13px; margin-right: 24px;" @click="handleClearHistory(index)" class="header-common svg-icon cursor-pointer" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+              </div>
+            </div>
+          </div>
+          <!-- 第一版 -->
+          <!-- <div class="search-list">
+            <a @click="handleGoToResult(item)" v-for="item in historyList" :key="item">{{ item }}</a>
+          </div> -->
+        </div>
+        <div class="search-card">
+          <!-- <div class="search-card-top">
+            <div class="search-title">{{ $t('str_rec_title') }}</div>
+          </div>
+          <div class="search-list-new">
+            <div  class="search-list-li" v-for="item in keysList" :key="item.searchKey">
+              <div @click="handleGoToResult(item.searchWord)" >{{ item.searchWord }}</div>
+            </div>
+          </div> -->
+          <!-- 第一版 -->
+          <div class="search-title">{{ $t('str_rec_title') }}</div>
+          <div style="height: 16px;" class="d-none d-sm-block"></div>
+          <div class="search-list">
+            <a class="cursor-pointer" @click="handleGoToResult(item)" v-for="(item, index) in keysList" :key="index">{{ item }}</a>
+          </div>
+        </div>
+      </template>
+      <!-- 无搜索结果 -->
+      <!-- <template v-else>
+        <div class="no-match">{{ $t('str_related_no') }}</div>
+        <div class="no-match-link">
+          <div class="no-match-title">{{ $t('str_related_videos') }}</div>
+          <div class="loading-box" style="margin-top: -45px;" v-if="relatedLoading">
+            <cardLoad></cardLoad>
+          </div>
+          <div class="no-match-list">
+            <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
+          </div>
+        </div>
+      </template> -->
+    </main>
+    <main v-show="!searchShow">
       <!-- 有搜索结果 -->
-      <NavNew :title="$route.query.value + ' ' + '('+ pageTotal + ' results' + ')'" imgUrl=""></NavNew>
+      <NavNew :title="search + ' ' + '('+ pageTotal + ' results' + ')'" imgUrl=""></NavNew>
       <!-- <div class="search-result" id="searchName">{{ search }}</div> -->
       <div class="loading-box" style="margin-top: 42px;" v-if="spainnerLoading">
         <cardLoad></cardLoad>
@@ -34,13 +103,12 @@
           <div class="no-match">{{ $t('str_related_no') }}</div>
           <div class="no-match-link">
             <div class="no-match-title">{{ $t('str_related_videos') }}</div>
-            <div class="no-match-list" v-if="relatedList.length">
+            <div class="no-match-list">
               <div class="row">
                 <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in relatedList" :item="item" :key="item.vodId"></Cover>
               </div>
               <!-- <Cover v-for="item in relatedList" :item="item" :key="item.vodId"></Cover> -->
             </div>
-            <Empty v-else style="margin-top: 0; margin-bottom: 20px;"></Empty>
           </div>
         </template>
         <!-- <Empty v-else></Empty> -->
@@ -61,6 +129,7 @@ import Cover from '@/components/cover'
 import Empty from '@/components/empty'
 import NavNew from '~/components/nav/new'
 import CODES from "~/plugins/enums/codes"
+import { uniArray } from '@/utils/format.js'
 export default{
 data() {
   return {
@@ -93,7 +162,24 @@ computed: {
   },
 },
 created(){
-  this.getList()
+  if(!this.searchShow){
+    this.search = localStorage.getItem('search') || ''
+  }
+  // this.set_show(true)
+  if(process.client) {
+    if(localStorage.getItem('searchBool')){
+      this.getList()
+    }
+    this.searchBool = localStorage.getItem('searchBool')
+    console.log(this.searchBool, 'created')
+    // this.set_show(localStorage.getItem('searchBool'))
+    if(!this.searchBool){
+      this.set_show(true)
+    }
+  }
+  this.getHistoryList()
+  this.initKyesList()
+  console.log(1111)
 },
 components: {
   Cover,
@@ -121,6 +207,34 @@ head(){
     ]
   }
 },
+// activated(){
+//   const isRefresh = this.$route.params.refresh;
+//   if( isRefresh ){
+//     this.search = ''
+//     this.set_show(true)
+//     this.handleFocus();
+//   }
+// },
+beforeDestroy(){
+  console.log('beforeDestroy')
+  if(process.client) {
+    if(!['search___en', 'search___pt'].includes(this.$route.name)) {
+      localStorage.removeItem('search')
+      localStorage.removeItem('searchBool')
+    }
+  }
+}, 
+watch: {
+  searchShow(val){
+    if(val){
+      console.log(val, 'watch searchShow')
+      this.search = ''
+      this.$nextTick(() => {
+        this.handleFocus()
+      })
+    }
+  }
+},
 methods: {
   ...mapActions(['set_show']),
   // onLoad(){
@@ -130,6 +244,34 @@ methods: {
   //     this.getList();
   //   // }
   // },
+  handleFocus(){
+    this.$refs.searchRef && this.$refs.searchRef.focus()
+  },
+  getHistoryList(){
+    if(process.client) {
+      const list = JSON.parse(localStorage.getItem('historyList') || '[]')
+      this.historyList1 = list
+      this.historyList = list.length > 4 ? list.slice(0, 5) : list
+    } else {
+      this.historyList = []
+    }
+    console.log(this.historyList, 'getHistoryList')
+  },
+  handleClearCurrentHistory(){
+    if(this.historyList.length){
+      this.historyList.splice(0,5)
+      localStorage.setItem('historyList', JSON.stringify(this.historyList))
+      this.getHistoryList()
+    }
+  },
+  handleClearHistory(index){
+    if(this.historyList.length){
+      this.historyList.splice(index, 1)
+      localStorage.setItem('historyList', JSON.stringify(this.historyList))
+      this.getHistoryList()
+    }
+    console.log(index, 'index')
+  },
   async getRelatedList(){
     try {
       this.relatedLoading = true
@@ -168,7 +310,7 @@ methods: {
         page: this.pageInfo.page,
         size: this.pageInfo.size,
         // search: Base64.encode(this.search)
-        search:this.$route.query.value
+        search:this.search
       }
       console.log(params, 'params')
       console.log(this.pageInfo, 'pageInfo')
@@ -228,10 +370,7 @@ methods: {
       this.historyList.unshift(this.search)
       this.historyList = Array.from(new Set(this.historyList))
       // this.handleReset()
-      if(process.client){
-        localStorage.setItem('historyList', JSON.stringify(this.historyList))
-      }
-      // this.handleGoToResult(this.search)
+      this.handleGoToResult(this.search)
       this.$refs.searchRef.blur();//关闭手机软键盘
       // this.handleReset()
       // this.search = ''
