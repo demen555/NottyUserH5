@@ -56,6 +56,7 @@ let Api = {
     videoTagSuggest: "/api/v1/tag/video_tag_suggest", // 标签建议
     videoState: "/api/v1/vod/state", // 登录用户对当前视频的状态(赞、踩、收藏)
     videoHits: "/api/v1/vod/hits", // 播放数量
+    videoRouter: "/api/v1/vod/router",
   }
 };
 export default Api;
