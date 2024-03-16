@@ -31,8 +31,8 @@ function codeToast(code, app, store){
   }
 }
 
-export default function ({ app, $axios, store }, inject) {
-  console.log(app, 'app')
+export default function ({ app, $axios, store, route }, inject) {
+  console.log(app, 'app', route)
   $axios.onRequest((config) => {
     config.headers['Content-Type'] = 'application/json'
     const token =  store.state.user.accessToken;

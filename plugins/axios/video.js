@@ -220,7 +220,19 @@ export default ($axios) => ({
         })
     },
 
-    
+            /***
+     * @播放路由
+     * @参数
+     * @vodId  视频id
+     * */ 
+    requestVideoRouter(data){
+        return $axios({
+            url: Api.video.videoRouter,
+            method: "POST",
+            data: data
+        })
+    },
+        
 });
 
 

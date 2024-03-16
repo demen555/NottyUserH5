@@ -292,7 +292,7 @@ export default {
     Thumb
   },
   created(){
-    console.log( 'this.$route.name', this.$route.name )
+    console.log( 'this.$route.name', this.$route )
     // this.initTypeList()
     // this.initTagList()
     this.themeChecked = this.theme === 'dark'
