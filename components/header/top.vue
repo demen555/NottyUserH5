@@ -9,7 +9,7 @@
         </nuxt-link>
         <!-- <div class="d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
         <div class="search-btn-content">
-          <div class="d-none d-sm-block search-btn cursor-pointer">
+          <div class="d-none d-sm-block search-btn cursor-pointer" @click.stop>
             <div class="search-top-btn cursor-pointer">
               <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
               <input @focus="handleInputFocus" @keyup.enter.stop="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
@@ -21,17 +21,17 @@
             </div> -->
           </div>
           <main class="search-dialog" v-show="searchDialogShow">
-            <div @click.stop>
-              <div class="search d-sm-none" ref="search">
-                <div class="search-btn search-btn-page">
-                  <div>
-                    <input @focus="searchDialogShow = true" ref="searchRef" type="search"  :placeholder="$t('str_search_something')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
-                  </div>
-                  <img @click="handleFocus" class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
-                  <img v-show="search" @click="handleReset" class="header-common com-close svg-icon2" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+            <div class="search d-sm-none" ref="search"  @click.stop>
+              <div class="search-btn search-btn-page">
+                <div>
+                  <input @focus="searchDialogShow = true" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
                 </div>
-                <div class="search-cancel cursor-pointer" @click="handleGoHome">{{ $t('str_cancel') }}</div>
+                <img @click="handleFocus" class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
+                <img v-show="search" @click="handleReset" class="header-common com-close svg-icon2" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
               </div>
+              <div class="search-cancel cursor-pointer" @click="handleGoHome">{{ $t('str_cancel') }}</div>
+            </div>
+            <div @click.stop>
               <div class="search-card">
                 <div class="search-card-top">
                   <div class="search-title cursor-pointer">{{ $t('str_search_his_title') }}</div>
@@ -67,7 +67,7 @@
         </div>
         <div class="header-right">
           <div class="d-sm-none">
-            <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search cursor-pointer" alt="com_sousuo">
+            <img @click.stop="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search cursor-pointer" alt="com_sousuo">
           </div>
           <div class="home-nav-loc d-none d-sm-table">
             <img class="loc-img" @click="pcNavLocShow = !pcNavLocShow" src="~/static/images/home_top_yuyan.png" alt="home_top_yuyan">
@@ -343,7 +343,6 @@ export default {
     Thumb
   },
   created(){
-    this.search = ''
     console.log( 'this.$route.name', this.$route.name )
     // this.initTypeList()
     // this.initTagList()
@@ -365,7 +364,6 @@ export default {
   mounted(){
     this.set_categoryList( this.typeList)
     this.set_tagList( this.tagList)
-    this.handleFocus()
     this.getHistoryList()
     this.initKyesList()
     // 点击其他元素，卸载视频
@@ -412,11 +410,18 @@ export default {
   },
   watch: {
     search(val){
+      // if(val){
+      //   console.log(val, 'watch search')
+      //   this.searchDialogShow = true
+      // } else {
+      //   this.searchDialogShow = false
+      // }
+    },
+    searchDialogShow(val){
       if(val){
-        console.log(val, 'watch search')
-        this.searchDialogShow = true
-      } else {
-        this.searchDialogShow = false
+        // this.$nextTick(() => {
+        //   this.handleFocus()
+        // })
       }
     },
     '$route.query': {
@@ -424,7 +429,8 @@ export default {
       handler(newQuery, oldQuery) {
         // 当查询字符串参数改变时，这里会被触发
         if(newQuery) {
-          console.log(newQuery, '$route.query')
+          this.search = newQuery.value
+          console.log(newQuery, 'top $route.query')
           this.searchDialogShow = false
         }
       }
@@ -694,7 +700,7 @@ export default {
       
     },
     handleGoHome(){
-      this.$router.go(-1)
+      this.$router.push(this.localePath('index'))
       this.searchDialogShow = false
     }
   }
