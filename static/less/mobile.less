@@ -45,6 +45,25 @@
     .pxToVW(45, height) !important;
     .pxToVW(45, line-height) !important;
   }
+  .search-dialog{
+    width: 100vw !important;
+    top: 0px !important;
+  }
+  .search-input{
+    height: 32px !important;
+    text-indent: 2.5em !important;
+  }
+  .search-list-new{
+    line-height: 20px !important;
+  }
+  .search-card{
+    line-height: 40px !important;
+    margin-top: 12px !important;
+    margin-bottom: 25px !important;
+  }
+  .search-list{
+    line-height: 20px !important
+  }
   // 首页
   .home{
     .home-footer{
@@ -262,6 +281,10 @@
         }
       }
     }
+    .search-list a{
+      // height: 24px !important;
+      line-height: 24px !important;
+    }
     .pwdForgot{
       .pxToVW1920(1440, width);
       .pxToVW1920(816, height);
@@ -345,6 +368,12 @@
       min-height: 20px;
       transform: translate(-54px, -50%);
     }
+    .search-dialog{
+      .pxToVW1920(1000, width);
+      top: 64px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
     .search-btn{
       .pxToVW1920(1000, width);
       margin: 0 auto;
@@ -357,13 +386,13 @@
         width: 100%;
         margin: 0 auto;
         height: 48px;
-        border: 1PX solid rgba(246, 214, 88, 1);
+        // border: 1PX solid rgba(246, 214, 88, 1);
         border-radius: 24px;
         position: relative;
         background: rgba(255, 229, 0, 0.1);
         display: flex;
         align-items: center;
-        padding: 0 16px;
+        // padding: 0 16px;
         .search-top-text{
           color: rgba(253, 70, 246, 1);
           font-size: 16px;;

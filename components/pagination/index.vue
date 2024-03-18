@@ -3,34 +3,34 @@
     <ul class="pagination">
       <!-- {{ currentPage }} {{ routeName.split('__')[0] }} {{ $route.query.page }} -->
       <div :class="{ 'disabled': current == 1 }" class="cursor-pointer">
-        <nuxt-link :to="localePath({ name: currentName, query: { page: 1 }})"> 
+        <nuxt-link :to="localePath({ name: currentName, query: { page: 1, value }})"> 
           <span @click.stop="setCurrent(1)">
             <img :src="require('~/static/images/com_zuo_fysy.svg')"> 
           </span>
         </nuxt-link>
       </div>
       <div :class="{ 'disabled': current == 1 }" class="cursor-pointer">
-        <nuxt-link class="pagination__prev" :to="localePath({ name: currentName, query: { page: current - 1 }})">
+        <nuxt-link class="pagination__prev" :to="localePath({ name: currentName, query: { page: current - 1, value }})">
           <span>
             <img @click.stop="setCurrent(current - 1)" :src="require('~/static/images/com_jt_sx_zuo_fy.svg')">
           </span>
         </nuxt-link>
       </div>
       <div v-for="p in grouplist" :class="{ 'active': current == p.val }">
-        <nuxt-link class="cursor-pointer" :to="localePath({ name: currentName, query: { page: p.val }})">
+        <nuxt-link class="cursor-pointer" :to="localePath({ name: currentName, query: { page: p.val, value }})">
           <span @click.stop="setCurrent(p.val)">{{ p.text }}</span>
         </nuxt-link>
         <!-- <a @click="setCurrent(p.val)" class="cursor-pointer">{{ p.text }}</a> -->
       </div>
       <div :class="{ 'disabled': current == page }" class="cursor-pointer">
-        <nuxt-link class="pagination__next" :to="localePath({ name: currentName, query: { page: current + 1 }})">
+        <nuxt-link class="pagination__next" :to="localePath({ name: currentName, query: { page: current + 1, value }})">
           <span @click.stop="setCurrent(current + 1)">
             <img :current="current + 1"  :src="require('~/static/images/com_jt_sx_you_fy.svg')" alt="">
           </span>
         </nuxt-link>
       </div>
       <div :class="{ 'disabled': current == page }" class="cursor-pointer">
-        <nuxt-link :to="localePath({ name: currentName, query: { page: page }})">
+        <nuxt-link :to="localePath({ name: currentName, query: { page: page, value }})">
           <span @click.stop="setCurrent(page)">
             <img :src="require('~/static/images/com_you_fywy.svg')">
           </span>
@@ -76,6 +76,9 @@ export default {
   computed: {
     current() {
       return this.$route.query.page * 1 || 1
+    },
+    value() {
+      return this.$route.query.value || ''
     },
     currentName(){
       return this.routeName.split('__')[0]

@@ -3,72 +3,26 @@
     <Overlay v-model="overlayShow" v-if="overlayShow"></Overlay>
       <header class="home-header" id="home-header">
         <img @click="handleExpand('left')" :src="themeChecked? require('~/static/images/home_top_more_1.svg'): require('~/static/images/home_top_more.svg')" class="header-common cursor-pointer" alt="more">
-        <nuxt-link :to="localePath({ name: 'index'})"> 
+        <nuxt-link :to="localePath({ name: 'index', query: { page: 1 }})"> 
           <div class="pc-logo d-none d-sm-block cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
           <div class="d-block d-sm-none cursor-pointer" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div>
         </nuxt-link>
         <!-- <div class="d-sm-none" @click="handleClickNotty"  :class="themeChecked? 'logo-black': 'logo-white'"></div> -->
-        <div class="search-btn-content">
-          <div class="d-none d-sm-block search-btn cursor-pointer" @click.stop>
+        <nuxt-link :to="localePath('search')" class="search-btn-content">
+          <div class="d-none d-sm-block search-btn cursor-pointer" @click.stop="handleGoPage('search')">
+            <!-- <form>
+              <input ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
+            </form> -->
             <div class="search-top-btn cursor-pointer">
               <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
-              <input @focus="handleInputFocus" @keyup.enter.stop="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
-              <img v-show="search" @click="handleReset" class="header-common com-close svg-icon1" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
-            </div>
-            <!-- <div class="search-top-btn cursor-pointer">
-              <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
               <div class="search-top-text">{{ $t('str_search') }}</div>
-            </div> -->
+            </div>
           </div>
-          <main class="search-dialog" v-show="searchDialogShow">
-            <div class="search d-sm-none" ref="search"  @click.stop>
-              <div class="search-btn search-btn-page">
-                <div>
-                  <input @focus="searchDialogShow = true" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
-                </div>
-                <img @click="handleFocus" class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
-                <img v-show="search" @click="handleReset" class="header-common com-close svg-icon2" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
-              </div>
-              <div class="search-cancel cursor-pointer" @click="handleGoHome">{{ $t('str_cancel') }}</div>
-            </div>
-            <div @click.stop>
-              <div class="search-card">
-                <div class="search-card-top">
-                  <div class="search-title cursor-pointer">{{ $t('str_search_his_title') }}</div>
-                  <div class="search-clear cursor-pointer" @click="handleClearCurrentHistory"><img class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete"></div>
-                </div>
-                <!-- 移动版布局 -->
-                <div class="search-list-new d-sm-none">
-                  <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
-                    <div @click="handleGoToResult(item)" class="cursor-pointer">{{ item }}</div>
-                    <img @click="handleClearHistory(index)" class="header-common svg-icon cursor-pointer" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
-                  </div>
-                </div>
-                <!-- pc版布局 -->
-                <div class="d-none d-sm-block"> 
-                  <div class="search-list-new-pc">
-                    <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
-                      <div @click="handleGoToResult(item)" class="cursor-pointer">{{ item }}</div>
-                      <img style="margin-left: 13px; margin-right: 24px;" @click="handleClearHistory(index)" class="header-common2 svg-icon cursor-pointer" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="search-card">
-                <div class="search-title">{{ $t('str_rec_title') }}</div>
-                <div style="height: 16px;" class="d-none d-sm-block"></div>
-                <div class="search-list">
-                  <a class="cursor-pointer" @click="handleGoToResult(item)" v-for="(item, index) in keysList" :key="index">{{ item }}</a>
-                </div>
-                <div style="height: 60px;" class="d-none d-sm-block"></div>
-              </div>
-            </div>
-          </main>
-        </div>
+        </nuxt-link>
         <div class="header-right">
-          <div class="d-sm-none">
-            <img @click.stop="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search cursor-pointer" alt="com_sousuo">
-          </div>
+          <nuxt-link :to="localePath('search')" class="d-sm-none">
+            <img @click="handleGoPage('search')" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo.svg')" class="header-common header-search cursor-pointer" alt="com_sousuo">
+          </nuxt-link>
           <div class="home-nav-loc d-none d-sm-table">
             <img class="loc-img" @click="pcNavLocShow = !pcNavLocShow" src="~/static/images/home_top_yuyan.png" alt="home_top_yuyan">
             <div class="nav-loc-pop" v-show="pcNavLocShow">
@@ -96,7 +50,7 @@
     >
       <div id="drawer" class="nav-menu menu-right">
         <div class="menu-header">
-          <nuxt-link :to="localePath({ name: 'index'})"> 
+          <nuxt-link :to="localePath({ name: 'index', query: { page: 1 }})"> 
             <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
           </nuxt-link>
          <img class="close-pop" @click="showPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
@@ -148,7 +102,7 @@
         <div class="menu-flex">
           <div class="menu-header">
           <img class="close-pop" @click="showRightPop = false" src="~/static/images/home_top_guanbi_orange.svg">  
-          <nuxt-link :to="localePath({ name: 'index'})"> 
+          <nuxt-link :to="localePath({ name: 'index', query: { page: 1 }})"> 
             <div class="logo-pop" @click="handleClickNotty" :class="themeChecked? 'logo-black': 'logo-white'"></div>
           </nuxt-link>
           </div>
@@ -327,11 +281,6 @@ export default {
         size: 10
       },
       pcNavLocShow: false,
-      search: '',
-      keysList: [],
-      historyList: [],
-      historyList1: [],
-      searchDialogShow: false
     }
   },
 
@@ -343,7 +292,7 @@ export default {
     Thumb
   },
   created(){
-    console.log( 'this.$route.name', this.$route )
+    console.log( 'this.$route.name', this.$route.name )
     // this.initTypeList()
     // this.initTagList()
     this.themeChecked = this.theme === 'dark'
@@ -364,8 +313,8 @@ export default {
   mounted(){
     this.set_categoryList( this.typeList)
     this.set_tagList( this.tagList)
-    this.getHistoryList()
-    this.initKyesList()
+    this.handleFocus()
+
     // 点击其他元素，卸载视频
     document.addEventListener(
         "click",
@@ -388,14 +337,12 @@ export default {
         },
         true
     );
-    document.addEventListener("click", this.bodyCloseHide);
+
     console.log( this.tagList, this.typeList, "typeList&tagList" )
-  },
-  beforeDestroy() {
-    document.removeEventListener("click", this.bodyCloseHide)
   },
   computed: {
     ...mapGetters(['userinfo', 'theme', 'isLogin', 'tagId', 'typeId','accessToken']),
+
     locationText() {
       const obj = this.locationList.find(item => this.location === item.code) || {}
       return this.$t(obj.country)
@@ -403,50 +350,11 @@ export default {
     // 当前得路由
     routeName(){
       return this.$route.name
-    },
-    sliceHistoryList(){
-      return this.historyList.slice(0,5)
-    },
-  },
-  watch: {
-    search(val){
-      // if(val){
-      //   console.log(val, 'watch search')
-      //   this.searchDialogShow = true
-      // } else {
-      //   this.searchDialogShow = false
-      // }
-    },
-    searchDialogShow(val){
-      if(val){
-        // this.$nextTick(() => {
-        //   this.handleFocus()
-        // })
-      }
-    },
-    '$route.query': {
-      immediate: true,
-      handler(newQuery, oldQuery) {
-        // 当查询字符串参数改变时，这里会被触发
-        if(newQuery) {
-          this.search = newQuery.value
-          console.log(newQuery, 'top $route.query')
-          this.searchDialogShow = false
-        }
-      }
     }
   },
   methods: {
     formatTime1 ,
     ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken', 'set_tagList', 'set_categoryList']),
-    handleInputFocus(){
-      setTimeout(() => {
-        this.searchDialogShow = true
-      }, 500)
-    },
-    bodyCloseHide(){
-      this.searchDialogShow = false
-    },
     handleClick(id){
       this.set_typeid(id)
       console.log(id, 'typeid')
@@ -604,8 +512,7 @@ export default {
       if(val === 'line') {
         this.$refs.dialogLineRef.onLineShow()
       } else if (val === 'search') {
-        // this.set_show(true)
-        this.searchDialogShow = true
+        this.set_show(true)
       } else {
         this.$router.push(this.localePath(val))
       }
@@ -622,87 +529,8 @@ export default {
       aLink.click();
       document.body.removeChild(aLink); // 下载完成移除元素
     },
-    handleClearCurrentHistory(){
-      if(this.historyList.length){
-        this.historyList.splice(0,5)
-        localStorage.setItem('historyList', JSON.stringify(this.historyList))
-        this.getHistoryList()
-      }
-    },
-    handleClearHistory(index){
-      if(this.historyList.length){
-        this.historyList.splice(index, 1)
-        localStorage.setItem('historyList', JSON.stringify(this.historyList))
-        this.getHistoryList()
-      }
-      console.log(index, 'index')
-    },
-    getHistoryList(){
-      if(process.client) {
-        const list = JSON.parse(localStorage.getItem('historyList') || '[]')
-        this.historyList1 = list
-        this.historyList = list.length > 4 ? list.slice(0, 5) : list
-      } else {
-        this.historyList = []
-      }
-      console.log(this.historyList, 'getHistoryList')
-    },
-    handleSearch(){
-      if(this.search){
-        this.historyList.unshift(this.search)
-        this.historyList = Array.from(new Set(this.historyList))
-        if(process.client){
-          localStorage.setItem('historyList', JSON.stringify(this.historyList))
-        }
-        // this.handleReset()
-        // this.handleGoToResult(this.search)
-        this.$refs.searchRef.blur();//关闭手机软键盘
-        this.searchDialogShow = false
-        // this.handleReset()
-        this.$router.push(this.localePath({
-          name: 'search',
-          query: { value: this.search }
-        }))
-      }
-    },
-    handleGoToResult(search){
-      console.log(search, 'search')
-      gtag('event', 'view_search_results', {
-          keyword: search,
-      });
-      this.dataList = []
-      this.search = search
-      this.historyList.unshift(this.search)
-      this.historyList = Array.from(new Set(this.historyList))
-      if(process.client){
-        localStorage.setItem('historyList', JSON.stringify(this.historyList))
-      }
-      this.searchDialogShow = false
-      this.$router.push(this.localePath({
-        name: 'search',
-        query: { value: this.search }
-      }))
-    },
-    async initKyesList(){
-      try {
-        const params = { size: 20 }
-        const res = await this.$searchApi.postSearchKeys(JSON.stringify(params))
-        console.log(res, 'initKyesList')
-        if(res.code === 100){
-          this.keysList = res.data
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    },
-    handleReset(){
-      this.search = ''
-      
-    },
-    handleGoHome(){
-      this.$router.push(this.localePath('index'))
-      this.searchDialogShow = false
-    }
+
+
   }
 }
 </script>
@@ -750,10 +578,6 @@ header{
     height: 24px;
     border-radius: 24px;
   }
-}
-.header-common2{
-  width: 14px;
-  height: 14px;
 }
 .header-logo{
   width: 108px;
@@ -1120,7 +944,7 @@ header{
 }
 
 .search-input{
-  width: 100%;
+  width: 75vw;
   margin: 0 auto;
   background-color: var(--bg-color3, rgba(246, 214, 88, 0.1));
   border-radius: 24px;
@@ -1142,130 +966,10 @@ input::placeholder{
 .search-icon{
   position: absolute;
   left: 12px;
-  top: 18px;
+  top: 40px;
   width: 16px;
   height: 16px;
   cursor: pointer;
 }
-.search-dialog{
-  width: 1000px;
-  // height: 300px;
-  background-color: #0C1015;
-  position: absolute;
-  left: 0;
-  top: 80px;
-  right: 0;
-}
-// search
-.search-card{
-  width: 90%;
-  margin: 0 auto;
-  line-height: 40px;
-  // margin-top: 16px;
-}
-.search-card-top{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  // height: 40px;
-  padding-top: 10px;
-  .search-clear {
-    color: var(--text-color2,  rgba(255, 255, 255, 0.70));
-    font-size: 12px;
-  }
-}
-.search-title{
-  color: var(--text-color1, #FFFFFF);
-  font-size: 16px;
-  font-weight: bold;
-  height: 40px;
-}
-.search-list-new{
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
-  font-size: 14px;
-  .search-list-li{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 8px;
-  }
-}
-.search-list-new-pc{
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
-  font-size: 14px;
-  display: flex;
-  // height: 24px;
-  // line-height: 24px;
-  // margin-top: 10px;
-  margin-bottom: 20px;
-  .search-list-li{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 8px;
-    height: 20px;
-  }
-}
-.search-list{
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
-  font-size: 14px;
-  display: flex;
-  flex-wrap: wrap;
-}
-.search-list a{
-  margin-top: 8px;
-  padding: 3.5px 8px;
-  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
-  margin-right: 8px;
-  font-size: 14px;
-  border-radius: 4px;
-  color: var(--text-color2,  rgba(255, 255, 255, 0.70));
-}
-.search{
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  height: 32px;
-  align-items: center;
-  margin-top: 8px;
-  z-index: 1002;
-}
-.search-img{
-  width: 16px;
-  height: 16px;
-  display: flex;
-}
-.search-btn{
-  width: 90%;
-  // width: 100%;
-  font-size: 14px;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.search-top-icon{
-  position: absolute;
-  left: 10px;
-  top: 8px;
-}
-.svg-icon1{
-  position: absolute;
-  right: 10px;
-  top: 8px;
-}
-.svg-icon2{
-  position: absolute;
-  right: 45px;
-  top: 14px;
-}
-.search-input{
-  width: 70vw;
-  background-color: var(--bg-color3, rgba(246, 214, 88, 0.1));
-  border-radius: 24px;
-  text-indent: 3.5em;
-  color: var(--bg-secondry,  #FD46F6);
-  height: 48px;
-  border: 1PX solid var(--bg-primary, #F6D658);
-}
+
 </style>
