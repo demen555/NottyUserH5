@@ -16,6 +16,7 @@
     <div style="height: 40px;" class="d-none d-sm-block"></div>
     <div style="height: 60px;"></div>
     <div class="row">
+      <div v-html="seoInfo.content"></div> 
       <fBottom></fBottom>
     </div>
   </div>
@@ -49,6 +50,13 @@ data() {
       keywords: "",
       title: ""
     }
+  }
+},
+async asyncData({ $homeApi }) { 
+  const res = await $homeApi.postSeo('category')
+  console.log(res.data, 'seo')
+  return { 
+    seoInfo: res.data || {},
   }
 },
 head(){

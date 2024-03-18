@@ -26,9 +26,10 @@
         <div class="pagination">
           <v-pagination :total="pageInfo.total" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
         </div>
-        <fBottom></fBottom>
-        <h2 class="footer-title paddingTop88" style="display: none;"> {{ categoryMetaData.h2}} </h2>
+       
+        <h2 class="footer-title paddingTop88" > {{ categoryMetaData.h2}} </h2>
         <p class="footer-description" style="display: none;" v-html="categoryMetaData.footer_desc"> </p>
+        <fBottom></fBottom>
       </div>
     </template>
     <Empty v-else></Empty>   

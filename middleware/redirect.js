@@ -674,22 +674,47 @@ var tagsUrl = {
 //   // 从 /old-page 重定向到 /new-page，状态码为 301
 //   from: '/old-page',
 //   to: '/new-page',
-//   statusCode: 301
+//   statusCode: 301 
 // }
 
-export default function ({ route, redirect, app }) {
+export default async function ({ route, redirect, app, $videoApi }) {
   const currentLocale = app.i18n.locale
-  const { name, params } = route;
-  console.log( 'route', route )
-  if( name.indexOf("tag-name") != -1 && tagsUrl[params.name] ){
+  const { name, params, path } = route;
+  console.log( 'route', route, $videoApi  )
+
+  // 视频详情页面 第1种情况 视频详情页面老路径 例如： https://www.nottyhub.com/video/15379
+  if( name && name.indexOf("video-id") != -1 && Number(params.id) ){
+    await $videoApi.requestVideoRouter({ vodId: params.id }).then(res => {
+        if( res.code == 100 ){
+        redirect(301, res.data.urlSlug)
+        }
+    });
+  }
+
+  // 视频详情页面 第2种情况 视频详情页面重复路径 例如： https://nottyhub.com/video/nottyhub.com/video/48301
+  if( (path.match(/video/g) || []).length > 1 ){
+    let match = path.match(/\/(\d+)$/);
+    let number = match ? match[1] : null;
+    await $videoApi.requestVideoRouter({ vodId: number }).then(res => {
+        if( res.code == 100 ){
+        redirect(301, res.data.urlSlug)
+        }
+    });
+  } 
+
+
+  // tags 页面
+  if( name && name.indexOf("tag-name") != -1 && tagsUrl[params.name] ){
     if( currentLocale != "en" ){
       redirect(301, `/${currentLocale}/tag/${tagsUrl[params.name]}`)
     }else{
       redirect(301, `/tag/${tagsUrl[params.name]}`)
     }
   }
+
   // 如果路由不匹配任何页面，重定向到当前语言的首页
   if (route.matched.length == 0) {
-    redirect(`/`)
+    redirect(301, `/`)
   }
+
 }
