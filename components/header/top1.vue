@@ -12,7 +12,7 @@
           <div class="d-none d-sm-block search-btn cursor-pointer">
             <div class="search-top-btn cursor-pointer">
               <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
-              <input @focus="handleInputFocus" @keyup.enter.stop="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
+              <input @focus="searchDialogShow = true" @keyup.enter.stop="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
               <img v-show="search" @click="handleReset" class="header-common com-close svg-icon1" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
             </div>
             <!-- <div class="search-top-btn cursor-pointer">
@@ -20,50 +20,50 @@
               <div class="search-top-text">{{ $t('str_search') }}</div>
             </div> -->
           </div>
-          <main class="search-dialog" v-show="searchDialogShow">
-            <div @click.stop>
-              <div class="search d-sm-none" ref="search">
-                <div class="search-btn search-btn-page">
-                  <div>
-                    <input @focus="searchDialogShow = true" ref="searchRef" type="search"  :placeholder="$t('str_search_something')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
-                  </div>
-                  <img @click="handleFocus" class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
-                  <img v-show="search" @click="handleReset" class="header-common com-close svg-icon2" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+          <van-popup round lock-scroll :overlay="false" close-on-click-overlay lazy-render v-model="searchDialogShow" position="top" :style="{ height: '100%' }">
+          <!-- <main class="search-dialog" v-show="searchDialogShow"> -->
+            <div class="search d-sm-none" ref="search">
+              <div class="search-btn search-btn-page">
+                <div>
+                  <input @focus="searchDialogShow = true" ref="searchRef" type="search"  :placeholder="$t('str_search_something')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
                 </div>
-                <div class="search-cancel cursor-pointer" @click="handleGoHome">{{ $t('str_cancel') }}</div>
+                <img @click="handleFocus" class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
+                <img v-show="search" @click="handleReset" class="header-common com-close svg-icon2" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
               </div>
-              <div class="search-card">
-                <div class="search-card-top">
-                  <div class="search-title cursor-pointer">{{ $t('str_search_his_title') }}</div>
-                  <div class="search-clear cursor-pointer" @click="handleClearCurrentHistory"><img class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete"></div>
+              <div class="search-cancel cursor-pointer" @click="handleGoHome">{{ $t('str_cancel') }}</div>
+            </div>
+            <div class="search-card">
+              <div class="search-card-top">
+                <div class="search-title cursor-pointer">{{ $t('str_search_his_title') }}</div>
+                <div class="search-clear cursor-pointer" @click="handleClearCurrentHistory"><img class="header-common" :src="require('~/static/images/com_delete.svg')" alt="com_delete"></div>
+              </div>
+              <!-- 移动版布局 -->
+              <div class="search-list-new d-sm-none">
+                <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
+                  <div @click="handleGoToResult(item)" class="cursor-pointer">{{ item }}</div>
+                  <img @click="handleClearHistory(index)" class="header-common svg-icon cursor-pointer" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
                 </div>
-                <!-- 移动版布局 -->
-                <div class="search-list-new d-sm-none">
+              </div>
+              <!-- pc版布局 -->
+              <div class="d-none d-sm-block"> 
+                <div class="search-list-new-pc">
                   <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
                     <div @click="handleGoToResult(item)" class="cursor-pointer">{{ item }}</div>
-                    <img @click="handleClearHistory(index)" class="header-common svg-icon cursor-pointer" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
+                    <img style="margin-left: 13px; margin-right: 24px;" @click="handleClearHistory(index)" class="header-common2 svg-icon cursor-pointer" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
                   </div>
                 </div>
-                <!-- pc版布局 -->
-                <div class="d-none d-sm-block"> 
-                  <div class="search-list-new-pc">
-                    <div class="search-list-li" v-for="(item,index) in sliceHistoryList" :key="item">
-                      <div @click="handleGoToResult(item)" class="cursor-pointer">{{ item }}</div>
-                      <img style="margin-left: 13px; margin-right: 24px;" @click="handleClearHistory(index)" class="header-common2 svg-icon cursor-pointer" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="search-card">
-                <div class="search-title">{{ $t('str_rec_title') }}</div>
-                <div style="height: 16px;" class="d-none d-sm-block"></div>
-                <div class="search-list">
-                  <a class="cursor-pointer" @click="handleGoToResult(item)" v-for="(item, index) in keysList" :key="index">{{ item }}</a>
-                </div>
-                <div style="height: 60px;" class="d-none d-sm-block"></div>
               </div>
             </div>
-          </main>
+            <div class="search-card">
+              <div class="search-title">{{ $t('str_rec_title') }}</div>
+              <div style="height: 16px;" class="d-none d-sm-block"></div>
+              <div class="search-list">
+                <a class="cursor-pointer" @click="handleGoToResult(item)" v-for="(item, index) in keysList" :key="index">{{ item }}</a>
+              </div>
+              <div style="height: 60px;" class="d-none d-sm-block"></div>
+            </div>
+          <!-- </main> -->
+          </van-popup>
         </div>
         <div class="header-right">
           <div class="d-sm-none">
@@ -390,11 +390,8 @@ export default {
         },
         true
     );
-    document.addEventListener("click", this.bodyCloseHide);
+
     console.log( this.tagList, this.typeList, "typeList&tagList" )
-  },
-  beforeDestroy() {
-    document.removeEventListener("click", this.bodyCloseHide)
   },
   computed: {
     ...mapGetters(['userinfo', 'theme', 'isLogin', 'tagId', 'typeId','accessToken']),
@@ -433,14 +430,6 @@ export default {
   methods: {
     formatTime1 ,
     ...mapActions(['set_userinfo', 'set_detail', 'update_theme', 'set_show', 'set_tagid', 'set_typeid','clearAccessToken', 'set_tagList', 'set_categoryList']),
-    handleInputFocus(){
-      setTimeout(() => {
-        this.searchDialogShow = true
-      }, 500)
-    },
-    bodyCloseHide(){
-      this.searchDialogShow = false
-    },
     handleClick(id){
       this.set_typeid(id)
       console.log(id, 'typeid')
@@ -1261,5 +1250,14 @@ input::placeholder{
   color: var(--bg-secondry,  #FD46F6);
   height: 48px;
   border: 1PX solid var(--bg-primary, #F6D658);
+}
+.search-btn-content{
+  /deep/ .van-popup--top{
+    top: 70px;
+    z-index: 999 !important;
+  }
+  /deep/ .van-popup{
+    min-height: 400px;
+  }
 }
 </style>

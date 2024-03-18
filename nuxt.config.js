@@ -97,6 +97,7 @@ module.exports = {
     '~/plugins/utils.js',
     '~/plugins/vant.js',
     "~/plugins/axios/index.js",
+    { src: './directive/out', ssr: false }, // added
     { src: '~/plugins/store-cache', ssr: false },
   ],
   loading: {
