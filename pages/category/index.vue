@@ -43,7 +43,7 @@ data() {
     typeList: [],
     pageInfo: {
       page: 1,
-      size: 20
+      size: 300
     },
     categoryMetaData: {
       description: "",
