@@ -133,13 +133,6 @@ head(){
 },
 methods: {
   ...mapActions(['set_show']),
-  // onLoad(){
-  //   console.log(this.loading, this.pageInfo, 'onLoad')
-  //   // if(!this.loading){
-  //     this.pageInfo.page += 1
-  //     this.getList();
-  //   // }
-  // },
   async getRelatedList(){
     try {
       this.relatedLoading = true
@@ -171,6 +164,7 @@ methods: {
     }
   },
   async getList(isRefresh){
+    this.dataList = []
     try {
       isRefresh === 'first' && (this.spainnerLoading = true)
       this.loading = true
@@ -228,11 +222,6 @@ methods: {
       this.loading = false
     }
   },
-  // onRefresh() {
-  //   console.log('onRefresh')
-  //   this.pageInfo.page = 1
-  //   this.getList(true);
-  // },
   handleSearch(){
     if(this.search){
       this.historyList.unshift(this.search)
@@ -283,7 +272,6 @@ methods: {
       localStorage.setItem('searchBool', true)
     }
     this.set_show(false)
-    this.getList('first')
   },
   handleGoHome(){
     this.$router.go('-1')
