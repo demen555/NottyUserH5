@@ -1,16 +1,18 @@
 <template>
-    <div :class="['video-m3u8', { 'video-m3u8-img': isCompleted }]">
+    <div :class="['video-m3u8', { 'video-m3u8-img': isCompleted }]" :shortsMute="shortsMute">
         <van-progress class="video-progress" v-show="!isCompleted" :percentage="progress" />
-        <img class="img" v-if="vodPic" :src="vodPic" alt="part1">
-        <img class="img" v-else src="~/static/images/cover1.svg" alt="part1">
-        <video @click="videobtn" :id="`hls-video-${vodId}`" x5-video-player-type='h5' playsinline  muted="muted" class="video-js vjs-default-skin">
+        <!-- <img class="img" v-if="vodPic" :src="vodPic" alt="part1">
+        <img class="img" v-else src="~/static/images/cover1.svg" alt="part1"> -->
+        <video :id="`hls-video-${vodId}`" x5-video-player-type='h5' playsinline  :muted="shortsMute" class="video-js vjs-default-skin">
             <source :src="vodPlayUrl()" type="application/x-mpegURL">
         </video>
+        <div class="replay" v-show="showReplayplayer" @click="checkPlayStatus"></div>
+        <div class="shorts_mute" v-show="!shortsMute" @click.stop="unmuteVideo"><img src="~/static/images/shorts_mute.svg" alt="shorts_mute"></div>
     </div>
 </template>
 <script>
 
-
+import { mapGetters } from "vuex"
 export default {
     name: 'videoM3u8',
     props: {
@@ -39,7 +41,12 @@ export default {
             progress: 0, // 初始值代表再加载
             isCompleted: false,
             isOpen: false,
+            showReplayplayer: false,
         }
+    },
+
+    computed:{
+        ...mapGetters(["shortsMute"])
     },
 
     mounted() {
@@ -50,7 +57,7 @@ export default {
             preload: 'auto',
             autoplay: true,
         });
-        console.log( this.player )
+        console.log( 'this.player', this.player )
         // 视频禁用鼠标右键
         this.player && this.player.on('contextmenu', (e) => {
             e.preventDefault();
@@ -63,7 +70,13 @@ export default {
 
         // 加载完成等待
         this.player && this.player.on('click', (e) => {
-            console.log("点击")
+            console.log("click点击")
+            this.checkPlayStatus()
+        });
+
+        this.player && this.player.on('touchstart', (e) => {
+            console.log("touchstart点击")
+            this.checkPlayStatus()
         });
 
         // 开始播放
@@ -73,20 +86,11 @@ export default {
             this.isCompleted = true;
         });
 
-        // // 播放完成事件
-        // this.player && this.player.on('ended', (e) => {
-        //     this.$store.commit("SET_VODID", "")
-        // });
+
 
         // 加载异常
         this.player && this.player.on('error', (e) => {
             console.log('加载异常')
-            // 如果是开始播放之后捕获异常直接跳出播放器
-            if( !this.isOpen ){
-                // this.$store.commit("SET_VODID", "")
-                // this.player.load(); // 捕获异常重新载入
-            }
-            
         });
 
         // 网络异常
@@ -130,11 +134,7 @@ export default {
                 this.$store.commit("SET_VODID", "")
             }
         },
-        videobtn(){
-            console.log("DIAN")
-        },
 
- 
         animateProgress(target, duration) {
             return new Promise((resolve, reject) => {
                 let start = this.progress;
@@ -158,8 +158,42 @@ export default {
                 const startTime = Date.now();
                 requestAnimationFrame(doAnimation);
             });
-        }
+        },
 
+        // 播放视频
+        playVideo() {
+            this.player && this.player.play();
+        },
+
+        // 暂停视频
+        pauseVideo() {
+            this.player && this.player.pause();
+        },
+
+        // 开启声音
+        unmuteVideo() {
+            this.$store.commit("UPDATE_SHORTMUTE", false)
+            this.player && this.player.muted(false);
+        },
+
+        // 关闭声音
+        mutedVideo(){
+            this.player && this.player.muted(true);
+        },
+
+        // 获取播放状态
+        checkPlayStatus() {
+            var isPaused = this.player && this.player.paused();
+            if (isPaused) {
+                console.log("视频当前处于暂停状态");
+                this.playVideo();
+                this.showReplayplayer = false;
+            } else {
+                console.log("视频正在播放");
+                this.pauseVideo();
+                this.showReplayplayer = true;
+            }
+        }
 
     },
     beforeDestroy() {
@@ -172,9 +206,34 @@ export default {
 </script>
 <style lang="less" scoped>
 .video-m3u8{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
     height: 100%;
-    position: relative;
+    cursor: pointer;
+    .replay{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 64px;
+        height: 64px;
+        background: url("~~/static/images/bfq_play.png");
+        background-size: 100% 100%;
+        z-index: 99;
+    }
+    .shorts_mute{
+        position: absolute;
+        top: 80px;
+        left: 16px;
+        img{
+            width: 24px;
+            height: 24px;
+        }
+    }
     .img{
         width: 100%;
         height: 100%;

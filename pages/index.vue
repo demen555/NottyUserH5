@@ -14,7 +14,7 @@
           </nuxt-link>
           <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
       </div>
-
+      <!-- 短片列表 -->
       <div class="shorts-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
         <div class="list-title">
           <div class="title-left">
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="list-content" ref="shortsList">
-          <nuxt-link class="list-item" v-for="item in storiesList" :key="item.vodId" draggable="false" :to="localePath({
+          <nuxt-link class="list-item" @click.prevent v-for="item in storiesList" :key="item.vodId" draggable="false" :to="localePath({
               name: 'shorts-id',
               params: { id: item.vodId }
           })">
