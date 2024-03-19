@@ -1,39 +1,16 @@
 <template>
-  <div class="tag tag-page">
+  <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <nav-new :title="tags[tagIndex] + ' ' + '('+ total + ' results' + ')'" :imgUrl="require('~/static/images/my_gn_biaoqian_1.svg')"></nav-new>
-    <div class="paddingTop88"></div>
-    <div style="height: 66px;" class="d-none d-sm-block"></div>
-    <div class="tag-box" >
-      <div v-for="(item, index) in tags" :key="index"><span class="tag-name" :class="tagIndex === index? 'tag-color': ''" @click="handleClickTagName(item, index)">{{ item }}</span><span v-if="tags.length -1 !== index" class="tag-line">-</span></div>
+    <nav-new :title="$t('str_footer_nav9')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
+    <div class="police">
+      <div class="police-title">{{ $t('str_footer_faq1') }}</div>
+      <div class="police-title">{{ $t('str_footer_faq2') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_faq3') }}</div>
+      <div class="police-title">{{ $t('str_footer_faq4') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_faq5') }}</div>
+      <div class="police-title">{{ $t('str_footer_csam6') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_faq7') }}</div>
     </div>
-    <div class="loading-box" v-if="spinnerLoading">
-      <tagLoad></tagLoad>
-    </div>
-    <!-- <van-loading size="48px" type="spinner" v-if="loading" /> -->
-    <div class="container-fluid-sp" v-if="tagList.length">
-      <div class="thumb row">
-        <nuxt-link :to="localePath({
-          name: 'tag-name',
-          params:{
-            id: tag.id,
-            name: tag.urlSlug,
-            refresh: true,
-          },
-        })" 
-      
-        class="tag-item  col-sm-6 col-md-4 col-lg-3 col-xl-2" 
-        v-for="(tag, index) in tagList" 
-        :key="index">
-          <span class="item-name"  @click.stop="handleClickTag(tag)" >{{ tag.name }}</span>
-        </nuxt-link>
-      </div>
-    </div>
-    <empty v-else></empty>
-    <div style="height: 40px;" class="d-none d-sm-block"></div>
-    <div style="height: 60px;"></div>
-    <div v-html="seoInfo.content"></div> 
-    <fBottom></fBottom>
   </div>
 </template>
 <script>
@@ -42,12 +19,12 @@ import NavNew from '@/components/nav/new'
 import Thumb from '@/components/thumb'
 import empty from '@/components/empty'
 import tagLoad from "@/components/skeleton/tagLoad.vue"
-import fBottom from '~/components/footer/bottom.vue'
 import commonMinxin from '~/plugins/mixins/common'
 import CODES from "~/plugins/enums/codes"
 
 
 export default{
+  name: 'faq',
   mixins: [commonMinxin],
   data() {
     return {
@@ -57,24 +34,14 @@ export default{
       loading: false,
       finished: false,
       pageInfo: {
-        // page: 1,
+        page: 1,
         size: 50,
-        urlSlug: 'tag'
+        letter: ''
       },
       total: 0,
       tagIndex: 0,
       tags: [this.$t('str_menu_tag_all'), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     }
-  },
-  components: {
-    NavNew,
-    Thumb,
-    empty,
-    tagLoad,
-    fBottom
-  },
-  created(){
-    this.getList('first')
   },
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -110,11 +77,20 @@ export default{
     }
   },
   async asyncData({ $homeApi }) { 
-    const res = await $homeApi.postSeo('tag')
+    const res = await $homeApi.postSeo('faq')
     console.log(res.data, 'seo')
     return { 
       seoInfo: res.data || {},
     }
+  },
+  components: {
+    NavNew,
+    Thumb,
+    empty,
+    tagLoad
+  },
+  created(){
+    this.initTagList('first')
   },
   methods: {
     ...mapActions(['set_tagid']),
@@ -125,8 +101,14 @@ export default{
       });
       console.log(item)
       this.set_tagid(item.id)
-
-      this.$router.push(this);
+      this.$router.push({
+        name: 'category-id-name',
+        params:{
+          id: item.id,
+          name: item.name,
+          refresh: true,
+        },
+      });
     },
     handleClickTagName(item, index){
       this.tagIndex = index
@@ -139,20 +121,31 @@ export default{
       if(this.clickShow) return this.loading = false
       console.log(this.pageInfo, 'onLoad')
       this.pageInfo.page += 1
-      this.getList(); 
+      this.initTagList(); 
     },
-    async getList(isRefresh = false){
+    async initTagList(isRefresh = false){
       try {
         isRefresh === 'first'  && (this.spinnerLoading = true)
         !isRefresh  && (this.loading = true)
         const res = await this.$homeApi.postTagListPage(this.pageInfo)
         if(res.code === CODES.SUCCESS){
-          this.tagList = res.data.data || []
-          this.total = res.data.data.length
+          this.total = res.data.meta.pagination.total
+          if(isRefresh){
+            this.tagList = res.data.data || []
+            this.refreshing = false
+          } else {
+            this.tagList = [ ...this.tagList, ...res.data.data]
+            this.loading = false
+          }
+          if(res.data.data.length === 0){
+            this.finished = true
+          } else {
+            this.finished = false
+          }
         }
 
       } catch (error) {
-        console.error(error)
+
       } finally {
         this.spinnerLoading = false
         this.loading = false
@@ -160,8 +153,8 @@ export default{
       }
     },
     onRefresh() {
-      // this.pageInfo.page = 1
-      this.getList(true)
+      this.pageInfo.page = 1
+      this.initTagList(true)
     }
   }
 }
@@ -170,13 +163,12 @@ export default{
 .thumb{
   display: flex;
   flex-wrap: wrap;
-  // justify-content: space-between;
-  margin: 0 4px;
+  justify-content: space-between;
+  margin: 0 12px;
 }
-
 .tag-box{
   margin: 10px 12px;
-  // height: 44px;
+  height: 44px;
   border-radius: 4px;
   background-color: var(--bg-color3, rgba(255, 255, 255, 0.10));
   border: 1px solid var(--bg-color3, rgba(255, 255, 255, 0.10));
@@ -199,24 +191,19 @@ export default{
   }
 }
 .tag-item{
+  width: 172px;
   height: 32px;
+  border-radius: 4px;
+  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
-}
-.paddingTop88{
-  padding-top: 80px;
-}  
-.item-name{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 12px;
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
-  background-color: var(--bg-color2, rgba(255, 255, 255, 0.06));
-  border-radius: 4px;
+  text-align: center;
+}
+:deep(.van-nav-bar__left){
+  font-size: 18px;
 }
 </style>
