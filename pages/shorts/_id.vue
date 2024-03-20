@@ -5,7 +5,14 @@
     <div class="shorts-content" @wheel="handleScrollDebounced">
       <van-swipe ref="pornShorts" class="shorts-swipe" vertical :loop="false" :show-indicators="false" @change="changeswipe">
         <van-swipe-item v-for="(item,i) in dataList" :key="item.vodId">
-          <videoM3u8 :videoSrc="item.vodPlayUrl" :vodPic="item.vodPic" :vodId="item.vodId" v-if="swipeIndex == i"></videoM3u8>
+          <videoM3u8 
+            :videoSrc="item.vodPlayUrl" 
+            :vodPic="item.vodPic" 
+            :vodId="item.vodId" 
+            :shortsMute="shortsMute" 
+            @unmuteVideo="unmuteVideo" 
+            v-if="swipeIndex == i">
+          </videoM3u8>
           <div class="shorts-controls">
             <!-- 点赞 -->
             <div class="controls-btn controls-up"> 
@@ -75,6 +82,7 @@ export default {
         page: 1,  
         size: 10
       },
+      shortsMute: true
     }
   },
 
@@ -90,6 +98,11 @@ export default {
   },
 
   methods:{
+
+    unmuteVideo(){
+      this.shortsMute = false;
+    },
+
     handleScrollDebounced: debounce(function(event){
       const swipeInstance = this.$refs.pornShorts;
       const delta = Math.sign(event.deltaY);
@@ -104,15 +117,12 @@ export default {
     changeswipe(i){
       this.swipeIndex = i;
       const item  = this.dataList[i];
-      
-
-
+      this.shortsMute = false;
       const currentVideo = document.getElementById('hls-video-' + item.vodId);
       console.log( "切换路由：" ,  item.vodId, currentVideo);
       if (currentVideo) {
         currentVideo.muted = false;
       }
-
       const url = this.localePath({
         name: 'shorts-id',
         params: {

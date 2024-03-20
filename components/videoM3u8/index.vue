@@ -1,18 +1,20 @@
 <template>
-    <div :class="['video-m3u8', { 'video-m3u8-img': isCompleted }]" :shortsMute="shortsMute">
+    <div :class="['video-m3u8', { 'video-m3u8-img': isCompleted }]" >
         <van-progress class="video-progress" v-show="!isCompleted" :percentage="progress" />
         <!-- <img class="img" v-if="vodPic" :src="vodPic" alt="part1">
-        <img class="img" v-else src="~/static/images/cover1.svg" alt="part1"> -->
-        <video :id="`hls-video-${vodId}`" x5-video-player-type='h5' playsinline  :muted="shortsMute" class="video-js vjs-default-skin">
+        <img class="img" v-else src="~/static/images/cover1.svg" alt="part1">  -->
+        <video :id="`hls-video-${vodId}`" x5-video-player-type='h5' playsinline :muted="shortsMute" class="video-js vjs-default-skin">
             <source :src="vodPlayUrl()" type="application/x-mpegURL">
         </video>
         <div class="replay" v-show="showReplayplayer" @click="checkPlayStatus"></div>
-        <div class="shorts_mute" v-show="!shortsMute" @click.stop="unmuteVideo"><img src="~/static/images/shorts_mute.svg" alt="shorts_mute"></div>
+        <div class="shorts_mute" v-show="shortsMute"  @click.stop="unmuteVideo">
+            <img src="~/static/images/shorts_mute.svg" alt="shorts_mute">
+            <span> TAP TO UNMUTE </span>
+        </div>
     </div>
 </template>
 <script>
 
-import { mapGetters } from "vuex"
 export default {
     name: 'videoM3u8',
     props: {
@@ -34,6 +36,12 @@ export default {
                 return 0
             }
         },
+        shortsMute: {
+            type: Boolean,
+            default() {
+                return true
+            }
+        },
     },
     data() {
         return {
@@ -43,10 +51,6 @@ export default {
             isOpen: false,
             showReplayplayer: false,
         }
-    },
-
-    computed:{
-        ...mapGetters(["shortsMute"])
     },
 
     mounted() {
@@ -172,7 +176,8 @@ export default {
 
         // 开启声音
         unmuteVideo() {
-            this.$store.commit("UPDATE_SHORTMUTE", false)
+            console.log("开启声音")
+            this.$emit('unmuteVideo', !this.shortsMute)
             this.player && this.player.muted(false);
         },
 
@@ -229,9 +234,16 @@ export default {
         position: absolute;
         top: 80px;
         left: 16px;
+        display: flex;
+        align-items: center;
         img{
             width: 24px;
             height: 24px;
+        }
+        span{
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 12px;
         }
     }
     .img{

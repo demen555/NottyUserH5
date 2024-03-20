@@ -13,8 +13,6 @@ const state = {
 
   noLoginDownVod: [], // 未登录点踩列表
   accessToken: '',
-
-  shortsMute: true,
 }
 
 const actions = {
@@ -45,9 +43,6 @@ const actions = {
   update_upvod(contxt, data){
     contxt.commit('UPDATE_UPVOD', data)
   },
-  set_short_mute(contxt, data){
-    contxt.commit('UPDATE_SHORTMUTE', data)
-  }
 }
 
 const getters = {
@@ -61,8 +56,6 @@ const getters = {
   noLoginUpVod: (state) => state.noLoginUpVod, 
   noLoginDownVod: (state) => state.noLoginDownVod,  
   accessToken: (state) => state.accessToken, 
-  shortsMute: (state) => state.shortsMute, 
-  
 }
 
 const mutations = {
@@ -161,10 +154,6 @@ const mutations = {
   DEL_DOWNVOD (state, data){
     state.noLoginDownVod = state.noLoginDownVod.filter( ele => ele.vodId != data );
   },
-
-  UPDATE_SHORTMUTE(state, data){
-    state.shortsMute = data;
-  }
 }
 
 export default {
