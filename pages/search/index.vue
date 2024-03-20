@@ -166,7 +166,7 @@ methods: {
   async getList(isRefresh){
     this.dataList = []
     try {
-      isRefresh === 'first' && (this.spainnerLoading = true)
+      this.spainnerLoading = true
       this.loading = true
       const params = {
         page: this.pageInfo.page,
