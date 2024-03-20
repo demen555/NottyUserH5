@@ -691,8 +691,8 @@ export default async function ({ route, redirect, app, $videoApi }) {
     });
   }
 
-  // 视频详情页面 第2种情况 视频详情页面重复路径 例如： https://nottyhub.com/video/nottyhub.com/video/48301
-  if( (path.match(/video/g) || []).length > 1 ){
+  // 视频详情页面 第2种情况 视频详情页面重复路径 例如： https://nottyhub.com/video/nottyhub.com/video/48301 en/video/65037
+  if( !name && path.match(/video/g) ){
     let match = path.match(/\/(\d+)$/);
     let number = match ? match[1] : null;
     await $videoApi.requestVideoRouter({ vodId: number }).then(res => {
@@ -700,10 +700,48 @@ export default async function ({ route, redirect, app, $videoApi }) {
         redirect(301, res.data.urlSlug)
         }
     });
-  } 
+  }
+
+  // 历史记录  /en/search
+  if( !name && path.match(/search/g) ){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/search`)
+    }else{
+      redirect(301, `/search`)
+    }
+  }
+
+  // 搜索 
+  if( !name && path.match(/history/g) ){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/porn-history`)
+    }else{
+      redirect(301, `/porn-history`)
+    }
+  }
+
+  // 分类页面 https://nottyhub.com/category/89/www.nottyhub.com/category/89/Threesome
+  if( !name && path.match(/category/g) ){
+    const lastSegment = path.split('/').filter(Boolean).pop();
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/category/${lastSegment}`)
+    }else{
+      redirect(301, `/category/${lastSegment}`)
+    }
+  }
 
 
-  // tags 页面
+  // tag 页面  不匹配路由
+  if( (!name && path.match(/tag/g)) || (!name && path.match(/type/g)) ){
+    const lastSegment = path.split('/').filter(Boolean).pop();
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/tag/${lastSegment}`)
+    }else{
+      redirect(301, `/tag/${lastSegment}`)
+    }
+  }
+
+  // tags 页面 匹配路由
   if( name && name.indexOf("tag-name") != -1 && tagsUrl[params.name] ){
     if( currentLocale != "en" ){
       redirect(301, `/${currentLocale}/tag/${tagsUrl[params.name]}`)
