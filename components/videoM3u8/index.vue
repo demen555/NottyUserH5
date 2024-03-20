@@ -57,7 +57,7 @@ export default {
         this.animateProgress(99, 2000)
         this.player = videojs(`hls-video-${this.vodId}`, {
             loop: true,
-            controls: false,
+            controls: true,
             preload: 'auto',
             autoplay: true,
         });
@@ -282,4 +282,24 @@ export default {
         display: none;
     }
 }
+
+/deep/ .video-js {
+    .vjs-control-bar {
+        display: flex !important;
+        z-index: 999;
+        background-color: transparent;
+    }
+    .vjs-play-control,
+    .vjs-volume-panel,
+    .vjs-current-time,
+    .vjs-time-divider,
+    .vjs-duration,
+    .vjs-remaining-time,
+    .vjs-picture-in-picture-control,
+    .vjs-fullscreen-control {
+        display: none !important;
+    }
+}
+
+
 </style>
