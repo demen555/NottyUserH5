@@ -12,7 +12,7 @@
           <div class="d-none d-sm-block search-btn cursor-pointer" @click.stop>
             <div class="search-top-btn cursor-pointer">
               <img class="header-common search-top-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
-              <input @focus="handleInputFocus" @keyup.enter.stop="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus/>
+              <input @focus="handleInputFocus" @keyup.enter.stop="handleSearch" v-model="search" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input"/>
               <img v-show="search" @click="handleReset" class="header-common com-close svg-icon1" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
             </div>
             <!-- <div class="search-top-btn cursor-pointer">
@@ -24,7 +24,7 @@
             <div class="search d-sm-none" ref="search"  @click.stop>
               <div class="search-btn search-btn-page">
                 <div>
-                  <input @focus="searchDialogShow = true" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" autofocus @keyup.enter="handleSearch" v-model="search"/>
+                  <input @focus="searchDialogShow = true" ref="searchRef" type="search"  :placeholder="$t('str_search')" class="search-input" @keyup.enter="handleSearch" v-model="search"/>
                 </div>
                 <img @click="handleFocus" class="header-common search-icon" :src="themeChecked? require('~/static/images/com_sousuo_1.svg'): require('~/static/images/com_sousuo_rj.svg')" alt="com_sousuo_1">
                 <img v-show="search" @click="handleReset" class="header-common com-close svg-icon2" :src="themeChecked? require('~/static/images/com_sousuo_guanbi_1.svg'): require('~/static/images/com_sousuo_guanbi_rj.svg')" alt="com_sousuo_guanbi_1">
