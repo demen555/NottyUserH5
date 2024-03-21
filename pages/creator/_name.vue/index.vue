@@ -147,9 +147,6 @@ export default {
       "noLoginDownVod",
       "isLogin"
     ]),
-    userId(){
-      return localStorage.getItem('userId')
-    },
     name(){
       return this.$route.params.name
     }
@@ -162,6 +159,7 @@ export default {
   },
 
   created() {
+    console.log(this.$route.params, 'params')
     this.getUpInfo()
     this.getList('first')
   },
@@ -178,7 +176,7 @@ export default {
     },
     async getUpInfo() {
       try {
-        const res = await this.$homeApi.requestUpInfo({userId: this.userId})
+        const res = await this.$homeApi.requestUpInfo({urlSlug: name})
         const { code, data = {} } = res
         if (code === CODES.SUCCESS) {
           console.log(data, 'upInfo')
