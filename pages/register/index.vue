@@ -79,7 +79,7 @@
         </div>
       </div>
     </div>
-    <div id="main-content" class="wiki-content d-none d-sm-block">
+    <!-- <div id="main-content" class="wiki-content d-none d-sm-block">
       <h1>
         <strong>{{ $t('str_login_html1') }}</strong>
       </h1>
@@ -198,7 +198,8 @@
           </a>
         </li>
       </ul>
-    </div>
+    </div> -->
+    <div class="footer-content" v-html="seoInfo.content"></div>
     <fBottom class="d-none d-sm-block"></fBottom>
    </div>
 </template>

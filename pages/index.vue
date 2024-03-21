@@ -42,7 +42,7 @@
         <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
       </div>
         <!-- <div style="min-height: 304px;" class="d-none d-sm-block"></div> -->
-      <div v-html="homepage.content"></div>  
+      <div class="footer-content" v-html="homepage.content"></div>  
       <fBottom></fBottom>
     </div>
     <div class="sticky-upload" v-show="showSticky">

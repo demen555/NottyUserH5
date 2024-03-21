@@ -17,7 +17,7 @@
     <div style="height: 60px;"></div>
     <div v-html="seoInfo.content"></div>  
     <div class="row">
-      <div v-html="seoInfo.content"></div> 
+      <div class="footer-content" v-html="seoInfo.content"></div> 
       <fBottom></fBottom>
     </div>
   </div>

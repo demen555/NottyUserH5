@@ -67,6 +67,7 @@
             <div class="pagination">
               <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
             </div>
+            <!-- <div class="footer-content" v-html="seoInfo.content"></div> -->
             <fBottom></fBottom>
           </div>
         </div>
