@@ -3,7 +3,8 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <nav-new :title="$t('str_footer_nav11')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_cookie1') }}</div>
+      <div class="footer-content" v-html="seoInfo.content"></div>
+      <!-- <div class="police-title">{{ $t('str_footer_cookie1') }}</div>
       <div class="police-text-content">
         {{ $t('str_footer_cookie2') }}
       </div>
@@ -12,7 +13,6 @@
       <div class="police-text-content">{{ $t('str_footer_cookie5') }}</div>
       <div class="police-text-content">{{ $t('str_footer_cookie6') }} </div>
       <div class="police-text-content">{{ $t('str_footer_cookie7') }}</div>
-      <!-- <div class="police-text-content">{{ $t('str_footer_cookie8') }} </div> -->
       <div class="police-text-content">{{ $t('str_footer_cookie9') }}</div>
       <div class="police-text-content">{{ $t('str_footer_cookie10') }} </div>
       <div class="police-text-content">{{ $t('str_footer_cookie11') }}</div>
@@ -20,7 +20,7 @@
       <div class="police-text-content">{{ $t('str_footer_cookie13') }}</div>
       <div class="police-text-content">{{ $t('str_footer_cookie14') }} </div>
       <div class="police-text-content">{{ $t('str_footer_cookie15') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_cookie16') }} </div>
+      <div class="police-text-content">{{ $t('str_footer_cookie16') }} </div> -->
     </div>
     <div style="height: 30px;"></div>
     <fBottom></fBottom>

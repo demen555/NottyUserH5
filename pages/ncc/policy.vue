@@ -3,7 +3,8 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <nav-new :title="$t('str_footer_nav5')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_ncc1') }}</div>
+      <div class="footer-content" v-html="seoInfo.content"></div>
+      <!-- <div class="police-title">{{ $t('str_footer_ncc1') }}</div>
       <div class="police-title-text">{{ $t('str_footer_ncc5') }}</div>
       <div class="police-text-content">
         {{ $t('str_footer_ncc3') }}
@@ -97,7 +98,7 @@
         {{ $t('str_footer_ncc65') }}
         <br>https://rainlily.org.hk/chi/about
         <br>safechat@rainlily.org.hk
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
