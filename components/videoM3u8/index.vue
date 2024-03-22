@@ -189,6 +189,7 @@ export default {
         // 获取播放状态
         checkPlayStatus() {
             var isPaused = this.player && this.player.paused();
+            console.log( this.player, this.player.paused() )
             if (isPaused) {
                 console.log("视频当前处于暂停状态");
                 this.playVideo();
