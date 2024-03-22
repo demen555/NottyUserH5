@@ -29,7 +29,7 @@
               <span class="words">{{ item.vodDown }}</span>
             </div>
             <!-- 评论 -->
-            <div class="controls-btn controls-review">
+            <div class="controls-btn controls-review" @click="onLoadReview">
               <div class="controls-img">
                 <img class="img" src="~/static/images/my_gn_comments_1.png" alt="my_gn_comments_1">
               </div>
@@ -57,41 +57,57 @@
             </div>
             <h2> {{ item.vodName }} </h2>
           </div>
-          <div class="shorts-review" @wheel.stop @touchstart.stop>
-            <div class="review-btn" >
-                <span class="num"> {{ $t('str_vodReviewList', { num: vodReviewtotal }) }} </span>
-                <!-- <div class="btn words-ellipsis d-sm-none">{{ $t('str_review_btn') }}</div> -->
-            </div>
-            <van-list
-                  v-model="loadingReview"
-                  :finished="finishedReview"
-                  loading-text="loading"
-                  :immediate-check='false'
-                  @load="onLoadReview"
-                  >
-                  <template #finished>
-                  <span v-show="!(!vodReviewList.length && !loadingReview)"> {{ $t('str_no_more') }} </span> 
-                  </template>
-      
-                  <Empty v-if="!vodReviewList.length && !loadingReview"></Empty>
-
-                  <template v-else>
-                      <div class="review-list" v-for="item in vodReviewList" :key="item.commentId">
-                          <div class="list-top">
-                              <img class="top-img" src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
-                              <div class="top-name">{{ item.commentName || item.userName ||   $t('str_tourist') }}</div>
-                              <div class="top-time">{{ $t(dateFormat(item.commentTime)) }}</div> 
-                          </div>
-                          <div class="list-bottom">
-                              {{ item.commentContent }}
-                          </div>
-                      </div>
-                  </template>
-
-            </van-list>
-          </div>
         </van-swipe-item>
       </van-swipe>
+      <div class="shorts-review" @wheel.stop @touchstart.stop v-if="showReviewBlur">
+        <div class="review-top" @click="showReviewBlur = false"></div>
+        <div class="review-main">
+          <div class="review-btn" >
+              <span class="num"> {{ $t('str_vodReviewList', { num: vodReviewtotal }) }} </span>
+              <!-- <div class="btn words-ellipsis d-sm-none">{{ $t('str_review_btn') }}</div> -->
+          </div>
+          <van-list
+                v-model="loadingReview"
+                :finished="finishedReview"
+                loading-text="loading"
+                :immediate-check='false'
+                @load="onLoadReview"
+                >
+                <template #finished>
+                <span v-show="!(!vodReviewList.length && !loadingReview)"> {{ $t('str_no_more') }} </span> 
+                </template>
+    
+                <Empty v-if="!vodReviewList.length && !loadingReview"></Empty>
+
+                <template v-else>
+                    <div class="review-list" v-for="item in vodReviewList" :key="item.commentId">
+                        <div class="list-top">
+                            <img class="top-img" src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
+                            <div class="top-name">{{ item.commentName || item.userName ||   $t('str_tourist') }}</div>
+                            <div class="top-time">{{ $t(dateFormat(item.commentTime)) }}</div> 
+                        </div>
+                        <div class="list-bottom">
+                            {{ item.commentContent }}
+                        </div>
+                    </div>
+                </template>
+
+          </van-list>
+          <div class="review-input">
+            <div class="mobile">
+              <input
+                  enterkeyhint="send"
+                  placeholder="Say something"
+                  @blur="blurFuc"
+                  ref="inputVal"
+                  v-model="content"
+                  @keyup.enter="sendVodReview" 
+                  class="input" 
+                  type="text">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <fBottom class="d-none d-sm-block"></fBottom>
   </div>
@@ -147,6 +163,10 @@ export default {
           page: 0
       },
 
+      content: "",
+      linkStr: "",
+      showReviewBlur: false
+
     }
   },
 
@@ -160,9 +180,9 @@ export default {
       ]),
   },
   
-  created(){
-    this.onLoadReview();
-  },
+  // created(){
+  //   this.onLoadReview();
+  // },
 
   methods:{
     dateFormat,
@@ -172,6 +192,11 @@ export default {
 
     goLogin(){
         this.$router.push(this.localePath('login'))
+    },
+
+    blurFuc(){
+        this.showReviewBlur = false;
+        this.content = ""
     },
 
     handleScrollDebounced: debounce(function(event){
@@ -367,6 +392,7 @@ export default {
 
     // 评论列表
     onLoadReview(){
+        this.showReviewBlur = true;
         this.vodReviewPage.page++;
         this.$videoApi.requestVodReviewe({
           vodId: 63287,
@@ -389,6 +415,39 @@ export default {
         })
     },
 
+    // 评论
+    sendVodReview(){
+        if( this.onClick || !this.content){
+            return 
+        }
+        this.onClick = true;
+        // 需要审核，不能直接显示
+        this.$videoApi.requestVodReviewInput({
+          vodId: this.vodId,
+          content: this.content
+        }).then(res => {
+            if( res.code === CODES.SUCCESS ){
+                this.$toast(this.$t('str_show_when_allow'))
+            }
+        }).finally( () => {
+            this.onClick = false;
+            this.content = ""
+        })
+    },
+
+    showVodReview(){
+      if( !this.isLogin ){
+          return this.goLogin()
+      }
+      this.showReviewBlur = true;
+      this.$nextTick( () => {
+          let inputVal = this.$refs.inputVal;
+          inputVal.focus();
+          setTimeout(() => {
+              inputVal.scrollIntoView() 
+          }, 400);
+      });
+    },
 
   },
 }
@@ -481,15 +540,27 @@ export default {
     left: 0;
     bottom: 0;
     right: 0;
-    height: 60%;
-    background: rgba(24, 24, 28, 1);
-    border-radius: 16px 16px 0 0;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
+    top: 0;
+    .review-top{
+      width: 100%;
+      height: 40%;
+      cursor: pointer;
+    }
+    .review-main{
+ 
+      height: 60%;
+      background: rgba(24, 24, 28, 1);
+      border-radius: 16px 16px 0 0;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+    }
     .van-list{
       flex: 1;
       overflow: auto;
+    }
+    .main-list-no{
+      margin-top: 60px;
     }
     .review-btn{   
       padding: 8px 12px;
@@ -543,6 +614,26 @@ export default {
         font-size: 14px;
         padding-left: 40px;
         word-break: break-all;
+      }
+
+    }
+    .review-input{
+      width: 100%;
+      height: 64px;
+      border-top: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(24, 24, 28, 1);
+      padding: 16px;
+      .mobile{
+        width: 100%;
+        height: 100%;
+      }
+      .input{
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 4px;
+        padding: 0 16px;
       }
     }
   }
