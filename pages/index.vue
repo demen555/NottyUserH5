@@ -488,6 +488,7 @@ overflow: visible;
     justify-content: space-between;
     margin-bottom: 12px;
     padding-left: 12px;
+    padding-right: 12px;
     .title-right, .title-left{
       display: flex;
       align-items: center;

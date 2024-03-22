@@ -70,30 +70,35 @@ import commonMinxin from '~/plugins/mixins/common'
 export default {
   components:{ videoM3u8 },
   mixins: [commonMinxin],
-  async asyncData({ $homeApi, params }) { 
-    console.log( params.id )
+  async asyncData({ $homeApi,  $videoApi, params }) { 
     const res1 = await $homeApi.requestvodpageStoriesHome({
-      page: 1,  
       size: 10,
       excludes: params.id,
     })
+    const res2 =  await $videoApi.requestVodComment({ 
+      vodId: params.id 
+    });
+    console.log("当前视频：", res2.data)
+    console.log("下一部10个视频：", res1.data.data)
     return { 
-      dataList: res1.data.data || [],
+      dataList: [ res2.data, ...res1.data.data] || [],
       pageInfo: {
         size: 10
       },
-      shortsMute: true
+      shortsMute: true,
+      curVodId: params.id
     }
   },
 
   data(){
     return{
       pageInfo: {
-        page: 1,  
         size: 10
       },
       dataList:[],
       swipeIndex: 0,
+
+      curVodId: ""
     }
   },
 
@@ -129,8 +134,25 @@ export default {
           id: item.vodId
         }
       })
-      window.history.pushState({}, "", url)
+      window.history.pushState({}, "", url);
+      this.loadList(i)
     },
+
+    async loadList(i){
+      if( i + 1 >= this.dataList.length ){
+        this.pageInfo.size = this.pageInfo.size + 10;
+        const res1 = await this.$homeApi.requestvodpageStoriesHome({
+          size: this.pageInfo.size,
+          excludes: this.curVodId,
+        });
+        const res2 =  await this.$videoApi.requestVodComment({ 
+          vodId: this.curVodId
+        });
+
+        this.dataList = [ res2.data, ...res1.data.data] || []
+      }
+    },
+
 
     goback(){
       this.$router.push( this.localePath("/"))
