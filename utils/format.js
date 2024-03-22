@@ -1,10 +1,12 @@
 export function formatNumber(size) {
   // if (!size) return "--";
   var num = 1000; //byte         
-  if (size < num)
+  if (size < num) {
     return size;
-  if (size < Math.pow(num, 2))
-    return (size / num).toFixed(2) + "K"; // 1000
+  } else {
+    console.log(size/num, (size/num).toFixed(2), (size/num).toFixed(2) + "K")
+    return (size/num).toFixed(2) + "K";
+  }
 }
 export function formatPer(like, all) {
   return parseInt((like/all)*100) + '%'

@@ -17,7 +17,7 @@
           <div class="main-btn-right">
             <div class="main-btn-view">
               <div :class="themeChecked? 'main-like':'main-like-white'"></div>
-              <div class="main-text">{{ formatNumber(upInfo?.totalViewCount || 0) }}</div>
+              <div class="main-text">{{ formatNumber(upInfo?.totalViewCount * 1 || 0) }}</div>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
               <div class="main-btn-right">
                 <div class="main-btn-view">
                   <div :class="themeChecked? 'main-like':'main-like-white'"></div>
-                  <div class="main-text">{{ formatNumber(upInfo?.totalViewCount || 0) }}</div>
+                  <div class="main-text">{{ formatNumber(upInfo.totalViewCount * 1 || 0) }}</div>
                 </div>
               </div>
             </div>
