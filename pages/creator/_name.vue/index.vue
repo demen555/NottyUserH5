@@ -161,7 +161,6 @@ export default {
   created() {
     console.log(this.$route.params, 'params')
     this.getUpInfo()
-    this.getList('first')
   },
   methods: {
     dateFormat,
@@ -181,6 +180,7 @@ export default {
         if (code === CODES.SUCCESS) {
           console.log(data, 'upInfo')
           this.upInfo = data
+          this.getList('first')
         }
       } catch (error) {
         console.error(error)
@@ -190,7 +190,7 @@ export default {
       try {
         isRefresh === 'first' && (this.spainnerLoading = true)
         this.loading = true
-        const params = { page: this.pageInfo.page, size: this.pageInfo.size, userId: this.userId, orderBy: this.activeTag}
+        const params = { page: this.pageInfo.page, size: this.pageInfo.size, userId: this.upInfo.userId, orderBy: this.activeTag}
         const res = await this.$homeApi.requestvodpageHome(params)
         const { code, data = {} } = res
         if (code === CODES.SUCCESS) {
