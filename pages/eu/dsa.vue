@@ -3,11 +3,12 @@
     <HeaderTop></HeaderTop>
     <nav-new :title="$t('str_footer_nav10')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_eu1') }}</div>
+      <div class="footer-content" v-html="seoInfo.content"></div>
+      <!-- <div class="police-title">{{ $t('str_footer_eu1') }}</div>
       <div class="police-title-text">{{ $t('str_footer_eu2') }}</div>
       <div class="police-text-content-prev">
         {{ $t('str_footer_eu3') }}
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

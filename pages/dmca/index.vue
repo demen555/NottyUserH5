@@ -3,7 +3,8 @@
     <HeaderTop></HeaderTop>
     <nav-new :title="$t('str_footer_nav6')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_nav6') }}</div>
+      <div class="footer-content" v-html="seoInfo.content"></div>
+      <!-- <div class="police-title">{{ $t('str_footer_nav6') }}</div>
       <div class="police-title-text">{{ $t('str_footer_dmca1') }}</div>
       <div class="police-title" style="margin-top: 10px;">{{ $t('str_footer_dmca2') }}</div>
       <div class="police-text-content">{{ $t('str_footer_dmca3') }}</div>
@@ -20,7 +21,7 @@
       <div class="police-title">{{ $t('str_footer_dmca13') }}</div>
       <div class="police-text-content">{{ $t('str_footer_dmca14') }}</div>
       <div class="police-title">{{ $t('str_footer_dmca15') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_dmca16') }}<span class="footer-red">{{ $t('str_footer_dmca17') }}</span></div>
+      <div class="police-text-content">{{ $t('str_footer_dmca16') }}<span class="footer-red">{{ $t('str_footer_dmca17') }}</span></div> -->
     </div>
   </div>
 </template>

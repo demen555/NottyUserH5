@@ -3,7 +3,8 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <nav-new :title="$t('str_footer_nav2')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_terms1') }}</div>
+      <div class="footer-content" v-html="seoInfo.content"></div>
+      <!-- <div class="police-title">{{ $t('str_footer_terms1') }}</div>
       <div class="police-text-content">{{ $t('str_footer_terms2') }}</div>
       <div class="police-title">{{ $t('str_footer_terms3') }}</div>
       <div class="police-text-content">{{ $t('str_footer_terms4') }}</div>
@@ -38,7 +39,7 @@
       <div class="police-title">{{ $t('str_footer_terms33') }}</div>
       <div class="police-text-content">{{ $t('str_footer_terms34') }}</div>
       <div class="police-title">{{ $t('str_footer_terms35') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms36') }}</div>
+      <div class="police-text-content">{{ $t('str_footer_terms36') }}</div> -->
     </div>
   </div>
 </template>
