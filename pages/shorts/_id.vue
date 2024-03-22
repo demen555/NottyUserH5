@@ -40,7 +40,7 @@
               <div class="controls-img">
                 <img class="img" src="~/static/images/my_gn_wdsc_1.png" alt="my_gn_wdsc_1">
               </div>
-              <span class="words">Collect</span>
+              <span class="words">{{ $t('str_collect') }}</span>
             </div>
             <!-- 分享 -->
             <div class="controls-btn controls-share" @click="onShowdialogLink">
@@ -57,6 +57,39 @@
             </div>
             <h2> {{ item.vodName }} </h2>
           </div>
+          <div class="shorts-review" @wheel.stop @touchstart.stop>
+            <div class="review-btn" >
+                <span class="num"> {{ $t('str_vodReviewList', { num: vodReviewtotal }) }} </span>
+                <!-- <div class="btn words-ellipsis d-sm-none">{{ $t('str_review_btn') }}</div> -->
+            </div>
+            <van-list
+                  v-model="loadingReview"
+                  :finished="finishedReview"
+                  loading-text="loading"
+                  :immediate-check='false'
+                  @load="onLoadReview"
+                  >
+                  <template #finished>
+                  <span v-show="!(!vodReviewList.length && !loadingReview)"> {{ $t('str_no_more') }} </span> 
+                  </template>
+      
+                  <Empty v-if="!vodReviewList.length && !loadingReview"></Empty>
+
+                  <template v-else>
+                      <div class="review-list" v-for="item in vodReviewList" :key="item.commentId">
+                          <div class="list-top">
+                              <img class="top-img" src="~/static/images/home_top_mrtx_1.svg" alt="avatar">
+                              <div class="top-name">{{ item.commentName || item.userName ||   $t('str_tourist') }}</div>
+                              <div class="top-time">{{ $t(dateFormat(item.commentTime)) }}</div> 
+                          </div>
+                          <div class="list-bottom">
+                              {{ item.commentContent }}
+                          </div>
+                      </div>
+                  </template>
+
+            </van-list>
+          </div>
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -67,6 +100,9 @@
 import { debounce  } from 'lodash';
 import videoM3u8 from "@/components/videoM3u8"
 import commonMinxin from '~/plugins/mixins/common'
+import { mapGetters } from "vuex"
+import CODES from "~/plugins/enums/codes"
+import { dateFormat, formatNumber, formatPer, getQueryString } from '~/utils/format.js';
 export default {
   components:{ videoM3u8 },
   mixins: [commonMinxin],
@@ -86,7 +122,9 @@ export default {
         size: 10
       },
       shortsMute: true,
-      curVodId: params.id
+      curVodId: params.id,
+
+      videoStatus:{},
     }
   },
 
@@ -98,14 +136,42 @@ export default {
       dataList:[],
       swipeIndex: 0,
 
-      curVodId: ""
+      curVodId: "",
+
+      vodReviewList:[],
+      loadingReview: false,
+      finishedReview: false,
+      vodReviewtotal: 0,
+      vodReviewPage:{
+          size: 24,
+          page: 0
+      },
+
     }
   },
 
-  methods:{
+  computed:{
+      ...mapGetters([
+          "historyVod", 
+          "userinfo", 
+          "noLoginUpVod", 
+          "noLoginDownVod", 
+          "isLogin"
+      ]),
+  },
+  
+  created(){
+    this.onLoadReview();
+  },
 
+  methods:{
+    dateFormat,
     unmuteVideo(){
       this.shortsMute = false;
+    },
+
+    goLogin(){
+        this.$router.push(this.localePath('login'))
     },
 
     handleScrollDebounced: debounce(function(event){
@@ -209,7 +275,6 @@ export default {
         }
     },
 
-
     // 点赞 取消点赞 
     setVodUp(){
         const vodId = this.vodId;
@@ -258,7 +323,6 @@ export default {
         }
     },
 
-
     // 点踩 取消点踩
     setVodDown(){
         const vodId = this.vodId;
@@ -301,11 +365,32 @@ export default {
         }
     },
 
+    // 评论列表
+    onLoadReview(){
+        this.vodReviewPage.page++;
+        this.$videoApi.requestVodReviewe({
+          vodId: 63287,
+          ...this.vodReviewPage
+        }).then(res => {
+            if( res.code === CODES.SUCCESS ){
+                this.vodReviewtotal = res.data.meta.pagination.total;
+                this.vodReviewList = [
+                    ...this.vodReviewList,
+                    ...res.data.data
+                ];
+                if( this.vodReviewPage.page >= res.data.meta.pagination.total_pages ){
+                    this.finishedReview = true;
+                    this.loadingReview = false;
+                }else{
+                    this.finishedReview = false;
+                    this.loadingReview = false;
+                }
+            } 
+        })
+    },
+
+
   },
-
-
-
-
 }
 </script>
 
@@ -389,6 +474,76 @@ export default {
       width: 100%;
       height: 100%;
       display: block;
+    }
+  }
+  .shorts-review{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 60%;
+    background: rgba(24, 24, 28, 1);
+    border-radius: 16px 16px 0 0;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    .van-list{
+      flex: 1;
+      overflow: auto;
+    }
+    .review-btn{   
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;  
+      justify-content: space-between;
+      .num{
+          color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+          font-family: PingFang SC;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+      }
+      .btn{
+          width: 80px;
+          height: 32px;
+          text-align: center;
+          line-height: 32px;
+          background-color: var(--bg-primary, #F6D658);
+          color: var(--text-color1, #181E2A);
+          font-size: 14px;
+          cursor: pointer;
+          border-radius: 32px;
+          padding: 0 8px;
+      }
+    }
+    .review-list{
+      padding: 8px 12px;
+      .list-top{
+        display: flex;
+        align-items: center;  
+        justify-content: space-between;
+        .top-img{
+          width: 32px;
+          height: 32px;
+        }
+        .top-name{
+          flex: 1;
+          color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+          font-size: 14px;
+          padding-left: 8px;
+        }
+        .top-time{
+          color: var(--text-color2,  rgba(255, 255, 255, 0.70));
+          font-size: 12px;
+        }
+      }
+      .list-bottom{
+        color: var(--text-color1, #FFFFFF);
+        font-size: 14px;
+        padding-left: 40px;
+        word-break: break-all;
+      }
     }
   }
 }
