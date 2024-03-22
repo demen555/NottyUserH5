@@ -32,15 +32,16 @@ export default{
   data(){
     return {
       footerList: [
-        { name: this.$t('str_footer_nav1'), id: 'policy-csam'},
-        { name: this.$t('str_footer_nav2'), id: 'policy-terms'},
+        { name: this.$t('str_footer_nav1'), id: 'csam-policy'},
+        { name: this.$t('str_footer_nav2'), id: 'terms-service'},
         { name: this.$t('str_footer_nav3'), id: 'policy-privacy'},
-        { name: this.$t('str_footer_nav4'), id: 'policy-content'},
-        { name: this.$t('str_footer_nav6'), id: 'policy-dmca'},
-        { name: this.$t('str_footer_nav5'), id: 'policy-ncc'},
-        { name: this.$t('str_footer_nav8'), id: 'policy-2257'},
-        { name: this.$t('str_footer_nav9'), id: 'policy-faq'},
-        { name: this.$t('str_footer_nav10'), id: 'policy-eu'},
+        { name: this.$t('str_footer_nav4'), id: 'content-removal'},
+        { name: this.$t('str_footer_nav6'), id: 'dmca'},
+        { name: this.$t('str_footer_nav5'), id: 'ncc-policy'},
+        { name: this.$t('str_footer_nav8'), id: 'usc-2257'},
+        { name: this.$t('str_footer_nav9'), id: 'faq'},
+        { name: this.$t('str_footer_nav10'), id: 'eu-dsa'},
+        { name: this.$t('str_footer_nav11'), id: 'cookie-policy'}
       ],
       hostname: '',
     }
