@@ -16,7 +16,10 @@
       </div>
       <!-- 短片列表 -->
       <div class="shorts-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
-        <div class="list-title">
+        <nuxt-link class="list-title" :to="localePath({
+            name: 'shorts-id',
+            params: { id: storiesList[0].vodId }
+        })">
           <div class="title-left">
             <img src="~/static/images/gn_shorts.png" alt="gn_shorts">
             <span> Shorts </span>
@@ -25,7 +28,7 @@
             <span> More </span>
             <img src="~/static/images/com_jt_sx_you.png" alt="com_jt_sx_you">
           </div>
-        </div>
+        </nuxt-link>
         <div class="list-content" ref="shortsList">
           <nuxt-link class="list-item" @click.prevent v-for="item in storiesList" :key="item.vodId" draggable="false" :to="localePath({
               name: 'shorts-id',
@@ -46,10 +49,13 @@
               </div>
             </div>
           </nuxt-link>
-          <div class="list-more">
+          <nuxt-link class="list-more" :to="localePath({
+              name: 'shorts-id',
+              params: { id: storiesList[0].vodId }
+          })">
             <img src="~/static/images/gn_shorts.png" alt="gn_shorts">
             <span>All</span>
-          </div>
+          </nuxt-link>
         </div>
       </div>
 
