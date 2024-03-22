@@ -188,14 +188,10 @@ async asyncData({ $homeApi, query }) {
   const res1 = await $homeApi.requestvodpageHome({
     page: query.page * 1 || 1,  
     size: 24,
-    kind: "videos",
   })
 
-  const res3 = await $homeApi.requestvodpageHome({
-    page: 1,  
-    size: 10,
-    kind: "videos",
-    // kind: "stories",
+  const res3 = await $homeApi.requestvodpageStoriesHome({
+    size: 10
   })
 
   return { 

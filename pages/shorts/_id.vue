@@ -72,14 +72,14 @@ export default {
   mixins: [commonMinxin],
   async asyncData({ $homeApi, params }) { 
     console.log( params.id )
-    const res1 = await $homeApi.requestvodpageHome({
+    const res1 = await $homeApi.requestvodpageStoriesHome({
       page: 1,  
-      size: 10
+      size: 10,
+      excludes: params.id,
     })
     return { 
       dataList: res1.data.data || [],
       pageInfo: {
-        page: 1,  
         size: 10
       },
       shortsMute: true
