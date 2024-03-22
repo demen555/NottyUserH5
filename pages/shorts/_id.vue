@@ -16,15 +16,17 @@
           <div class="shorts-controls">
             <!-- 点赞 -->
             <div class="controls-btn controls-up"> 
-              <div class="controls-img">
-                <img class="img" src="~/static/images/my_gn_dz_1.png" alt="my_gn_dz_1">
+              <div class="controls-img" @click="setVodUp">
+                <img class="img 1"  v-if="item.videoStatus && item.videoStatus.up" :src="require('~/static/images/spxq_dianzan_on.svg')"  alt="spxq_dianzan_on">
+                <img class="img 2"  v-else :src="require('~/static/images/my_gn_dz_1.png')"  alt="my_gn_dz_1">
               </div>
-              <span class="words">{{ item.vodUp }}</span>
+              <span class="words">{{ item.vodUp }} </span>
             </div>
             <!-- 点踩 -->
-            <div class="controls-btn controls-down">
+            <div class="controls-btn controls-down" @click="setVodDown">
               <div class="controls-img">
-                <img class="img" src="~/static/images/my_gn_caizan_1.png" alt="my_gn_caizan_1">
+                <img class="img 1" v-if="item.videoStatus && item.videoStatus.down" src="~/static/images/com_caizan_on.svg" alt="com_caizan_on">
+                <img class="img 2" v-else :src="require('~/static/images/my_gn_caizan_1.png')"  alt="com_dianzan">
               </div>
               <span class="words">{{ item.vodDown }}</span>
             </div>
@@ -33,15 +35,17 @@
               <div class="controls-img">
                 <img class="img" src="~/static/images/my_gn_comments_1.png" alt="my_gn_comments_1">
               </div>
-              <span class="words">{{ item.vodHits }}</span>
+              <span class="words" > 0 </span>
             </div>
             <!-- 收藏 -->
-            <div class="controls-btn controls-collect">
+            <div class="controls-btn controls-collect" @click="setCollect">
               <div class="controls-img">
-                <img class="img" src="~/static/images/my_gn_wdsc_1.png" alt="my_gn_wdsc_1">
+                <img class="img" v-if="item.videoStatus && item.videoStatus.collect"  :src="require('~/static/images/com_shoucang_on.svg')" alt="com_shoucang_on">
+                <img class="img" v-else src="~/static/images/my_gn_wdsc_1.png"  alt="com_dianzan">
               </div>
               <span class="words">{{ $t('str_collect') }}</span>
             </div>
+
             <!-- 分享 -->
             <div class="controls-btn controls-share" @click="onShowdialogLink">
               <div class="controls-img">
@@ -130,10 +134,24 @@ export default {
     const res2 =  await $videoApi.requestVodComment({ 
       vodId: params.id 
     });
-    console.log("当前视频：", res2.data)
-    console.log("下一部10个视频：", res1.data.data)
-    return { 
-      dataList: [ res2.data, ...res1.data.data] || [],
+
+    // const res3 =  await $videoApi.requestVodState({ 
+    //   vodId: params.id 
+    // });
+    // const { totalLike, totalDisLike, isLike, isDisLike, totalCollect, isCollect } = res3.data;
+    const obj = {
+      dataList: [ {
+        ...res2.data,
+        // videoStatus:{
+        //   vodUp: totalLike,
+        //   vodDown: totalDisLike,
+        //   up: isLike,
+        //   down: isDisLike,
+        //   collect: isCollect,
+        //   collectNumber: totalCollect,
+        //   vodId: params.id
+        // }
+      }, ...res1.data.data] || [],
       pageInfo: {
         size: 10
       },
@@ -142,6 +160,8 @@ export default {
 
       videoStatus:{},
     }
+    console.log( "shorts 数据：" , obj )
+    return obj
   },
 
   data(){
@@ -178,12 +198,16 @@ export default {
           "noLoginDownVod", 
           "isLogin"
       ]),
-  },
-  
-  // created(){
-  //   this.onLoadReview();
-  // },
 
+      vodId({ swipeIndex, dataList }){
+        return dataList[swipeIndex].vodId
+      }
+      
+  },
+  created(){
+    console.log( this.dataList, "data.list" )
+    this.getVodState( this.swipeIndex )
+  },
   methods:{
     dateFormat,
     unmuteVideo(){
@@ -227,6 +251,7 @@ export default {
       })
       window.history.pushState({}, "", url);
       this.loadList(i)
+      this.getVodState(i)
     },
 
     async loadList(i){
@@ -257,6 +282,29 @@ export default {
         })
     },
 
+    // 登录用户对当前视频的状态(赞、踩、收藏)
+    // 原 vodUp 点赞次数 ； vodDown 踩次数 ； up  down  赞 踩； collectNumber 收藏次数；  collect 是否收藏；
+    // 新 totalLike": 总赞数, "totalDisLike": 总踩数, "isLike": 是否赞, "isDisLike": 是否踩, "totalCollect": 总收藏数； "isCollect": 收否收藏,
+    getVodState(i){
+        const vodId = this.dataList[i].vodId;
+        this.$videoApi.requestVodState({
+          vodId: vodId,
+        }).then(res => {
+            if( res.code === CODES.SUCCESS ){
+                const { totalLike, totalDisLike, isLike, isDisLike, totalCollect, isCollect } = res.data;
+                this.$set(this.dataList[i], 'videoStatus', {
+                  vodUp: totalLike,
+                  vodDown: totalDisLike,
+                  up: isLike,
+                  down: isDisLike,
+                  collect: isCollect,
+                  collectNumber: totalCollect,
+                  vodId: vodId
+                })
+            }
+        })
+    },
+
     // 收藏 取消收藏
     setCollect(){
         if( !this.isLogin ){
@@ -266,33 +314,37 @@ export default {
             return 
         }
         this.onClick = true;
-
-        if( this.videoStatus.collect ){
-            const num = Number(this.videoStatus.collectNumber) - 1;
-            this.$set(this.videoStatus, "collectNumber", num)
-            this.$set(this.videoStatus, "collect", false)
+        const videoStatus = this.dataList[this.swipeIndex].videoStatus;
+        if( videoStatus.collect ){
+            const num = Number(videoStatus.collectNumber) - 1;
+            videoStatus.collectNumber = num;
+            videoStatus.collect = false;
+            this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
             this.$videoApi.requestVodcollectcancel({
               vodId: this.vodId,
             }).then(res => {
                 if( res.code !== CODES.SUCCESS ){
-                    const num = Number(this.videoStatus.collectNumber) + 1;
-                    this.$set(this.videoStatus, "collectNumber", num)
-                    this.$set(this.videoStatus, "collect", true)
+                    const num = Number(videoStatus.collectNumber) + 1;
+                    videoStatus.collectNumber = num;
+                    videoStatus.collect = true;
+                    this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
                 }
             }).finally( () => {
                 this.onClick = false
             })
         }else{
-            const num = Number(this.videoStatus.collectNumber) + 1;
-            this.$set(this.videoStatus, "collectNumber", num)
-            this.$set(this.videoStatus, "collect", true)
+            const num = Number(videoStatus.collectNumber) + 1;
+            videoStatus.collectNumber = num;
+            videoStatus.collect = true; 
+            this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)          
             this.$videoApi.requestVodcollect({
               vodId: this.vodId,
             }).then(res => {
                 if( res.code !== CODES.SUCCESS ){
-                    const num = Number(this.videoStatus.collectNumber) - 1;
-                    this.$set(this.videoStatus, "collectNumber", num)
-                    this.$set(this.videoStatus, "collect", false)
+                    const num = Number(videoStatus.collectNumber) - 1;
+                    videoStatus.collectNumber = num;
+                    videoStatus.collect = false;
+                    this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
                 }
             }).finally( () => {
                 this.onClick = false
@@ -303,44 +355,40 @@ export default {
     // 点赞 取消点赞 
     setVodUp(){
         const vodId = this.vodId;
-        const isUpVod = this.isUpVod(this.videoStatus);
+        const videoStatus = this.dataList[this.swipeIndex].videoStatus;
         if( this.onClick ){
-            return 
+          return 
         }
         this.onClick = true;
-        if( isUpVod ){
-            gtag('event', 'gt4_click_down', {
-                down_name: this.videoInfo.vodName,
-            });
-            this.$set(this.videoStatus, "up", false)
+        if( videoStatus.up ){
+            videoStatus.up = false
+            this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
             this.$videoApi.requestVodupcancel({
               vodId: vodId,
             }).then(res => {
                 console.log('res',res)
                 if( res.code === CODES.SUCCESS ){
-                    this.getVodState(vodId)
-                    this.getVideo(vodId);
+                  this.getVodState(this.swipeIndex)
                 } else{
-                    this.$set(this.videoStatus, "up", true)
+                  videoStatus.up = true
+                  this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
                 }
             }).finally( () => {
                 this.onClick = false
             })
 
         }else{
-            gtag('event', 'gt4_click_up', {
-                up_name: this.videoInfo.vodName,
-            });
-            this.$set(this.videoStatus, "down", false);
-            this.$set(this.videoStatus, "up", true);
+            videoStatus.down = false
+            videoStatus.up = true
+            this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
             this.$videoApi.requestVodup({
               vodId: this.vodId,
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
-                    this.getVodState(vodId)
-                    this.getVideo(vodId);
+                  this.getVodState(this.swipeIndex)
                 }else{
-                    this.$set(this.videoStatus, "up", false);
+                  videoStatus.up = false
+                  this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
                 }
             }).finally( () => {
                 this.onClick = false
@@ -351,38 +399,39 @@ export default {
     // 点踩 取消点踩
     setVodDown(){
         const vodId = this.vodId;
-        const isdownVod = this.isdownVod(this.videoStatus);
+        const videoStatus = this.dataList[this.swipeIndex].videoStatus;
         if( this.onClick ){
           return 
         }
         this.onClick = true;
-        if( isdownVod ){
-            this.$set(this.videoStatus, "down", false)
+        if( videoStatus.down ){
+            videoStatus.down = false
+            this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
             this.$videoApi.requestVoddowncancel({
               vodId: vodId,
             }).then(res => {
                 if( res.code === CODES.SUCCESS ){
-
-                    this.getVodState(vodId)
-                    this.getVideo(vodId);
+                  this.getVodState(this.swipeIndex)
                 } else {
-                    this.$set(this.videoStatus, "down", true)
+                    videoStatus.down = true
+                    this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
                 }
                 this.$toast(res.message);
             }).finally( () => {
                 this.onClick = false;
             })
         }else{
-          this.$set(this.videoStatus, "up", false);
-          this.$set(this.videoStatus, "down", true);
+          videoStatus.up = false
+          videoStatus.down = true
+          this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
           this.$videoApi.requestVoddown({
             vodId: this.vodId,
           }).then(res => {
               if( res.code === CODES.SUCCESS ){
-                  this.getVodState(vodId)
-                  this.getVideo(vodId);
+                this.getVodState(this.swipeIndex)
               } else{
-                  this.$set(this.videoStatus, "down", false)
+                  videoStatus.down = false
+                  this.$set(this.dataList[this.swipeIndex], 'videoStatus', videoStatus)
               }
           }).finally( () => {
               this.onClick = false
@@ -395,7 +444,7 @@ export default {
         this.showReviewBlur = true;
         this.vodReviewPage.page++;
         this.$videoApi.requestVodReviewe({
-          vodId: 63287,
+          vodId: this.vodId,
           ...this.vodReviewPage
         }).then(res => {
             if( res.code === CODES.SUCCESS ){
@@ -457,6 +506,9 @@ export default {
 .porn-shorts{
   .van-swipe{
     height: 100vh;
+  }
+  .shorts-content{
+    position: relative;
   }
   .shorts-controls{
     position: absolute;

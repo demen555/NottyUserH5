@@ -3,7 +3,7 @@
         <van-progress class="video-progress" v-show="!isCompleted" :percentage="progress" />
         <!-- <img class="img" v-if="vodPic" :src="vodPic" alt="part1">
         <img class="img" v-else src="~/static/images/cover1.svg" alt="part1">  -->
-        <video :id="`hls-video-${vodId}`" x5-video-player-type='h5' playsinline :muted="shortsMute" class="video-js vjs-default-skin">
+        <video :id="`hls-video-${vodId}`" x5-video-player-type='h5' playsinline :muted="shortsMute" class="video-js vjs-default-skin" autoplay>
             <source :src="vodPlayUrl()" type="application/x-mpegURL">
         </video>
         <div class="replay" v-show="showReplayplayer" @click="checkPlayStatus"></div>
@@ -50,6 +50,8 @@ export default {
             isCompleted: false,
             isOpen: false,
             showReplayplayer: false,
+
+            paused: false,
         }
     },
 
@@ -61,15 +63,10 @@ export default {
             preload: 'auto',
             autoplay: true,
         });
-        console.log( 'this.player', this.player )
+
         // 视频禁用鼠标右键
         this.player && this.player.on('contextmenu', (e) => {
             e.preventDefault();
-        });
-
-        // 加载进度
-        this.player && this.player.on('progress', (e) => {
-            // this.start();
         });
 
         // 加载完成等待
@@ -93,8 +90,9 @@ export default {
 
 
         // 加载异常
-        this.player && this.player.on('error', (e) => {
-            console.log('加载异常')
+        this.player && this.player.on('loadedmetadata', (e) => {
+            this.paused =  this.player.paused();
+            console.log('是否暂停:', this.player.paused());
         });
 
         // 网络异常
@@ -188,16 +186,16 @@ export default {
 
         // 获取播放状态
         checkPlayStatus() {
-            var isPaused = this.player && this.player.paused();
+            var isPaused = this.paused;
             console.log( this.player, this.player.paused() )
             if (isPaused) {
-                console.log("视频当前处于暂停状态");
                 this.playVideo();
                 this.showReplayplayer = false;
+                this.paused = !isPaused
             } else {
-                console.log("视频正在播放");
                 this.pauseVideo();
                 this.showReplayplayer = true;
+                this.paused = !isPaused
             }
         }
 
