@@ -176,7 +176,7 @@ export default {
     },
     async getUpInfo() {
       try {
-        const res = await this.$homeApi.requestUpInfo({urlSlug: name})
+        const res = await this.$homeApi.requestUpInfo({urlSlug: this.name})
         const { code, data = {} } = res
         if (code === CODES.SUCCESS) {
           console.log(data, 'upInfo')
