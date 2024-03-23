@@ -14,7 +14,7 @@
     </div>
 </template>
 <script>
-
+import { isPc } from '@/utils/format.js'
 export default {
     name: 'videoM3u8',
     props: {
@@ -121,6 +121,7 @@ export default {
         );
     },
     methods:{
+        isPc,
         vodPlayUrl (){
             const arr = this.videoSrc.split('$')
             const str = arr.find(  ele => ele.includes('.m3u8'))

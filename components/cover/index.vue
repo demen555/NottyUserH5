@@ -6,8 +6,8 @@
 
       <div class="main-list-group" @touchmove="longpressVideo(item)" @mousemove="longpressVideo(item)">
         <nuxt-link class="main-list" @click.prevent :to="localePath({
-            name: 'video-id',
-            params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
+            name: item.kind == 'stories' ? 'shorts-id' : 'video-id',
+            params: item.kind == 'stories' ? { id: item.vodId } : { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
         })">
           <div class="main-video">
 
@@ -41,14 +41,20 @@
               <img v-else src="~/static/images/person.svg" alt="person">
           </nuxt-link>
           <div class="main-content">
-            <nuxt-link class="main-title" :to="localePath({ name: 'video-id', params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') } })" >
+            <nuxt-link class="main-title" :to="localePath({ 
+              name: item.kind == 'stories' ? 'shorts-id' : 'video-id',
+              params: item.kind == 'stories' ? { id: item.vodId } : { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
+            })" >
               {{ item.vodName }}
             </nuxt-link>
             <div class="main-btn">
               <nuxt-link class="main-name" :to="localePath({ name: 'creator-name', params: { name: item.user && item.user.urlSlug } })" >
                   {{ item.user?.name || '--' }}
               </nuxt-link>
-              <nuxt-link class="main-btn-right" :to="localePath({ name: 'video-id', params: { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') } })" >
+              <nuxt-link class="main-btn-right" :to="localePath({ 
+                name: item.kind == 'stories' ? 'shorts-id' : 'video-id',
+                params: item.kind == 'stories' ? { id: item.vodId } : { id: `${item.vodName} ${item.vodId}`.toLowerCase().replace(/ /g, '-') }
+              })" >
                 <div class="main-btn-view">
                   <div :class="themeChecked? 'main-view':'main-view-white'"></div>
                   <div class="main-text">{{ formatNumber(item.vodHits) }}</div>
