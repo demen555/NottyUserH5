@@ -33,7 +33,7 @@
                 </div>
                 <div class="video-controls col-sm-5 col-md-4 col-lg-3 col-xl-2">
                     <div class="controls" @click="setVodUp()">
-                        <img class="icon"  v-if="isUpVod(videoStatus)" src="~/static/images/com_dianzan_on.svg" alt="com_dianzan_on">
+                        <img class="icon"  v-if="isUpVod(videoStatus)" src="~/static/images/spxq_dianzan_on.svg" alt="spxq_dianzan_on">
                         <img class="icon"  v-else :src="themeChecked? require('~/static/images/com_dianzan_1.svg'): require('~/static/images/com_dianzan.svg')"  alt="com_dianzan">
                         <span class="words">{{ vodPercent.vodUp }}%</span>
                     </div>
@@ -926,7 +926,7 @@ export default {
                 background-size: cover;
             }
             .icon-on{
-                background: url("~~/static/images/com_dianzan_on.svg");
+                background: url("~~/static/images/spxq_dianzan_on.svg");
                 background-size: cover;
             }
         }

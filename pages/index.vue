@@ -14,6 +14,51 @@
           </nuxt-link>
           <nuxt-link class="tag-name" style="padding-right: 12px;" :to="localePath('tag')" > {{ $t('str_menu_tag_all') }}</nuxt-link>
       </div>
+      <!-- 短片列表 -->
+      <div class="shorts-list col-sm-12 col-md-12 col-lg-12 col-xl-12" >
+        <nuxt-link class="list-title" :to="localePath({
+            name: 'shorts-id',
+            params: { id: storiesList[0].vodId }
+        })">
+          <div class="title-left">
+            <img src="~/static/images/gn_shorts.png" alt="gn_shorts">
+            <span> Shorts </span>
+          </div>
+          <div class="title-right">
+            <span> More </span>
+            <img src="~/static/images/com_jt_sx_you.png" alt="com_jt_sx_you">
+          </div>
+        </nuxt-link>
+        <div class="list-content" ref="shortsList">
+          <nuxt-link class="list-item" @click.prevent v-for="item in storiesList" :key="item.vodId" draggable="false" :to="localePath({
+              name: 'shorts-id',
+              params: { id: item.vodId }
+          })">
+            <img :src="item.vodPic" alt="" draggable="false">
+            <div class="list-des">
+              <h2 class="vodName">{{ item.vodName }}</h2>
+              <div class="list-btn">
+                <div class="main-btn-view">
+                  <img :src="require('~/static/images/com_shipinshu_1.svg')" alt="com_shipinshu_1">
+                  <div class="main-text">{{ formatNumber(item.vodHits) }}</div>
+                </div>
+                <div class="mian-btn-like">
+                  <img :src="require('~/static/images/com_dianzan_1.svg')" alt="com_dianzan_1">
+                  <div class="main-text">{{ formatPer(item.vodUp, item.vodUp+item.vodDown)}}</div>
+                </div>
+              </div>
+            </div>
+          </nuxt-link>
+          <nuxt-link class="list-more" :to="localePath({
+              name: 'shorts-id',
+              params: { id: storiesList[0].vodId }
+          })">
+            <img src="~/static/images/gn_shorts.png" alt="gn_shorts">
+            <span>All</span>
+          </nuxt-link>
+        </div>
+      </div>
+
       <div v-for="(item,index) in dataList" :key="item.vodId" class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
         <Cover style="margin-top: 12px;" :item="item"></Cover>
         <div class="top-category d-sm-none" v-if="index === 1">
@@ -62,6 +107,7 @@ import Cover from '~/components/cover'
 import CODES from "~/plugins/enums/codes"
 import commonMinxin from '~/plugins/mixins/common'
 import dialogBottom from "~/components/dialog/dialog-bottom.vue"
+import { formatNumber, formatPer } from '@/utils/format.js'
 export default{
 fetchOnServer: true,
 mixins: [commonMinxin],
@@ -81,7 +127,8 @@ data() {
     categoryList: [],
     showPopup: false, //底部popup
 
-    homepage:{}
+    homepage:{},
+    storiesList:[],
   }
 },
 computed: {
@@ -128,6 +175,9 @@ created(){
   }
   // this.showPopup = true
 },
+mounted(){
+  this.initHorizontalScroll();
+},
 components: {
   HeaderTop,
   Cover,
@@ -146,7 +196,11 @@ async asyncData({ $homeApi, query }) {
 
   const res1 = await $homeApi.requestvodpageHome({
     page: query.page * 1 || 1,  
-    size: 24
+    size: 24,
+  })
+
+  const res3 = await $homeApi.requestvodpageStoriesHome({
+    size: 10
   })
 
 
@@ -161,10 +215,13 @@ async asyncData({ $homeApi, query }) {
       page: Number(query.page) || 1,
       size: 24,
     },
-    homepage: home.data
+    homepage: home.data,
+    storiesList: res3.data.data || [],
   }
 },
 methods: {
+  formatNumber,
+  formatPer,
   ...mapActions(['set_tagid']),
   handleClose(){
     this.showSticky = false
@@ -199,6 +256,38 @@ methods: {
     this.pageInfo.page = 1
     this.getList(true);
   },
+  initHorizontalScroll() {
+      let isMouseDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+
+      const content = this.$refs.shortsList;
+
+      content.addEventListener('mousedown', (event) => {
+        isMouseDown = true;
+        startX = event.pageX - content.offsetLeft;
+        scrollLeft = content.scrollLeft;
+        content.style.cursor = 'grabbing'; /* 鼠标样式为抓取中手型 */
+      });
+
+      content.addEventListener('mousemove', (event) => {
+        if (!isMouseDown) return;
+        const x = event.pageX - content.offsetLeft;
+        const walk = (x - startX) * 2; // 控制滚动速度
+        content.scrollLeft = scrollLeft - walk;
+      });
+
+      content.addEventListener('mouseup', () => {
+        isMouseDown = false;
+        content.style.cursor = 'grab'; /* 鼠标样式为抓取手型 */
+      });
+
+      content.addEventListener('mouseleave', () => {
+        isMouseDown = false;
+        content.style.cursor = 'grab'; /* 鼠标样式为抓取手型 */
+      });
+  }
+
 }
 }
 </script>
@@ -321,6 +410,120 @@ overflow: visible;
     font-size: 10PX !important;
     font-weight: bold;
     color: var(--text-color1, #181E2A);
+  }
+}
+.shorts-list{
+  width: 100%;
+  margin-top: 12px;
+  cursor: grab; /* 鼠标样式为抓取手型 */
+  .list-content{
+    display: flex;
+    overflow-x: auto;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+  .list-item{
+    flex-shrink: 0;
+    width: 161px;
+    height: 289px;
+    // background-color: pink;
+    border-radius: 12px;
+    margin-left: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+    .list-des{
+      position: absolute;
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      h2{
+        font-size: 14px;
+        font-weight: 400;
+        color: #fff;
+        word-break: break-word;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+      .list-btn{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 8px 0 12px 0;
+      }
+      .main-btn-view, .mian-btn-like{
+        display: flex;
+        align-items: center;
+        img{
+          width: 16px;
+          height: 16px;
+          margin-right: 4px;
+        }
+        .main-text{
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+    }
+
+  }
+  .list-more{
+    flex-shrink: 0;
+    width: 56px;
+    height: 289px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img{
+      width: 24px;
+      height: 24px;
+    }
+    span{
+      font-size: 14px;
+      color: #fff;
+      margin-top: 8px;
+    }
+
+  }
+  .list-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    .title-right, .title-left{
+      display: flex;
+      align-items: center;
+    }
+    .title-right img{
+      width: 12px;
+      height: 12px;
+      margin-left: 8px;
+    }
+    .title-left img{
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+    .title-right span{
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .title-left span{
+      font-size: 16px;
+      color: #fff;
+    }
   }
 }
 </style>

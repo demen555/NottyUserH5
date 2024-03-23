@@ -1,17 +1,20 @@
 <template>
-    <div :class="['video-m3u8', { 'video-m3u8-img': isCompleted }]">
+    <div :class="['video-m3u8', { 'video-m3u8-img': isCompleted }]" >
         <van-progress class="video-progress" v-show="!isCompleted" :percentage="progress" />
-        <img class="img" v-if="vodPic" :src="vodPic" alt="part1">
-        <img class="img" v-else src="~/static/images/cover1.svg" alt="part1">
-        <video @click="videobtn" :id="`hls-video-${vodId}`" x5-video-player-type='h5' playsinline  muted="muted" class="video-js vjs-default-skin">
+        <!-- <img class="img" v-if="vodPic" :src="vodPic" alt="part1">
+        <img class="img" v-else src="~/static/images/cover1.svg" alt="part1">  -->
+        <video :id="`hls-video-${vodId}`" x5-video-player-type='h5' playsinline :muted="shortsMute" class="video-js vjs-default-skin" autoplay>
             <source :src="vodPlayUrl()" type="application/x-mpegURL">
         </video>
+        <div class="replay" v-show="showReplayplayer" @click="checkPlayStatus"></div>
+        <div class="shorts_mute" v-show="shortsMute"  @click.stop="unmuteVideo">
+            <img src="~/static/images/shorts_mute.svg" alt="shorts_mute">
+            <span> TAP TO UNMUTE </span>
+        </div>
     </div>
 </template>
 <script>
-// import videojs from 'video.js';
-// import 'video.js/dist/video-js.css';
-import { mapGetters } from 'vuex';
+import { isPc } from '@/utils/format.js'
 export default {
     name: 'videoM3u8',
     props: {
@@ -27,6 +30,18 @@ export default {
                 return ""
             }
         },
+        vodId: {
+            type: Number,
+            default() {
+                return 0
+            }
+        },
+        shortsMute: {
+            type: Boolean,
+            default() {
+                return true
+            }
+        },
     },
     data() {
         return {
@@ -34,33 +49,35 @@ export default {
             progress: 0, // 初始值代表再加载
             isCompleted: false,
             isOpen: false,
+            showReplayplayer: false,
+
+            paused: false,
         }
     },
-    computed:{
-        ...mapGetters(['vodId']),
-    },
+
     mounted() {
         this.animateProgress(99, 2000)
         this.player = videojs(`hls-video-${this.vodId}`, {
             loop: true,
-            controls: false,
+            controls: true,
             preload: 'auto',
             autoplay: true,
         });
-        console.log( this.player )
+
         // 视频禁用鼠标右键
         this.player && this.player.on('contextmenu', (e) => {
             e.preventDefault();
         });
 
-        // 加载进度
-        this.player && this.player.on('progress', (e) => {
-            // this.start();
-        });
-
         // 加载完成等待
         this.player && this.player.on('click', (e) => {
-            console.log("点击")
+            console.log("click点击")
+            this.checkPlayStatus()
+        });
+
+        this.player && this.player.on('touchstart', (e) => {
+            console.log("touchstart点击")
+            this.checkPlayStatus()
         });
 
         // 开始播放
@@ -70,20 +87,12 @@ export default {
             this.isCompleted = true;
         });
 
-        // // 播放完成事件
-        // this.player && this.player.on('ended', (e) => {
-        //     this.$store.commit("SET_VODID", "")
-        // });
+
 
         // 加载异常
-        this.player && this.player.on('error', (e) => {
-            console.log('加载异常')
-            // 如果是开始播放之后捕获异常直接跳出播放器
-            if( !this.isOpen ){
-                // this.$store.commit("SET_VODID", "")
-                // this.player.load(); // 捕获异常重新载入
-            }
-            
+        this.player && this.player.on('loadedmetadata', (e) => {
+            this.paused =  this.player.paused();
+            console.log('是否暂停:', this.player.paused());
         });
 
         // 网络异常
@@ -112,10 +121,12 @@ export default {
         );
     },
     methods:{
+        isPc,
         vodPlayUrl (){
             const arr = this.videoSrc.split('$')
             const str = arr.find(  ele => ele.includes('.m3u8'))
-            return (str || "") + '?segments=8&time=2';
+            return str
+            // return (str || "") + '?segments=8&time=2';
         },
         contains(e){
             let $video = document.querySelector(`#hls-video-${this.vodId}`);
@@ -126,11 +137,7 @@ export default {
                 this.$store.commit("SET_VODID", "")
             }
         },
-        videobtn(){
-            console.log("DIAN")
-        },
 
- 
         animateProgress(target, duration) {
             return new Promise((resolve, reject) => {
                 let start = this.progress;
@@ -154,8 +161,44 @@ export default {
                 const startTime = Date.now();
                 requestAnimationFrame(doAnimation);
             });
-        }
+        },
 
+        // 播放视频
+        playVideo() {
+            this.player && this.player.play();
+        },
+
+        // 暂停视频
+        pauseVideo() {
+            this.player && this.player.pause();
+        },
+
+        // 开启声音
+        unmuteVideo() {
+            console.log("开启声音")
+            this.$emit('unmuteVideo', !this.shortsMute)
+            this.player && this.player.muted(false);
+        },
+
+        // 关闭声音
+        mutedVideo(){
+            this.player && this.player.muted(true);
+        },
+
+        // 获取播放状态
+        checkPlayStatus() {
+            var isPaused = this.paused;
+            console.log( this.player, this.player.paused() )
+            if (isPaused) {
+                this.playVideo();
+                this.showReplayplayer = false;
+                this.paused = !isPaused
+            } else {
+                this.pauseVideo();
+                this.showReplayplayer = true;
+                this.paused = !isPaused
+            }
+        }
 
     },
     beforeDestroy() {
@@ -168,9 +211,41 @@ export default {
 </script>
 <style lang="less" scoped>
 .video-m3u8{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
     height: 100%;
-    position: relative;
+    cursor: pointer;
+    .replay{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 64px;
+        height: 64px;
+        background: url("~~/static/images/bfq_play.png");
+        background-size: 100% 100%;
+        z-index: 99;
+    }
+    .shorts_mute{
+        position: absolute;
+        top: 80px;
+        left: 16px;
+        display: flex;
+        align-items: center;
+        img{
+            width: 24px;
+            height: 24px;
+        }
+        span{
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 12px;
+        }
+    }
     .img{
         width: 100%;
         height: 100%;
@@ -207,4 +282,24 @@ export default {
         display: none;
     }
 }
+
+/deep/ .video-js {
+    .vjs-control-bar {
+        display: flex !important;
+        z-index: 999;
+        background-color: transparent;
+    }
+    .vjs-play-control,
+    .vjs-volume-panel,
+    .vjs-current-time,
+    .vjs-time-divider,
+    .vjs-duration,
+    .vjs-remaining-time,
+    .vjs-picture-in-picture-control,
+    .vjs-fullscreen-control {
+        display: none !important;
+    }
+}
+
+
 </style>

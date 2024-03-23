@@ -27,6 +27,18 @@ export default ($axios) => ({
     },
 
     /***
+     * @首页短视频列表
+     * 
+     */ 
+    requestvodpageStoriesHome(data){
+        return $axios({
+            url: Api.home.vodpagehomeStories,
+            method: "POST",
+            data: data
+        })
+    },
+
+    /***
      * @首页视频列表
      * 
      */ 
