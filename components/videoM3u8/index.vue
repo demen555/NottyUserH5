@@ -4,6 +4,7 @@
     </div>
 </template>
 <script>
+import {  isPc } from '~/utils/format.js';
 // 视频截取
 function vodPlayUrl (url){
     const arr = url.split('$')
@@ -43,18 +44,25 @@ export default {
                 },
             });
 
-            // 监听视频区域的点击事件
-            this.dp && this.dp.container.addEventListener('click', (event) => {
-                if (event.target === this.dp.video) {
-                    console.log( '用 toggle 方法切换播放状态' )
-                    // 调用 toggle 方法切换播放状态
-                    if (this.dp.video.paused) {
-                        this.dp.play();
-                    } else {
-                        this.dp.pause();
-                    }
+            this.dp && this.dp.on('loadeddata', () => {
+                // 监听视频区域的点击事件
+                if( !isPc() ){
+                    this.dp && this.dp.container.addEventListener('click', (event) => {
+                        if (event.target === this.dp.video) {
+                            console.log( '用 toggle 方法切换播放状态' , this.dp.video.paused, this.dp)
+                            // 调用 toggle 方法切换播放状态
+                            if (this.dp.video.paused) {
+                                this.dp.play();
+                            } else {
+                                console.log("视频暂停")
+                                this.dp.pause();
+                            }
+                        }
+                    }, true);
                 }
-            }, true);
+            });
+
+
 
         }
     }
