@@ -51,10 +51,10 @@ export default {
         this.animateProgress(99, 2000)
 
         
-        // 页面禁用右键
-        document.oncontextmenu = new Function("event.returnValue=false");
-        // 页面禁用选择
-        document.onselectstart = new Function("event.returnValue=false");
+        // // 页面禁用右键
+        // document.oncontextmenu = new Function("event.returnValue=false");
+        // // 页面禁用选择
+        // document.onselectstart = new Function("event.returnValue=false");
         
         // 点击其他元素，卸载视频
         document.addEventListener(
