@@ -58,6 +58,7 @@ let Api = {
     videoState: "/api/v1/vod/state", // 登录用户对当前视频的状态(赞、踩、收藏)
     videoHits: "/api/v1/vod/hits", // 播放数量
     videoRouter: "/api/v1/vod/router",
+    storiesHits: "api/v1/vod/stories/hits" , // 短视频停留时间上报
   }
 };
 export default Api;

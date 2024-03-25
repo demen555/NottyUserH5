@@ -232,6 +232,18 @@ export default ($axios) => ({
             data: data
         })
     },
+        /***
+     * @播放数量
+     * @参数
+     * @vodId  视频id
+     * */ 
+    requeststoriesHits(data){
+        return $axios({
+            url: Api.video.videoHits,
+            method: "POST",
+            data: data
+        })
+    },
         
 });
 
