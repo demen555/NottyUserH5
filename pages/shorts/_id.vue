@@ -1,16 +1,12 @@
 <template>
   <div class="porn-shorts" >
-    <HeaderTop class="d-none d-sm-block"></HeaderTop>
+    <HeaderTop class="d-none d-sm-block" v-show="isPcShow()"></HeaderTop>
     <div class="shorts-back d-sm-none" @click="goback"><img src="~/static/images/com_jt_sx_zuo.svg" alt=""></div>
     <div class="shorts-content" @wheel="handleScrollDebounced">
       <van-swipe ref="pornShorts" class="shorts-swipe" vertical :loop="false" :show-indicators="false" @change="changeswipe">
         <van-swipe-item v-for="(item,i) in dataList" :key="item.vodId">
           <videoM3u8 
-            :videoSrc="item.vodPlayUrl" 
-            :vodPic="item.vodPic" 
-            :vodId="item.vodId" 
-            :shortsMute="shortsMute" 
-            @unmuteVideo="unmuteVideo" 
+            :videoInfo="item"
             v-if="swipeIndex == i">
           </videoM3u8>
           <div class="shorts-controls">
@@ -113,7 +109,7 @@
         </div>
       </div>
     </div>
-    <fBottom class="d-none d-sm-block"></fBottom>
+    <fBottom class="d-none d-sm-block" v-show="isPcShow()"></fBottom>
   </div>
 </template>
 <script>
@@ -122,7 +118,8 @@ import videoM3u8 from "@/components/videoM3u8"
 import commonMinxin from '~/plugins/mixins/common'
 import { mapGetters } from "vuex"
 import CODES from "~/plugins/enums/codes"
-import { dateFormat, formatNumber, formatPer, getQueryString } from '~/utils/format.js';
+import { dateFormat, formatNumber, formatPer, getQueryString, isPc } from '~/utils/format.js';
+
 export default {
   components:{ videoM3u8 },
   mixins: [commonMinxin],
@@ -231,7 +228,6 @@ export default {
 
   methods:{
     dateFormat,
-
     initTime(){
       this.storiesHitsTimer && clearTimeout(this.storiesHitsTimer)
       this.storiesHitsTimer = setTimeout( () => {
@@ -528,6 +524,11 @@ export default {
       });
     },
 
+    isPcShow(){
+      if( process.client ){
+        return isPc();
+      }
+    }
   },
 
   destroyed(){
@@ -583,7 +584,7 @@ export default {
     height: 88px;
     padding: 0 12px;
     position: absolute;
-    bottom: 0;
+    bottom: 28px;
     h2{
       font-size: 14px;
       font-weight: 400;
