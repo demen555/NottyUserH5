@@ -251,7 +251,7 @@ export default {
     handleScrollDebounced: debounce(function(event){
       const swipeInstance = this.$refs.pornShorts;
       const delta = Math.sign(event.deltaY);
-      console.log("触发滚轮事件")
+      console.log("触发滚轮事件", delta, swipeInstance)
       if (delta > 0) {
         swipeInstance.prev();
       } else {
@@ -263,11 +263,7 @@ export default {
       this.swipeIndex = i;
       const item  = this.dataList[i];
       this.shortsMute = false;
-      const currentVideo = document.getElementById('hls-video-' + item.vodId);
-      console.log( "切换路由：" ,  item.vodId, currentVideo);
-      if (currentVideo) {
-        currentVideo.muted = false;
-      }
+      console.log( "切换路由：" ,  item.vodId);
       const url = this.localePath({
         name: 'shorts-id',
         params: {

@@ -28,7 +28,6 @@ export default {
                 lang: 'en',
                 autoplay: true,
                 // muted: true, // 添加 muted 属性
-                volume: 0,
                 video: {
                     // pic: videoInfo.vodPic, 
                     url: vodPlayUrl(videoInfo.vodPlayUrl),
