@@ -59,7 +59,7 @@ export default {
         this.animateProgress(99, 2000)
         this.player = videojs(`hls-video-${this.vodId}`, {
             loop: true,
-            controls: true,
+            controls: false,
             preload: 'auto',
             autoplay: true,
         });
@@ -71,6 +71,7 @@ export default {
 
         // 加载完成等待
         this.player && this.player.on('click', (e) => {
+            e.preventDefault();
             console.log("click点击")
             this.checkPlayStatus()
         });
@@ -236,6 +237,7 @@ export default {
         left: 16px;
         display: flex;
         align-items: center;
+        z-index: 101;
         img{
             width: 24px;
             height: 24px;
@@ -275,6 +277,7 @@ export default {
     top: 0;
     width: 100%;
     z-index: 3;
+
     .van-progress__portion{
         background-color: var(--bg-primary, #F6D658);
     }
@@ -298,6 +301,9 @@ export default {
     .vjs-picture-in-picture-control,
     .vjs-fullscreen-control {
         display: none !important;
+    }
+    .vjs-control-bar .vjs-captions-button {
+      display: none;
     }
 }
 

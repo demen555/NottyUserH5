@@ -207,9 +207,38 @@ export default {
   created(){
     console.log( this.dataList, "data.list" )
     this.getVodState( this.swipeIndex )
+    if( process.client ){
+      // 获取视口高度并将其应用于元素
+      function setElementHeightToViewportHeight() {
+        var element = document.querySelector('.shorts-swipe');
+        if(!element){
+          return
+        }
+        var viewportHeight = window.innerHeight;
+        element.style.height = viewportHeight + 'px';
+      }
+
+      // 页面加载时设置一次高度
+      setElementHeightToViewportHeight();
+
+      // 在窗口大小变化时重新设置高度
+      window.addEventListener('resize', setElementHeightToViewportHeight);
+
+      this.initTime();
+    }
   },
+
+
   methods:{
     dateFormat,
+
+    initTime(){
+      this.storiesHitsTimer && clearTimeout(this.storiesHitsTimer)
+      this.storiesHitsTimer = setTimeout( () => {
+        this.$videoApi.requeststoriesHits({ vodId: this.vodId })
+      }, 15000)
+    },
+
     unmuteVideo(){
       this.shortsMute = false;
     },
@@ -252,6 +281,7 @@ export default {
       window.history.pushState({}, "", url);
       this.loadList(i)
       this.getVodState(i)
+      this.initTime()
     },
 
     async loadList(i){
@@ -499,6 +529,10 @@ export default {
     },
 
   },
+
+  destroyed(){
+    this.storiesHitsTimer && clearTimeout(this.storiesHitsTimer)
+  }
 }
 </script>
 
