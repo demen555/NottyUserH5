@@ -17,7 +17,7 @@
         </div>
         <div class="dplayer-top-controller" v-show="controller">
             <div class="controller-tips">Long press the screen to speed up playback</div>
-            <div class="controller-btn d-sm-none">
+            <div class="controller-btn">
                 <div class="speed" @click.stop="speedStatus = !speedStatus">{{nowSpeed}}x</div>
                 <div class="full" @click.stop="fullScreenBtn"></div>
                 <div class="speed-check" v-show="speedStatus">
@@ -481,7 +481,7 @@ export default {
 }
 
 .video-not-full{
-    /deep/ .dplayer-mobile{
+    /deep/ .dplayer {
         overflow: inherit;
         &.dplayer-hide-controller{
             .dplayer-time{
@@ -496,9 +496,12 @@ export default {
         .dplayer-menu{
             display: none !important;
         }
-        // .diplayer-loading-icon{
-        //     display: none !important;
-        // }
+        .dplayer-icons-left{
+            display: none !important;
+        }
+        .dplayer-mobile-play{
+            display: block;
+        }
         &.dplayer-loading{
             .dplayer-mobile-play{
                 opacity: 0 !important;
@@ -642,6 +645,7 @@ export default {
             background: var(--bg-color3, rgba(255, 255, 255, 0.10));
             font-size: 12px;
             zoom: 0.75;
+            cursor: pointer;
         }
         .full{
             width: 16px;
@@ -651,6 +655,7 @@ export default {
             background-image: url('~~/static/images/bfq_qp.svg');
             background-repeat: no-repeat;
             background-size: 100% 100%;
+            cursor: pointer;
         }
         .speed-check{
             position: absolute;
@@ -662,6 +667,7 @@ export default {
             width: 48px;
             border-radius: 4px;
             padding: 2px;
+            cursor: pointer;
             .item{
                 width: 100%;
                 height: 21px;
