@@ -126,7 +126,7 @@ data() {
     categoryList: [],
     showPopup: false, //底部popup
 
-    storiesList:[],
+    storiesList:[{}],
   }
 },
 computed: {
@@ -209,7 +209,7 @@ async asyncData({ $homeApi, query }) {
       page: Number(query.page) || 1,
       size: 24,
     },
-    storiesList: res3.data.data || [],
+    storiesList: res3.data.data || [{}],
   }
 },
 methods: {
