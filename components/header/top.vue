@@ -194,13 +194,13 @@
             </div>
           </nuxt-link>
           <!-- 收藏 -->
-          <!-- <div class="nav-menu-list cursor-pointer" @click="handleGoPage('collect')" > -->
-          <nuxt-link class="nav-menu-list cursor-pointer" :to="localePath('collect')" >
+          <div class="nav-menu-list cursor-pointer" @click="handleGoPage('collect')" >
+          <!-- <nuxt-link class="nav-menu-list cursor-pointer" :to="localePath('collect')" > -->
             <div class="nav-menu-left">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
               <div>{{ $t('str_collect') }}</div>
             </div>
-          </nuxt-link>
+          </div>
           <!-- 点赞 -->
           <!-- <div class="nav-menu-list cursor-pointer" @click="handleGoPage('up')"  > -->
           <nuxt-link class="nav-menu-list cursor-pointer" :to="localePath('up')"  >
