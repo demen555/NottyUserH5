@@ -114,7 +114,8 @@ watch: {
 },
 mounted(){
   // console.log(this.$refs.header, '888')
-  this.$refs.header.$refs.searchRef.blur();
+  this.$refs.header.$refs.searchRef1.blur();
+  this.$refs.header.$refs.searchRef2.blur();
 },
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -258,7 +259,8 @@ methods: {
         localStorage.setItem('historyList', JSON.stringify(this.historyList))
       }
       // this.handleGoToResult(this.search)
-      this.$refs.searchRef.blur();//关闭手机软键盘
+      this.$refs.searchRef1.blur();//关闭手机软键盘
+      this.$refs.searchRef2.blur();//关闭手机软键盘
       // this.handleReset()
       // this.search = ''
     }
@@ -279,7 +281,8 @@ methods: {
     this.search = ''
     if(!this.searchShow){
       this.set_show(true)
-      this.$refs.searchRef.focus();
+      this.$refs.searchRef1.focus();
+      this.$refs.searchRef2.focus();
     }
   },
   handleGoToResult(search){
