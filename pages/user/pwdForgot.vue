@@ -1,46 +1,51 @@
 <template>
   <div class="pwdForgot">
-    <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <h1 class="title"> {{ $t('str_get_back_pwd') }} </h1>
-    <div class="pwd-Forgot">
+    <div class="pwdForgot-main">
+        <HeaderTop @refresh="onRefresh"></HeaderTop>
+        <h1 class="title"> {{ $t('str_get_back_pwd') }} </h1>
+        <div class="pwd-Forgot">
 
-        <div class="user-lable">
-            <img class="img" :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')">
-            <label for="password">
-            <input 
-                @blur="validatorPassword"
-                v-model="form.password" 
-                class="input"
-                id="password"
-                :placeholder="$t('str_input_new_pwd')" 
-                type="text">
-            </label>
-        </div>
-        <div class="error-msg" v-show="password.showError">{{ password.errorMsg }}</div>
+            <div class="user-lable">
+                <img class="img" :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')">
+                <label for="password">
+                <input 
+                    @blur="validatorPassword"
+                    v-model="form.password" 
+                    class="input"
+                    id="password"
+                    :placeholder="$t('str_input_new_pwd')" 
+                    type="text">
+                </label>
+            </div>
+            <div class="error-msg" v-show="password.showError">{{ password.errorMsg }}</div>
 
-        <div class="user-lable">
-            <img class="img" :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')">
-            <label for="password1">
-            <input 
-                @blur="validatorPassword1"
-                v-model="form.password1"
-                class="input"
-                id="password1"
-                :placeholder="$t('str_input_new_pwd_again')" 
-                type="text">
-            </label>
-        </div>
-        <div class="error-msg" v-show="password1.showError">{{ password1.errorMsg }}</div>
+            <div class="user-lable">
+                <img class="img" :src="themeChecked ? require('~/static/images/login_mima_1.svg'): require('~/static/images/login_mima.svg')">
+                <label for="password1">
+                <input 
+                    @blur="validatorPassword1"
+                    v-model="form.password1"
+                    class="input"
+                    id="password1"
+                    :placeholder="$t('str_input_new_pwd_again')" 
+                    type="text">
+                </label>
+            </div>
+            <div class="error-msg" v-show="password1.showError">{{ password1.errorMsg }}</div>
 
-        <div class="user-btn-submit" @click="onClickRight">
-            {{ $t('str_get_back') }}
-            <van-loading class="user-icon" type="spinner" v-show="showLoading" />
+            <div class="user-btn-submit" @click="onClickRight">
+                {{ $t('str_get_back') }}
+                <van-loading class="user-icon" type="spinner" v-show="showLoading" />
+            </div>
+            <div class="rta-com d-none d-sm-flex">
+                <p class="com">  © {{ hostname }}, 2023 </p>
+                <img class="rta" :src="require('~/static/images/rat.png')" alt="rta">
+            </div>
         </div>
-        <div class="rta-com d-none d-sm-flex">
-            <p class="com">  © {{ hostname }}, 2023 </p>
-            <img class="rta" :src="require('~/static/images/rat.png')" alt="rta">
-        </div>
-
+    </div>
+    <div class="pwdForgot-footer">
+        <div class="footer-content" v-html="seoInfo.content"></div>
+        <fBottom></fBottom>
     </div>
   </div>
 </template>
@@ -72,9 +77,52 @@ export default {
                 showError: false,
                 errorMsg: ''
             },
-            hostname: ""
+            hostname: "",
+            seoInfo:{}
         }
     },
+
+    head(){
+        const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
+        return {
+            link: [
+                {
+                    hid: "canonical",
+                    rel: 'canonical',
+                    href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
+                },
+            ],
+            title: this.seoInfo.seoTitle,
+            meta:[
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.seoInfo.seoDescription
+                },
+                {
+                    hid: 'keyswords',
+                    name: 'keyswords',
+                    content: this.seoInfo.seoKeywords
+                },
+                {
+                    hid: 'title',
+                    name: 'title',
+                    content: this.seoInfo.seoTitle
+                },
+                { hid: 'og:title', property: 'og:title', content: this.seoInfo.seoTitle },
+                { hid: 'og:description', property: 'og:description', content:  this.seoInfo.seoDescription },
+                { hid: 'og:keywords', property: 'og:keywords', content: this.seoInfo.seoKeywords },
+            ]
+        }
+    },
+
+    async asyncData({ $homeApi }) { 
+        const res = await $homeApi.postSeo('pwdForgot')
+        return { 
+            seoInfo: res.data || {},
+        }
+    },
+
     computed:{
         ...mapGetters([
             "userinfo"
@@ -152,8 +200,19 @@ export default {
 <style src="~/static/less/user.less" lang="less" scoped></style>
 <style lang="less" scoped>
 .pwdForgot{
-    padding: 0 32px;
-    margin-top: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    .pwdForgot-main{
+        padding: 0 32px;
+        margin-top: 88px;
+    }
+    .pwdForgot-footer{
+        width: 100%;
+    }
+
     .pwd-Forgot{
         margin-top: 24px;
     }

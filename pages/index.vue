@@ -86,7 +86,6 @@
       <div class="pagination">
         <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
       </div>
-        <!-- <div style="min-height: 304px;" class="d-none d-sm-block"></div> -->
       <div class="footer-content" v-html="homepage.content"></div>  
       <fBottom></fBottom>
     </div>
@@ -141,16 +140,16 @@ head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   
   return {
-    title: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com",
+    title: this.homepage.seoTitle,   
     meta: [
       { name: "norton-safeweb-site-verification", content: "99S8U9XP2A-6VI2JWSF527U7D6HGU1JHV-M9S9VL-BNV1KNA5DCK6AO6I49JODEXQ63TQ-GVEFFH5TR-R93FMKWQVXG82091-3NST-1A9X6LHVDEB55S3-IY34UF6U1G" },
-      { hid: "title", name: 'title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
-      { hid: "description", name: 'description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
-      { hid: "keywords", name: 'keywords', content: "XXX / Video de sexo / porno gratis / filme porno gratis / assistir filme porno gratis" },
+      { hid: "title", name: 'title', content:  this.homepage.seoTitle },
+      { hid: "description", name: 'description', content:  this.homepage.seoDescription },
+      { hid: "keywords", name: 'keywords', content:  this.homepage.seoKeywords },
 
-      { property: 'og:title', content: "Assistir Vídeo Pornô Grátis HD | XXX Filmes de Sexo Porno | Porno Tube by Nottyhub.com" },
-      { property: 'og:description', content: "Nottyhub, assista a Vídeos Pornôs Grátis em HD agora! Obtenha filmes e clipes pornôs diários XXX. Melhor Tube Pornô para Brasileiro! Apresentando pornografia gay, pornografia lésbica, vídeo amador caseiro!" },
-      { property: 'og:keywords', content: "XXX / Video de sexo / porno gratis / filme porno gratis / assistir filme porno gratis" },
+      { property: 'og:title', content: this.homepage.seoTitle },
+      { property: 'og:description', content:  this.homepage.seoDescription   },
+      { property: 'og:keywords',  content:  this.homepage.seoKeywords },
     ],
     link: [
       {
@@ -161,6 +160,7 @@ head(){
     ],
   }
 },
+
 created(){
   if(process.client){
     this.$nextTick(() => {
