@@ -352,6 +352,7 @@ export default {
     if(process.client){
       document.documentElement.setAttribute('data-theme', this.theme)
       this.$nextTick(() => {
+        this.handleInputBlur()
         // this.handleFocus()
         this.location = localStorage.getItem('location') || 'US1'
         !localStorage.getItem('showGuild') && this.$refs.dialogGuildRef.onShow()
@@ -445,6 +446,9 @@ export default {
       setTimeout(() => {
         this.searchDialogShow = true
       }, 500)
+    },
+    handleInputBlur(){
+      this.$refs.searchRef.blur()
     },
     bodyCloseHide(){
       this.searchDialogShow = false
@@ -1196,6 +1200,7 @@ input::placeholder{
   color: var(--text-color2,  rgba(255, 255, 255, 0.70));
   font-size: 14px;
   display: flex;
+  flex-wrap: wrap;
   // height: 24px;
   // line-height: 24px;
   // margin-top: 10px;
