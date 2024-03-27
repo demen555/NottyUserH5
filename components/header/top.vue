@@ -195,18 +195,20 @@
           </nuxt-link>
           <!-- 收藏 -->
           <div class="nav-menu-list cursor-pointer" @click="handleGoPage('collect')" >
+          <!-- <nuxt-link class="nav-menu-list cursor-pointer" :to="localePath('collect')" > -->
             <div class="nav-menu-left">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_wdsc_1.svg'): require('~/static/images/my_gn_wdsc.svg')" alt="my_gn_wdsc"></div>
               <div>{{ $t('str_collect') }}</div>
             </div>
           </div>
           <!-- 点赞 -->
-          <div class="nav-menu-list cursor-pointer" @click="handleGoPage('up')"  >
+          <!-- <div class="nav-menu-list cursor-pointer" @click="handleGoPage('up')"  > -->
+          <nuxt-link class="nav-menu-list cursor-pointer" :to="localePath('up')"  >
             <div class="nav-menu-left">
               <div class="nav-menu-tag"><img :src="themeChecked? require('~/static/images/my_gn_dz_1.svg'): require('~/static/images/my_gn_dz.svg')"></div>
               <div>{{ $t('str_like') }}</div>
             </div>
-          </div>
+          </nuxt-link>
           <!-- 语言 -->
           <div class="nav-list-tags cursor-pointer">
             <div class="nav-menu-list-tag" @click="handleShowExpand('language')">
