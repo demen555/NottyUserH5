@@ -4,14 +4,8 @@
     <nav-new :title="$t('str_footer_nav9')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
       <div class="footer-content" v-html="seoInfo.content"></div>
-      <!-- <div class="police-title">{{ $t('str_footer_faq1') }}</div>
-      <div class="police-title">{{ $t('str_footer_faq2') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_faq3') }}</div>
-      <div class="police-title">{{ $t('str_footer_faq4') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_faq5') }}</div>
-      <div class="police-title">{{ $t('str_footer_csam6') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_faq7') }}</div> -->
     </div>
+    <fBottom></fBottom>
   </div>
 </template>
 <script>

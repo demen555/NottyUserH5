@@ -1,27 +1,11 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <nav-new :title="$t('str_footer_nav11')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
+    <nav-new title="2257" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_cookie1') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_cookie2') }}
-      </div>
-      <div class="police-text-content">{{ $t('str_footer_cookie3') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_cookie4') }} </div>
-      <div class="police-text-content">{{ $t('str_footer_cookie5') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_cookie6') }} </div>
-      <div class="police-text-content">{{ $t('str_footer_cookie7') }}</div>
-      <!-- <div class="police-text-content">{{ $t('str_footer_cookie8') }} </div> -->
-      <div class="police-text-content">{{ $t('str_footer_cookie9') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_cookie10') }} </div>
-      <div class="police-text-content">{{ $t('str_footer_cookie11') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_cookie12') }} </div>
-      <div class="police-text-content">{{ $t('str_footer_cookie13') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_cookie14') }} </div>
-      <div class="police-text-content">{{ $t('str_footer_cookie15') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_cookie16') }} </div>
+      <div class="footer-content" v-html="seoInfo.content"></div>
     </div>
+    <fBottom></fBottom>
   </div>
 </template>
 <script>
@@ -35,7 +19,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'policy-cookie',
+  name: 'usc-2257',
   mixins: [commonMinxin],
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -71,7 +55,7 @@ export default{
     }
   },
   async asyncData({ $homeApi }) { 
-    const res = await $homeApi.postSeo('policy-cookie')
+    const res = await $homeApi.postSeo('usc-2257')
     console.log(res.data, 'seo')
     return { 
       seoInfo: res.data || {},

@@ -1,23 +1,12 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <nav-new :title="$t('str_footer_nav1')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
+    <nav-new :title="$t('str_footer_nav11')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
       <div class="footer-content" v-html="seoInfo.content"></div>
-      <!-- <div class="police-title">{{ $t('str_footer_csam1') }}</div>
-      <div class="police-title-text">{{ $t('str_footer_csam2') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_csam3') }}</div>
-      <div class="police-title">{{ $t('str_footer_csam4') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_csam5') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_csam6') }}</div>
-      <div class="police-title">{{ $t('str_footer_csam7') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_csam8') }}</div>
-      <div class="police-title">{{ $t('str_footer_csam9') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_csam10') }}</div>
-      <div class="police-title">{{ $t('str_footer_csam11') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_csam12') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_csam13') }}</div> -->
     </div>
+    <div style="height: 30px;"></div>
+    <fBottom></fBottom>
   </div>
 </template>
 <script>
@@ -31,7 +20,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'csam-policy',
+  name: 'cookie-policy',
   mixins: [commonMinxin],
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
@@ -67,7 +56,7 @@ export default{
     }
   },
   async asyncData({ $homeApi }) { 
-    const res = await $homeApi.postSeo('csam-policy')
+    const res = await $homeApi.postSeo('cookie-policy')
     console.log(res.data, 'seo')
     return { 
       seoInfo: res.data || {},

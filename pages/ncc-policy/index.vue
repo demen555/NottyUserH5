@@ -3,102 +3,9 @@
     <HeaderTop @refresh="onRefresh"></HeaderTop>
     <nav-new :title="$t('str_footer_nav5')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_ncc1') }}</div>
-      <div class="police-title-text">{{ $t('str_footer_ncc5') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_ncc3') }}
-      </div>
-      <div class="police-title">{{ $t('str_footer_ncc4') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc5') }}</div>
-      <div class="police-title">{{ $t('str_footer_ncc6') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc7') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc8') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc9') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc10') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc11') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc12') }}</div>
-      <div class="police-title" style="margin: 10px 0;">{{ $t('str_footer_ncc13') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc14') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc15') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc16') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc17') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc18') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc19') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc20') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_ncc21') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_ncc22') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_ncc23') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc24') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc25') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc26') }}s</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc27') }}</div>
-      <div class="police-title">{{ $t('str_footer_ncc28') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc29') }}</div>
-      <div class="police-title">{{ $t('str_footer_ncc30') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc31') }}</div>
-      <div class="police-title">{{ $t('str_footer_ncc32') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc33') }}</div>
-      <div class="police-title">{{ $t('str_footer_ncc34') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc35') }}</div>
-      <div class="police-title">{{ $t('str_footer_ncc36') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc37') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc38') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc39') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_ncc40') }}</div>
-      <div class="police-title">{{ $t('str_footer_ncc41') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc42') }}
-      </div>
-      <div class="police-title">{{ $t('str_footer_ncc43') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_ncc44') }}
-        <br>{{ $t('str_footer_ncc45') }}
-        <br>{{ $t('str_footer_ncc46') }}
-        <br>{{ $t('str_footer_ncc47') }}
-      </div>
-      <div class="police-title">{{ $t('str_footer_ncc48') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_ncc49') }}
-        <br>https://www.esafety.gov.au/about-us
-        <br>{{ $t('str_footer_ncc50') }}
-      </div>
-      <div class="police-title">{{ $t('str_footer_ncc51') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_ncc52') }}
-        <br>{{ $t('str_footer_ncc53') }}
-        <br>p://www.safernet.org.br/site/webline
-      </div>
-      <div class="police-title">{{ $t('str_footer_ncc54') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_ncc55') }}
-        <br>https://igvm-iefh.belgium.be/fr/institut
-        <br>1800 12 800
-        <br>egalite.hommesfemmes@iefh.belgique.be
-      </div>
-      <div class="police-title">{{ $t('str_footer_ncc56') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_ncc57') }}
-        <br>{{ $t('str_footer_ncc58') }}
-        <br>ywcanada.ca/en > Guide on Sexual Image Based Abuse
-      </div>
-      <div class="police-title">{{ $t('str_footer_ncc59') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_ncc60') }}
-        <br>https://stopchikane.nu/om-stopchikane/hvem-er-stopchikane/
-        <br>28 83 40 70
-        <br>kontakt@stopchikane.nu
-      </div>
-      <div class="police-title">{{ $t('str_footer_ncc61') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_ncc62') }}
-        <br>{{ $t('str_footer_ncc63') }}
-        <br>https://service-public.fr/particuliers/vosdroits/F32103
-      </div>
-      <div class="police-title">{{ $t('str_footer_ncc64') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_ncc65') }}
-        <br>https://rainlily.org.hk/chi/about
-        <br>safechat@rainlily.org.hk
-      </div>
+      <div class="footer-content" v-html="seoInfo.content"></div>
     </div>
+    <fBottom></fBottom>
   </div>
 </template>
 <script>
@@ -112,7 +19,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'police-ncc',
+  name: 'ncc-policy',
   mixins: [commonMinxin],
   data() {
     return {
@@ -165,7 +72,7 @@ export default{
     }
   },
   async asyncData({ $homeApi }) { 
-    const res = await $homeApi.postSeo('policy-ncc')
+    const res = await $homeApi.postSeo('ncc-policy')
     console.log(res.data, 'seo')
     return { 
       seoInfo: res.data || {},

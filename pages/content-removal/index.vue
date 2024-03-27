@@ -1,19 +1,11 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <nav-new title="2257" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
+    <nav-new :title="$t('str_footer_nav4')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_22571') }}</div>
-      <div class="police-text-content">
-        {{ $t('str_footer_22572') }}
-      </div>
-      <div class="police-text-content">{{ $t('str_footer_22573') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_22574') }} </div>
-      <div class="police-title">{{ $t('str_footer_22575') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_22576') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_22577') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_22578') }}</div>
+      <div class="fooer-content" v-html="seoInfo.content"></div>
     </div>
+    <fBottom></fBottom>
   </div>
 </template>
 <script>
@@ -27,8 +19,25 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'policy-2257',
+  name: 'content-removal',
   mixins: [commonMinxin],
+  data() {
+    return {
+      tagList: [],
+      refreshing: false,
+      spinnerLoading: false,
+      loading: false,
+      finished: false,
+      pageInfo: {
+        page: 1,
+        size: 50,
+        letter: ''
+      },
+      total: 0,
+      tagIndex: 0,
+      tags: [this.$t('str_menu_tag_all'), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    }
+  },
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
     return {
@@ -63,27 +72,10 @@ export default{
     }
   },
   async asyncData({ $homeApi }) { 
-    const res = await $homeApi.postSeo('policy-2257')
+    const res = await $homeApi.postSeo('content-removal')
     console.log(res.data, 'seo')
     return { 
       seoInfo: res.data || {},
-    }
-  },
-  data() {
-    return {
-      tagList: [],
-      refreshing: false,
-      spinnerLoading: false,
-      loading: false,
-      finished: false,
-      pageInfo: {
-        page: 1,
-        size: 50,
-        letter: ''
-      },
-      total: 0,
-      tagIndex: 0,
-      tags: [this.$t('str_menu_tag_all'), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     }
   },
   components: {

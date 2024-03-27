@@ -33,12 +33,12 @@ export default{
     return {
       footerList: [
         { name: this.$t('str_footer_nav1'), id: 'csam-policy'},
-        { name: this.$t('str_footer_nav2'), id: 'terms-service'},
-        { name: this.$t('str_footer_nav3'), id: 'policy-privacy'},
+        { name: this.$t('str_footer_nav2'), id: 'terms-of-service'},
+        { name: this.$t('str_footer_nav3'), id: 'privacy-policy'},
         { name: this.$t('str_footer_nav4'), id: 'content-removal'},
         { name: this.$t('str_footer_nav6'), id: 'dmca'},
         { name: this.$t('str_footer_nav5'), id: 'ncc-policy'},
-        { name: this.$t('str_footer_nav8'), id: 'usc-2257'},
+        { name: this.$t('str_footer_nav8'), id: 'u-s-c-2257'},
         { name: this.$t('str_footer_nav9'), id: 'faq'},
         { name: this.$t('str_footer_nav10'), id: 'eu-dsa'},
         { name: this.$t('str_footer_nav11'), id: 'cookie-policy'}
