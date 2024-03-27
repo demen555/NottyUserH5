@@ -48,6 +48,7 @@
           <div class="pagination" v-if="dataList.length">
             <v-pagination :total="pageTotal? pageTotal : pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
           </div>
+          <div class="footer-content" v-html="seoInfo.content"></div>
           <fBottom></fBottom>
         </div>
       </div>
@@ -83,7 +84,8 @@ data() {
     pageTotal: 0,
     relatedLoading: false,
     searchBool: false,
-    pageInfoTotal: 0
+    pageInfoTotal: 0,
+    seoInfo:{}
   }
 },
 mixins: [commonMinxin],
@@ -121,17 +123,38 @@ head(){
         href: `https://${hostName}${this.$nuxt.context.route.fullPath}`,
       },
     ],
-    title: "Search for Free Porn Videos | Nottyhub.com",
+    title: this.seoInfo.seoTitle,
     meta:[
-      { hid: "title", name: 'title', content: "Search for Free Porn Videos | Nottyhub.com" },
-      { hid: "description", name: 'description', content: "Search free porn videos, xxx adult porno on Nottyhub.com. Browse your interests with collection of videos. Fantasy and Pleasure like never before." },
-      { hid: "keywords", name: 'keywords', content: "Search Free Porn Videos" },
-      { property: 'og:title', content: "Search for Free Porn Videos | Nottyhub.com" },
-      { property: 'og:description', content: "Search free porn videos, xxx adult porno on Nottyhub.com. Browse your interests with collection of videos. Fantasy and Pleasure like never before." },
-      { property: 'og:keywords', content: "Search Free Porn Videos" },
+      {
+          hid: 'description',
+          name: 'description',
+          content: this.seoInfo.seoDescription
+      },
+      {
+          hid: 'keyswords',
+          name: 'keyswords',
+          content: this.seoInfo.seoKeywords
+      },
+      {
+          hid: 'title',
+          name: 'title',
+          content: this.seoInfo.seoTitle
+      },
+      { hid: 'og:title', property: 'og:title', content: this.seoInfo.seoTitle },
+      { hid: 'og:description', property: 'og:description', content:  this.seoInfo.seoDescription },
+      { hid: 'og:keywords', property: 'og:keywords', content: this.seoInfo.seoKeywords },
+
     ]
   }
 },
+
+async asyncData({ $homeApi }) { 
+  const res = await $homeApi.postSeo('search')
+  return { 
+    seoInfo: res.data || {},
+  }
+},
+
 methods: {
   ...mapActions(['set_show']),
   async getRelatedList(){

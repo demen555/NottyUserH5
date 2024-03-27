@@ -16,11 +16,13 @@
             <v-pagination :total="pageInfoTotal" :routeName="$route.name" :current-page='pageInfo.page' @pagechange="handlePage"></v-pagination>
           </div> -->
           <div class="pagination"></div>
+          <div class="footer-content" v-html="seoInfo.content"></div>
           <fBottom></fBottom>
         </div>
       </van-checkbox-group>
     </div>
     <Empty v-else></Empty>
+    
     <Footer v-if="showFooter && dataList.length" @handleAll="handleAll" :result="result" :showCheck="showCheck"></Footer>  
   </div>
 </template>
@@ -48,7 +50,8 @@ data() {
     },
     showCheck: false,
     showFooter: false,
-    result: []
+    result: [],
+    seoInfo:{}
   }
 },
 computed: {
@@ -60,14 +63,26 @@ mounted(){
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   return {
-    title: "My Porn History - Nottyhub.com",
+    title: this.seoInfo.seoTitle,
     meta: [
-      { hid: "title", name: 'title', content: "My Porn History - Nottyhub.com" },
-      { hid: "description", name: 'description', content: "Rewatch My Porn history. Trace back to our favorite scenes and categories, login Nottyhub to never lose your progress, premium XXX Sex Movies for everyone." },
-      { hid: "keywords", name: 'keywords', content: "Porn History" },
-      { property: 'og:title', content: "My Porn History - Nottyhub.com" },
-      { property: 'og:description', content: "Rewatch My Porn history. Trace back to our favorite scenes and categories, login Nottyhub to never lose your progress, premium XXX Sex Movies for everyone." },
-      { property: 'og:keywords', content: "Porn History" },
+            {
+                hid: 'description',
+                name: 'description',
+                content: this.seoInfo.seoDescription
+            },
+            {
+                hid: 'keyswords',
+                name: 'keyswords',
+                content: this.seoInfo.seoKeywords
+            },
+            {
+                hid: 'title',
+                name: 'title',
+                content: this.seoInfo.seoTitle
+            },
+            { hid: 'og:title', property: 'og:title', content: this.seoInfo.seoTitle },
+            { hid: 'og:description', property: 'og:description', content:  this.seoInfo.seoDescription },
+            { hid: 'og:keywords', property: 'og:keywords', content: this.seoInfo.seoKeywords },
     ],
     link: [
       {
@@ -78,6 +93,14 @@ head(){
     ],
   }
 },
+
+async asyncData({ $homeApi }) { 
+  const res = await $homeApi.postSeo('porn-history')
+  return { 
+    seoInfo: res.data || {},
+  }
+},
+
 components: {
   Nav,
   Cover,
