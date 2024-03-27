@@ -113,6 +113,10 @@ watch: {
       }
     }
 },
+mounted(){
+  // console.log(this.$refs.header, '888')
+  this.$refs.header.$refs.searchRef.blur();
+},
 head(){
   const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
   return {
