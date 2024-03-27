@@ -28,7 +28,7 @@
         </div>
        
         <h2 class="footer-title paddingTop88" > {{ categoryMetaData.h2}} </h2>
-        <p class="footer-description" style="display: none;" v-html="categoryMetaData.footer_desc"> </p>
+        <p class="footer-description" v-html="categoryMetaData.footer_desc"> </p>
         <fBottom></fBottom>
       </div>
     </template>
