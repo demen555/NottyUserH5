@@ -1,46 +1,11 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <nav-new :title="$t('str_footer_nav2')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
+    <nav-new :title="$t('str_footer_nav1')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
       <div class="footer-content" v-html="seoInfo.content"></div>
-      <!-- <div class="police-title">{{ $t('str_footer_terms1') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms2') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms3') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms4') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms5') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms6') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms7') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms8') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms9') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms10') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms11') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms12') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms13') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms14') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms15') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms16') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms17') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms18') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms19') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms20') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms21') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms22') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms23') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms24') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms25') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms26') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms27') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms28') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms29') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms30') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms31') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms32') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms33') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms34') }}</div>
-      <div class="police-title">{{ $t('str_footer_terms35') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_terms36') }}</div> -->
     </div>
+    <fBottom></fBottom>
   </div>
 </template>
 <script>
@@ -54,25 +19,8 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'terms-service',
+  name: 'csam-policy',
   mixins: [commonMinxin],
-  data() {
-    return {
-      tagList: [],
-      refreshing: false,
-      spinnerLoading: false,
-      loading: false,
-      finished: false,
-      pageInfo: {
-        page: 1,
-        size: 50,
-        letter: ''
-      },
-      total: 0,
-      tagIndex: 0,
-      tags: [this.$t('str_menu_tag_all'), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    }
-  },
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
     return {
@@ -107,10 +55,28 @@ export default{
     }
   },
   async asyncData({ $homeApi }) { 
-    const res = await $homeApi.postSeo('terms-service')
+    const res = await $homeApi.postSeo('csam-policy')
     console.log(res.data, 'seo')
     return { 
       seoInfo: res.data || {},
+    }
+  },
+  data() {
+    return {
+      tagList: [],
+      refreshing: false,
+      spinnerLoading: false,
+      loading: false,
+      finished: false,
+      pageInfo: {
+        page: 1,
+        size: 50,
+        letter: ''
+      },
+      total: 0,
+      tagIndex: 0,
+      tags: [this.$t('str_menu_tag_all'), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+      seoInfo:{},
     }
   },
   components: {

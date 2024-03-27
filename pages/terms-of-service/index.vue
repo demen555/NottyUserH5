@@ -1,23 +1,11 @@
 <template>
   <div class="tag">
     <HeaderTop @refresh="onRefresh"></HeaderTop>
-    <nav-new :title="$t('str_footer_nav4')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
+    <nav-new :title="$t('str_footer_nav2')" :imgUrl="require('~/static/images/my_gn_lsjl_1.svg')"></nav-new>
     <div class="police">
-      <div class="police-title">{{ $t('str_footer_content1') }}</div>
-      <div class="police-title-title">{{ $t('str_footer_content2') }}</div>
-      <div class="police-text-content-prev">
-        {{ $t('str_footer_content3') }}
-      </div>
-      <div class="police-text-content-next">{{ $t('str_footer_content4') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_content5') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_content6') }}</div>
-      <div class="police-text-content-next">{{ $t('str_footer_content7') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_content8') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_content9') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_content10') }}</div>
-      <div class="police-text-content-next-next">{{ $t('str_footer_content11') }}</div>
-      <div class="police-text-content">{{ $t('str_footer_content12') }}</div>
+      <div class="footer-content" v-html="seoInfo.content"></div>
     </div>
+    <fBottom></fBottom>
   </div>
 </template>
 <script>
@@ -31,7 +19,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'policy-content',
+  name: 'terms-service',
   mixins: [commonMinxin],
   data() {
     return {
@@ -47,7 +35,8 @@ export default{
       },
       total: 0,
       tagIndex: 0,
-      tags: [this.$t('str_menu_tag_all'), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+      tags: [this.$t('str_menu_tag_all'), 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+      seoInfo:{}
     }
   },
   head(){
@@ -84,7 +73,7 @@ export default{
     }
   },
   async asyncData({ $homeApi }) { 
-    const res = await $homeApi.postSeo('policy-content')
+    const res = await $homeApi.postSeo('terms-service')
     console.log(res.data, 'seo')
     return { 
       seoInfo: res.data || {},
