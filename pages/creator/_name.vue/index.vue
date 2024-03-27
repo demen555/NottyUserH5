@@ -1,6 +1,9 @@
 <template>
   <div>
     <HeaderTop @refresh="onRefresh" v-show="isStickyVisible"></HeaderTop>
+    <div class="loading-box" v-if="spainnerLoading">
+      <cardLoad></cardLoad>
+    </div>
     <!-- 移动端布局 -->
     <div class="main-video">
       <div class="video-container d-sm-none">
@@ -58,9 +61,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="loading-box" v-if="spainnerLoading">
-          <cardLoad></cardLoad>
-        </div> -->
         <div v-if="dataList.length" class="container-fluid">
           <div class="row">
             <Cover class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in dataList" :item="item" :key="item.vodId"></Cover>
@@ -176,6 +176,7 @@ export default {
     },
     async getUpInfo() {
       try {
+        this.spainnerLoading = true
         const res = await this.$homeApi.requestUpInfo({urlSlug: this.name})
         const { code, data = {} } = res
         if (code === CODES.SUCCESS) {
@@ -189,8 +190,6 @@ export default {
     },
     async getList(isRefresh) {
       try {
-        isRefresh === 'first' && (this.spainnerLoading = true)
-        this.loading = true
         const params = { page: this.pageInfo.page, size: this.pageInfo.size, userId: this.upInfo.userId, orderBy: this.activeTag}
         const res = await this.$homeApi.requestvodpageHome(params)
         const { code, data = {} } = res
