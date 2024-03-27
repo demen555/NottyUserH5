@@ -679,7 +679,7 @@ var tagsUrl = {
 
 export default async function ({ route, redirect, app, $videoApi }) {
   const currentLocale = app.i18n.locale
-  const { name, params, path } = route;
+  const { name, params, path, fullPath } = route;
   console.log( 'route', route, $videoApi  )
 
   // 视频详情页面 第1种情况 视频详情页面老路径 例如： https://www.nottyhub.com/video/15379
@@ -749,6 +749,94 @@ export default async function ({ route, redirect, app, $videoApi }) {
       redirect(301, `/tag/${tagsUrl[params.name]}`)
     }
   }
+
+
+ 
+  /** footer底部301跳转  开始  **/ 
+
+  if( (!name && ( fullPath == "/policy-csam" || fullPath == "/csam/policy" ) )){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/csam-policy`)
+    }else{
+      redirect(301, `/csam-policy`)
+    }
+  }
+
+  if( (!name && ( fullPath == "/policy-terms" || fullPath == "/terms/service" ) )){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/terms-of-service`)
+    }else{
+      redirect(301, `/terms-of-service`)
+    }
+  }
+
+  if( (!name && ( fullPath == "/policy-privacy" || fullPath == "/policy/privacy" ) )){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/privacy-policy`)
+    }else{
+      redirect(301, `/privacy-policy`)
+    }
+  }
+
+  if( (!name && ( fullPath == "/policy-content" || fullPath == "/content/removal" ) )){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/content-removal`)
+    }else{
+      redirect(301, `/content-removal`)
+    }
+  }
+
+  if( (!name && ( fullPath == "/policy-dmca" ) )){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/dmca`)
+    }else{
+      redirect(301, `/dmca`)
+    }
+  }
+
+  if( (!name && ( fullPath == "/policy-ncc" || fullPath == "/ncc/policy" ) )){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/ncc-policy`)
+    }else{
+      redirect(301, `/ncc-policy`)
+    }
+  }
+
+  if( (!name && ( fullPath == "/policy-2257" || fullPath == "/usc/2257" ) )){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/u-s-c-2257`)
+    }else{
+      redirect(301, `/u-s-c-2257`)
+    }
+  }
+
+  if( (!name && ( fullPath == "/policy-faq" ) )){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/faq`)
+    }else{
+      redirect(301, `/faq`)
+    }
+  }
+
+  if( (!name && ( fullPath == "/policy-eu" || fullPath == "/eu/dsa" ) )){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/eu-dsa`)
+    }else{
+      redirect(301, `/eu-dsa`)
+    }
+  }
+
+  if( (!name && ( fullPath == "/policy/cookie" || fullPath == "/cookie/policy" ) )){
+    if( currentLocale != "en" ){
+      redirect(301, `/${currentLocale}/cookie-policy`)
+    }else{
+      redirect(301, `/cookie-policy`)
+    }
+  }
+
+
+  /** footer底部301跳转  结束  **/ 
+
 
   // 如果路由不匹配任何页面，重定向到当前语言的首页
   if (route.matched.length == 0) {
