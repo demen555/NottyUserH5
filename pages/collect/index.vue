@@ -50,7 +50,8 @@ data() {
     },
     showCheck: false,
     showFooter: false,
-    result: []
+    result: [],
+    seoInfo:{}
   }
 },
 head(){
