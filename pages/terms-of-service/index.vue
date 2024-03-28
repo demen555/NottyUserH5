@@ -19,7 +19,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'terms-service',
+  name: 'terms-of-service',
   mixins: [commonMinxin],
   data() {
     return {

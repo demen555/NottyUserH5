@@ -19,7 +19,7 @@ import CODES from "~/plugins/enums/codes"
 
 
 export default{
-  name: 'usc-2257',
+  name: 'u-s-c-2257',
   mixins: [commonMinxin],
   head(){
     const hostName = process.server ? this.$nuxt.context.req.headers.host.replace(/:\d+$/, '') : window.location.host;
