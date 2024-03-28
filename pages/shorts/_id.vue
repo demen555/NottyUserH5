@@ -31,7 +31,7 @@
               <div class="controls-img">
                 <img class="img" src="~/static/images/my_gn_comments_1.png" alt="my_gn_comments_1">
               </div>
-              <span class="words" > 0 </span>
+              <span class="words" > {{ item.commentCount }} </span>
             </div>
             <!-- 收藏 -->
             <div class="controls-btn controls-collect" @click="setCollect">

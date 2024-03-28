@@ -216,7 +216,7 @@ async asyncData({ $homeApi, query }) {
       size: 24,
     },
     homepage: home.data,
-    storiesList: res3.data.data || [],
+    storiesList: res3.data.data || [{}],
   }
 },
 methods: {

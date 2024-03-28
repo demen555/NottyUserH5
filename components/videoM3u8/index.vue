@@ -29,11 +29,13 @@ export default {
                 lang: 'en',
                 autoplay: true,
                 // muted: true, // 添加 muted 属性
+                // volume: 0,
                 video: {
                     // pic: videoInfo.vodPic, 
                     url: vodPlayUrl(videoInfo.vodPlayUrl),
                     type: 'customHls',
                     hotkey:true,
+                    autoplay: true,
                     customType: {
                         customHls: function (video, player) {
                             const hls = new Hls()
